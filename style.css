@@ -1,0 +1,556 @@
+/* ========================================
+   CURSO DE REACT - STYLESHEET PRINCIPAL
+   ======================================== */
+
+/* ==========================================
+   1. VARIABLES CSS (DESIGN SYSTEM)
+   ========================================== */
+:root {
+  /* Paleta de colores React */
+  --react-cyan: #61dafb;
+  --react-blue: #20232a;
+  --react-dark: #0b0f14;
+  --react-white: #ffffff;
+  --react-light-blue: #282c34;
+  
+  /* Gradientes */
+  --react-gradient: linear-gradient(135deg, #61dafb 0%, #21d4fd 100%);
+  --react-bg-gradient: linear-gradient(135deg, #f5faff 0%, #e8f4fd 100%);
+  
+  /* Espaciado y efectos */
+  --radius: 16px;
+  --shadow-sm: 0 2px 8px rgba(97, 218, 251, 0.1);
+  --shadow-md: 0 8px 25px rgba(97, 218, 251, 0.15);
+  --shadow-lg: 0 20px 40px rgba(97, 218, 251, 0.2);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================
+   2. RESET Y CONFIGURACIÓN BASE
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--react-bg-gradient);
+  color: var(--react-dark);
+  line-height: 1.7;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   3. LAYOUT PRINCIPAL
+   ========================================== */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+/* ==========================================
+   4. HEADER Y NAVEGACIÓN
+   ========================================== */
+header {
+  background: linear-gradient(135deg, var(--react-blue) 0%, var(--react-light-blue) 100%);
+  color: var(--react-white);
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Patrón de fondo decorativo */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="%2361dafb" opacity="0.1"/><circle cx="75" cy="75" r="1.5" fill="%2361dafb" opacity="0.2"/><circle cx="50" cy="10" r="1" fill="%2361dafb" opacity="0.15"/><circle cx="90" cy="40" r="1.5" fill="%2361dafb" opacity="0.1"/><circle cx="10" cy="80" r="2" fill="%2361dafb" opacity="0.2"/></svg>');
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Títulos del header */
+header h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+  font-weight: 800;
+  background: var(--react-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+header p {
+  opacity: 0.9;
+  font-size: 1.2rem;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--react-white);
+}
+
+/* ==========================================
+   5. MENÚ DE NAVEGACIÓN
+   ========================================== */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2rem 0 1rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--react-white);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link:hover {
+  background: rgba(97, 218, 251, 0.2);
+  border-color: var(--react-cyan);
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: var(--react-cyan);
+  color: var(--react-blue);
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(97, 218, 251, 0.3);
+}
+
+.nav-link.extra {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px dashed rgba(97, 218, 251, 0.5);
+  opacity: 0.8;
+}
+
+.nav-link.extra:hover {
+  opacity: 1;
+  background: rgba(97, 218, 251, 0.15);
+}
+
+/* ==========================================
+   6. BREADCRUMBS (MIGAS DE PAN)
+   ========================================== */
+.breadcrumb {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  display: inline-block;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(97, 218, 251, 0.2);
+}
+
+.breadcrumb a {
+  color: var(--react-cyan);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.breadcrumb a:hover {
+  color: var(--react-white);
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.breadcrumb-current {
+  color: var(--react-white);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   7. TIPOGRAFÍA Y ELEMENTOS DE TEXTO
+   ========================================== */
+h2 {
+  color: var(--react-blue);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Línea decorativa después de h2 */
+h2::after {
+  content: '';
+  flex: 1;
+  height: 3px;
+  background: var(--react-gradient);
+  border-radius: 2px;
+  margin-left: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--react-dark);
+  font-size: 1.05rem;
+}
+
+strong {
+  color: var(--react-blue);
+  font-weight: 600;
+}
+
+/* ==========================================
+   8. LISTAS
+   ========================================== */
+ul, ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+li {
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+ul li::marker {
+  color: var(--react-cyan);
+}
+
+ol li::marker {
+  color: var(--react-cyan);
+  font-weight: 700;
+}
+
+/* ==========================================
+   9. ENLACES
+   ========================================== */
+a {
+  color: var(--react-cyan);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: var(--transition);
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: rgba(97, 218, 251, 0.1);
+  border-radius: 8px;
+  border: 2px solid transparent;
+}
+
+a:hover {
+  background: var(--react-cyan);
+  color: var(--react-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--react-cyan);
+}
+
+a:active {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   9.5. ELEMENTOS COLAPSABLES (DETAILS/SUMMARY)
+   ========================================== */
+/* Summary principal - estilo base */
+.summary-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto hover para summary */
+.summary-section:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Contenido del details */
+.details-content {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0 0 8px 8px;
+  border: 2px solid #e2e8f0;
+  border-top: none;
+}
+
+/* Variantes de color para diferentes tipos de summary */
+.summary-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.summary-primary:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+.summary-success {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.summary-success:hover {
+  background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+}
+
+.summary-warning {
+  background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+}
+
+.summary-warning:hover {
+  background: linear-gradient(135deg, #dd6b20 0%, #c05621 100%);
+}
+
+.summary-info {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+}
+
+.summary-info:hover {
+  background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+}
+
+/* Indicador de expansión */
+.summary-section::after {
+  content: '▼';
+  font-size: 0.8rem;
+  transition: var(--transition);
+  margin-left: auto;
+}
+
+details[open] .summary-section::after {
+  transform: rotate(180deg);
+}
+
+/* ==========================================
+   10. TARJETAS (CARDS)
+   ========================================== */
+.card {
+  background: var(--react-white);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: var(--radius);
+  padding: 2rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+/* Efecto de borde gradiente */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--react-gradient);
+  opacity: 0;
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: var(--react-white);
+  border-radius: calc(var(--radius) - 2px);
+  z-index: -1;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================
+   11. FOOTER
+   ========================================== */
+footer {
+  background: var(--react-blue);
+  color: var(--react-white);
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+  position: relative;
+}
+
+/* Línea superior decorativa */
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--react-gradient);
+}
+
+footer p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+  color: var(--react-white);
+}
+
+/* ==========================================
+   12. ANIMACIONES
+   ========================================== */
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(180deg); 
+  }
+}
+
+/* Animaciones progresivas para cards */
+@media (prefers-reduced-motion: no-preference) {
+  .card {
+    animation: slideInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .card:nth-child(1) { animation-delay: 0.1s; }
+  .card:nth-child(2) { animation-delay: 0.2s; }
+  .card:nth-child(3) { animation-delay: 0.3s; }
+  .card:nth-child(4) { animation-delay: 0.4s; }
+}
+
+/* ==========================================
+   13. RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 768px) {
+  /* Layout móvil */
+  .container {
+    padding: 2rem 1rem;
+  }
+  
+  header {
+    padding: 3rem 1rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+  }
+  
+  /* Tipografía móvil */
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h2::after {
+    margin-left: 0.5rem;
+  }
+  
+  /* Navegación móvil */
+  .main-nav {
+    gap: 0.3rem;
+  }
+  
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ==========================================
+   14. UTILIDADES
+   ========================================== */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mt-3 { margin-top: 3rem; }
+
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mb-3 { margin-bottom: 3rem; }
+
+.hidden {
+  display: none;
+}
+
+/* ==========================================
+   15. ACCESIBILIDAD
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mejores contrastes para usuarios con necesidades especiales */
+@media (prefers-contrast: high) {
+  :root {
+    --react-cyan: #0066cc;
+    --react-blue: #000000;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+}

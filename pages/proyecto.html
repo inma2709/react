@@ -1,0 +1,542 @@
+<!--
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Día 5 · Repaso y Proyecto final</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>🏁 Día 5 · Repaso y Proyecto final</h1>
+      <p>Lo que hemos aprendido, lo que nos falta y un ejemplo motivador</p>
+      
+      <!-- Menú de navegación -->
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">🏠 Inicio</a>
+        <a href="intro.html" class="nav-link">📦 Día 1</a>
+        <a href="componentes.html" class="nav-link">🧩 Día 2</a>
+        <a href="props.html" class="nav-link">🚀 Día 3</a>
+        <a href="estados.html" class="nav-link">⚡ Día 4</a>
+        <a href="#" class="nav-link active">🏁 Día 5</a>
+        <a href="rutas.html" class="nav-link extra">🧭 Extra</a>
+      </nav>
+      
+      <!-- Migas de pan -->
+      <div class="breadcrumb">
+        <a href="../index.html">🏠 Inicio</a>
+        <span class="breadcrumb-separator">→</span>
+        <span class="breadcrumb-current">🏁 Día 5: Proyecto Final</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Repaso -->
+    <section>
+      <h2>1) Repaso de lo aprendido</h2>
+      <div class="card">
+        <ul>
+          <li><strong>Instalación y entorno:</strong> crear un proyecto con Vite y React.</li>
+          <li><strong>JSX:</strong> escribir HTML dentro de JS con reglas especiales.</li>
+          <li><strong>Componentes:</strong> funciones que devuelven JSX, reutilizables.</li>
+          <li><strong>Props:</strong> pasar datos a los componentes como si fueran “atributos”.</li>
+          <li><strong>Listas con map():</strong> generar elementos dinámicos a partir de arrays.</li>
+          <li><strong>Estado (useState):</strong> memoria de los componentes, actualizable con funciones.</li>
+          <li><strong>Eventos:</strong> <code>onClick</code>, <code>onChange</code>, etc. para interacciones.</li>
+          <li><strong>Renderizado condicional:</strong> mostrar/ocultar según el estado.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Qué falta -->
+    <section>
+      <h2>2) ¿Qué no hemos visto aún?</h2>
+      <div class="card">
+        <p>React es muy amplio. En este curso básico no hemos entrado en:</p>
+        <ul>
+          <li><strong>React Router:</strong> navegación entre páginas.</li>
+          <li><strong>useEffect:</strong> manejar efectos secundarios como llamadas a APIs.</li>
+          <li><strong>Context:</strong> compartir estado entre muchos componentes.</li>
+          <li><strong>Testing:</strong> probar componentes automáticamente.</li>
+          <li><strong>Optimización y rendimiento.</strong></li>
+        </ul>
+        <p>Son temas avanzados que puedes explorar más adelante en la documentación oficial.</p>
+      </div>
+    </section>
+
+    <!-- Qué podemos hacer -->
+    <section>
+      <h2>3) ¿Qué somos capaces de hacer ahora?</h2>
+      <div class="card">
+        <p>Con lo que sabes hasta hoy, ya puedes:</p>
+        <ul>
+          <li>Montar una <strong>página de presentación personal</strong> con secciones.</li>
+          <li>Crear <strong>listas dinámicas</strong> a partir de datos.</li>
+          <li>Construir <strong>componentes reutilizables</strong> con props.</li>
+          <li>Añadir <strong>interactividad básica</strong> con estado y eventos.</li>
+          <li>Publicar tu mini-proyecto en <strong>Netlify</strong> o <strong>Vercel</strong>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Proyecto guiado paso a paso -->
+    <section>
+      <h2>4) 🛠️ Proyecto Final: "Mi Tarjeta Digital"</h2>
+      <div class="card">
+        <p><strong>Vamos a crear una tarjeta digital interactiva</strong> que combine todos los conceptos que has aprendido. Al final tendrás algo así:</p>
+        
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border: 2px dashed #61dafb; margin: 1rem 0;">
+          <p><strong>🎯 Tu tarjeta digital tendrá:</strong></p>
+          <ul>
+            <li>✅ Una foto/avatar y información personal</li>
+            <li>✅ Botón de "Me gusta" con contador (useState)</li>
+            <li>✅ Lista de habilidades que puedes mostrar/ocultar</li>
+            <li>✅ Sección de proyectos con datos dinámicos</li>
+            <li>✅ Formulario de contacto simple</li>
+          </ul>
+        </div>
+        
+        <h3>📋 Paso 1: Preparar la estructura</h3>
+        <p>Abre tu proyecto de React y crea esta estructura de carpetas:</p>
+<pre><code>src/
+├── components/
+│   ├── Avatar.jsx          ← Tu foto y nombre
+│   ├── BotonLike.jsx       ← Botón con contador
+│   ├── ListaHabilidades.jsx ← Habilidades con toggle
+│   ├── TarjetaProyecto.jsx ← Cada proyecto individual
+│   └── FormularioContacto.jsx ← Formulario simple
+├── data/
+│   └── misDatos.js         ← Todos tus datos personales
+├── App.jsx
+└── main.jsx</code></pre>
+        
+        <h3>📊 Paso 2: Crear tus datos personales</h3>
+        <p><strong>Crea el archivo <code>src/data/misDatos.js</code>:</strong></p>
+<pre><code class="language-js">// src/data/misDatos.js
+export const miInformacion = {
+  nombre: "Tu Nombre",
+  titulo: "Desarrollador/a en Aprendizaje",
+  avatar: "👨‍💻", // O una URL de imagen: "https://..."
+  bio: "¡Hola! Estoy aprendiendo React y me encanta crear cosas increíbles.",
+  email: "tu.email@ejemplo.com"
+};
+
+export const misHabilidades = [
+  { id: 1, nombre: "HTML", progreso: "⭐⭐⭐" },
+  { id: 2, nombre: "CSS", progreso: "⭐⭐⭐" },
+  { id: 3, nombre: "JavaScript", progreso: "⭐⭐" },
+  { id: 4, nombre: "React", progreso: "⭐" }
+];
+
+export const misProyectos = [
+  {
+    id: 1,
+    titulo: "Mi Primera Web",
+    descripcion: "Una página web que hice con HTML y CSS",
+    estado: "Terminado"
+  },
+  {
+    id: 2,
+    titulo: "Calculadora",
+    descripcion: "Una calculadora interactiva con JavaScript",
+    estado: "En progreso"
+  },
+  {
+    id: 3,
+    titulo: "Esta Tarjeta Digital",
+    descripcion: "Mi primer proyecto en React",
+    estado: "Nuevo"
+  }
+];</code></pre>
+        
+        <h3>🖼️ Paso 3: Componente Avatar</h3>
+        <p><strong>Crea <code>src/components/Avatar.jsx</code>:</strong></p>
+<pre><code class="language-jsx">// src/components/Avatar.jsx
+function Avatar({ informacion }) {
+  const { nombre, titulo, avatar, bio } = informacion;
+  
+  return (
+    &lt;div style={{
+      textAlign: 'center',
+      padding: '2rem',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      color: 'white',
+      borderRadius: '15px',
+      marginBottom: '1rem'
+    }}&gt;
+      &lt;div style={{ fontSize: '4rem', marginBottom: '1rem' }}&gt;
+        {avatar}
+      &lt;/div&gt;
+      &lt;h1 style={{ margin: '0.5rem 0' }}&gt;{nombre}&lt;/h1&gt;
+      &lt;h3 style={{ margin: '0.5rem 0', opacity: 0.9 }}&gt;{titulo}&lt;/h3&gt;
+      &lt;p style={{ fontSize: '1.1rem', opacity: 0.8 }}&gt;{bio}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Avatar;</code></pre>
+        
+        <h3>👍 Paso 4: Botón Like interactivo</h3>
+        <p><strong>Crea <code>src/components/BotonLike.jsx</code>:</strong></p>
+<pre><code class="language-jsx">// src/components/BotonLike.jsx
+import { useState } from 'react';
+
+function BotonLike() {
+  const [likes, setLikes] = useState(0);
+  const [yaLikeado, setYaLikeado] = useState(false);
+  
+  const handleLike = () =&gt; {
+    if (!yaLikeado) {
+      setLikes(likes + 1);
+      setYaLikeado(true);
+    }
+  };
+  
+  return (
+    &lt;div style={{
+      textAlign: 'center',
+      padding: '1rem',
+      background: 'white',
+      borderRadius: '10px',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+      margin: '1rem 0'
+    }}&gt;
+      &lt;button 
+        onClick={handleLike}
+        style={{
+          background: yaLikeado ? '#ff6b6b' : '#61dafb',
+          color: 'white',
+          border: 'none',
+          padding: '10px 20px',
+          borderRadius: '25px',
+          fontSize: '1.1rem',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease'
+        }}
+      &gt;
+        {yaLikeado ? '❤️ ¡Gracias!' : '👍 Me gusta'}
+      &lt;/button&gt;
+      &lt;p style={{ margin: '10px 0 0 0', color: '#666' }}&gt;
+        {likes} persona{likes !== 1 ? 's' : ''} {likes === 1 ? 'ha' : 'han'} dado like
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default BotonLike;</code></pre>
+        
+        <h3>🏆 Paso 5: Lista de habilidades con toggle</h3>
+        <p><strong>Crea <code>src/components/ListaHabilidades.jsx</code>:</strong></p>
+<pre><code class="language-jsx">// src/components/ListaHabilidades.jsx
+import { useState } from 'react';
+
+function ListaHabilidades({ habilidades }) {
+  const [mostrar, setMostrar] = useState(false);
+  
+  return (
+    &lt;div style={{
+      background: 'white',
+      padding: '1.5rem',
+      borderRadius: '10px',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+      margin: '1rem 0'
+    }}&gt;
+      &lt;div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}&gt;
+        &lt;h3&gt;🏆 Mis Habilidades&lt;/h3&gt;
+        &lt;button 
+          onClick={() =&gt; setMostrar(!mostrar)}
+          style={{
+            background: '#61dafb',
+            color: 'white',
+            border: 'none',
+            padding: '5px 15px',
+            borderRadius: '15px',
+            cursor: 'pointer'
+          }}
+        &gt;
+          {mostrar ? 'Ocultar' : 'Ver todas'}
+        &lt;/button&gt;
+      &lt;/div&gt;
+      
+      {mostrar &amp;&amp; (
+        &lt;div style={{ marginTop: '1rem' }}&gt;
+          {habilidades.map(habilidad =&gt; (
+            &lt;div 
+              key={habilidad.id}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: '0.5rem 0',
+                borderBottom: '1px solid #eee'
+              }}
+            &gt;
+              &lt;span&gt;{habilidad.nombre}&lt;/span&gt;
+              &lt;span&gt;{habilidad.progreso}&lt;/span&gt;
+            &lt;/div&gt;
+          ))}
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+export default ListaHabilidades;</code></pre>
+        
+        <h3>💼 Paso 6: Tarjetas de proyectos</h3>
+        <p><strong>Crea <code>src/components/TarjetaProyecto.jsx</code>:</strong></p>
+<pre><code class="language-jsx">// src/components/TarjetaProyecto.jsx
+function TarjetaProyecto({ proyecto }) {
+  const { titulo, descripcion, estado } = proyecto;
+  
+  const getColorEstado = (estado) =&gt; {
+    switch(estado) {
+      case 'Terminado': return '#4CAF50';
+      case 'En progreso': return '#FF9800';
+      case 'Nuevo': return '#61dafb';
+      default: return '#666';
+    }
+  };
+  
+  return (
+    &lt;div style={{
+      background: 'white',
+      padding: '1.5rem',
+      borderRadius: '10px',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+      margin: '1rem 0',
+      borderLeft: `4px solid ${getColorEstado(estado)}`
+    }}&gt;
+      &lt;div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}&gt;
+        &lt;h4 style={{ margin: 0 }}&gt;{titulo}&lt;/h4&gt;
+        &lt;span style={{
+          background: getColorEstado(estado),
+          color: 'white',
+          padding: '2px 8px',
+          borderRadius: '10px',
+          fontSize: '0.8rem'
+        }}&gt;
+          {estado}
+        &lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p style={{ margin: 0, color: '#666' }}&gt;{descripcion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default TarjetaProyecto;</code></pre>
+        
+        <h3>📝 Paso 7: Formulario de contacto simple</h3>
+        <p><strong>Crea <code>src/components/FormularioContacto.jsx</code>:</strong></p>
+<pre><code class="language-jsx">// src/components/FormularioContacto.jsx
+import { useState } from 'react';
+
+function FormularioContacto({ email }) {
+  const [mensaje, setMensaje] = useState('');
+  const [enviado, setEnviado] = useState(false);
+  
+  const handleSubmit = (e) =&gt; {
+    e.preventDefault();
+    if (mensaje.trim()) {
+      setEnviado(true);
+      // Aquí podrías enviar el mensaje a un servicio real
+      setTimeout(() =&gt; {
+        setEnviado(false);
+        setMensaje('');
+      }, 3000);
+    }
+  };
+  
+  return (
+    &lt;div style={{
+      background: 'white',
+      padding: '1.5rem',
+      borderRadius: '10px',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+      margin: '1rem 0'
+    }}&gt;
+      &lt;h3&gt;✉️ ¿Quieres contactarme?&lt;/h3&gt;
+      &lt;p style={{ color: '#666', marginBottom: '1rem' }}&gt;
+        Escríbeme a: &lt;strong&gt;{email}&lt;/strong&gt;
+      &lt;/p&gt;
+      
+      {enviado ? (
+        &lt;div style={{
+          background: '#d4edda',
+          color: '#155724',
+          padding: '1rem',
+          borderRadius: '5px',
+          textAlign: 'center'
+        }}&gt;
+          ¡Mensaje enviado! ✅ (Esto es solo una simulación)
+        &lt;/div&gt;
+      ) : (
+        &lt;form onSubmit={handleSubmit}&gt;
+          &lt;textarea
+            value={mensaje}
+            onChange={(e) =&gt; setMensaje(e.target.value)}
+            placeholder="Escribe tu mensaje aquí..."
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '5px',
+              minHeight: '80px',
+              resize: 'vertical'
+            }}
+          /&gt;
+          &lt;button 
+            type="submit"
+            style={{
+              background: '#61dafb',
+              color: 'white',
+              border: 'none',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              marginTop: '10px'
+            }}
+          &gt;
+            Enviar mensaje
+          &lt;/button&gt;
+        &lt;/form&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+export default FormularioContacto;</code></pre>
+        
+        <h3>� Paso 8: Juntarlo todo en App.jsx</h3>
+        <p><strong>Actualiza tu <code>src/App.jsx</code>:</strong></p>
+<pre><code class="language-jsx">// src/App.jsx
+import Avatar from './components/Avatar';
+import BotonLike from './components/BotonLike';
+import ListaHabilidades from './components/ListaHabilidades';
+import TarjetaProyecto from './components/TarjetaProyecto';
+import FormularioContacto from './components/FormularioContacto';
+import { miInformacion, misHabilidades, misProyectos } from './data/misDatos';
+
+function App() {
+  return (
+    &lt;div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+      padding: '20px'
+    }}&gt;
+      &lt;div style={{
+        maxWidth: '600px',
+        margin: '0 auto'
+      }}&gt;
+        {/* Avatar y información principal */}
+        &lt;Avatar informacion={miInformacion} /&gt;
+        
+        {/* Botón de like */}
+        &lt;BotonLike /&gt;
+        
+        {/* Lista de habilidades */}
+        &lt;ListaHabilidades habilidades={misHabilidades} /&gt;
+        
+        {/* Sección de proyectos */}
+        &lt;div style={{
+          background: 'white',
+          padding: '1.5rem',
+          borderRadius: '10px',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+          margin: '1rem 0'
+        }}&gt;
+          &lt;h3&gt;💼 Mis Proyectos&lt;/h3&gt;
+          {misProyectos.map(proyecto =&gt; (
+            &lt;TarjetaProyecto key={proyecto.id} proyecto={proyecto} /&gt;
+          ))}
+        &lt;/div&gt;
+        
+        {/* Formulario de contacto */}
+        &lt;FormularioContacto email={miInformacion.email} /&gt;
+        
+        {/* Footer */}
+        &lt;div style={{
+          textAlign: 'center',
+          padding: '2rem',
+          color: '#666'
+        }}&gt;
+          &lt;p&gt;🎉 ¡Mi primera tarjeta digital hecha con React!&lt;/p&gt;
+          &lt;p style={{ fontSize: '0.9rem' }}&gt;
+            Creada con ❤️ usando lo aprendido en el curso
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+        
+        <h3>🎨 Paso 9: ¡Personaliza y disfruta!</h3>
+        <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; border-left: 4px solid #4CAF50;">
+          <p><strong>🎯 ¡Ya tienes tu tarjeta digital!</strong> Ahora:</p>
+          <ol>
+            <li><strong>Personaliza los datos</strong> en <code>misDatos.js</code> con tu información real</li>
+            <li><strong>Cambia los colores</strong> en los estilos por los que más te gusten</li>
+            <li><strong>Añade más proyectos</strong> conforme los vayas creando</li>
+            <li><strong>Compártela</strong> con tus amigos y familia</li>
+          </ol>
+        </div>
+        
+        <p><strong>🤯 ¿Te das cuenta de lo que acabas de hacer?</strong></p>
+        <ul>
+          <li>✅ Has usado <strong>componentes</strong> para organizar tu código</li>
+          <li>✅ Has pasado <strong>props</strong> entre componentes</li>
+          <li>✅ Has manejado <strong>estado</strong> con useState</li>
+          <li>✅ Has respondido a <strong>eventos</strong> de usuario</li>
+          <li>✅ Has renderizado <strong>listas dinámicas</strong> con map()</li>
+          <li>✅ Has usado <strong>renderizado condicional</strong></li>
+          <li>✅ Has creado <strong>formularios controlados</strong></li>
+        </ul>
+        
+        <p><em>¡Esto es React en acción! 🚀</em></p>
+      </div>
+    </section>
+
+    <!-- Cierre -->
+    <section>
+      <h2>5) ¡Enhorabuena!</h2>
+      <div class="card">
+        <p>🎉 Si has llegado hasta aquí, ya tienes tu <strong>primer contacto real con React</strong>.</p>
+        <p>A partir de ahora puedes:</p>
+        <ul>
+          <li>Explorar la <a href="https://react.dev" target="_blank">documentación oficial</a>.</li>
+          <li>Practicar creando pequeños proyectos: listas, contadores, portfolios.</li>
+          <li>Dar el salto a temas más avanzados poco a poco.</li>
+        </ul>
+        <p><strong>No necesitas saberlo todo hoy.</strong> Lo importante es que ahora React ya no es un misterio, y puedes aprender investigando con base sólida.</p>
+      </div>
+    </section>
+
+    <!-- Navegación -->
+    <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: linear-gradient(135deg, #61dafb, #20232a); color: white; border-radius: 10px;">
+      <p style="margin-bottom: 1rem; font-size: 1.2rem; font-weight: bold;">🎉 ¡Felicidades! Has completado el curso</p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+        <a href="../index.html" style="text-decoration: none; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px;">🏠 Portada</a>
+        <a href="intro.html" style="text-decoration: none; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px;">📦 Día 1</a>
+        <a href="componentes.html" style="text-decoration: none; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px;">🧩 Día 2</a>
+        <a href="props.html" style="text-decoration: none; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px;">🚀 Día 3</a>
+        <a href="estados.html" style="text-decoration: none; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px;">⚡ Día 4</a>
+        <strong style="background: rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 20px;">🏁 Día 5</strong>
+      </div>
+      <div style="margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+        <p style="font-size: 0.9rem; margin: 0;">
+          🌟 <strong>¡Lo lograste!</strong> Ahora puedes crear aplicaciones React básicas, entender la documentación oficial y seguir aprendiendo por tu cuenta.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Curso Básico de React · Día 5 · ¡Enhorabuena por completar el curso! 🎓 · Inmacontreras © 2025</p>
+  </footer>
+</body>
+</html>
+-->

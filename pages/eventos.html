@@ -1,0 +1,287 @@
+<!--
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Día 4 · Estado (useState) y eventos</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <h1>⚡ Día 4 · Estado y Eventos en React</h1>
+    <p>Interacciones básicas: contador, like, mostrar/ocultar e inputs controlados</p>
+  </header>
+
+  <main class="container">
+    <!-- Objetivos -->
+    <section>
+      <h2>1) Objetivos del día</h2>
+      <div class="card">
+        <ul>
+          <li>Entender qué es el <strong>estado</strong> y por qué React lo necesita.</li>
+          <li>Crear y actualizar estado con <code>useState</code>.</li>
+          <li>Manejar eventos como <code>onClick</code> y <code>onChange</code>.</li>
+          <li>Hacer renderizado condicional con estado.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Qué es el estado -->
+    <section>
+      <h2>2) ¿Qué es el estado?</h2>
+      <div class="card">
+        <p>El <strong>estado</strong> es la “memoria” de un componente: datos que pueden cambiar con el tiempo y que, cuando cambian, hacen que la interfaz se vuelva a pintar.</p>
+<pre><code class="language-jsx">import { useState } from "react";
+
+export default function Contador(){
+  const [valor, setValor] = useState(0); // valor inicial: 0
+
+  return (
+    &lt;div className="card"&gt;
+      &lt;p&gt;Has hecho clic: &lt;strong&gt;{valor}&lt;/strong&gt; veces&lt;/p&gt;
+      &lt;button className="btn mt-2" onClick={() =&gt; setValor(valor + 1)}&gt;+1&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+        <ul class="mt-2">
+          <li><code>useState(0)</code> crea una pareja: <code>[valor, setValor]</code>.</li>
+          <li><code>setValor</code> actualiza el estado y React re-renderiza el componente.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Eventos -->
+    <section>
+      <h2>3) Eventos: <code>onClick</code>, <code>onChange</code></h2>
+      <div class="card">
+        <p>Los eventos en JSX van en <em>camelCase</em> y reciben funciones.</p>
+<pre><code class="language-jsx">export default function BotonLike(){
+  const [likes, setLikes] = useState(0);
+  function handleLike(){
+    setLikes(likes + 1);
+  }
+  return (
+    &lt;div className="card"&gt;
+      &lt;button className="btn" onClick={handleLike}&gt;👍 Me gusta&lt;/button&gt;
+      &lt;p className="mt-2"&gt;Likes: {likes}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+
+        <p class="mt-2"><strong>Input controlado</strong> (el valor del input vive en el estado):</p>
+<pre><code class="language-jsx">export default function NombreEnVivo(){
+  const [nombre, setNombre] = useState("");
+
+  return (
+    &lt;div className="card"&gt;
+      &lt;label htmlFor="nombre"&gt;Escribe tu nombre:&lt;/label&gt;
+      &lt;input
+        id="nombre"
+        className="mt-2"
+        value={nombre}
+        onChange={(e) =&gt; setNombre(e.target.value)}
+        placeholder="Tu nombre..."
+      /&gt;
+      &lt;p className="mt-2"&gt;Hola, &lt;strong&gt;{nombre || "anónimo"}&lt;/strong&gt; 👋&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    </section>
+
+    <!-- Renderizado condicional -->
+    <section>
+      <h2>4) Renderizado condicional</h2>
+      <div class="card">
+        <p>Muestra u oculta contenido según el estado.</p>
+<pre><code class="language-jsx">export default function ToggleDescripcion(){
+  const [visible, setVisible] = useState(false);
+
+  return (
+    &lt;div className="card"&gt;
+      &lt;button className="btn" onClick={() =&gt; setVisible(!visible)}&gt;
+        {visible ? "Ocultar" : "Mostrar"} descripción
+      &lt;/button&gt;
+
+      {visible &amp;&amp; (
+        &lt;p className="mt-2"&gt;Esta es una descripción que aparece y desaparece.&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    </section>
+
+    <!-- Actualizaciones basadas en el valor previo -->
+    <section>
+      <h2>5) ¡Ojo! Actualizar en base al valor anterior</h2>
+      <div class="card">
+        <p>Cuando la actualización depende del valor previo, usa la función callback de <code>setState</code>:</p>
+<pre><code class="language-jsx">setValor(v =&gt; v + 1); // seguro cuando hay varias actualizaciones seguidas
+</code></pre>
+        <p>Ejemplo rápido:</p>
+<pre><code class="language-jsx">&lt;button onClick={() =&gt; {
+  setValor(v =&gt; v + 1);
+  setValor(v =&gt; v + 1); // suma 2 correctamente
+}}&gt;+2&lt;/button&gt;
+</code></pre>
+      </div>
+    </section>
+
+    <!-- Mini práctica guiada -->
+    <section>
+      <h2>6) Mini práctica (15–20 min): “Perfil interactivo”</h2>
+      <div class="card">
+        <p>Crea un pequeño perfil con tres interacciones:</p>
+        <ol>
+          <li><strong>Like</strong> al perfil (contador).</li>
+          <li><strong>Mostrar/ocultar</strong> biografía.</li>
+          <li><strong>Editar nombre</strong> con un input controlado.</li>
+        </ol>
+
+        <p class="mt-2"><strong>Estructura sugerida</strong></p>
+<pre><code class="language-jsx">// src/components/Perfil.jsx
+import { useState } from "react";
+
+export default function Perfil(){
+  const [nombre, setNombre] = useState("Inma");
+  const [likes, setLikes] = useState(0);
+  const [verBio, setVerBio] = useState(true);
+
+  return (
+    &lt;article className="card"&gt;
+      &lt;h3&gt;Perfil de {nombre} &lt;span className="badge"&gt;React&lt;/span&gt;&lt;/h3&gt;
+
+      &lt;div className="mt-2"&gt;
+        &lt;label htmlFor="nombre"&gt;Nombre:&lt;/label&gt;
+        &lt;input
+          id="nombre"
+          className="mt-2"
+          value={nombre}
+          onChange={(e) =&gt; setNombre(e.target.value)}
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;div className="mt-4"&gt;
+        &lt;button className="btn" onClick={() =&gt; setLikes(l =&gt; l + 1)}&gt;👍 Like&lt;/button&gt;
+        &lt;span className="mt-2"&gt; · Likes: {likes}&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div className="mt-4"&gt;
+        &lt;button className="btn" onClick={() =&gt; setVerBio(v =&gt; !v)}&gt;
+          {verBio ? "Ocultar" : "Mostrar"} bio
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      {verBio &amp;&amp; (
+        &lt;p className="mt-2"&gt;
+          Soy formadora web y me encanta enseñar React con ejemplos sencillos.
+        &lt;/p&gt;
+      )}
+    &lt;/article&gt;
+  );
+}
+</code></pre>
+
+        <p class="mt-2"><strong>Usarlo en <code>App.jsx</code>:</strong></p>
+<pre><code class="language-jsx">// src/App.jsx
+import Perfil from "./components/Perfil";
+
+export default function App(){
+  return (
+    &lt;main className="container"&gt;
+      &lt;h2&gt;Interacciones básicas&lt;/h2&gt;
+      &lt;div className="mt-4"&gt;&lt;Perfil /&gt;&lt;/div&gt;
+    &lt;/main&gt;
+  );
+}
+</code></pre>
+
+        <p class="mt-2"><strong>Reto extra (opcional):</strong> añade un botón “Reset” que ponga <code>likes</code> a 0 y <code>nombre</code> a “Inma”.</p>
+      </div>
+    </section>
+
+    <!-- Bonus: lista simple con añadir elementos -->
+    <section>
+      <h2>7) Bonus (opcional): lista con añadir elementos</h2>
+      <div class="card">
+        <p>Pequeña “lista de notas” para practicar estado con arrays.</p>
+<pre><code class="language-jsx">export default function Notas(){
+  const [texto, setTexto] = useState("");
+  const [notas, setNotas] = useState([]);
+
+  function addNota(){
+    if(!texto.trim()) return;
+    setNotas(prev =&gt; [...prev, { id: crypto.randomUUID(), texto }]);
+    setTexto("");
+  }
+
+  return (
+    &lt;div className="card"&gt;
+      &lt;h3&gt;Notas rápidas&lt;/h3&gt;
+      &lt;input value={texto} onChange={(e)=&gt;setTexto(e.target.value)} placeholder="Escribe una nota..." /&gt;
+      &lt;button className="btn mt-2" onClick={addNota}&gt;➕ Añadir&lt;/button&gt;
+
+      {notas.length === 0 ? (
+        &lt;p className="mt-2"&gt;No hay notas todavía.&lt;/p&gt;
+      ) : (
+        &lt;ul className="mt-2"&gt;
+          {notas.map(n =&gt; &lt;li key={n.id}&gt;{n.texto}&lt;/li&gt;)}
+        &lt;/ul&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+        <p class="mt-2">🧠 Conceptos: <code>useState</code> con arrays, <code>spread</code> para añadir, <code>key</code> en listas.</p>
+      </div>
+    </section>
+
+    <!-- Errores comunes -->
+    <section>
+      <h2>8) Errores comunes hoy</h2>
+      <div class="card">
+        <ul>
+          <li>Modificar el estado directamente (usa siempre la función <code>set...</code>).</li>
+          <li>Olvidar que los inputs controlados deben leer su valor desde el estado.</li>
+          <li>Esperar que el estado cambie de forma “inmediata” en la misma línea (React puede agrupar actualizaciones).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Próximo día -->
+    <section>
+      <h2>9) ¿Qué haremos en el Día 5?</h2>
+      <div class="card">
+        <p>Montaremos la <strong>mini-página final</strong> combinando lo aprendido:</p>
+        <ul>
+          <li>Header + sección “Sobre mí”.</li>
+          <li>Listado de tarjetas (props + <code>map()</code>).</li>
+          <li>Interacciones básicas (like, toggle, input de contacto).</li>
+          <li>Revisión de estilos y <strong>publicación</strong> (Netlify/Vercel).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Nav -->
+    <div class="mt-8">
+      <a href="index.html">⬅️ Portada</a> ·
+      <a href="dia1.html">Día 1</a> ·
+      <a href="dia2.html">Día 2</a> ·
+      <a href="dia3.html">Día 3</a> ·
+      <strong>Día 4</strong> ·
+      <em>Día 5 (Proyecto final + publicación) → siguiente</em>
+    </div>
+  </main>
+
+  <footer>
+    <p>Curso Básico de React · Día 4</p>
+  </footer>
+</body>
+</html>
+-->

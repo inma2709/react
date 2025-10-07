@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Día 2 · JSX y Componentes en React</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>🧩 Día 2 · JSX y Componentes</h1>
+      <p>De HTML "normal" a JSX + piezas reutilizables</p>
+      
+      <!-- Menú de navegación -->
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">🏠 Inicio</a>
+        <a href="intro.html" class="nav-link">📦 Día 1</a>
+        <a href="#" class="nav-link active">🧩 Día 2</a>
+        <a href="props.html" class="nav-link">🚀 Día 3</a>
+        <a href="estados.html" class="nav-link">⚡ Día 4</a>
+        <a href="proyecto.html" class="nav-link">🏁 Día 5</a>
+        <a href="rutas.html" class="nav-link extra">🧭 Extra</a>
+      </nav>
+      
+      <!-- Migas de pan -->
+      <div class="breadcrumb">
+        <a href="../index.html">🏠 Inicio</a>
+        <span class="breadcrumb-separator">→</span>
+        <span class="breadcrumb-current">🧩 Día 2: JSX y Componentes</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Pregunta clave -->
+    <section>
+      <h2>🤔 La Gran Pregunta: ¿Qué es JSX?</h2>
+      <div class="card">
+        <p><strong>¿JSX es un lenguaje de programación?</strong> ¡No! JSX es una <strong>sintaxis especial</strong> que inventó el equipo de React para hacer tu vida más fácil.</p>
+        
+        <h3>🧠 Piénsalo así:</h3>
+        <ul>
+          <li><strong>HTML:</strong> Define la estructura de tu página</li>
+          <li><strong>JavaScript:</strong> Añade lógica y dinamismo</li>
+          <li><strong>JSX:</strong> Te permite mezclar HTML y JavaScript de forma natural</li>
+        </ul>
+        
+        <h3>🔄 ¿Qué hace React con JSX?</h3>
+        <p>React tiene un "traductor" que convierte tu JSX en JavaScript puro que los navegadores sí entienden.</p>
+        
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+          <strong>🎯 Lo que tú escribes (JSX):</strong>
+<pre><code>&lt;h1&gt;¡Hola mundo!&lt;/h1&gt;</code></pre>
+          <strong>🤖 Lo que ve el navegador (JavaScript):</strong>
+<pre><code>React.createElement('h1', null, '¡Hola mundo!')</code></pre>
+        </div>
+        
+        <p><em>¡No te preocupes por entender el código del navegador! Solo necesitas saber que JSX hace tu trabajo mucho más fácil.</em></p>
+      </div>
+    </section>
+
+    <!-- Comparación visual -->
+    <section>
+      <h2>👀 JSX vs HTML: ¿En qué se parecen y en qué se diferencian?</h2>
+      <div class="card">
+        <h3>✅ Lo que ES igual a HTML:</h3>
+        <ul>
+          <li>Usas las mismas etiquetas: <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, etc.</li>
+          <li>La estructura se ve prácticamente igual</li>
+          <li>Puedes anidar elementos como siempre</li>
+        </ul>
+        
+        <h3>⚠️ Las pequeñas diferencias (¡solo son 3!):</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+          <div>
+            <h4>📄 En HTML escribes:</h4>
+<pre><code>&lt;div class="mi-estilo"&gt;
+  &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+  &lt;button onclick="miFuncion()"&gt;Click&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+          <div>
+            <h4>⚛️ En JSX escribes:</h4>
+<pre><code>&lt;div className="mi-estilo"&gt;
+  &lt;label htmlFor="nombre"&gt;Nombre:&lt;/label&gt;
+  &lt;button onClick={miFuncion}&gt;Click&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+        
+        <h3>🤷‍♀️ ¿Por qué estos cambios?</h3>
+        <ul>
+          <li><strong><code>class → className</code>:</strong> Porque <code>class</code> ya es una palabra reservada en JavaScript</li>
+          <li><strong><code>for → htmlFor</code>:</strong> Porque <code>for</code> también es una palabra reservada de JavaScript</li>
+          <li><strong><code>onclick → onClick</code>:</strong> En JavaScript se prefiere camelCase para los nombres</li>
+        </ul>
+        
+        <p>💡 <strong>Truco de memoria:</strong> Si Visual Studio Code te subraya algo en rojo, probablemente necesites cambiar <code>class</code> por <code>className</code>.</p>
+      </div>
+    </section>
+
+    <!-- El superpoder de JSX -->
+    <section>
+      <h2>🦸‍♀️ El Superpoder de JSX: Mezclar HTML con JavaScript</h2>
+      <div class="card">
+        <p>Aquí es donde JSX se vuelve realmente poderoso. ¡Puedes usar variables de JavaScript directamente en tu HTML!</p>
+        
+        <h3>🎯 Experimento 1: Variables en JSX</h3>
+        <p><strong>Prueba esto en tu <code>App.jsx</code>:</strong></p>
+<pre><code class="language-jsx">function App() {
+  const miNombre = "Tu Nombre Aquí";
+  const miEdad = 25;
+  const meGustaReact = true;
+  
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;¡Hola, soy {miNombre}!&lt;/h1&gt;
+      &lt;p&gt;Tengo {miEdad} años&lt;/p&gt;
+      &lt;p&gt;¿Me gusta React? {meGustaReact ? "¡Sí!" : "No mucho"}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        
+        <h3>🔍 ¿Qué está pasando aquí?</h3>
+        <ul>
+          <li><strong><code>{miNombre}</code>:</strong> Las llaves <code>{ }</code> le dicen a JSX "aquí va JavaScript"</li>
+          <li><strong><code>{miEdad}</code>:</strong> Puedes poner números, strings, o cualquier variable</li>
+          <li><strong><code>{meGustaReact ? "¡Sí!" : "No mucho"}</code>:</strong> ¡Incluso operadores ternarios funcionan!</li>
+        </ul>
+        
+        <h3>🎯 Experimento 2: La Regla del "Elemento Único"</h3>
+        <p><strong>❌ Esto NO funciona:</strong></p>
+      <pre><code class="language-jsx">function App() {
+        return (
+          &lt;h1&gt;Título&lt;/h1&gt;
+          &lt;p&gt;Párrafo&lt;/p&gt;
+        );
+      }</code></pre>
+        <p>
+          <strong>¿Por qué no funciona?</strong> Porque en JSX, una función debe devolver <em>un solo elemento</em>. Si devuelves dos etiquetas (<code>&lt;h1&gt;</code> y <code>&lt;p&gt;</code>) sin un contenedor, React no sabe cómo unirlas. Por eso se usa un <code>&lt;div&gt;</code> o un <code>&lt;&gt;</code> fragmento: así todo queda dentro de un único elemento.
+        </p>
+        <p><strong>✅ Esto SÍ funciona (opción 1 - con div):</strong></p>
+<pre><code class="language-jsx">function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Título&lt;/h1&gt;
+      &lt;p&gt;Párrafo&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        
+        <p><strong>✅ Esto SÍ funciona (opción 2 - con fragmento):</strong></p>
+<pre><code class="language-jsx">function App() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Título&lt;/h1&gt;
+      &lt;p&gt;Párrafo&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+        
+        <h3>🤷‍♀️ ¿Por qué esta regla?</h3>
+        <p>Recuerda que JSX se convierte en JavaScript. Una función solo puede devolver <strong>una cosa</strong>. El <code>&lt;div&gt;</code> o el fragmento <code>&lt;&gt;</code> actúa como esa "una cosa" que contiene todo lo demás.</p>
+        
+        <p>💡 <strong>Consejo:</strong> Usa fragmentos <code>&lt;&gt;</code> cuando no quieras añadir un div extra a tu HTML final.</p>
+      </div>
+    </section>
+
+    <!-- Componentes: el corazón de React -->
+    <section>
+      <h2>🧩 Componentes: Las Piezas de LEGO de tu Aplicación</h2>
+      <div class="card">
+        <h3>🤔 ¿Qué es un componente?</h3>
+        <p>Imagina que estás construyendo con LEGO. En lugar de tener una pieza gigante para toda la casa, tienes:</p>
+        <ul>
+          <li>🧱 Una pieza para la puerta</li>
+          <li>🧱 Una pieza para la ventana</li>
+          <li>🧱 Una pieza para el techo</li>
+        </ul>
+        
+        <p>Los <strong>componentes de React son igual</strong>: pequeñas piezas reutilizables que juntas forman tu aplicación.</p>
+        
+        <h3>📝 Anatomía de un Componente</h3>
+        <p>Un componente es simplemente una <strong>función de JavaScript que devuelve JSX</strong>. ¡Así de simple!</p>
+        
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+          <strong>🔬 Diseccionemos un componente:</strong>
+<pre><code class="language-jsx">function MiComponente() {    ← 1) Es una función
+  const mensaje = "¡Hola!";  ← 2) Puede tener lógica JS
+  
+  return (                   ← 3) Devuelve JSX
+    &lt;h1&gt;{mensaje}&lt;/h1&gt;
+  );
+}</code></pre>
+        </div>
+        
+        <h3>⚠️ Reglas importantes de los componentes:</h3>
+        <ul>
+          <li><strong>Nombre en Mayúscula:</strong> <code>MiComponente</code>, no <code>miComponente</code></li>
+          <li><strong>Siempre devuelve JSX</strong> (o <code>null</code> si no quieres mostrar nada)</li>
+          <li><strong>Un archivo = Un componente</strong> (buena práctica)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Creando tu primer componente paso a paso -->
+    <section>
+      <h2>👷‍♀️ ¡Manos a la obra! Tu Primer Componente</h2>
+      <div class="card">
+        <p>Vamos a incorporar tu primer componente paso a paso. <strong>¡Sígueme y hazlo en tu proyecto!</strong></p>
+        
+        <h3>🗂️ Paso 1: Crear la carpeta (¡organización es clave!)</h3>
+        <ol>
+          <li>En tu proyecto, dentro de <code>src/</code>, crea una carpeta llamada <code>components</code></li>
+          <li>Tu estructura debería verse así:</li>
+        </ol>
+<pre><code>src/
+├── components/     ← nueva carpeta
+├── App.jsx
+└── main.jsx</code></pre>
+        
+        <h3>📄 Paso 2: Crear tu primer archivo de componente</h3>
+        <ol>
+            <li>Dentro de <code>src/components/</code>, crea un archivo llamado <code>Header.jsx</code></li>
+            <li>A continuación crea otro archivo para los estilos de Header: Header.css</li>
+            <li>Un componente en React se escribe como una función de JavaScript que devuelve JSX. El nombre del componente debe empezar en mayúscula y el archivo suele tener el mismo nombre que el componente.</li>
+            <li>Escribe exactamente esto :</li>
+          </ol>
+
+        <details>
+          <summary class="summary-section summary-primary">📄 Código del componente Header.jsx (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <pre><code class="language-jsx">import { Link } from 'react-router-dom';
+import './Header.css';
+
+function Header() {
+  return (
+    &lt;header className="header"&gt;
+      &lt;h1 className="title"&gt;Mi Portafolio&lt;/h1&gt;
+      &lt;nav className="nav"&gt;
+        &lt;Link to="/" className="navLink"&gt;Inicio&lt;/Link&gt;
+        &lt;Link to="/proyectos" className="navLink"&gt;Proyectos&lt;/Link&gt;
+        &lt;Link to="/sobre-mi" className="navLink"&gt;Sobre mí&lt;/Link&gt;
+        &lt;button className="button"&gt;Contacto&lt;/button&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+  );
+}
+
+export default Header;</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-info">🎨 Estilos CSS para Header.css (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <pre><code class="language-css">/* Header principal */
+.header {
+  background: linear-gradient(135deg, #1e1e28 0%, #2a2a3a 100%);
+  background-color: #1e1e28; /* Fallback sólido */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid #00C890;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Título del header */
+.title {
+  font-size: 1.5rem;
+  color: #00C890;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Navegación */
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Enlaces de navegación */
+.navLink {
+  color: #F0F0F0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #00C890;
+  text-decoration: underline;
+}
+
+/* Botón */
+.button {
+  background-color: #00C890;
+  color: #1E1E28;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #00A878;
+}</code></pre>
+          </div>
+        </details>
+
+        </details>
+
+        <details>
+          <summary class="summary-section summary-success">🔍 Explicación detallada línea por línea (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <p><strong>📦 Línea 1: <code>import { Link } from 'react-router-dom';</code></strong></p>
+            <ul>
+              <li>Importamos el componente <code>Link</code> desde la librería <code>react-router-dom</code></li>
+              <li><code>Link</code> es como un <code>&lt;a&gt;</code> pero para aplicaciones SPA (Single Page Applications)</li>
+              <li>Permite navegar entre páginas sin recargar toda la aplicación</li>
+              <li>Las llaves <code>{ }</code> indican que es una importación específica (destructuring)</li>
+            </ul>
+
+            <p><strong>🎨 Línea 2: <code>import styles from './Header.css';</code></strong></p>
+            <ul>
+              <li>Importamos los estilos CSS desde el archivo <code>Header.css</code> en la misma carpeta</li>
+              <li><code>styles</code> será un objeto que contiene todas las clases CSS como propiedades</li>
+              <li>El <code>./</code> indica que está en la misma carpeta que el componente</li>
+              <li>Esto se llama "CSS Modules" - cada componente tiene sus propios estilos</li>
+            </ul>
+
+            <p><strong>⚡ Línea 4: <code>function Header() {</code></strong></p>
+            <ul>
+              <li>Declaramos una función llamada <code>Header</code> (en mayúscula porque es un componente)</li>
+              <li>Es una función flecha o function declaration que define nuestro componente</li>
+              <li>Los componentes siempre deben empezar con mayúscula en React</li>
+            </ul>
+
+            <p><strong>🔄 Línea 5: <code>return (</code></strong></p>
+            <ul>
+              <li>Todo componente debe <code>return</code> JSX (JavaScript XML)</li>
+              <li>Los paréntesis permiten escribir JSX en múltiples líneas de forma legible</li>
+            </ul>
+
+            <p><strong>🏗️ Línea 6: <code>&lt;header className={styles.header}&gt;</code></strong></p>
+            <ul>
+              <li><code>&lt;header&gt;</code> es un elemento HTML semántico para la cabecera</li>
+              <li><code>className</code> (no <code>class</code>) asigna estilos CSS en JSX</li>
+              <li><code>{styles.header}</code> accede a la clase CSS <code>.header</code> del archivo importado</li>
+              <li>Las llaves <code>{ }</code> permiten ejecutar JavaScript dentro del JSX</li>
+            </ul>
+
+            <p><strong>📰 Línea 7: <code>&lt;h1 className={styles.title}&gt;Mi Portafolio&lt;/h1&gt;</code></strong></p>
+            <ul>
+              <li>Elemento <code>&lt;h1&gt;</code> para el título principal de la página</li>
+              <li>Aplica los estilos de la clase <code>.title</code> del CSS importado</li>
+              <li>"Mi Portafolio" es el texto que aparecerá en la página</li>
+            </ul>
+
+            <p><strong>🧭 Línea 8: <code>&lt;nav className={styles.nav}&gt;</code></strong></p>
+            <ul>
+              <li><code>&lt;nav&gt;</code> es el elemento semántico HTML para navegación</li>
+              <li>Aplica los estilos de navegación desde el CSS importado</li>
+              <li>Contiene todos los enlaces de navegación</li>
+            </ul>
+
+            <p><strong>🔗 Líneas 9-11: Los componentes <code>&lt;Link&gt;</code></strong></p>
+            <ul>
+              <li><code>&lt;Link to="/"&gt;</code>: Navega a la ruta raíz (página de inicio)</li>
+              <li><code>&lt;Link to="/proyectos"&gt;</code>: Navega a la página de proyectos</li>
+              <li><code>&lt;Link to="/sobre-mi"&gt;</code>: Navega a la página "sobre mí"</li>
+              <li><code>className={styles.navLink}</code>: Aplica estilos específicos a los enlaces</li>
+              <li>Cada Link renderiza como un <code>&lt;a&gt;</code> pero con funcionalidad SPA</li>
+            </ul>
+
+            <p><strong>🔘 Línea 12: <code>&lt;button className={styles.button}&gt;Contacto&lt;/button&gt;</code></strong></p>
+            <ul>
+              <li>Un botón normal de HTML con estilos aplicados</li>
+              <li>No navega automáticamente - necesitarías agregar un onClick para funcionalidad</li>
+            </ul>
+
+            <p><strong>🏁 Línea 16: <code>export default Header;</code></strong></p>
+            <ul>
+              <li><code>export default</code> permite que otros archivos importen este componente</li>
+              <li>Es la exportación por defecto, así que se puede importar como <code>import Header from './Header'</code></li>
+              <li>Sin esto, el componente no sería accesible desde otros archivos</li>
+            </ul>
+          </div>
+        </details>
+        
+        <h3>🔌 Paso 3: Conectar tu componente a la página inicial</h3>
+        <p>¡Excelente! Ya tienes tu componente Header creado. Ahora viene la parte emocionante: <strong>¡usarlo en tu aplicación!</strong></p>
+        
+        <p>Como buen desarrollador React, vamos a crear una página <code>Home.jsx</code> que será nuestra página principal. Esta página importará y usará nuestro componente Header.</p>
+        
+        <h4>📁 Crea los archivos Home.jsx y Home.css</h4>
+        <p>En tu carpeta <code>src/</code>, crea <strong>dos archivos</strong> (al mismo nivel que App.jsx):</p>
+        <ol>
+          <li><code>Home.jsx</code> - El componente React</li>
+          <li><code>Home.css</code> - Los estilos de la página home</li>
+        </ol>
+
+        <details>
+          <summary class="summary-section summary-primary">🏠 Código del componente Home.jsx (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <pre><code class="language-jsx">import Header from "../components/Header";
+
+import "./Home.css";
+
+function Home() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;main className="home-main"&gt;
+        &lt;h2 className="home-title"&gt;
+          🎉 ¡Bienvenido a mi portafolio!
+        &lt;/h2&gt;
+        &lt;p className="home-text"&gt;
+          Este es el contenido principal de la página home.
+        &lt;/p&gt;
+        &lt;p className="home-text"&gt;
+          El header debería estar visible en la parte superior de la página con un fondo oscuro.
+        &lt;/p&gt;
+        &lt;div className="home-card"&gt;
+          &lt;h3&gt;Características del header:&lt;/h3&gt;
+          &lt;ul className="home-list"&gt;
+            &lt;li&gt;✅ Posición fija en la parte superior&lt;/li&gt;
+            &lt;li&gt;✅ Fondo semi-transparente con efecto blur&lt;/li&gt;
+            &lt;li&gt;✅ Enlaces de navegación interactivos&lt;/li&gt;
+            &lt;li&gt;✅ Botón de contacto con hover&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  );
+}
+export default Home;</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-info">🎨 Estilos CSS para Home.css (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <pre><code class="language-css">/* Contenedor principal de la página home */
+.home-main {
+  padding-top: 100px;
+  padding: 100px 2rem 2rem 2rem;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Título principal */
+.home-title {
+  color: #00C890;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Texto de párrafos */
+.home-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+/* Tarjeta de información */
+.home-card {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #00C890;
+}
+
+.home-card h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Lista dentro de la tarjeta */
+.home-list {
+  text-align: left;
+  padding-left: 0;
+  list-style: none;
+}
+
+.home-list li {
+  padding: 0.5rem 0;
+  color: #666;
+  font-weight: 500;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.home-list li:last-child {
+  border-bottom: none;
+}
+
+/* Efectos hover */
+.home-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .home-main {
+    padding: 80px 1rem 2rem 1rem;
+  }
+  
+  .home-title {
+    font-size: 1.5rem;
+  }
+  
+  .home-text {
+    font-size: 1rem;
+  }
+}</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-success">🧠 ¿Qué estamos aprendiendo aquí? (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <h4>� Conceptos clave que acabas de aplicar:</h4>
+            
+            <h5>� 1. Importación y uso de componentes:</h5>
+            <ul>
+              <li><strong>Línea 1:</strong> <code>import Header from "./components/Header";</code></li>
+              <li>Importamos nuestro componente Header desde la carpeta components</li>
+              <li>Usamos ruta relativa <code>"./components/Header"</code> (sin extensión .jsx)</li>
+              <li><strong>Línea 6:</strong> <code>&lt;Header /&gt;</code> - Lo usamos como si fuera una etiqueta HTML</li>
+            </ul>
+
+            <h5>🎨 2. Importación de estilos CSS:</h5>
+            <ul>
+              <li><strong>Línea 2:</strong> <code>import "./Home.css";</code></li>
+              <li>Importamos los estilos CSS directamente al componente</li>
+              <li>El <code>./</code> indica que está en la misma carpeta que el componente</li>
+              <li>React aplica automáticamente estos estilos cuando el componente se renderiza</li>
+            </ul>
+
+            <h5>🏗️ 3. Estructura de componente y clases CSS:</h5>
+            <ul>
+              <li><strong>className:</strong> Usamos <code>className</code> para aplicar clases CSS</li>
+              <li><strong>Organización:</strong> Cada elemento tiene su propia clase descriptiva</li>
+              <li><strong>Nomenclatura:</strong> Usamos prefijo <code>home-</code> para evitar conflictos</li>
+              <li><strong>Semántica:</strong> Nombres de clase descriptivos como <code>home-main</code>, <code>home-title</code></li>
+            </ul>
+
+            <h5>� 4. Ventajas de CSS separado vs estilos inline:</h5>
+            <ul>
+              <li><strong>Reutilización:</strong> Los estilos se pueden aplicar a múltiples elementos</li>
+              <li><strong>Mantenimiento:</strong> Es más fácil modificar y organizar los estilos</li>
+              <li><strong>Performance:</strong> CSS se cachea por el navegador</li>
+              <li><strong>Responsive:</strong> Podemos usar media queries fácilmente</li>
+              <li><strong>Efectos:</strong> Hover, transiciones y animaciones más fáciles</li>
+            </ul>
+
+            <h5>🧱 5. Composición de componentes:</h5>
+            <ul>
+              <li><strong>Header</strong> se encarga de la navegación</li>
+              <li><strong>Home</strong> se encarga del contenido principal</li>
+              <li>Cada componente tiene sus propios estilos</li>
+              <li>Los componentes son independientes y reutilizables</li>
+            </ul>
+
+            <h5>📱 6. Responsive design con CSS:</h5>
+            <ul>
+              <li><strong>Media queries:</strong> <code>@media (max-width: 768px)</code> para móviles</li>
+              <li><strong>Flexibilidad:</strong> Tamaños que se adaptan a pantalla</li>
+              <li><strong>rem units:</strong> Se adaptan al tamaño de fuente del usuario</li>
+              <li><strong>Layout fluido:</strong> Padding y márgenes responsivos</li>
+            </ul>
+
+            <p><strong>🎉 ¡Felicidades!</strong> Ahora entiendes la arquitectura estándar de React: componentes separados con sus propios archivos CSS. Esta es la práctica profesional más común.</p>
+          </div>
+        </details>
+
+        <h4>🔧 Paso final: Actualizar App.jsx</h4>
+        <p>¡Perfecto! Ya tienes tu componente Home funcionando. Ahora necesitas actualizar <code>App.jsx</code> para que use React Router y permita la navegación entre páginas.</p>
+        
+        <p><strong>📋 Requisitos previos:</strong></p>
+        <ol>
+          <li>Mueve tu archivo <code>Home.jsx</code> a una carpeta <code>src/pages/</code></li>
+          <li>Mueve tu archivo <code>Home.css</code> también a <code>src/pages/</code></li>
+          <li>Instala React Router: <code>npm install react-router-dom</code></li>
+        </ol>
+
+        <details>
+          <summary class="summary-section summary-primary">🗺️ Código completo de App.jsx con rutas (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <pre><code class="language-jsx">import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+
+function App() {
+  return (
+    &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+      &lt;Route path="/proyectos" element={&lt;div style={{paddingTop: '100px', padding: '100px 2rem'}}&gt;Página de Proyectos (En construcción)&lt;/div&gt;} /&gt;
+      &lt;Route path="/sobre-mi" element={&lt;div style={{paddingTop: '100px', padding: '100px 2rem'}}&gt;Página Sobre Mí (En construcción)&lt;/div&gt;} /&gt;
+    &lt;/Routes&gt;
+  );
+}
+
+export default App;</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-success">🧠 Explicación línea por línea de App.jsx (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <h4>📚 ¿Qué hace cada línea?</h4>
+            
+            <h5>🔗 Línea 1: <code>import { Routes, Route } from "react-router-dom";</code></h5>
+            <ul>
+              <li><strong>Routes:</strong> Contenedor principal que maneja todas las rutas de la aplicación</li>
+              <li><strong>Route:</strong> Define una ruta individual (URL específica)</li>
+              <li><strong>react-router-dom:</strong> Librería que permite navegación sin recargar página (SPA)</li>
+              <li><strong>Destructuring:</strong> Las llaves <code>{ }</code> importan componentes específicos</li>
+            </ul>
+
+            <h5>📁 Línea 2: <code>import Home from "./pages/Home";</code></h5>
+            <ul>
+              <li><strong>Importación:</strong> Trae nuestro componente Home desde la carpeta pages</li>
+              <li><strong>Ruta relativa:</strong> <code>./pages/Home</code> busca en carpeta pages desde App.jsx</li>
+              <li><strong>Organización:</strong> Separamos páginas en carpeta específica para mejor estructura</li>
+            </ul>
+
+            <h5>⚡ Líneas 4-5: <code>function App() { return (</code></h5>
+            <ul>
+              <li><strong>Componente principal:</strong> App es el componente raíz de toda la aplicación</li>
+              <li><strong>Return JSX:</strong> Devuelve la estructura de rutas</li>
+              <li><strong>Responsabilidad única:</strong> App solo se encarga de definir las rutas</li>
+            </ul>
+
+            <h5>🗺️ Línea 6: <code>&lt;Routes&gt;</code></h5>
+            <ul>
+              <li><strong>Contenedor de rutas:</strong> Agrupa todas las rutas posibles</li>
+              <li><strong>Router context:</strong> Proporciona contexto de navegación a las rutas hijas</li>
+              <li><strong>Solo un Routes:</strong> Debe haber un solo Routes activo por aplicación</li>
+            </ul>
+
+            <h5>🏠 Línea 7: <code>&lt;Route path="/" element={&lt;Home /&gt;} /&gt;</code></h5>
+            <ul>
+              <li><strong>path="/":</strong> Define la URL raíz (ejemplo.com/)</li>
+              <li><strong>element={&lt;Home /&gt;}:</strong> Qué componente mostrar en esa ruta</li>
+              <li><strong>Página principal:</strong> Primera página que ven los usuarios</li>
+            </ul>
+
+            <h5>🔧 Líneas 8-9: Rutas temporales</h5>
+            <ul>
+              <li><strong>path="/proyectos":</strong> URL para página de proyectos</li>
+              <li><strong>path="/sobre-mi":</strong> URL para página sobre mí</li>
+              <li><strong>div temporal:</strong> Marcadores mientras desarrollas las páginas reales</li>
+              <li><strong>Estilos inline:</strong> paddingTop compensa el header fijo</li>
+            </ul>
+
+            <h5>🎯 ¿Por qué esta estructura?</h5>
+            <ul>
+              <li><strong>Escalabilidad:</strong> Fácil agregar nuevas páginas</li>
+              <li><strong>Navegación funcional:</strong> Los enlaces del Header ahora funcionan</li>
+              <li><strong>SPA real:</strong> Cambio de páginas sin recargar</li>
+              <li><strong>Desarrollo progresivo:</strong> Páginas temporales mientras construyes</li>
+            </ul>
+
+            <p><strong>🚀 Resultado:</strong> ¡Ahora tienes una aplicación React funcional con navegación real entre páginas!</p>
+          </div>
+        </details>
+
+        <h4>📋 Paso crucial: Actualizar main.jsx</h4>
+        <p>Para que las rutas funcionen, también necesitas actualizar <code>main.jsx</code>. Este archivo es <strong>súper importante</strong> porque es el punto de entrada de toda tu aplicación React.</p>
+
+        <details>
+          <summary class="summary-section summary-info">🔧 Código actualizado de main.jsx (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <pre><code class="language-jsx">import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  &lt;StrictMode&gt;
+    &lt;BrowserRouter&gt;
+      &lt;App /&gt;
+    &lt;/BrowserRouter&gt;
+  &lt;/StrictMode&gt;,
+)</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-warning">🔧 ¿Por qué necesitamos BrowserRouter en main.jsx? (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <h4>🤔 La pregunta crucial: ¿Por qué BrowserRouter en main.jsx y no en App.jsx?</h4>
+            
+            <p><strong>🎯 Respuesta corta:</strong> Porque <code>BrowserRouter</code> debe envolver <strong>TODA</strong> la aplicación desde el punto más alto para que las rutas funcionen en cualquier parte.</p>
+            
+            <h5>🏗️ Arquitectura de una aplicación React con rutas:</h5>
+            <pre><code>main.jsx (punto de entrada)
+├── StrictMode (modo desarrollo)
+├── BrowserRouter (habilita rutas en TODA la app)
+└── App.jsx (componente principal)
+    └── Routes (define rutas específicas)
+        ├── Route (página 1)
+        ├── Route (página 2)
+        └── Route (página 3)</code></pre>
+            
+            <h5>⚡ ¿Qué pasaría si ponemos BrowserRouter en App.jsx?</h5>
+            <ul>
+              <li><strong>❌ Error común:</strong> "useRoutes() may be used only in the context of a &lt;Router&gt; component"</li>
+              <li><strong>🔧 Problema:</strong> React Router necesita "contexto" desde el nivel más alto</li>
+              <li><strong>💡 Solución:</strong> BrowserRouter en main.jsx proporciona contexto a toda la aplicación</li>
+            </ul>
+            
+            <h5>🎯 ¿Cómo afecta esto a tu día a día como desarrollador?</h5>
+            <h6>📅 Configuración inicial (una sola vez):</h6>
+            <ul>
+              <li><strong>main.jsx:</strong> Envuelves la app con BrowserRouter</li>
+              <li><strong>App.jsx:</strong> Defines las rutas con Routes y Route</li>
+              <li><strong>Componentes:</strong> Usan Link para navegar</li>
+            </ul>
+            
+            <h6>🔄 Desarrollo diario (99% del tiempo):</h6>
+            <ul>
+              <li><strong>Agregar nuevas páginas:</strong> Solo modificas App.jsx</li>
+              <li><strong>main.jsx:</strong> Lo dejas intacto</li>
+              <li><strong>Navegación:</strong> Usas Link en cualquier componente</li>
+            </ul>
+            
+            <h5>🧠 Analogía para entenderlo mejor:</h5>
+            <p><strong>🏢 Piensa en un edificio:</strong></p>
+            <ul>
+              <li><strong>main.jsx = Cimientos:</strong> Proporcionan base sólida para todo el edificio</li>
+              <li><strong>BrowserRouter = Sistema eléctrico:</strong> Debe estar desde la base para llegar a todos los pisos</li>
+              <li><strong>App.jsx = Planos de distribución:</strong> Definen qué hay en cada piso</li>
+              <li><strong>Componentes = Habitaciones:</strong> Pueden usar la electricidad sin instalarla</li>
+            </ul>
+            
+            <h5>🚨 Error típico y su solución:</h5>
+            <div style="background: #ffe6e6; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <p><strong>❌ Si no pones BrowserRouter en main.jsx:</strong></p>
+              <pre><code>// En App.jsx
+&lt;Routes&gt;  ← ¡ERROR! No hay contexto de router
+  &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+&lt;/Routes&gt;</code></pre>
+              <p><strong>💥 Error que verás:</strong> "useRoutes() may be used only in the context of a &lt;Router&gt; component"</p>
+            </div>
+            
+            <div style="background: #e6ffe6; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <p><strong>✅ Con BrowserRouter en main.jsx:</strong></p>
+              <pre><code>// main.jsx
+&lt;BrowserRouter&gt;  ← ✅ Proporciona contexto
+  &lt;App /&gt;
+&lt;/BrowserRouter&gt;
+
+// App.jsx
+&lt;Routes&gt;  ← ✅ ¡Funciona! Ya tiene contexto
+  &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+&lt;/Routes&gt;</code></pre>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-success">🧠 ¿Por qué main.jsx es TAN importante? (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <h4>🚀 main.jsx: El corazón de tu aplicación React</h4>
+            
+            <h5>📍 ¿Qué es main.jsx?</h5>
+            <ul>
+              <li><strong>Punto de entrada:</strong> Es el primer archivo que se ejecuta en tu aplicación</li>
+              <li><strong>Conexión con HTML:</strong> Conecta tu código React con el HTML del navegador</li>
+              <li><strong>Configuración global:</strong> Aquí configuras todo lo que afecta a TODA la aplicación</li>
+              <li><strong>Una sola vez:</strong> Solo se ejecuta al cargar la página por primera vez</li>
+            </ul>
+
+            <h5>🔍 Línea por línea explicado:</h5>
+            
+            <p><strong>Línea 1: <code>import { StrictMode } from 'react'</code></strong></p>
+            <ul>
+              <li><strong>StrictMode:</strong> Modo estricto que ayuda a detectar problemas en desarrollo</li>
+              <li><strong>Beneficios:</strong> Avisos sobre componentes obsoletos, efectos secundarios, etc.</li>
+              <li><strong>Solo en desarrollo:</strong> No afecta la versión de producción</li>
+            </ul>
+
+            <p><strong>Línea 2: <code>import { createRoot } from 'react-dom/client'</code></strong></p>
+            <ul>
+              <li><strong>createRoot:</strong> Nueva API de React 18 para renderizar la aplicación</li>
+              <li><strong>react-dom:</strong> Librería que conecta React con el DOM del navegador</li>
+              <li><strong>client:</strong> Indica que es para el lado del cliente (navegador)</li>
+            </ul>
+
+            <p><strong>Línea 3: <code>import { BrowserRouter } from 'react-router-dom'</code></strong></p>
+            <ul>
+              <li><strong>BrowserRouter:</strong> Habilita la navegación por URL en el navegador</li>
+              <li><strong>Historia del navegador:</strong> Permite usar botones de atrás/adelante</li>
+              <li><strong>URLs limpias:</strong> Permite URLs como /proyectos en lugar de #/proyectos</li>
+            </ul>
+
+            <p><strong>Línea 4: <code>import App from './App.jsx'</code></strong></p>
+            <ul>
+              <li><strong>Componente raíz:</strong> App es el componente principal de toda la aplicación</li>
+              <li><strong>Todo parte de aquí:</strong> Todos los demás componentes están dentro de App</li>
+            </ul>
+
+            <p><strong>Líneas 6-12: El renderizado</strong></p>
+            <ul>
+              <li><strong>createRoot:</strong> Crea un "root" React en el elemento HTML con id "root"</li>
+              <li><strong>render:</strong> Renderiza todo el árbol de componentes React</li>
+              <li><strong>Jerarquía:</strong> StrictMode → BrowserRouter → App → tus componentes</li>
+            </ul>
+
+            <h5>🏗️ ¿Cómo afecta esto a tu día a día?</h5>
+            
+            <h6>✅ Cuándo NO necesitas tocar main.jsx:</h6>
+            <ul>
+              <li>Creando nuevos componentes</li>
+              <li>Agregando nuevas páginas</li>
+              <li>Modificando estilos</li>
+              <li>Trabajando con props y state</li>
+              <li>95% del desarrollo normal</li>
+            </ul>
+
+            <h6>⚠️ Cuándo SÍ necesitas modificar main.jsx:</h6>
+            <ul>
+              <li><strong>Agregar Context Providers:</strong> Para estado global (como autenticación)</li>
+              <li><strong>Configurar themes:</strong> Temas de material-ui, styled-components, etc.</li>
+              <li><strong>Servicios globales:</strong> Analytics, error tracking, i18n</li>
+              <li><strong>Configuraciones de librería:</strong> Apollo GraphQL, Redux, etc.</li>
+            </ul>
+
+            <h5>🎯 Ejemplo de evolución de main.jsx:</h5>
+            <p><strong>Al principio (como ahora):</strong></p>
+            <pre><code>StrictMode → BrowserRouter → App</code></pre>
+            
+            <p><strong>En proyectos más grandes:</strong></p>
+            <pre><code>StrictMode → BrowserRouter → AuthProvider → ThemeProvider → App</code></pre>
+
+            <h5>💡 Consejos para el día a día:</h5>
+            <ul>
+              <li><strong>Déjalo simple:</strong> No agregues cosas hasta que las necesites</li>
+              <li><strong>Un lugar, una responsabilidad:</strong> Configuraciones globales van aquí</li>
+              <li><strong>Orden importa:</strong> Los providers externos van más afuera</li>
+              <li><strong>Documenta cambios:</strong> Si agregas algo, deja un comentario</li>
+            </ul>
+
+            <p><strong>🏆 Conclusión:</strong> main.jsx es como el "manager" de tu aplicación - configura el ambiente, pero rara vez necesitas cambiarlo en el desarrollo diario.</p>
+          </div>
+        </details>
+
+        <h4>🚀 ¡Ejecuta tu aplicación!</h4>
+        <p>En tu terminal, dentro de la carpeta del proyecto, ejecuta:</p>
+        <pre><code class="language-bash">npm run dev</code></pre>
+        
+        <h3>🎉 ¡Mira el resultado!</h3>
+        <p>Deberías ver:</p>
+        <ul>
+          <li>✅ <strong>Header fijo arriba</strong> con tu nombre y navegación</li>
+          <li>✅ <strong>Contenido principal</strong> con el mensaje de bienvenida</li>
+          <li>✅ <strong>Estilos aplicados</strong> - fondo gris, colores consistentes</li>
+          <li>✅ <strong>Header que no se mueve</strong> al hacer scroll</li>
+        </ul>
+        
+        <p><strong>🎊 ¡Felicidades!</strong> Acabas de crear tu primera aplicación React con componentes reutilizables y has aprendido:</p>
+        <ul>
+          <li>🏗️ Cómo crear componentes</li>
+          <li>📦 Cómo importar y exportar</li>
+          <li>🎨 Cómo aplicar estilos</li>
+          <li>🧩 Cómo componer una aplicación</li>
+        </ul>
+        
+        <h3>🤯 Momento "¡Aja!"</h3>
+        <p>¿Te das cuenta de lo que acaba de pasar?  Esto es la esencia de React.</p>
+      </div>
+    </section>
+
+    <!-- Cuadro resumen del flujo completo -->
+    <section>
+      <h2>📋 Resumen: El Viaje Completo de tu Primer Componente</h2>
+      <div class="card" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-left: 5px solid #28a745;">
+        <h3>🎓 ¡Felicidades! Acabas de completar el ciclo completo de React</h3>
+        <p>Quiero que entiendas <strong>exactamente</strong> lo que acabas de lograr. Has conectado todas las piezas del rompecabezas React:</p>
+        
+        <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <h4>🏗️ Paso 1: Creaste el componente Header.jsx</h4>
+          <div style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+            <strong>📁 Ubicación:</strong> <code>src/components/Header.jsx</code><br>
+            <strong>🎯 Propósito:</strong> Una función que devuelve JSX con navegación<br>
+            <strong>💡 Clave:</strong> <code>export default Header</code> para que otros archivos lo puedan usar
+          </div>
+          <pre><code class="language-jsx">function Header() {
+  return &lt;header&gt;...&lt;/header&gt;;
+}
+export default Header;</code></pre>
+        </div>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <h4>🏠 Paso 2: Lo incorporaste en Home.jsx</h4>
+          <div style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+            <strong>📁 Ubicación:</strong> <code>src/pages/Home.jsx</code><br>
+            <strong>🎯 Propósito:</strong> Página principal que usa el Header<br>
+            <strong>💡 Clave:</strong> <code>import Header</code> + <code>&lt;Header /&gt;</code>
+          </div>
+          <pre><code class="language-jsx">import Header from "../components/Header";
+
+function Home() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;  ← ¡Tu componente funcionando!
+      &lt;main&gt;...contenido...&lt;/main&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </div>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <h4>🗺️ Paso 3: Lo conectaste en App.jsx</h4>
+          <div style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+            <strong>📁 Ubicación:</strong> <code>src/App.jsx</code><br>
+            <strong>🎯 Propósito:</strong> Define qué página mostrar según la URL<br>
+            <strong>💡 Clave:</strong> <code>&lt;Route path="/" element={&lt;Home /&gt;} /&gt;</code>
+          </div>
+          <pre><code class="language-jsx">import Home from "./pages/Home";
+
+function App() {
+  return (
+    &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;  ← Home incluye Header
+    &lt;/Routes&gt;
+  );
+}</code></pre>
+        </div>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <h4>⚡ Paso 4: Le diste vida en main.jsx</h4>
+          <div style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+            <strong>📁 Ubicación:</strong> <code>src/main.jsx</code><br>
+            <strong>🎯 Propósito:</strong> Punto de entrada que inicia toda la aplicación<br>
+            <strong>💡 Clave:</strong> <code>BrowserRouter</code> habilita las rutas + <code>render()</code> muestra todo
+          </div>
+          <pre><code class="language-jsx">import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  &lt;BrowserRouter&gt;
+    &lt;App /&gt;  ← App incluye Routes, que incluye Home, que incluye Header
+  &lt;/BrowserRouter&gt;
+)</code></pre>
+        </div>
+
+        <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0; border: 2px solid #28a745;">
+          <h4>🎯 El Flujo Completo (de mayor a menor):</h4>
+          <div style="font-family: monospace; font-size: 1.1rem; line-height: 1.8;">
+            <strong style="color: #dc3545;">main.jsx</strong> → renderiza →<br>
+            &nbsp;&nbsp;<strong style="color: #fd7e14;">App.jsx</strong> → enruta →<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<strong style="color: #20c997;">Home.jsx</strong> → incluye →<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="color: #6f42c1;">Header.jsx</strong> → ¡SE MUESTRA! 🎉
+          </div>
+        </div>
+
+        <div style="background: #fff3cd; padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0; border: 2px solid #ffc107;">
+          <h4>🧠 ¿Por qué este orden es tan importante?</h4>
+          <ul style="margin: 0.5rem 0;">
+            <li><strong>🔧 main.jsx:</strong> Es el "motor" - sin él, nada funciona</li>
+            <li><strong>🗺️ App.jsx:</strong> Es el "GPS" - decide qué mostrar según la URL</li>
+            <li><strong>🏠 Home.jsx:</strong> Es la "casa" - organiza el contenido de la página</li>
+            <li><strong>🧩 Header.jsx:</strong> Es el "mueble" - una pieza reutilizable</li>
+          </ul>
+        </div>
+
+        <div style="background: #d1ecf1; padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0; border: 2px solid #bee5eb;">
+          <h4>💪 Lo que acabas de dominar:</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+            <div>
+              <strong>✅ Habilidades técnicas:</strong>
+              <ul>
+                <li>Crear componentes React</li>
+                <li>Import/Export entre archivos</li>
+                <li>Usar JSX y CSS</li>
+                <li>Configurar rutas básicas</li>
+              </ul>
+            </div>
+            <div>
+              <strong>✅ Conceptos fundamentales:</strong>
+              <ul>
+                <li>Arquitectura de aplicación React</li>
+                <li>Flujo de datos y componentes</li>
+                <li>Separación de responsabilidades</li>
+                <li>Estructura de proyecto profesional</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="text-align: center; font-size: 1.2rem; font-weight: bold; color: #28a745; margin-top: 2rem;">
+          🎉 ¡Acabas de ver tu primera aplicacion en react! 🎉<br>
+          <em style="font-size: 1rem; color: #666;">Has creado tu primera aplicación con componentes, rutas y navegación profesional.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- Ejercicio práctico -->
+    <section>
+      <h2>🏋️‍♀️ ¡Ejercicio Práctico! Incorpora un Footer</h2>
+      <div class="card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-left: 5px solid #ff9800;">
+        <h3>🎯 Tu Desafío: Agregar un Footer a tu Aplicación</h3>
+        <p>¡Es hora de poner en práctica lo que has aprendido! Te voy a dar los archivos de un componente Footer y tú debes incorporarlo a tu web siguiendo el mismo proceso que hicimos con Header.</p>
+        
+        <div style="background: #fff3e0; padding: 1.5rem; border-radius: 10px; margin: 1rem 0; border: 2px solid #ff9800;">
+          <h4>📋 Instrucciones del ejercicio:</h4>
+          <ol>
+            <li><strong>Crea el archivo:</strong> <code>src/components/Footer.jsx</code></li>
+            <li><strong>Crea el archivo:</strong> <code>src/components/Footer.css</code></li>
+            <li><strong>Copia el código</strong> que te doy a continuación</li>
+            <li><strong>Incorpora el Footer</strong> en tu aplicación (siguiendo el mismo proceso que Header)</li>
+            <li><strong>¡Comprueba que funciona!</strong> Debe aparecer al final de cada página</li>
+          </ol>
+        </div>
+
+        <details>
+          <summary class="summary-section summary-primary">📄 Código para Footer.jsx (Click para copiar)</summary>
+          <div class="details-content">
+            <pre><code class="language-jsx">import './Footer.css';
+
+function Footer() {
+  const currentYear = new Date().getFullYear();
+  
+  return (
+    &lt;footer className="footer"&gt;
+      &lt;div className="footer-content"&gt;
+        &lt;div className="footer-section"&gt;
+          &lt;h3 className="footer-title"&gt;Mi Portafolio&lt;/h3&gt;
+          &lt;p className="footer-description"&gt;
+            Desarrollador web apasionado por crear experiencias digitales increíbles.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div className="footer-section"&gt;
+          &lt;h4 className="footer-subtitle"&gt;Enlaces Rápidos&lt;/h4&gt;
+          &lt;ul className="footer-links"&gt;
+            &lt;li&gt;&lt;a href="#inicio" className="footer-link"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#proyectos" className="footer-link"&gt;Proyectos&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#sobre-mi" className="footer-link"&gt;Sobre mí&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#contacto" className="footer-link"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        
+        &lt;div className="footer-section"&gt;
+          &lt;h4 className="footer-subtitle"&gt;Sígueme&lt;/h4&gt;
+          &lt;div className="footer-social"&gt;
+            &lt;a href="#" className="footer-social-link"&gt;GitHub&lt;/a&gt;
+            &lt;a href="#" className="footer-social-link"&gt;LinkedIn&lt;/a&gt;
+            &lt;a href="#" className="footer-social-link"&gt;Twitter&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      
+      &lt;div className="footer-bottom"&gt;
+        &lt;p className="footer-copyright"&gt;
+          © {currentYear} Mi Portafolio. Hecho con ❤️ y React.
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/footer&gt;
+  );
+}
+
+export default Footer;</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-info">🎨 Código para Footer.css (Click para copiar)</summary>
+          <div class="details-content">
+            <pre><code class="language-css">/* Footer principal */
+.footer {
+  background: linear-gradient(135deg, #1e1e28 0%, #2a2a3a 100%);
+  color: #F0F0F0;
+  padding: 3rem 2rem 1rem 2rem;
+  margin-top: auto;
+}
+
+/* Contenido del footer */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Secciones del footer */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título principal del footer */
+.footer-title {
+  color: #00C890;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+/* Subtítulos de secciones */
+.footer-subtitle {
+  color: #00C890;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Descripción */
+.footer-description {
+  line-height: 1.6;
+  color: #B0B0B0;
+  margin-bottom: 1rem;
+}
+
+/* Lista de enlaces */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+/* Enlaces del footer */
+.footer-link {
+  color: #B0B0B0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  color: #00C890;
+  text-decoration: underline;
+}
+
+/* Enlaces sociales */
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-social-link {
+  color: #B0B0B0;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #444;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.footer-social-link:hover {
+  color: #1E1E28;
+  background-color: #00C890;
+  border-color: #00C890;
+}
+
+/* Parte inferior del footer */
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #444;
+  text-align: center;
+}
+
+.footer-copyright {
+  color: #888;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 1rem 1rem 1rem;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .footer-social {
+    justify-content: center;
+  }
+  
+  .footer-title {
+    font-size: 1.3rem;
+  }
+}</code></pre>
+          </div>
+        </details>
+
+        <div style="background: #ffebee; padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0; border: 2px solid #e57373;">
+          <h4>🤔 ¿No sabes por dónde empezar?</h4>
+          <p>¡Tranquilo! Recuerda el proceso que seguimos con Header:</p>
+          <ol>
+            <li><strong>📁 Crear:</strong> Los archivos Footer.jsx y Footer.css</li>
+            <li><strong>📦 Importar:</strong> Footer en Home.jsx</li>
+            <li><strong>🧩 Usar:</strong> <code>&lt;Footer /&gt;</code> en el JSX de Home</li>
+            <li><strong>🚀 Probar:</strong> Ejecutar <code>npm run dev</code> y ver el resultado</li>
+          </ol>
+          <p><em>💡 Pista: El Footer debe ir al final de la página, después del contenido principal pero dentro del <code>&lt;div&gt;</code> principal de Home.jsx</em></p>
+        </div>
+
+        <details>
+          <summary class="summary-section summary-success">🏆 Solución completa (Solo mira si te atascas)</summary>
+          <div class="details-content">
+            <h4>🔧 Cambios que necesitas hacer:</h4>
+            
+            <h5>📝 1. En Home.jsx - Agregar el import y uso del Footer:</h5>
+            <pre><code class="language-jsx">import Header from "../components/Header";
+import Footer from "../components/Footer";  ← Nuevo import
+import "./Home.css";
+
+function Home() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;main className="home-main"&gt;
+        &lt;h2 className="home-title"&gt;
+          🎉 ¡Bienvenido a mi portafolio!
+        &lt;/h2&gt;
+        &lt;p className="home-text"&gt;
+          Este es el contenido principal de la página home.
+        &lt;/p&gt;
+        &lt;p className="home-text"&gt;
+          El header debería estar visible en la parte superior de la página con un fondo oscuro.
+        &lt;/p&gt;
+        &lt;div className="home-card"&gt;
+          &lt;h3&gt;Características del header:&lt;/h3&gt;
+          &lt;ul className="home-list"&gt;
+            &lt;li&gt;✅ Posición fija en la parte superior&lt;/li&gt;
+            &lt;li&gt;✅ Fondo semi-transparente con efecto blur&lt;/li&gt;
+            &lt;li&gt;✅ Enlaces de navegación interactivos&lt;/li&gt;
+            &lt;li&gt;✅ Botón de contacto con hover&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+      &lt;Footer /&gt;  ← Nuevo componente Footer
+    &lt;/div&gt;
+  );
+}
+
+export default Home;</code></pre>
+
+            <h5>🎯 2. En App.jsx - ¡No necesitas cambiar nada!</h5>
+            <p>App.jsx no necesita modificaciones porque:</p>
+            <ul>
+              <li>El Footer está dentro de Home.jsx</li>
+              <li>App.jsx solo se encarga de las rutas</li>
+              <li>Cada página (Home, Proyectos, etc.) puede decidir si incluye Footer o no</li>
+            </ul>
+
+            <h5>📁 3. En main.jsx - ¡Tampoco necesitas cambiar nada!</h5>
+            <p>main.jsx permanece igual porque:</p>
+            <ul>
+              <li>Es el punto de entrada de la aplicación</li>
+              <li>Solo configura el router y renderiza App</li>
+              <li>Los componentes específicos se manejan en niveles inferiores</li>
+            </ul>
+
+            <h5>🎉 Resultado esperado:</h5>
+            <ul>
+              <li>✅ <strong>Header fijo arriba</strong> (como antes)</li>
+              <li>✅ <strong>Contenido principal</strong> en el centro</li>
+              <li>✅ <strong>Footer al final</strong> con información de contacto</li>
+              <li>✅ <strong>Diseño responsivo</strong> que se adapta a móviles</li>
+            </ul>
+
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <p><strong>🏆 ¡Felicidades!</strong> Si completaste este ejercicio, has demostrado que entiendes completamente:</p>
+              <ul>
+                <li>Cómo crear componentes React independientes</li>
+                <li>Cómo incorporar componentes en páginas existentes</li>
+                <li>La diferencia entre modificar páginas vs modificar rutas</li>
+                <li>El flujo completo de desarrollo en React</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <p style="text-align: center; font-size: 1.1rem; font-weight: bold; color: #ff9800; margin-top: 2rem;">
+          💪 ¡A practicar! Este ejercicio consolidará todo lo que has aprendido.<br>
+          <em style="font-size: 0.9rem; color: #666;">¿Te atascas? ¡Es normal! Revisa la solución paso a paso.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- Errores comunes -->
+    <section>
+      <h2>⚠️ Errores Típicos (¡para que no te frustres!)</h2>
+      <div class="card">
+        <h3>🚨 Error 1: Nombrar componentes en minúscula</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <p><strong>❌ Mal:</strong></p>
+<pre><code>function saludo() {  ← minúscula
+  return &lt;h1&gt;Hola&lt;/h1&gt;;
+}</code></pre>
+          </div>
+          <div>
+            <p><strong>✅ Bien:</strong></p>
+<pre><code>function Saludo() {  ← Mayúscula
+  return &lt;h1&gt;Hola&lt;/h1&gt;;
+}</code></pre>
+          </div>
+        </div>
+        
+        <h3>🚨 Error 2: Olvidar className</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <p><strong>❌ Mal:</strong></p>
+<pre><code>&lt;div class="mi-clase"&gt;  ← class</code></pre>
+          </div>
+          <div>
+            <p><strong>✅ Bien:</strong></p>
+<pre><code>&lt;div className="mi-clase"&gt;  ← className</code></pre>
+          </div>
+        </div>
+        
+        <h3>🚨 Error 3: Múltiples elementos sin contenedor</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <p><strong>❌ Mal:</strong></p>
+<pre><code>return (
+  &lt;h1&gt;Título&lt;/h1&gt;
+  &lt;p&gt;Párrafo&lt;/p&gt;
+);</code></pre>
+          </div>
+          <div>
+            <p><strong>✅ Bien:</strong></p>
+<pre><code>return (
+  &lt;&gt;
+    &lt;h1&gt;Título&lt;/h1&gt;
+    &lt;p&gt;Párrafo&lt;/p&gt;
+  &lt;/&gt;
+);</code></pre>
+          </div>
+        </div>
+        
+        <p><em>💡 Recuerda: Si Visual Studio Code te subraya algo en rojo, ¡prestale atención! Probablemente sea uno de estos errores.</em></p>
+      </div>
+    </section>
+
+    <!-- Navegación -->
+    <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: rgba(97, 218, 251, 0.1); border-radius: 10px;">
+      <p style="margin-bottom: 1rem; font-size: 1.1rem; font-weight: bold;">🧭 Navegación del Curso</p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="../index.html" style="text-decoration: none; background: #61dafb; color: white; padding: 8px 16px; border-radius: 20px;">🏠 Portada</a>
+        <a href="intro.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">📦 Día 1</a>
+        <strong style="background: #20232a; color: #61dafb; padding: 8px 16px; border-radius: 20px;">🧩 Día 2</strong>
+        <a href="props.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🚀 Día 3</a>
+        <a href="estados.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">⚡ Día 4</a>
+        <a href="proyecto.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🏁 Día 5</a>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+        � <strong>Siguientes pasos:</strong> ¡Excelente! Ya sabes JSX, componentes y navegación. En el Día 3 crearás tu portafolio personal con props.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Curso Básico de React · Día 2 · Inmacontreras © 2025</p>
+  </footer>
+</body>
+</html>

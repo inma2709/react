@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Día 1 · Instalación y primeros pasos con React</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>📦 Día 1 · Instalación de React</h1>
+      <p>Creando nuestro primer proyecto con Vite</p>
+      
+      <!-- Menú de navegación -->
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">🏠 Inicio</a>
+        <a href="#" class="nav-link active">📦 Día 1</a>
+        <a href="componentes.html" class="nav-link">🧩 Día 2</a>
+        <a href="props.html" class="nav-link">🚀 Día 3</a>
+        <a href="estados.html" class="nav-link">⚡ Día 4</a>
+        <a href="proyecto.html" class="nav-link">🏁 Día 5</a>
+        <a href="rutas.html" class="nav-link extra">🧭 Extra</a>
+      </nav>
+      
+      <!-- Migas de pan -->
+      <div class="breadcrumb">
+        <a href="../index.html">🏠 Inicio</a>
+        <span class="breadcrumb-separator">→</span>
+        <span class="breadcrumb-current">📦 Día 1: Instalación de React</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>🤔 Primero: ¿Por qué necesitamos crear un "proyecto"?</h2>
+      <div class="card">
+        <p>Cuando trabajas con HTML, CSS y JS, normalmente creas archivos y los abres directamente en el navegador. <strong>¿Por qué React es diferente?</strong></p>
+        <ul>
+          <li><strong>React usa JSX:</strong> Es HTML dentro de JavaScript, pero los navegadores no lo entienden directamente.</li>
+          <li><strong>Necesita traducción:</strong> Un "traductor" convierte tu código JSX a JavaScript que el navegador sí entiende.</li>
+          <li><strong>Maneja dependencias:</strong> React necesita librerías adicionales que deben organizarse correctamente.</li>
+        </ul>
+        <p><em>Piénsalo como cocinar: necesitas una cocina equipada (el proyecto) antes de empezar a cocinar (programar).</em></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>🔧 Paso 1 · Preparando nuestra "cocina"</h2>
+      <div class="card">
+        <p>Vamos a usar <strong>Vite</strong> para crear nuestro proyecto. Vite es como un chef experimentado que prepara toda la cocina por nosotros.</p>
+        <p><strong>¿Por qué usamos Vite?</strong> Vite es una herramienta moderna que nos permite crear proyectos de React de forma rápida y sencilla. Es mucho más rápido que otras opciones como Create React App, porque:</p>
+        <ul>
+          <li>🚀 <strong>Arranca el proyecto en segundos</strong> (no tienes que esperar mucho para empezar a programar).</li>
+          <li>🔄 <strong>Actualiza el navegador automáticamente</strong> cada vez que guardas cambios.</li>
+          <li>📦 <strong>Organiza todas las dependencias</strong> y configuraciones por ti.</li>
+          <li>🧑‍🍳 <strong>Es fácil de usar</strong> y recomendado por la comunidad de React.</li>
+        </ul>
+        <p>En resumen, Vite nos ahorra tiempo y nos permite centrarnos en aprender React sin preocuparnos por configuraciones complicadas.</p>
+        
+        <h3>🏗️ Comando 1: Crear la estructura</h3>
+<pre><code class="language-bash">npm create vite@latest mi-app -- --template react</code></pre>
+        <p><strong>¿Qué hace esto?</strong></p>
+        <ul>
+          <li><code>npm create vite@latest</code> → Le dice a npm "usa la herramienta Vite más reciente"</li>
+          <li><code>mi-app</code> → El nombre de tu proyecto (puedes cambiarlo por el que quieras)</li>
+          <li><code>--template react</code> → "Prepárame todo lo necesario para React"</li>
+          <li><code>--/code Cuando te pregunte si instala algo experimental le dices que no</li>
+        </ul>
+        <p>Después de ejecutar este comando, verás que se crea una carpeta llamada <code>mi-app</code> (o el nombre que hayas elegido) con varios archivos dentro.</p>  
+        <p>Ya nos ha creado la estructura, ahora veremos para que vale cada carpeta y cuales podemos eliminar.</p>        <h3>📁 Comando 2: Entrar al proyecto</h3>
+<pre><code class="language-bash">cd mi-app</code></pre>
+        <p><strong>¿Qué hace esto?</strong> <code>cd</code> significa "change directory". Es como entrar físicamente a la carpeta de tu proyecto.</p>
+        
+        <h3>📦 Comando 3: Instalar las herramientas (se ha hecho automaticamente al crear la app)</h3>
+<pre><code class="language-bash">npm install</code></pre>
+        <p><strong>¿Qué hace esto?</strong> Descarga todas las "herramientas" que React necesita:</p>
+        <ul>
+          <li>El traductor de JSX a JavaScript</li>
+          <li>El servidor de desarrollo que actualiza automáticamente</li>
+          <li>React mismo y sus dependencias</li>
+        </ul>
+        
+        <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffc107; margin: 1rem 0;">
+          <p><strong>🤔 Pregunta frecuente: "¿Tengo que instalar las dependencias cada vez?"</strong></p>
+          <p><strong>Respuesta corta: ¡NO!</strong> Solo necesitas hacer <code>npm install</code> en estas situaciones:</p>
+          <ul>
+            <li>✅ <strong>La primera vez</strong> que creas el proyecto</li>
+            <li>✅ <strong>Cuando añadas nuevas librerías</strong> (como Material-UI, React Router, etc.)</li>
+            <li>✅ <strong>Si borras accidentalmente</strong> la carpeta <code>node_modules</code></li>
+            <li>✅ <strong>Si descargas un proyecto</strong> de GitHub u otro lugar</li>
+          </ul>
+          <p><strong>❌ NO necesitas hacer <code>npm install</code> cada vez que:</strong></p>
+          <ul>
+            <li>❌ Abres Visual Studio Code</li>
+            <li>❌ Enciendes tu computadora</li>
+            <li>❌ Modificas archivos como <code>App.jsx</code></li>
+            <li>❌ Trabajas en tu proyecto día a día</li>
+          </ul>
+          <p><strong>💡 Piénsalo así:</strong> Es como instalar un programa en tu computadora. Lo instalas una vez y ya está disponible para usar siempre.</p>
+        </div>
+        
+        <h3>🚀 Comando 4: Encender la cocina</h3>
+<pre><code class="language-bash"><strong>npm run dev</strong> este será el comando que uses cuando entres y salgas de tu app. </code></pre>
+        <p><strong>¿Qué hace esto?</strong> Enciende un servidor local que:</p>
+        <ul>
+          <li>Traduce tu código JSX automáticamente</li>
+          <li>Actualiza el navegador cuando guardas cambios</li>
+          <li>Te muestra errores si algo está mal</li>
+        </ul>
+        
+        <p>🎯 <strong>Resultado:</strong> Verás una dirección como <strong>http://localhost:5173</strong>. ¡Ábrela en tu navegador!</p>
+        
+        <div style="background: #d4edda; padding: 1rem; border-radius: 8px; border-left: 4px solid #28a745; margin: 1rem 0;">
+          <h4>🔄 Tu flujo de trabajo diario (después de la primera instalación):</h4>
+          <ol>
+            <li><strong>Abres tu terminal</strong> en la carpeta de tu proyecto</li>
+            <li><strong>Ejecutas:</strong> <code>npm run dev</code> (¡solo este comando!)</li>
+            <li><strong>Abres tu navegador</strong> en <code>http://localhost:5173 (si estas ocupado usará otro)</code></li>
+            <li><strong>Programas y guardas cambios</strong> → ¡Se actualizan automáticamente!</li>
+            <li><strong>Cuando termines:</strong> Ctrl+C en el terminal para parar el servidor</li>
+          </ol>
+          <p><strong>📝 Resumen:</strong> Después del primer día, solo necesitas <code>npm run dev</code> para empezar a trabajar.</p>
+        </div>
+      </div>
+    </section>
+
+    <h3>Comando 5: npm install react-router-dom</h3>
+    <div class="card">
+      <p>Vamos a instalar React Router para manejar las rutas en nuestra aplicación. Ejecuta el siguiente comando en tu terminal:</p>
+      <pre><code class="language-bash">npm install react-router-dom</code></pre>
+      <p><strong>¿Qué hace esto?</strong> Añade React Router a tu proyecto, permitiéndote crear múltiples páginas y navegar entre ellas sin recargar la página. Igualmente te permite 
+      llamar a tus componentes y renderizarlos en tu página. Una vez instalado vuelve a arrancar el servidor con <code>npm run dev</code>.</p>
+      
+
+    </div>  
+
+    <section>
+      <h2>📂 Paso 2 · ¿Qué significa cada carpeta y archivo?</h2>
+      <div class="card">
+      <p>Cuando creas tu proyecto con Vite y React, se generan varias carpetas y archivos. Entender su propósito te ayudará a trabajar mejor:</p>
+      
+      <h3>🗂️ Carpetas principales</h3>
+      <ul>
+        <li>
+        <strong><code>src/</code></strong> — <em>El corazón de tu app</em><br>
+        Aquí va todo tu código fuente: componentes, páginas, estilos personalizados, imágenes, etc. Es la carpeta que más vas a usar y modificar.
+        Todo lo que crees lo crearás aquí dentro. 
+        </li>
+        <li>
+        <strong><code>public/</code></strong> — <em>Archivos públicos</em><br>
+        Todo lo que pongas aquí estará disponible directamente en la web (por ejemplo, imágenes, favicon, etc.). Normalmente no necesitas tocarla mucho.
+        </li>
+      </ul>
+
+      <h3>📄 Archivos importantes (explicación detallada)</h3>
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+        <p><strong>🎯 Entender estos archivos es CLAVE para trabajar con React:</strong></p>
+        
+        <h4>🏠 <code>index.html</code> (raíz del proyecto)</h4>
+        <ul>
+          <li><strong>¿Qué es?</strong> Es el "cascarón" estático de tu aplicación</li>
+          <li><strong>¿Qué contiene?</strong> Un HTML básico con un <code>&lt;div id="root"&gt;&lt;/div&gt;</code></li>
+          <li><strong>¿Para qué sirve?</strong> Es donde React se "monta" y toma control</li>
+          <li><strong>¿Lo modificas?</strong> 🔸 <strong>Rara vez</strong> - Solo para favicon, meta tags o fuentes</li>
+          <li><strong>🚨 Importante:</strong> Aquí NO pones tu UI de React. Es solo el "contenedor"</li>
+        </ul>
+        
+        <h4>⚡ <code>src/main.jsx</code> (punto de entrada)</h4>
+        <ul>
+          <li><strong>¿Qué es?</strong> El "encendedor" de tu aplicación React</li>
+          <li><strong>¿Qué hace?</strong> Arranca React y monta el componente raíz</li>
+          <li><strong>¿Lo modificas?</strong> 🔹 <strong>Muy poco</strong> - Solo para configuraciones globales</li>
+          <li><strong>📝 En nuestro curso:</strong> Solo lo tocamos para importar CSS global</li>
+        </ul>
+        
+        <h4>🧭 <code>src/App.jsx</code> (configuración de rutas)</h4>
+        <ul>
+          <li><strong>¿Qué es?</strong> Donde definimos todas las rutas de nuestra app</li>
+          <li><strong>¿Qué hace?</strong> Configura React Router y conecta URLs con páginas</li>
+          <li><strong>¿Lo modificas?</strong> ✅ <strong>Aquí trabajamos</strong> - Cada vez que añadimos páginas</li>
+          <li><strong>📝 En nuestro curso:</strong> Contiene BrowserRouter, Routes y Route</li>
+        </ul>
+
+        <h4>🏗️ <code>src/components/Layout.jsx</code> (estructura común)</h4>
+        <ul>
+          <li><strong>¿Qué es?</strong> Define el diseño común (header, footer, navegación)</li>
+          <li><strong>¿Qué hace?</strong> Envuelve todas las páginas con la misma estructura</li>
+          <li><strong>¿Lo modificas?</strong> ✅ <strong>Aquí también</strong> - Para cambiar diseño global</li>
+          <li><strong>📝 En nuestro curso:</strong> Contiene header con menú + Outlet + footer más menu lateral si queremos. Es la plantilla donde entrará nuestro contenido.</li>
+        </ul>
+      </div>
+
+      <h3>🧭 En resumen para ti como alumno</h3>
+      <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4CAF50;">
+        <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+          <thead>
+            <tr style="background: #f0f0f0;">
+              <th style="padding: 0.5rem; border: 1px solid #ddd; text-align: left;">Archivo</th>
+              <th style="padding: 0.5rem; border: 1px solid #ddd; text-align: left;">Función principal</th>
+              <th style="padding: 0.5rem; border: 1px solid #ddd; text-align: left;">¿Se toca mucho?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>index.html</code></td>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;">Contiene el <code>&lt;div id="root"&gt;</code> donde React se "inyecta"</td>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;">🔸 <strong>Rara vez</strong></td>
+            </tr>
+            <tr>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>main.jsx</code></td>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;">Arranca React y monta el componente raíz</td>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;">🔹 <strong>Muy poco</strong></td>
+            </tr>
+            <tr>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>App.jsx</code></td>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;">Contiene la configuración de rutas de tu app</td>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;">✅ <strong>Aquí trabajamos</strong></td>
+            </tr>
+            <tr>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>Layout.jsx</code></td>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;">Define el diseño común (header, footer, etc.)</td>
+              <td style="padding: 0.5rem; border: 1px solid #ddd;">✅ <strong>Aquí también</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>🎯 Estrategia de trabajo en nuestro curso:</h4>
+        <ul>
+          <li>📁 <strong>Layout.jsx</strong> → Crear una estructura con header, menú y footer</li>
+          <li>🧭 <strong>App.jsx</strong> → Definir rutas para conectar URLs con páginas</li>
+          <li>🔧 <strong>main.jsx</strong> → Intentar tocar lo menos posible</li>
+          <li>🏠 <strong>index.html</strong> → No lo tocamos</li>
+        </ul>
+
+        <h4>📄 ¿Cuál será nuestra página de inicio?</h4>
+        <p><strong>Crearemos <code>src/pages/Home.jsx</code></strong> que será nuestra página principal:</p>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+          <ul style="list-style: none; padding-left: 0;">
+            <li><strong>src/pages/Home.jsx</strong> &rarr; Esta será tu página de bienvenida</li>
+            <li><strong>Componentes de presentación:</strong> Elementos visuales que muestran información relevante.</li>
+            <li><strong>Hero section:</strong> Parte superior con título grande, imagen o fondo llamativo y mensaje principal.</li>
+            <li><strong>Features destacadas:</strong> Sección con las características principales, ventajas o beneficios, normalmente en tarjetas o lista.</li>
+            <li><strong>Call to action:</strong> Invitación clara para que el usuario realice una acción (registrarse, descargar, contactar, etc.), suele ser un botón destacado.</li>
+          </ul>
+        </div>
+        
+        <p><strong>💡 ¿Por qué no usamos App.jsx como inicio?</strong></p>
+        <ul>
+          <li>✅ <strong>Separación clara:</strong> App.jsx solo para rutas</li>
+          <li>✅ <strong>Escalabilidad:</strong> Fácil añadir más páginas</li>
+          <li>✅ <strong>Mantenibilidad:</strong> Cada archivo una responsabilidad</li>
+          <li>✅ <strong>Es una opción:</strong> Se usa mucho en proyectos reales especialmente si crecen.</li>
+          <li>✅ <strong>Facilita el aprendizaje:</strong> Entiendes mejor la estructura de React</li>
+        </ul>
+      </div>
+      
+      <h3>🏗️ Estructura recomendada al principio</h3>
+      <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4CAF50;">
+        <p><strong>Para que aprendas de forma organizada, te recomiendo esta estructura:</strong></p>
+<pre><code>📁 tu-proyecto/
+├── 📄 index.html              ← El "cascarón" estático
+├── 📁 src/
+│   ├── 📁 components/         ← Componentes reutilizables
+│   │   ├── 📄 Header.jsx      ← Cabecera con navegación
+│   │   ├── 📄 Footer.jsx      ← Pie de página
+│   │   └── 📄 Tarjeta.jsx     ← Componente reutilizable
+│   ├── 📁 pages/              ← Páginas de tu aplicación
+│   │   ├── 📄 Home.jsx        ← Nuestra página principal (inicio)
+│   │   ├── 📄 Proyectos.jsx   ← Página de proyectos
+│   │   └── 📄 Contacto.jsx    ← Página de contacto
+│   ├── 📄 Layout.jsx          ← Header/Footer + &lt;Outlet/&gt;
+│   ├── 📄 main.jsx            ← Router y montaje de React
+│   └── 📄 App.jsx             ← Configuración de rutas
+└── 📁 node_modules/           ← No tocar nunca
+</code></pre>
+        <h4>🎯 ¿Por qué esta estructura?</h4>
+        <ul>
+          <li><strong>📁 components/</strong> → Todo lo reutilizable va aquí</li>
+          <li><strong>📁 pages/</strong> → Cada "pantalla" de tu app tiene su archivo</li>
+          <li><strong>📄 Layout.jsx</strong> → Lo que se repite en todas las páginas (Header, Footer)</li>
+          <li><strong>📄 main.jsx</strong> → Configuraciones globales y rutas</li>
+          <li><strong>📄 App.jsx</strong> →  Lo vamos a usar para las rutas. </li>
+        </ul>
+      </div>
+      
+      <h3>🧠 Flujo de trabajo en React (paso a paso)</h3>
+      <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2196F3;">
+        <p><strong>Entender el flujo te ayuda a debuggear y crear mejor:</strong></p>
+        <ol>
+          <li><strong>Usuario abre tu app</strong> → Se carga <code>index.html</code></li>
+          <li><strong>index.html carga</strong> → <code>src/main.jsx</code> se ejecuta</li>
+          <li><strong>main.jsx dice:</strong> "Monta React en <code>#root</code> y usa estas rutas"</li>
+          <li><strong>React Router ve la URL</strong> → Decide qué página mostrar</li>
+          <li><strong>Se renderiza Layout.jsx</strong> → Header, Footer + la página específica</li>
+          <li><strong>La página usa componentes</strong> → Como Tarjeta, Button, etc.</li>
+          <li><strong>¡El usuario ve tu app!</strong> → Todo funcionando y responsive</li>
+        </ol>
+        
+        <p><strong>💡 Clave para principiantes:</strong> React es como un árbol. <code>main.jsx</code> es la raíz, <code>Layout.jsx</code> es el tronco, y tus páginas son las ramas con hojas (componentes).</p>
+      </div>
+
+      <h3>📄 Archivos que puedes eliminar o ignorar</h3>
+      <ul>
+        <li>
+        <strong><code>src/index.css y app.css</code></strong> — Archivo de estilos por defecto.<br>
+        Si no lo usas, puedes eliminarlo, pero recuerda eliminar también su importación en <code>src/main.jsx</code> para evitar errores al arrancar el proyecto. Puedes crear tus propios archivos CSS o usar librerías como MUI.
+        </li>
+        <li>
+        <strong><code>package.json</code></strong> — Lista de dependencias y scripts.<br>
+        No lo borres, pero no necesitas modificarlo al principio.
+        </li>
+        <li>
+        <strong><code>node_modules/</code></strong> — Carpeta con todas las librerías instaladas.<br>
+        Nunca la modifiques ni la borres manualmente.
+        </li>
+        <li>
+        <strong><code>vite.config.js</code></strong> — Configuración avanzada de Vite.<br>
+        Puedes ignorarlo por ahora pero no lo borres.
+        </li>
+      </ul>
+      <h3>📝 Archivos y carpetas que deberás crear</h3>
+      <ul>
+        <li>
+          <strong><code>src/assets/</code></strong> — Carpeta para imágenes, logos y otros archivos multimedia.<br>
+          Guarda aquí tus imágenes para usarlas en los componentes y páginas.
+        </li>
+        <li>
+          <strong><code>src/pages/</code></strong> — Carpeta para tus páginas principales.<br>
+          Por ejemplo: <code>Home.jsx</code>, <code>About.jsx</code>, <code>Contact.jsx</code>. Así mantienes tu proyecto organizado.
+        </li>
+        <li>
+          <strong><code>src/components/</code></strong> — Carpeta para componentes reutilizables.<br>
+          Ejemplo: <code>Header.jsx</code>, <code>Footer.jsx</code>, <code>Card.jsx</code>, <code>Button.jsx</code>.
+        </li>
+        <li>
+          <strong><code>src/styles/</code></strong> — Opcional, para tus archivos CSS personalizados.<br>
+          Puedes crear <code>styles.css</code> o <code>App.module.css</code> si prefieres separar los estilos.
+        </li>
+        
+      </ul>
+
+      <p>💡 <strong>Resumen teórico:</strong> Piensa que <code>src/</code> es tu espacio de trabajo, <code>public/</code> es el escaparate, y el resto son herramientas y configuraciones que hacen que todo funcione. Puedes eliminar <code>src/index.css</code> si no lo usas, y centrarte en <code>src/App.jsx</code> y <code>src/main.jsx</code> para empezar.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>🎉 Paso 3 · Tu primer "¡Hola Mundo!" en React</h2>
+      <div class="card">
+        <p>Ahora viene la parte emocionante: <strong>vamos a hacer nuestro primer cambio</strong> y entender qué está pasando.</p>
+        
+        <h3>🔍 Abre y examina <code>src/App.jsx</code></h3>
+        <p>Verás algo parecido a esto:</p>
+<pre><code class="language-jsx">function App() {
+  return (
+    &lt;h1&gt;Hola React 🚀&lt;/h1&gt;
+  )
+}
+
+export default App
+</code></pre>
+
+        <h3>🤯 ¡Momento "aja"! ¿Qué está pasando aquí?</h3>
+        <ul>
+          <li><strong><code>function App()</code></strong> → Una función de JavaScript (como las que ya conoces)</li>
+          <li><strong><code>return ()</code></strong> → Devuelve algo (como <code>return </code> en una función normal)</li>
+          <li><strong><code>&lt;h1&gt;...&lt;/h1&gt;</code></strong> → ¡HTML dentro de JavaScript! Esto es JSX</li>
+          <li><strong><code>export default App</code></strong> → "Oye, otros archivos pueden usar esta función"</li>
+        </ul>
+        
+        <h3>✏️ Tu primera modificación (¡hazla ahora!)</h3>
+        <p><strong>Cambia</strong> el texto del <code>h1</code> por algo personal:</p>
+<pre><code class="language-jsx">function App() {
+  return (
+    &lt;h1&gt;¡Hola estoy aprendiendo React! 🎉&lt;/h1&gt;
+  )
+}
+
+export default App
+</code></pre>
+        
+        <p><strong>Guarda el archivo</strong> (Ctrl+S) y mira tu navegador. <strong>¡Cambió automáticamente!</strong></p>
+        
+        <h3>🪄 ¿Por qué es esto mágico?</h3>
+        <p>En HTML normal tendrías que:</p>
+        <ol>
+          <li>Cambiar el archivo</li>
+          <li>Guardarlo</li>
+          <li>Ir al navegador</li>
+          <li>Actualizar la página (F5)</li>
+        </ol>
+        <p><strong>Con React + Vite:</strong> ¡Los pasos 3 y 4 son automáticos! El navegador se actualiza solo cuando guardas.</p>
+
+        <h3>⚛️ ¿Qué es el DOM virtual?</h3>
+        <p>React utiliza algo llamado <strong>DOM virtual</strong> (<em>Virtual DOM</em>). Es una copia ligera del DOM real que vive en memoria. Cuando haces un cambio en tu app, React compara el DOM virtual con el DOM real y <strong>solo actualiza lo que cambió</strong>, en vez de recargar toda la página. Esto hace que tu aplicación sea <strong>mucho más rápida y eficiente</strong>.</p>
+        <ul>
+          <li>🔍 <strong>React detecta los cambios</strong> en el DOM virtual.</li>
+          <li>⚡ <strong>Actualiza solo lo necesario</strong> en el navegador.</li>
+          <li>🚀 <strong>Evita recargar toda la página</strong>, mejorando el rendimiento.</li>
+        </ul>
+        <p><em>Piensa en el DOM virtual como un borrador que React usa para decidir qué partes de la página necesita cambiar realmente.</em></p>
+        <h3>🔗 ¿Cómo se conecta el DOM virtual con el navegador que cambia solo?</h3>
+        <p>Cuando guardas tu archivo en React, Vite detecta el cambio y recarga automáticamente la app en el navegador. Pero <strong>no recarga toda la página</strong>: React revisa el DOM virtual, compara con el DOM real y <strong>solo modifica lo que cambió</strong>. Así, el navegador muestra el nuevo contenido al instante, sin refrescar todo.</p>
+        <ul>
+          <li>🖥️ <strong>Vite observa los archivos</strong> y avisa a React cuando hay cambios.</li>
+          <li>⚛️ <strong>React actualiza el DOM virtual</strong> y calcula los cambios mínimos.</li>
+          <li>🌐 <strong>El navegador recibe solo los cambios necesarios</strong> y los muestra al usuario.</li>
+        </ul>
+        <p><em>Por eso parece "mágico": el navegador cambia solo porque React y Vite trabajan juntos para actualizar solo lo necesario, de forma rápida y eficiente.</em></p>
+
+    <section>
+      <h2>🔄 Conectando con lo que ya sabes</h2>
+      <div class="card">
+        <h3>🤝 HTML tradicional vs React</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+          <div>
+            <h4>📄 HTML tradicional:</h4>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hola Mundo&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+          <div>
+            <h4>⚛️ React (JSX):</h4>
+<pre><code class="language-jsx">function App() {
+  return (
+    &lt;h1&gt;Hola Mundo&lt;/h1&gt;
+  )
+}</code></pre>
+          </div>
+        </div>
+        
+        <h3>💡 Las diferencias clave:</h3>
+        <ul>
+          <li><strong>Estructura:</strong> En React, cada "página" es una función que devuelve HTML</li>
+            <li><strong>Reutilización:</strong> Puedes usar la misma función muchas veces y crear componentes reutilizables para diferentes partes de tu app</li>
+          <li><strong>Dinamismo:</strong> El HTML puede cambiar basado en datos (¡lo veremos pronto!)</li>
+          <li><strong>Integración:</strong> HTML y JavaScript están juntos, no separados</li>
+          <li><strong>Estado:</strong> Los componentes pueden tener "estado" que cambia con el tiempo</li>
+          <li><strong>Props:</strong> Los componentes pueden recibir datos a través de "props"</li>
+          <li><strong>Ciclo de vida:</strong> Los componentes tienen un ciclo de vida que puedes controlar</li>
+          <li><strong>Eventos:</strong> Manejo de eventos (clicks, formularios) de forma más sencilla. No hay Eventos.
+          </li><strong>Virtual DOM:</strong> React usa un DOM virtual para actualizaciones eficientes</li>
+          <li><strong>JSX:</strong> Sintaxis que mezcla HTML y JavaScript</li>
+          <li><strong>Programacion declarativa:</strong> Enfocada en el qué, no en el cómo. Escribes lo que quieres que ocurra (por ejemplo, mostrar una lista), y React se encarga de cómo hacerlo internamente.</li>
+        </ul>
+        
+        <p><em>¡No te preocupes si aún no lo entiendes completamente! Estamos construyendo los cimientos. Mañana añadiremos más piezas al puzzle.</em></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>✅ Checklist del Día 1</h2>
+      <div class="card">
+        <p>Antes de continuar al Día 2, asegúrate de que tienes:</p>
+        <ul>
+          <li>✅ Tu proyecto creado y funcionando en <code>http://localhost:5173</code></li>
+          <li>✅ Visual Studio Code abierto con la carpeta de tu proyecto</li>
+          <li>✅ Has hecho al menos un cambio en <code>App.jsx</code> y has visto el resultado</li>
+          <li>✅ Entiendes que JSX es "HTML dentro de JavaScript"</li>
+        </ul>
+        <p><strong>¡Si tienes todo esto, estás listo/a para el Día 2!</strong> 🎉</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>🧩 Bonus: ¿Cómo se construye una página real en React?</h2>
+      <div class="card">
+        <p> Ahora que tienes tu proyecto funcionando, probablemente te preguntas: <em>"¿Cómo creo una página web completa con React?"</em></p>        
+        <h3>�️ La filosofía de React: "Componentes como piezas de LEGO"</h3>
+        <p>En React, construyes páginas combinando <strong>componentes</strong> (piezas reutilizables). Imagina que cada parte de tu página es una pieza de LEGO:</p>
+        <ul>
+          <li>🧱 <strong>Header</strong> → La cabecera con navegación</li>
+          <li>🧱 <strong>Sidebar</strong> → Barra lateral</li>
+          <li>🧱 <strong>Card</strong> → Tarjetas de contenido</li>
+          <li>🧱 <strong>Button</strong> → Botones reutilizables</li>
+          <li>🧱 <strong>Footer</strong> → Pie de página</li>
+        </ul>
+        
+      
+        
+        <h3>🤖 Tu mejor amigo: La IA (revisa siempre a veces no te entiende bien)</h3>
+        <div style="background: #e8f4fd; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196F3;">
+          <p><>💡 Consejo de oro: <strong>¡Usa la IA a tu favor!</strong></p>
+          <p>Puedes pedirle a ChatGPT, Claude, o cualquier IA:</p>
+          <ul>
+            <li><em>"Créame un componente Header para React con navegación"</em></li>
+            <li><em>"Necesito un componente Card que muestre título, imagen y descripción"</em></li>
+            <li><em>"Ayúdame a crear un botón reutilizable en React"</em></li>
+          </ul>
+          <p><strong>¡Es como pedir piezas de LEGO personalizadas!</strong> La IA te da el código, tú lo copias, lo pegas, y lo personalizas.</p>
+        </div>
+        
+        <h3>📚 Bibliotecas de componentes (¡atajos geniales!)</h3>
+        <p>Si quieres componentes ya hechos y profesionales, usa estas bibliotecas:</p>
+        <ul>
+          <li><strong><a href="https://mui.com/" target="_blank">Material-UI (MUI)</a></strong> → Componentes con diseño de Google</li>
+          <li><strong><a href="https://ant.design/" target="_blank">Ant Design</a></strong> → Componentes elegantes y completos</li>
+          <li><strong><a href="https://chakra-ui.com/" target="_blank">Chakra UI</a></strong> → Fácil de usar y personalizar</li>
+          <li><strong><a href="https://reactbootstrap.github.io/" target="_blank">React Bootstrap</a></strong> → Bootstrap pero para React</li>
+        </ul>
+        
+        <h3>🔗 ¿Cómo enlazar otras páginas en React?</h3>
+        <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196F3;">
+          <p>Para navegar entre páginas en React, usamos <strong>React Router</strong>. Así puedes crear enlaces sin recargar la página:</p>
+          <ol style="margin: 0; padding-left: 1.2em;">
+            <li style="margin-bottom: 0.5em;"><strong>Instala React Router:</strong> <code>npm install react-router-dom</code></li>
+            <li style="margin-bottom: 0.5em;"><strong>Configura las rutas</strong> en <code>App.jsx</code> usando <code>Routes</code> y <code>Route</code></li>
+            <li style="margin-bottom: 0.5em;"><strong>Usa el componente <code>&lt;Link&gt;</code></strong> para crear enlaces entre páginas:</li>
+          </ol>    
+         
+        </div>
+
+        <h3>📄 ¿Múltiples páginas? ¡También es posible!</h3>
+        <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; border-left: 4px solid #4CAF50;">
+          <ol style="margin: 0; padding-left: 1.2em;">
+            <li style="margin-bottom: 0.5em;"><strong>Crea archivos de página:</strong> <code>src/pages/Home.jsx</code>, <code>src/pages/About.jsx</code>, <code>src/pages/Contact.jsx</code></li>
+            <li style="margin-bottom: 0.5em;"><strong>Instala React Router:</strong> <code>npm install react-router-dom</code></li>
+            <li style="margin-bottom: 0.5em;"><strong>Configura las rutas</strong> en <code>App.jsx</code> (usando <code>Routes</code> y <code>Route</code>)</li>
+            <li style="margin-bottom: 0.5em;"><strong>Añade navegación</strong> con <code>&lt;Link&gt;</code> en lugar de <code>&lt;a&gt;</code></li>
+          </ol>
+          <p style="margin: 0.5em 0;"><em>¡Lo veremos con más detalle en los días siguientes!</em></p>
+        </div>
+
+        <h3>🎯 Tu estrategia para este curso:</h3>
+        <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; border-left: 4px solid #4CAF50;">
+          <ol style="margin: 0; padding-left: 1.2em;">
+            <li style="margin-bottom: 0.5em;"><strong>Aprende los conceptos</strong> en este curso (días 1-5)</li>
+            <li style="margin-bottom: 0.5em;"><strong>Pide ayuda a la IA</strong> para componentes específicos</li>
+            <li style="margin-bottom: 0.5em;"><strong>Copia, pega y personaliza</strong> el código que te dé</li>
+            <li style="margin-bottom: 0.5em;"><strong>Experimenta y rompe cosas</strong> (¡es la mejor forma de aprender!)</li>
+            <li style="margin-bottom: 0.5em;"><strong>Construye tu proyecto personal</strong> combinando todo</li>
+          </ol>
+          <p style="margin: 0.5em 0;"><strong>💡 Recuerda:</strong> No necesitas ser un experto desde el día 1. </p>
+        </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>🌐 Recursos</h2>
+            <div class="card" style="text-align: center;">
+        <p>Si algo falla, revisa la documentación oficial de React:</p>
+        <p><a href="https://react.dev" target="_blank" rel="noopener noreferrer">📖 React.dev</a></p>
+            </div>
+          </section>
+
+    <!-- Navegación -->
+    <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: rgba(97, 218, 251, 0.1); border-radius: 10px;">
+      <p style="margin-bottom: 1rem; font-size: 1.1rem; font-weight: bold;">🧭 Navegación del Curso</p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="../index.html" style="text-decoration: none; background: #61dafb; color: white; padding: 8px 16px; border-radius: 20px;">🏠 Portada</a>
+        <strong style="background: #20232a; color: #61dafb; padding: 8px 16px; border-radius: 20px;">📦 Día 1</strong>
+        <a href="componentes.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🧩 Día 2</a>
+        <a href="props.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🚀 Día 3</a>
+        <a href="estados.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">⚡ Día 4</a>
+        <a href="proyecto.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🏁 Día 5</a>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+        📍 <strong>Siguientes pasos:</strong> Una vez que tengas tu proyecto corriendo, continúa con el Día 2 para aprender JSX y componentes.
+      </p>
+    </div>
+  </main>
+
+
+</body>
+</html>

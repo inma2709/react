@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Día 3 · Props: El Alma de React</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>🔗 Día 3 · Props: Conectando Componentes</h1>
+      <p>Aprende a pasar datos entre componentes como un profesional</p>
+      
+      <!-- Menú de navegación -->
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">🏠 Inicio</a>
+        <a href="intro.html" class="nav-link">📦 Día 1</a>
+        <a href="componentes.html" class="nav-link">🧩 Día 2</a>
+        <a href="#" class="nav-link active">🔗 Día 3</a>
+        <a href="estados.html" class="nav-link">⚡ Día 4</a>
+        <a href="proyecto.html" class="nav-link">🏁 Día 5</a>
+        <a href="rutas.html" class="nav-link extra">🧭 Extra</a>
+      </nav>
+      
+      <!-- Migas de pan -->
+      <div class="breadcrumb">
+        <a href="../index.html">🏠 Inicio</a>
+        <span class="breadcrumb-separator">→</span>
+        <span class="breadcrumb-current">🔗 Día 3: Props Maestría</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Introducción a Props -->
+    <section>
+      <h2>🎯 ¿Qué son las Props?</h2>
+      <div class="card">
+        <p><strong>Las Props son como los "ingredientes" que le das a una receta</strong>. Imagínate que tienes una receta para hacer una tarjeta de presentación, pero quieres que cada tarjeta sea diferente.</p>
+        
+        <h3>🍪 Analogía del mundo real:</h3>
+        <div style="background: #f0f8ff; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #61dafb;">
+          <p><strong>🏪 Imagina una fábrica de tarjetas:</strong></p>
+          <ul>
+            <li>📐 <strong>Molde (Componente):</strong> La máquina que hace tarjetas</li>
+            <li>🎨 <strong>Ingredientes (Props):</strong> Nombre, color, foto, título...</li>
+            <li>📇 <strong>Resultado:</strong> Tarjetas únicas con diferentes datos</li>
+          </ul>
+          
+          <p style="margin-top: 1rem;"><strong>💡 La clave:</strong> Un mismo molde puede crear infinitas tarjetas diferentes según los ingredientes que le pongas.</p>
+        </div>
+
+        <h3>✨ En React funciona igual:</h3>
+        <ul>
+          <li>🧩 <strong>Componente:</strong> La "plantilla" reutilizable</li>
+          <li>📦 <strong>Props:</strong> Los datos específicos que le pasas</li>
+          <li>⚛️ <strong>React:</strong> Combina componente + props = UI única</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Props intro -->
+    <section>
+      <h2>🎁 Props: Haciendo Componentes Inteligentes</h2>
+      <div class="card">
+      <h3>🤔 ¿Recuerdas las etiquetas HTML con atributos?</h3>
+      <p>En HTML puedes escribir:</p>
+  <pre><code>&lt;img src="mi-foto.jpg" alt="Mi foto" width="200" /&gt;</code></pre>
+      <p>Los atributos (<code>src</code>, <code>alt</code>, <code>width</code>) hacen que la misma etiqueta <code>img</code> pueda mostrar diferentes imágenes.</p>
+      
+      <h3>🎯 ¡Las Props son lo mismo pero para tus componentes!</h3>
+      <p>Las <strong>props</strong> son "atributos personalizados" que le pasas a un componente como parametros para que sea <strong>reutilizable</strong>.</p>
+      
+      <h3>🛠️ Ejemplo práctico: Creemos un componente Tarjeta profesional</h3>
+      <p>Vamos a crear una tarjeta moderna con CSS separado, imagen opcional y botón. Crea <strong>dos archivos</strong>:</p>
+
+      <details>
+        <summary class="summary-section summary-primary">📄 Código del componente Tarjeta.jsx (Click para ver/ocultar)</summary>
+        <div class="details-content">
+          <pre><code class="language-jsx">import './Tarjeta.css';
+
+function Tarjeta({ titulo, descripcion, imagen, textoBoton, color, colorFondo }) {
+  return (
+    &lt;div 
+      className="tarjeta" 
+      style={{ 
+        borderLeftColor: color,
+        backgroundColor: colorFondo || '#ffffff'
+      }}
+    &gt;
+      {imagen && (
+        &lt;div className="tarjeta-imagen"&gt;
+          &lt;img src={imagen} alt={titulo} /&gt;
+        &lt;/div&gt;
+      )}
+      
+      &lt;div className="tarjeta-contenido"&gt;
+        &lt;h3 className="tarjeta-titulo"&gt;{titulo}&lt;/h3&gt;
+        &lt;p className="tarjeta-descripcion"&gt;{descripcion}&lt;/p&gt;
+        
+        {textoBoton && (
+          &lt;button className="tarjeta-boton" style={{ backgroundColor: color }}&gt;
+            {textoBoton}
+          &lt;/button&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Tarjeta;</code></pre>
+        </div>
+      </details>
+
+      <details>
+        <summary class="summary-section summary-info">🎨 Código del archivo Tarjeta.css (Click para ver/ocultar)</summary>
+        <div class="details-content">
+          <pre><code class="language-css">/* Contenedor para layout horizontal de tarjetas */
+.tarjetas-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 1rem 0;
+}
+
+/* Tarjeta principal */
+.tarjeta {
+  display: flex;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-left: 5px solid #e74c3c;
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  /* Fondo se aplica via props, por defecto es blanco */
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenedor de imagen */
+.tarjeta-imagen {
+  flex: 0 0 150px;
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+.tarjeta-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta-imagen:hover img {
+  transform: scale(1.05);
+}
+
+/* Contenido de la tarjeta */
+.tarjeta-contenido {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Título */
+.tarjeta-titulo {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.3;
+}
+
+/* Descripción */
+.tarjeta-descripcion {
+  margin: 0 0 1.25rem 0;
+  color: #5a6c7d;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* Botón */
+.tarjeta-boton {
+  align-self: flex-start;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.875rem;
+}
+
+.tarjeta-boton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
+}
+
+/* Responsive: Layout vertical en tablets */
+@media (max-width: 768px) {
+  .tarjetas-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .tarjeta {
+    min-width: unset;
+    max-width: unset;
+  }
+}
+
+/* Responsive: Sin imagen en móviles pequeños */
+@media (max-width: 480px) {
+  .tarjeta {
+    flex-direction: column;
+  }
+  
+  .tarjeta-imagen {
+    flex: none;
+    height: 200px;
+  }
+  
+  .tarjeta-contenido {
+    padding: 1rem;
+  }
+}
+
+/* Variación: tarjeta sin imagen (se reorganiza automáticamente) */
+.tarjeta:not(:has(.tarjeta-imagen)) {
+  padding: 1.5rem;
+}
+
+.tarjeta:not(:has(.tarjeta-imagen)) .tarjeta-contenido {
+  padding: 0;
+}</code></pre>
+        </div>
+      </details>
+
+      <details>
+        <summary class="summary-section success">✨ Nuevas características del componente mejorado (Click para ver/ocultar)</summary>
+        <div class="details-content">
+          <h4>🎯 ¿Qué mejoras tiene la nueva Tarjeta?</h4>
+          
+          <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>🆕 Props nuevas disponibles:</h5>
+            <ul>
+              <li><strong>imagen:</strong> URL de imagen (opcional) - si no se pasa, la tarjeta se reorganiza automáticamente</li>
+              <li><strong>textoBoton:</strong> Texto del botón (opcional) - si no se pasa, no aparece botón</li>
+              <li><strong>color:</strong> Color del borde izquierdo y del botón</li>
+              <li><strong>colorFondo:</strong> Color de fondo de la tarjeta (opcional, por defecto blanco)</li>
+              <li><strong>titulo:</strong> Título principal de la tarjeta</li>
+              <li><strong>descripcion:</strong> Texto descriptivo</li>
+            </ul>
+          </div>
+
+          <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>🏗️ Layout horizontal automático:</h5>
+            <ul>
+              <li><strong>Contenedor flex:</strong> Usa la clase <code>.tarjetas-container</code> para layout horizontal</li>
+              <li><strong>Gap responsivo:</strong> Espaciado automático entre tarjetas</li>
+              <li><strong>Adaptativo:</strong> En tablets/móviles se reorganiza verticalmente</li>
+              <li><strong>Flexible:</strong> Tarjetas se ajustan al contenido disponible</li>
+            </ul>
+          </div>
+
+          <h5>🎨 Diseño profesional con CSS moderno:</h5>
+          <ul>
+            <li><strong>Layout Flexbox:</strong> Imagen a la izquierda, contenido a la derecha</li>
+            <li><strong>Sombras suaves:</strong> Efecto elevado con hover animado</li>
+            <li><strong>Responsive:</strong> En móviles se reorganiza en columna</li>
+            <li><strong>Imágenes adaptativas:</strong> Se ajustan automáticamente al contenedor</li>
+            <li><strong>Botón moderno:</strong> Con efectos hover y animaciones</li>
+          </ul>
+
+          <h5>🧠 Renderizado condicional inteligente:</h5>
+          <pre><code class="language-jsx">// Solo muestra imagen si existe
+{imagen && (
+  &lt;div className="tarjeta-imagen"&gt;
+    &lt;img src={imagen} alt={titulo} /&gt;
+  &lt;/div&gt;
+)}
+
+// Solo muestra botón si se pasa texto
+{textoBoton && (
+  &lt;button className="tarjeta-boton"&gt;{textoBoton}&lt;/button&gt;
+)}</code></pre>
+
+          <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>💡 ¿Por qué separar CSS del JSX?</h5>
+            <ul>
+              <li><strong>Organización:</strong> Estilos en un archivo, lógica en otro</li>
+              <li><strong>Reutilización:</strong> Los estilos se pueden aplicar a múltiples elementos</li>
+              <li><strong>Mantenimiento:</strong> Más fácil modificar el diseño</li>
+              <li><strong>Performance:</strong> CSS se cachea por el navegador</li>
+              <li><strong>Responsividad:</strong> Media queries para diferentes pantallas</li>
+            </ul>
+          </div>
+
+          <h5>📱 Responsive automático:</h5>
+          <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+            <thead>
+              <tr style="background: #f5f5f5;">
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Dispositivo</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Layout</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Comportamiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Desktop</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Horizontal (flex-row)</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Imagen izquierda, contenido derecha</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Mobile</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Vertical (flex-column)</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Imagen arriba, contenido abajo</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Sin imagen</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Solo contenido</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">Se reorganiza automáticamente</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary class="summary-section summary-success">🔍 Explicación línea por línea del componente mejorado (Click para ver/ocultar)</summary>
+        <div class="details-content">
+          <p><strong>� Línea 1: <code>import './Tarjeta.css';</code></strong></p>
+          <ul>
+            <li>Importamos los estilos CSS desde el archivo en la misma carpeta</li>
+            <li>React aplicará automáticamente estas clases cuando el componente se renderice</li>
+          </ul>
+
+          <p><strong>⚡ Línea 3: <code>function Tarjeta({ titulo, descripcion, imagen, textoBoton, color }) {</code></strong></p>
+          <ul>
+            <li>Ahora recibimos <strong>5 props</strong> en lugar de 3</li>
+            <li><code>imagen</code> y <code>textoBoton</code> son opcionales</li>
+            <li>Usamos destructuring para extraer todas las props del objeto</li>
+          </ul>
+
+          <p><strong>�️ Línea 5: <code>&lt;div className="tarjeta" style={{ borderLeftColor: color }}&gt;</code></strong></p>
+          <ul>
+            <li><code>className="tarjeta"</code> aplica los estilos base del CSS</li>
+            <li><code>style={{ borderLeftColor: color }}</code> personaliza solo el color del borde</li>
+            <li>Combinamos estilos fijos (CSS) con dinámicos (props)</li>
+          </ul>
+
+          <p><strong>🖼️ Líneas 6-10: Renderizado condicional de imagen</strong></p>
+          <ul>
+            <li><code>{imagen && (...)}</code> - Solo se ejecuta si imagen existe</li>
+            <li>Si no hay imagen, esta sección completa se omite</li>
+            <li><code>alt={titulo}</code> mejora la accesibilidad</li>
+          </ul>
+
+          <p><strong>📝 Líneas 12-14: Contenido principal</strong></p>
+          <ul>
+            <li><code>className="tarjeta-contenido"</code> - Aplica estilos flex para organizar el contenido</li>
+            <li>Contiene título, descripción y botón (si existe)</li>
+          </ul>
+
+          <p><strong>🔘 Líneas 16-20: Botón condicional</strong></p>
+          <ul>
+            <li><code>{textoBoton && (...)}</code> - Solo aparece si se pasa textoBoton</li>
+            <li><code>style={{ backgroundColor: color }}</code> - El botón toma el color de la prop</li>
+            <li>Combina estilos CSS base con color personalizado</li>
+          </ul>
+
+          <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>🎯 Concepto clave: Flexibilidad total</h5>
+            <p>Este componente puede funcionar en <strong>4 configuraciones diferentes</strong>:</p>
+            <ul>
+              <li>Con imagen + con botón</li>
+              <li>Con imagen + sin botón</li>
+              <li>Sin imagen + con botón</li>
+              <li>Sin imagen + sin botón</li>
+            </ul>
+            <p>¡El mismo código se adapta automáticamente! 🎉</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary class="summary-section summary-orange">📱 Ejemplos del componente mejorado (Click para ver/ocultar)</summary>
+        <div class="details-content">
+          <h4>🎯 Diferentes configuraciones de la Tarjeta</h4>
+          
+          <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>🖼️ Ejemplo 1: Tarjeta completa (con imagen, botón y fondo personalizado)</h5>
+            <pre><code class="language-jsx">&lt;Tarjeta 
+  titulo="Aprende React"
+  descripcion="Curso completo de React desde cero hasta avanzado"
+  imagen="/images/react-logo.png"
+  textoBoton="Empezar curso"
+  color="#61dafb"
+  colorFondo="#f0f8ff"
+/&gt;</code></pre>
+            <p><strong>Resultado:</strong> Tarjeta con imagen, fondo azul claro, borde azul y botón azul.</p>
+          </div>
+
+          <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>🎨 Ejemplo 2: Tarjeta con fondo colorido</h5>
+            <pre><code class="language-jsx">&lt;Tarjeta 
+  titulo="Tips de JavaScript"
+  descripcion="Consejos útiles para mejorar tu código JavaScript"
+  textoBoton="Leer más"
+  color="#f39c12"
+  colorFondo="#fef9e7"
+/&gt;</code></pre>
+            <p><strong>Resultado:</strong> Tarjeta compacta con fondo amarillo claro y elementos naranjas.</p>
+          </div>
+
+          <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>📸 Ejemplo 3: Fondo blanco (por defecto)</h5>
+            <pre><code class="language-jsx">&lt;Tarjeta 
+  titulo="Galería de proyectos"
+  descripcion="Explora los proyectos más creativos de nuestra comunidad"
+  imagen="/images/gallery.jpg"
+  color="#9c27b0"
+/&gt;</code></pre>
+            <p><strong>Resultado:</strong> Tarjeta con fondo blanco por defecto, borde morado.</p>
+          </div>
+
+          <div style="background: #f3e5f5; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>🌈 Ejemplo 4: Fondo degradado con CSS personalizado</h5>
+            <pre><code class="language-jsx">&lt;Tarjeta 
+  titulo="¿Sabías que...?"
+  descripcion="React fue creado por Facebook en 2013 y ahora es usado por millones"
+  color="#e91e63"
+  colorFondo="linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%)"
+/&gt;</code></pre>
+            <p><strong>Resultado:</strong> Tarjeta con degradado rosa suave como fondo.</p>
+          </div>
+
+          <h5>🏠 Layout horizontal en Home.jsx:</h5>
+          <pre><code class="language-jsx">import Tarjeta from './components/Tarjeta.jsx';
+
+function Home() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Mi página con tarjetas mejoradas&lt;/h1&gt;
+      
+      {/* IMPORTANTE: Usar contenedor para layout horizontal */}
+      &lt;div className="tarjetas-container"&gt;
+        &lt;Tarjeta 
+          titulo="React Masterclass"
+          descripcion="Domina React con proyectos reales y las mejores prácticas"
+          imagen="/images/react-course.jpg"
+          textoBoton="Inscribirse ahora"
+          color="#61dafb"
+          colorFondo="#f0f8ff"
+        /&gt;
+        
+        &lt;Tarjeta 
+          titulo="Comunidad activa"
+          descripcion="Únete a más de 10,000 desarrolladores que aprenden juntos"
+          textoBoton="Unirse"
+          color="#4caf50"
+          colorFondo="#f1f8e9"
+        /&gt;
+        
+        &lt;Tarjeta 
+          titulo="Estadísticas 2024"
+          descripcion="React sigue siendo el framework más popular para desarrollo frontend"
+          color="#ff9800"
+          colorFondo="#fff3e0"
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <h5>💡 ¿Por qué estas mejoras son importantes?</h5>
+            <ul>
+              <li><strong>Flexibilidad:</strong> Un componente, múltiples usos</li>
+              <li><strong>Performance:</strong> CSS separado se cachea mejor</li>
+              <li><strong>Responsive:</strong> Se adapta automáticamente a móviles</li>
+              <li><strong>Accesibilidad:</strong> Mejor soporte para lectores de pantalla</li>
+              <li><strong>Mantenimiento:</strong> Fácil modificar estilos sin tocar el JSX</li>
+              <li><strong>Layout horizontal:</strong> Usa <code>.tarjetas-container</code> para que salgan en fila</li>
+            </ul>
+          </div>
+
+          <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #ff9800;">
+            <h5>🔥 ¡IMPORTANTE! Para layout horizontal:</h5>
+            <p><strong>SIEMPRE envuelve las tarjetas en un contenedor con la clase <code>tarjetas-container</code>:</strong></p>
+            <ul>
+              <li><strong>✅ Correcto:</strong> <code>&lt;div className="tarjetas-container"&gt;&lt;Tarjeta.../&gt;&lt;Tarjeta.../&gt;&lt;/div&gt;</code></li>
+              <li><strong>❌ Incorrecto:</strong> <code>&lt;Tarjeta.../&gt;&lt;Tarjeta.../&gt;</code> (se apilan verticalmente)</li>
+              <li><strong>Responsive automático:</strong> En tablets/móviles vuelven a la columna</li>
+              <li><strong>Espaciado perfecto:</strong> Gap automático entre tarjetas</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+        <details>
+          <summary class="summary-section summary-warning">⚠️ ¿Las props son opcionales u obligatorias? (Click para entender)</summary>
+          <div class="details-content">
+            <h4>🤔 Respuesta corta: En nuestro componente actual son OPCIONALES pero PROBLEMÁTICAS si no las pasas</h4>
+            
+            <h5>❌ ¿Qué pasa si no pasas las props?</h5>
+            <pre><code class="language-jsx">// Si usas el componente sin props:
+&lt;Tarjeta /&gt;
+
+// Resultado:
+// - titulo será undefined → &lt;h3&gt;undefined&lt;/h3&gt;
+// - descripcion será undefined → &lt;p&gt;undefined&lt;/p&gt;  
+// - color será undefined → backgroundColor: undefined (transparente)</code></pre>
+
+            <div style="background: #ffebee; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #f44336;">
+              <h5>🚨 Problemas que verás:</h5>
+              <ul>
+                <li>La tarjeta aparece sin color de fondo</li>
+                <li>Muestra literalmente "undefined" en pantalla</li>
+                <li>Se ve rota y poco profesional</li>
+              </ul>
+            </div>
+
+            <h5>✅ Solución 1: Props con valores por defecto</h5>
+            <pre><code class="language-jsx">function Tarjeta({ titulo = "Sin título", descripcion = "Sin descripción", color = "#cccccc" }) {
+  return (
+    &lt;div style={{
+      backgroundColor: color,
+      padding: "15px",
+      borderRadius: "8px", 
+      margin: "10px 0",
+      color: "white"
+    }}&gt;
+      &lt;h3&gt;{titulo}&lt;/h3&gt;
+      &lt;p&gt;{descripcion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <h5>✅ Solución 2: Validación con OR (||)</h5>
+            <pre><code class="language-jsx">function Tarjeta({ titulo, descripcion, color }) {
+  return (
+    &lt;div style={{
+      backgroundColor: color || "#cccccc",  // Si no hay color, usa gris
+      padding: "15px",
+      borderRadius: "8px",
+      margin: "10px 0", 
+      color: "white"
+    }}&gt;
+      &lt;h3&gt;{titulo || "Sin título"}&lt;/h3&gt;
+      &lt;p&gt;{descripcion || "Sin descripción"}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #4caf50;">
+              <h5>🎯 ¿Cuándo usar cada enfoque?</h5>
+              <ul>
+                <li><strong>Valores por defecto:</strong> Cuando quieres que el componente funcione bien sin props</li>
+                <li><strong>Sin valores por defecto:</strong> Cuando SIEMPRE esperas que se pasen las props</li>
+                <li><strong>Validación OR:</strong> Para casos específicos donde algunos valores pueden faltar</li>
+              </ul>
+            </div>
+
+            <h5>📚 Conceptos importantes:</h5>
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+              <thead>
+                <tr style="background: #f5f5f5;">
+                  <th style="padding: 0.5rem; border: 1px solid #ddd;">Situación</th>
+                  <th style="padding: 0.5rem; border: 1px solid #ddd;">¿Qué pasa?</th>
+                  <th style="padding: 0.5rem; border: 1px solid #ddd;">¿Cómo solucionarlo?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>&lt;Tarjeta /&gt;</code></td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Muestra "undefined"</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Valores por defecto</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>&lt;Tarjeta titulo="HTML" /&gt;</code></td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Solo titulo funciona</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Valores por defecto para las otras</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Todas las props pasadas</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">¡Funciona perfecto!</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Nada, así está bien</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #ff9800;">
+              <h5>🏫 Para el aula: ¿Cómo explicarlo a los estudiantes?</h5>
+              <p><strong>"Las props en React son como los ingredientes de una receta:</strong></p>
+              <ul>
+                <li>Puedes cocinar sin algunos ingredientes, pero el plato no sabrá igual</li>
+                <li>Es mejor tener ingredientes de repuesto (valores por defecto) por si faltan</li>
+                <li>O hacer que ciertos ingredientes sean obligatorios para que el plato salga bien"</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <p><strong>Ahora úsalo en <code>Home.jsx</code>:</strong></p>
+
+        <details>
+          <summary class="summary-section summary-primary">🏠 Código completo de Home.jsx con SEIS tarjetas diferentes (Click para ver/ocultar)</summary>
+          <div class="details-content">
+            <pre><code class="language-jsx">import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Tarjeta from "../components/Tarjeta";
+
+import "./Home.css";
+
+function Home() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;main&gt;
+        &lt;h1&gt;🎯 Demo de Tarjetas con Todas las Props&lt;/h1&gt;
+        &lt;p&gt;Aquí tienes 6 tarjetas diferentes que muestran todas las combinaciones posibles:&lt;/p&gt;
+        
+        {/* Primera fila - 3 tarjetas CON IMAGEN */}
+        &lt;div className="tarjetas-container"&gt;
+          
+          {/* Tarjeta 1: COMPLETA - Con imagen, botón y fondo personalizado */}
+          &lt;Tarjeta 
+            titulo="React Masterclass"
+            descripcion="Curso completo de React desde cero hasta nivel avanzado con proyectos reales"
+            imagen="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=150&h=150&fit=crop"
+            textoBoton="Inscribirse ahora"
+            color="#61dafb"
+            colorFondo="#f0f8ff"
+          /&gt;
+          
+          {/* Tarjeta 2: CON IMAGEN - Sin botón, fondo degradado */}
+          &lt;Tarjeta 
+            titulo="Diseño UI/UX"
+            descripcion="Principios fundamentales de diseño para crear interfaces atractivas y funcionales"
+            imagen="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=150&h=150&fit=crop"
+            color="#ff5722"
+            colorFondo="linear-gradient(135deg, #fff3e0 0%, #ffccbc 100%)"
+          /&gt;
+          
+          {/* Tarjeta 3: CON IMAGEN Y BOTÓN - Fondo sólido */}
+          &lt;Tarjeta 
+            titulo="JavaScript Avanzado"
+            descripcion="Domina conceptos avanzados: closures, promises, async/await y más"
+            imagen="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=150&h=150&fit=crop"
+            textoBoton="Empezar curso"
+            color="#f7df1e"
+            colorFondo="#fffbf0"
+          /&gt;
+          
+        &lt;/div&gt;
+
+        {/* Segunda fila - 3 tarjetas SIN IMAGEN */}
+        &lt;div className="tarjetas-container"&gt;
+          
+          {/* Tarjeta 4: MINIMALISTA - Solo texto, fondo blanco por defecto */}
+          &lt;Tarjeta 
+            titulo="¿Sabías que...?"
+            descripcion="React fue creado por Facebook en 2013 y ahora es usado por millones de desarrolladores en todo el mundo"
+            color="#e91e63"
+          /&gt;
+          
+          {/* Tarjeta 5: SOLO BOTÓN - Sin imagen, con fondo vibrante */}
+          &lt;Tarjeta 
+            titulo="Comunidad Activa"
+            descripcion="Únete a más de 10,000 desarrolladores que aprenden y crecen juntos cada día"
+            textoBoton="Unirse gratis"
+            color="#4caf50"
+            colorFondo="#e8f5e8"
+          /&gt;
+          
+          {/* Tarjeta 6: CON BOTÓN Y FONDO - Estilo llamativo */}
+          &lt;Tarjeta 
+            titulo="Bootcamp Intensivo"
+            descripcion="Programa intensivo de 12 semanas para convertirte en desarrollador Full Stack"
+            textoBoton="Más info"
+            color="#9c27b0"
+            colorFondo="#f3e5f5"
+          /&gt;
+          
+        &lt;/div&gt;
+
+        &lt;div className="explicacion"&gt;
+          &lt;h2&gt;🎯 ¿Qué acabas de ver?&lt;/h2&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;strong&gt;Fila 1 (CON IMÁGENES):&lt;/strong&gt; Tres tarjetas con fotos diferentes&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Fila 2 (SIN IMÁGENES):&lt;/strong&gt; Tres tarjetas enfocadas en contenido&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;6 combinaciones diferentes&lt;/strong&gt; del mismo componente&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Layout horizontal&lt;/strong&gt; usando .tarjetas-container&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}
+export default Home;</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-success">🧠 ¿Cómo funciona la magia de las props en Home.jsx? (Click para entender)</summary>
+          <div class="details-content">
+            <h4>🎯 El poder de la reutilización: Un componente, infinitas posibilidades</h4>
+            
+            <p>En <code>Home.jsx</code> estamos viendo algo increíble: <strong>el mismo componente Tarjeta usado 6 veces</strong>, pero cada una se ve completamente diferente. ¿Cómo es posible?</p>
+
+            <h5>🔥 1. Dos filas organizadas estratégicamente:</h5>
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h6>🖼️ Primera fila - CON IMÁGENES:</h6>
+              <ul>
+                <li><strong>Tarjeta 1:</strong> Completa (imagen + botón + fondo azul)</li>
+                <li><strong>Tarjeta 2:</strong> Imagen + fondo degradado (sin botón)</li>
+                <li><strong>Tarjeta 3:</strong> Imagen + botón + fondo amarillo</li>
+              </ul>
+              
+              <h6>📝 Segunda fila - SIN IMÁGENES:</h6>
+              <ul>
+                <li><strong>Tarjeta 4:</strong> Minimalista (solo texto, fondo blanco)</li>
+                <li><strong>Tarjeta 5:</strong> Con botón + fondo verde</li>
+                <li><strong>Tarjeta 6:</strong> Con botón + fondo morado</li>
+              </ul>
+            </div>
+
+            <h5>🎨 2. Variedad de fondos y colores:</h5>
+            <pre><code class="language-jsx">// Fondo personalizado sólido:
+colorFondo="#f0f8ff"
+
+// Fondo degradado CSS:
+colorFondo="linear-gradient(135deg, #fff3e0 0%, #ffccbc 100%)"
+
+// Sin fondo (blanco por defecto):
+{/* No se pasa la prop colorFondo */}</code></pre>
+
+            <h5>🖼️ 3. Imágenes dinámicas de Unsplash:</h5>
+            <pre><code class="language-jsx">// Imágenes reales y responsivas:
+imagen="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=150&h=150&fit=crop"</code></pre>
+
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>💡 ¿Qué está pasando aquí?</h5>
+              <ol>
+                <li><strong>React ve:</strong> "Ah, necesito crear 6 componentes Tarjeta diferentes"</li>
+                <li><strong>Por cada uno:</strong> Llama a la función Tarjeta() con props únicas</li>
+                <li><strong>Resultado:</strong> 6 tarjetas completamente diferentes del mismo componente</li>
+                <li><strong>Layout:</strong> Organizadas en 2 filas horizontales de 3 tarjetas cada una</li>
+              </ol>
+            </div>
+
+            <h5>🎨 4. Personalización total sin límites:</h5>
+            <p>Cada tarjeta es <strong>independiente</strong>. Mira la variedad que conseguimos:</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+              <div>
+                <h6>�️ Tarjetas con imagen:</h6>
+                <ul>
+                  <li><strong>React:</strong> Completa con botón</li>
+                  <li><strong>UI/UX:</strong> Solo imagen + fondo degradado</li>
+                  <li><strong>JavaScript:</strong> Imagen + botón + fondo sólido</li>
+                </ul>
+              </div>
+              <div>
+                <h6>� Tarjetas sin imagen:</h6>
+                <ul>
+                  <li><strong>¿Sabías que...?:</strong> Solo texto, fondo blanco</li>
+                  <li><strong>Comunidad:</strong> Con botón + fondo verde</li>
+                  <li><strong>Bootcamp:</strong> Con botón + fondo morado</li>
+                </ul>
+              </div>
+            </div>
+
+            <h5>🚀 5. Layout horizontal perfecto:</h5>
+            <pre><code class="language-jsx">// Cada fila en su propio contenedor:
+&lt;div className="tarjetas-container"&gt;
+  &lt;Tarjeta ... /&gt;  {/* Tarjeta 1 */}
+  &lt;Tarjeta ... /&gt;  {/* Tarjeta 2 */}
+  &lt;Tarjeta ... /&gt;  {/* Tarjeta 3 */}
+&lt;/div&gt;
+
+&lt;div className="tarjetas-container"&gt;
+  &lt;Tarjeta ... /&gt;  {/* Tarjeta 4 */}
+  &lt;Tarjeta ... /&gt;  {/* Tarjeta 5 */}
+  &lt;Tarjeta ... /&gt;  {/* Tarjeta 6 */}
+&lt;/div&gt;</code></pre>
+
+            <h5>🚀 6. Escalabilidad infinita:</h5>
+            <p>¿Quieres agregar más tarjetas? ¡Súper fácil!</p>
+            <pre><code class="language-jsx">// Ejemplos adicionales con nuevas props:
+&lt;Tarjeta 
+  titulo="Python" 
+  descripcion="Lenguaje versátil para IA" 
+  imagen="python-logo.jpg"
+  textoBoton="Aprender"
+  color="#3776ab" 
+  colorFondo="#f0f8ff"
+/&gt;
+
+&lt;Tarjeta 
+  titulo="Datos curiosos" 
+  descripcion="El primer bug de programación fue literalmente un insecto" 
+  color="#ff6b6b"
+  colorFondo="linear-gradient(45deg, #ffebee, #ffcdd2)"
+/&gt;</code></pre>
+
+            <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>🧩 Analogía perfecta: El molde de galletas</h5>
+              <p><strong>Componente Tarjeta = Molde de galletas</strong></p>
+              <ul>
+                <li><strong>Molde:</strong> Siempre la misma forma (estructura del componente)</li>
+                <li><strong>Masa:</strong> Diferentes sabores y colores (props + imagen + botón + fondo)</li>
+                <li><strong>Resultado:</strong> 6 galletas con la misma forma pero completamente únicas</li>
+              </ul>
+            </div>
+
+            <h5>💪 7. El verdadero poder de React:</h5>
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+              <thead>
+                <tr style="background: #f5f5f5;">
+                  <th style="padding: 0.5rem; border: 1px solid #ddd;">Sin Props (HTML tradicional)</th>
+                  <th style="padding: 0.5rem; border: 1px solid #ddd;">Con Props (React mejorado)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Copiar HTML 6 veces manualmente</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Usar componente 6 veces con props diferentes</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Cambiar manualmente cada copia</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Cambiar solo las props</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Error en uno = arreglar manualmente</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Error en uno = se arregla en todos</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Mucho código repetido</td>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Cambiar manualmente cada copia</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Cambiar solo las props (imagen, botón, fondo, etc.)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Error en uno = arreglar en 6 lugares</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Error en uno = se arregla automáticamente en todos</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Mucho código repetido</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Código limpio y reutilizable</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Sin layout consistente</td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Layout horizontal automático con .tarjetas-container</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>🎓 Para recordar en clase:</h5>
+              <p><strong>"Props = Personalización infinita sin duplicación"</strong></p>
+              <ul>
+                <li>Un componente se escribe <strong>una vez</strong></li>
+                <li>Se usa <strong>infinitas veces</strong> con props diferentes</li>
+                <li>Cada uso es <strong>único</strong> gracias a las props opcionales</li>
+                <li>6 tarjetas diferentes = <strong>6 combinaciones</strong> del mismo código</li>
+                <li>Cambios en el componente afectan <strong>todas las instancias</strong></li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      
+      <p>Así, con un solo componente <code>Tarjeta</code> y 6 props diferentes, creamos una página dinámica y visualmente atractiva. <code>Header</code> y <code>Footer</code> se muestran en todas las páginas, y <code>App</code> se encarga solo de las rutas.</p>
+      </div>
+    </section>
+
+    <!-- Nuevo: Tarjetas dinámicas con .map() 
+    <section>
+      <h2>🔁 El Siguiente Nivel: Tarjetas Dinámicas con .map()</h2>
+      <div class="card">
+        <p><strong>¡Hasta ahora has creado tarjetas una por una!</strong> Pero... ¿qué pasa si necesitas 50 tarjetas? ¿Las vas a escribir a mano? 😅</p>
+        
+        <h3>🤔 Problema real del mundo laboral:</h3>
+        <div style="background: #ffebee; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #f44336;">
+          <p><strong>Escenario típico:</strong> Tu jefe te dice: "Necesito una tienda online con 100 productos"</p>
+          <ul>
+            <li>❌ <strong>Mal enfoque:</strong> Copiar y pegar 100 veces el componente Tarjeta</li>
+            <li>✅ <strong>Enfoque profesional:</strong> Un array de datos + .map() = 100 tarjetas automáticas</li>
+          </ul>
+        </div>
+
+        <h3>📚 ¿Recuerdas los arrays de JavaScript?</h3>
+        <p>Antes de React, ya sabías hacer esto:</p>
+        <pre><code class="language-javascript">// Array básico que ya conoces
+const frutas = ["🍎", "🍌", "🍓", "🥝"];
+
+// Recorrer con .map() (también lo conoces)
+frutas.map(fruta => console.log("Me gusta la", fruta));
+
+// Resultado en consola:
+// Me gusta la 🍎
+// Me gusta la 🍌  
+// Me gusta la 🍓
+// Me gusta la 🥝</code></pre>
+
+        <h3>💡 Concepto clave: ¡En React es exactamente igual!</h3>
+        <p><strong>La diferencia:</strong> En lugar de <code>console.log()</code>, devolvemos componentes JSX</p>
+
+        <details>
+          <summary class="summary-section summary-success">🎯 Demo paso a paso: De array simple a tarjetas React (Click para ver)</summary>
+          <div class="details-content">
+            
+            <h4>📝 Paso 1: Empezamos con un array simple</h4>
+            <pre><code class="language-javascript">// Array de tecnologías (datos que ya tienes)
+const tecnologias = ["HTML", "CSS", "JavaScript", "React"];</code></pre>
+
+            <h4>🔄 Paso 2: Recorremos con .map() básico</h4>
+            <pre><code class="language-javascript">// Esto ya lo sabes hacer:
+tecnologias.map(tech => console.log(tech));
+
+// Resultado: HTML, CSS, JavaScript, React</code></pre>
+
+            <h4>⚛️ Paso 3: ¡Lo mismo pero devolviendo JSX!</h4>
+            <pre><code class="language-jsx">// En React, en lugar de console.log, devolvemos JSX:
+{tecnologias.map(tech => (
+  &lt;div key={tech}&gt;{tech}&lt;/div&gt;
+))}
+
+// Resultado: 4 divs automáticos con HTML, CSS, JavaScript, React</code></pre>
+
+            <h4>🎴 Paso 4: Ahora con nuestro componente Tarjeta</h4>
+            <pre><code class="language-jsx">// Sustituimos el div por nuestro componente:
+{tecnologias.map(tech => (
+  &lt;Tarjeta 
+    key={tech}
+    titulo={tech} 
+    descripcion={`Aprende ${tech} desde cero`}
+    color="#61dafb"
+  /&gt;
+))}</code></pre>
+
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>🧠 ¿Qué acabas de ver?</h5>
+              <ul>
+                <li><strong>Mismo concepto:</strong> .map() funciona igual que siempre</li>
+                <li><strong>Nueva aplicación:</strong> En lugar de console.log, creamos componentes</li>
+                <li><strong>Resultado:</strong> 4 tarjetas automáticas, sin escribir código repetido</li>
+                <li><strong>Escalabilidad:</strong> Si añades "Vue" al array, automáticamente aparece una quinta tarjeta</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-primary">🏪 Ejemplo real: Tienda de productos con .map() (Click para ver)</summary>
+          <div class="details-content">
+            
+            <h4>🛍️ Creemos una tienda de productos paso a paso</h4>
+            <p>Vamos a crear <strong>una página completamente nueva</strong> para demostrar el poder de las tarjetas dinámicas.</p>
+
+            <h5>📁 Archivo: pages/Tienda.jsx</h5>
+            <pre><code class="language-jsx">import Tarjeta from "../components/Tarjeta";
+import "./Tienda.css";
+
+function Tienda() {
+  // 🎯 PASO 1: Creamos un array de productos (como cualquier array de JS)
+  const productos = [
+    {
+      id: 1,
+      titulo: "Laptop Gaming",
+      descripcion: "Potente laptop para gaming con RTX 4060 y 16GB RAM",
+      imagen: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=150&h=150&fit=crop",
+      precio: "$1,299",
+      textoBoton: "Comprar ahora",
+      color: "#e74c3c",
+      colorFondo: "#fff5f5"
+    },
+    {
+      id: 2,
+      titulo: "iPhone 15 Pro",
+      descripcion: "El smartphone más avanzado con chip A17 Pro y cámara titanio",
+      imagen: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=150&h=150&fit=crop",
+      precio: "$999",
+      textoBoton: "Ver detalles",
+      color: "#3498db",
+      colorFondo: "#f0f8ff"
+    },
+    {
+      id: 3,
+      titulo: "AirPods Pro",
+      descripcion: "Auriculares inalámbricos con cancelación de ruido activa",
+      imagen: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=150&h=150&fit=crop",
+      precio: "$249",
+      textoBoton: "Agregar al carrito",
+      color: "#9b59b6",
+      colorFondo: "#f8f5ff"
+    },
+    {
+      id: 4,
+      titulo: "MacBook Air M2",
+      descripcion: "Ultrabook potente y ligero para profesionales creativos",
+      imagen: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=150&h=150&fit=crop",
+      precio: "$1,199",
+      textoBoton: "Más info",
+      color: "#1abc9c",
+      colorFondo: "#f0fff4"
+    },
+    {
+      id: 5,
+      titulo: "PlayStation 5",
+      descripcion: "Consola de nueva generación con gráficos 4K y SSD ultrarrápido",
+      imagen: "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=150&h=150&fit=crop",
+      precio: "$499",
+      textoBoton: "Pre-ordenar",
+      color: "#f39c12",
+      colorFondo: "#fffbf0"
+    },
+    {
+      id: 6,
+      titulo: "Monitor 4K",
+      descripcion: "Monitor profesional 27 pulgadas con precisión de color perfecta",
+      imagen: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=150&h=150&fit=crop",
+      precio: "$599",
+      textoBoton: "Ver ofertas",
+      color: "#e67e22",
+      colorFondo: "#fef5e7"
+    }
+  ];
+
+  return (
+    &lt;div&gt;
+      &lt;header className="tienda-header"&gt;
+        &lt;h1&gt;🛍️ TechStore - Productos Dinámicos&lt;/h1&gt;
+        &lt;p&gt;Ejemplo perfecto de cómo .map() genera tarjetas automáticamente&lt;/p&gt;
+      &lt;/header&gt;
+
+      &lt;main className="tienda-container"&gt;
+        
+        {/* 🎯 PASO 2: Aquí está la magia - usamos .map() para crear tarjetas */}
+        &lt;div className="tarjetas-container"&gt;
+          {productos.map(producto => (
+            &lt;Tarjeta
+              key={producto.id}                    {/* 🔑 Clave única obligatoria */}
+              titulo={producto.titulo}             {/* 📝 Cada prop viene del objeto */}
+              descripcion={producto.descripcion}
+              imagen={producto.imagen}
+              textoBoton={producto.textoBoton}
+              color={producto.color}
+              colorFondo={producto.colorFondo}
+            /&gt;
+          ))}
+        &lt;/div&gt;
+
+        {/* Explicación para el alumno */}
+        &lt;div className="explicacion-dinamica"&gt;
+          &lt;h2&gt;🧠 ¿Qué acabas de ver?&lt;/h2&gt;
+          &lt;div className="stats"&gt;
+            &lt;div className="stat"&gt;
+              &lt;span className="numero"&gt;1&lt;/span&gt;
+              &lt;span className="texto"&gt;Array con {productos.length} productos&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div className="stat"&gt;
+              &lt;span className="numero"&gt;1&lt;/span&gt;
+              &lt;span className="texto"&gt;Componente Tarjeta reutilizado&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div className="stat"&gt;
+              &lt;span className="numero"&gt;{productos.length}&lt;/span&gt;
+              &lt;span className="texto"&gt;Tarjetas generadas automáticamente&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Tienda;</code></pre>
+
+            <h5>🎨 Archivo: pages/Tienda.css</h5>
+            <pre><code class="language-css">/* Tienda.css - Estilos para la página de tienda */
+
+.tienda-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.tienda-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.tienda-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.tienda-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Estadísticas visuales */
+.explicacion-dinamica {
+  margin-top: 4rem;
+  text-align: center;
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.numero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.texto {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tienda-header {
+    padding: 2rem 1rem;
+  }
+  
+  .tienda-header h1 {
+    font-size: 2rem;
+  }
+  
+  .stats {
+    gap: 1.5rem;
+  }
+}</code></pre>
+
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>🎯 Análisis del código: ¿Qué está pasando?</h5>
+              
+              <h6>1️⃣ Array de productos (líneas 5-64):</h6>
+              <ul>
+                <li>6 objetos, cada uno con las props que necesita la Tarjeta</li>
+                <li>Cada objeto tiene <code>id</code>, <code>titulo</code>, <code>descripcion</code>, etc.</li>
+                <li>Es como una base de datos mini en JavaScript</li>
+              </ul>
+
+              <h6>2️⃣ .map() mágico (líneas 73-83):</h6>
+              <ul>
+                <li><code>productos.map(producto => (...))</code> recorre cada objeto</li>
+                <li>Por cada <code>producto</code>, crea una <code>&lt;Tarjeta /&gt;</code></li>
+                <li><code>key={producto.id}</code> le da una ID única (React lo necesita)</li>
+                <li>Cada prop se llena con datos del objeto: <code>titulo={producto.titulo}</code></li>
+              </ul>
+
+              <h6>3️⃣ Resultado automático:</h6>
+              <ul>
+                <li>✨ 6 tarjetas aparecen automáticamente</li>
+                <li>🎨 Cada una con diseño diferente (color, imagen, etc.)</li>
+                <li>📱 Layout responsive heredado del CSS</li>
+                <li>🔄 Si agregamos un producto al array, aparece automáticamente</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-info">🧠 ¿Por qué necesitamos la prop `key`? (Click para entender)</summary>
+          <div class="details-content">
+            
+            <h4>🔑 La prop `key` explicada fácil</h4>
+            <p>Cuando usas <code>.map()</code> en React, <strong>SIEMPRE</strong> necesitas una prop <code>key</code> única para cada elemento.</p>
+
+            <h5>🚗 Analogía perfecta: Matrículas de autos</h5>
+            <div style="background: #f0f8ff; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <p><strong>Imagina un parking con 100 autos idénticos:</strong></p>
+              <ul>
+                <li>🚗 <strong>Sin matrícula:</strong> ¿Cómo distingues cuál es cuál?</li>
+                <li>🆔 <strong>Con matrícula:</strong> Cada auto tiene una ID única</li>
+                <li>⚛️ <strong>En React:</strong> La prop <code>key</code> es como la matrícula</li>
+              </ul>
+            </div>
+
+            <h5>⚠️ ¿Qué pasa si no pones key?</h5>
+            <pre><code class="language-jsx">// ❌ MAL - Sin key (React se queja en consola)
+{productos.map(producto => (
+  &lt;Tarjeta titulo={producto.titulo} /&gt;  {/* Falta key */}
+))}
+
+// ✅ BIEN - Con key única
+{productos.map(producto => (
+  &lt;Tarjeta 
+    key={producto.id}              {/* 👈 Key única obligatoria */}
+    titulo={producto.titulo} 
+  /&gt;
+))}</code></pre>
+
+            <h5>📋 Reglas de la prop key:</h5>
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+              <thead>
+                <tr style="background: #f5f5f5;">
+                  <th style="padding: 0.5rem; border: 1px solid #ddd;">✅ Buenas prácticas</th>
+                  <th style="padding: 0.5rem; border: 1px solid #ddd;">❌ Evitar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>key={producto.id}</code></td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>key={index}</code> (en la mayoría de casos)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>key={usuario.email}</code></td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;">Sin key</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>key={item.codigo}</code></td>
+                  <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>key={"fijo"}</code> (misma key repetida)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>💡 ¿Por qué React necesita esto?</h5>
+              <p><strong>Optimización de rendimiento:</strong></p>
+              <ul>
+                <li>React usa la <code>key</code> para saber qué elementos cambiar, añadir o quitar</li>
+                <li>Sin <code>key</code>, React tiene que regenerar todo cada vez</li>
+                <li>Con <code>key</code>, React solo cambia lo que realmente cambió</li>
+                <li>Resultado: Tu app va más rápida y fluida</li>
+              </ul>
+            </div>
+
+            <h5>🎯 En nuestro ejemplo de tienda:</h5>
+            <pre><code class="language-jsx">{productos.map(producto => (
+  &lt;Tarjeta
+    key={producto.id}  {/* 👈 Cada producto tiene un ID único (1, 2, 3, 4, 5, 6) */}
+    titulo={producto.titulo}
+    // ... resto de props
+  /&gt;
+))}</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-section summary-warning">🚀 Ejercicios prácticos para clase (Click para ver actividades)</summary>
+          <div class="details-content">
+            
+            <h4>💪 Actividades progresivas para dominar .map()</h4>
+
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>🧩 Ejercicio 1: Añadir productos nuevos</h5>
+              <p><strong>Objetivo:</strong> Comprobar que entiendes el concepto de datos dinámicos</p>
+              <ul>
+                <li>Añade 2 productos más al array (Nintendo Switch, iPad Pro)</li>
+                <li>Usa datos realistas: precios, descripciones, imágenes</li>
+                <li>¿Cuántas tarjetas aparecen automáticamente?</li>
+              </ul>
+            </div>
+
+            <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>🎨 Ejercicio 2: Personalizar props</h5>
+              <p><strong>Objetivo:</strong> Entender la relación objeto ↔ props</p>
+              <ul>
+                <li>Cambia algunos colores en el array</li>
+                <li>Modifica algunos <code>textoBoton</code> ("Oferta", "Agotado", etc.)</li>
+                <li>Prueba a quitar la <code>imagen</code> de algunos productos</li>
+              </ul>
+            </div>
+
+            <div style="background: #f0f8ff; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>🔧 Ejercicio 3: Crear nueva categoría</h5>
+              <p><strong>Objetivo:</strong> Aplicar el patrón a un caso diferente</p>
+              <pre><code class="language-jsx">// Crear array de cursos online:
+const cursos = [
+  {
+    id: 1,
+    titulo: "React desde Cero",
+    descripcion: "Aprende React paso a paso",
+    precio: "Gratis",
+    duracion: "8 horas",
+    color: "#61dafb",
+    // ... resto de datos
+  }
+  // ... más cursos
+];</code></pre>
+            </div>
+
+            <div style="background: #ffebee; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>🏆 Desafío avanzado: Filtrar productos</h5>
+              <p><strong>Para alumnos que van rápido:</strong></p>
+              <pre><code class="language-jsx">// Mostrar solo productos caros (precio > $500)
+const productosCaros = productos.filter(p => 
+  parseInt(p.precio.replace('$', '').replace(',', '')) > 500
+);
+
+// Luego aplicar .map() solo a los filtrados
+{productosCaros.map(producto => (
+  &lt;Tarjeta key={producto.id} ... /&gt;
+))}</code></pre>
+            </div>
+
+            <h5>🎯 Checklist de conceptos dominados:</h5>
+            <ul style="list-style: none; padding: 0;">
+              <li>✅ Entiendo que .map() recorre arrays</li>
+              <li>✅ Sé que .map() devuelve JSX en React</li>
+              <li>✅ Uso siempre key con valor único</li>
+              <li>✅ Conecto props del componente con datos del objeto</li>
+              <li>✅ Puedo añadir/quitar datos y veo cambios automáticos</li>
+            </ul>
+
+            <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h5>💼 Aplicación en el mundo real:</h5>
+              <p><strong>Este patrón lo usarás constantemente para:</strong></p>
+              <ul>
+                <li>🛍️ <strong>E-commerce:</strong> Lista de productos</li>
+                <li>📧 <strong>Email:</strong> Lista de mensajes</li>
+                <li>👥 <strong>Redes sociales:</strong> Feed de posts</li>
+                <li>📰 <strong>Noticias:</strong> Lista de artículos</li>
+                <li>🎵 <strong>Música:</strong> Playlist de canciones</li>
+                <li>📋 <strong>Tareas:</strong> Lista de TODOs</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
+          <h3>🎓 Frase para recordar toda la vida:</h3>
+          <p style="font-size: 1.3rem; margin: 1rem 0; font-weight: 600;">
+            "En React: datos en array + .map() + componente = UI automática"
+          </p>
+          <p style="opacity: 0.9; font-size: 1.1rem;">
+            ¡Has pasado de crear tarjetas manualmente a generarlas como un profesional! 🚀
+          </p>
+        </div>
+      </div>
+    </section>-->
+
+  </main>
+
+  <footer>
+    <p>💙 Día 3 completado: Props dominadas con 6 ejemplos diferentes | Layout horizontal perfecto | ¡Listo para el siguiente nivel!</p>
+  </footer>
+</body>
+</html>

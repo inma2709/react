@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Props en React · Guía Didáctica Completa</title>
+  <style>
+    :root {
+      --react-cyan: #61dafb;
+      --react-blue: #20232a;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --danger: #ef4444;
+      --light: #f8fafc;
+      --dark: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--react-blue) 0%, #374151 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin: 3rem 0;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border-left: 5px solid var(--react-cyan);
+    }
+
+    .progress-bar {
+      background: var(--light);
+      height: 8px;
+      border-radius: 4px;
+      margin: 2rem 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--react-cyan), var(--success));
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 4px;
+    }
+
+    /* Summary styles */
+    details {
+      margin: 1.5rem 0;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    summary:hover {
+      background: rgba(97, 218, 251, 0.1);
+    }
+
+    .summary-beginner { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); color: #92400e; }
+    .summary-concept { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); color: #1e40af; }
+    .summary-practice { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; }
+    .summary-advanced { background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); color: #be185d; }
+    .summary-code { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); color: #6b21a8; }
+
+    .details-content {
+      padding: 1.5rem;
+      background: #fafafa;
+    }
+
+    /* Code blocks */
+    pre {
+      background: var(--react-blue);
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      background: rgba(97, 218, 251, 0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: var(--react-blue);
+      font-weight: 600;
+    }
+
+    pre code {
+      background: none;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Highlighting in code */
+    .hl-keyword { color: #a78bfa; }
+    .hl-string { color: #34d399; }
+    .hl-comment { color: #94a3b8; }
+    .hl-number { color: #fbbf24; }
+    .hl-function { color: #60a5fa; }
+
+    /* Visual examples */
+    .visual-example {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .visual-example {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .example-card {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .example-bad {
+      border-color: var(--danger);
+      background: #fef2f2;
+    }
+
+    .example-good {
+      border-color: var(--success);
+      background: #f0fdf4;
+    }
+
+    /* Icons */
+    .icon {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+
+    /* Motivational quotes */
+    .quote {
+      background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+      border-left: 4px solid #8b5cf6;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-style: italic;
+      border-radius: 0 10px 10px 0;
+    }
+
+    /* Interactive elements */
+    .step-counter {
+      background: var(--react-cyan);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 1rem;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .analogy {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin: 3rem 0;
+      gap: 1rem;
+    }
+
+    .nav-button {
+      background: var(--react-cyan);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background: #0ea5e9;
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      background: var(--react-blue);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>🎯 Props en React</h1>
+      <p>Descubre cómo hacer componentes inteligentes y reutilizables desde cero</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressBar"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Introducción motivadora -->
+    <section class="section">
+      <div class="card">
+        <h2><span class="icon">🚀</span>¿Por qué Props son el Superpoder de React?</h2>
+        <p>Imagina que pudieras crear una máquina que produce tarjetas de presentación. En lugar de hacer una máquina diferente para cada persona, creas UNA sola máquina que puede personalizar cada tarjeta según los datos que le des.</p>
+        
+        <div class="analogy">
+          <h3>🏭 Analogía de la Fábrica de Tarjetas</h3>
+          <p><strong>Sin Props:</strong> Tienes que construir una máquina diferente para cada persona</p>
+          <p><strong>Con Props:</strong> Una sola máquina que recibe diferentes "materiales" y produce tarjetas únicas</p>
+        </div>
+
+        <div class="quote">
+          "Los Props son como los ingredientes de una receta: cambias los ingredientes y obtienes un plato diferente, pero la receta sigue siendo la misma."
+        </div>
+      </div>
+    </section>
+
+    <!-- Nivel 1: Conceptos básicos -->
+    <section class="section">
+      <div class="card">
+        <h2><span class="step-counter">1</span>Nivel Principiante: ¿Qué son las Props?</h2>
+        
+        <details>
+          <summary class="summary-beginner">
+            <span class="icon">📚</span>Definición simple de Props
+          </summary>
+          <div class="details-content">
+            <p><strong>Props = Properties = Propiedades</strong></p>
+            <p>Las props son datos que le pasas a un componente desde fuera, como si fueran parámetros de una función.</p>
+            
+            <div class="visual-example">
+              <div class="example-card">
+                <h4>En funciones normales:</h4>
+                <pre><code class="language-js"><span class="hl-keyword">function</span> <span class="hl-function">saludar</span>(nombre) {
+  <span class="hl-keyword">return</span> <span class="hl-string">"Hola "</span> + nombre;
+}
+
+<span class="hl-function">saludar</span>(<span class="hl-string">"María"</span>); <span class="hl-comment">// "Hola María"</span></code></pre>
+              </div>
+              <div class="example-card">
+                <h4>En componentes React:</h4>
+                <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Tarjeta</span>({ nombre }) {
+  <span class="hl-keyword">return</span> &lt;h1&gt;Hola {nombre}&lt;/h1&gt;;
+}
+
+&lt;<span class="hl-function">Tarjeta</span> nombre=<span class="hl-string">"María"</span> /&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-beginner">
+            <span class="icon">🔍</span>Comparación con HTML
+          </summary>
+          <div class="details-content">
+            <p>¡Ya conoces las props! En HTML, los atributos son como props:</p>
+            
+            <div class="visual-example">
+              <div class="example-card">
+                <h4>HTML con atributos:</h4>
+                <pre><code class="language-html">&lt;img src=<span class="hl-string">"foto.jpg"</span> 
+     alt=<span class="hl-string">"Mi foto"</span> 
+     width=<span class="hl-string">"200"</span> /&gt;</code></pre>
+                <p>Los atributos <code>src</code>, <code>alt</code>, <code>width</code> personalizan la imagen</p>
+              </div>
+              <div class="example-card">
+                <h4>React con props:</h4>
+                <pre><code class="language-jsx">&lt;Tarjeta titulo=<span class="hl-string">"Mi Blog"</span> 
+         color=<span class="hl-string">"azul"</span> 
+         tamaño=<span class="hl-string">"grande"</span> /&gt;</code></pre>
+                <p>Las props <code>titulo</code>, <code>color</code>, <code>tamaño</code> personalizan el componente</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-beginner">
+            <span class="icon">🎨</span>Tu primer componente con props
+          </summary>
+          <div class="details-content">
+            <h4>Paso a paso - Componente Saludo</h4>
+            
+            <h5>1. Componente sin props (limitado):</h5>
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Saludo</span>() {
+  <span class="hl-keyword">return</span> &lt;h1&gt;¡Hola Juan!&lt;/h1&gt;;
+}
+
+<span class="hl-comment">// Solo puede saludar a Juan 😢</span></code></pre>
+
+            <h5>2. Componente con props (flexible):</h5>
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Saludo</span>({ nombre }) {
+  <span class="hl-keyword">return</span> &lt;h1&gt;¡Hola {nombre}!&lt;/h1&gt;;
+}
+
+<span class="hl-comment">// Ahora puede saludar a cualquiera 🎉</span>
+&lt;<span class="hl-function">Saludo</span> nombre=<span class="hl-string">"María"</span> /&gt;    <span class="hl-comment">// ¡Hola María!</span>
+&lt;<span class="hl-function">Saludo</span> nombre=<span class="hl-string">"Carlos"</span> /&gt;   <span class="hl-comment">// ¡Hola Carlos!</span>
+&lt;<span class="hl-function">Saludo</span> nombre=<span class="hl-string">"Ana"</span> /&gt;      <span class="hl-comment">// ¡Hola Ana!</span></code></pre>
+
+            <div class="highlight-box">
+              <p><strong>🔑 Concepto clave:</strong> Un componente + diferentes props = resultados diferentes</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Nivel 2: Props en acción -->
+    <section class="section">
+      <div class="card">
+        <h2><span class="step-counter">2</span>Nivel Intermedio: Props en Acción</h2>
+
+        <details>
+          <summary class="summary-concept">
+            <span class="icon">🧩</span>Componente Tarjeta con múltiples props
+          </summary>
+          <div class="details-content">
+            <h4>Creando un componente más complejo</h4>
+            
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Tarjeta</span>({ titulo, descripcion, emoji, color }) {
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ backgroundColor: color, padding: <span class="hl-string">"1rem"</span>, borderRadius: <span class="hl-string">"8px"</span> }}&gt;
+      &lt;h3&gt;{emoji} {titulo}&lt;/h3&gt;
+      &lt;p&gt;{descripcion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <h4>Usando el componente con diferentes datos:</h4>
+            <pre><code class="language-jsx">&lt;<span class="hl-function">Tarjeta</span> 
+  titulo=<span class="hl-string">"HTML"</span>
+  descripcion=<span class="hl-string">"Estructura tu página web"</span>
+  emoji=<span class="hl-string">"🏗️"</span>
+  color=<span class="hl-string">"#ffebee"</span>
+/&gt;
+
+&lt;<span class="hl-function">Tarjeta</span> 
+  titulo=<span class="hl-string">"CSS"</span>
+  descripcion=<span class="hl-string">"Dale estilo y belleza"</span>
+  emoji=<span class="hl-string">"🎨"</span>
+  color=<span class="hl-string">"#e3f2fd"</span>
+/&gt;
+
+&lt;<span class="hl-function">Tarjeta</span> 
+  titulo=<span class="hl-string">"JavaScript"</span>
+  descripcion=<span class="hl-string">"Añade interactividad"</span>
+  emoji=<span class="hl-string">"⚡"</span>
+  color=<span class="hl-string">"#fff8e1"</span>
+/&gt;</code></pre>
+
+            <div class="analogy">
+              <h5>🎭 Analogía del Actor</h5>
+              <p>El componente es como un actor que puede interpretar diferentes personajes. Las props son el guión que le dice qué personaje interpretar en cada escena.</p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-concept">
+            <span class="icon">🔧</span>Props con valores por defecto
+          </summary>
+          <div class="details-content">
+            <h4>¿Qué pasa si no pasas todas las props?</h4>
+            
+            <div class="visual-example">
+              <div class="example-bad">
+                <h5>❌ Sin valores por defecto:</h5>
+                <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Boton</span>({ texto, color }) {
+  <span class="hl-keyword">return</span> &lt;button style={{ color }}&gt;{texto}&lt;/button&gt;;
+}
+
+&lt;<span class="hl-function">Boton</span> texto=<span class="hl-string">"Click"</span> /&gt; <span class="hl-comment">// color será undefined 😱</span></code></pre>
+              </div>
+              <div class="example-good">
+                <h5>✅ Con valores por defecto:</h5>
+                <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Boton</span>({ texto, color = <span class="hl-string">"blue"</span> }) {
+  <span class="hl-keyword">return</span> &lt;button style={{ color }}&gt;{texto}&lt;/button&gt;;
+}
+
+&lt;<span class="hl-function">Boton</span> texto=<span class="hl-string">"Click"</span> /&gt; <span class="hl-comment">// color será "blue" 🎉</span></code></pre>
+              </div>
+            </div>
+
+            <h4>Método alternativo con OR (||):</h4>
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Tarjeta</span>({ titulo, color }) {
+  <span class="hl-keyword">const</span> colorFinal = color || <span class="hl-string">"#f0f0f0"</span>; <span class="hl-comment">// Si no hay color, usa gris claro</span>
+  
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ backgroundColor: colorFinal }}&gt;
+      &lt;h3&gt;{titulo}&lt;/h3&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-concept">
+            <span class="icon">🎯</span>Props para controlar comportamiento
+          </summary>
+          <div class="details-content">
+            <h4>Las props no solo son para mostrar texto</h4>
+            
+            <h5>1. Props booleanas (verdadero/falso):</h5>
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Mensaje</span>({ texto, esImportante }) {
+  <span class="hl-keyword">return</span> (
+    &lt;p style={{ 
+      color: esImportante ? <span class="hl-string">"red"</span> : <span class="hl-string">"black"</span>,
+      fontWeight: esImportante ? <span class="hl-string">"bold"</span> : <span class="hl-string">"normal"</span>
+    }}&gt;
+      {texto}
+    &lt;/p&gt;
+  );
+}
+
+&lt;<span class="hl-function">Mensaje</span> texto=<span class="hl-string">"Mensaje normal"</span> /&gt;
+&lt;<span class="hl-function">Mensaje</span> texto=<span class="hl-string">"¡Urgente!"</span> esImportante={<span class="hl-keyword">true</span>} /&gt;</code></pre>
+
+            <h5>2. Props para números:</h5>
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">BarraProgreso</span>({ porcentaje }) {
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ width: <span class="hl-string">"200px"</span>, backgroundColor: <span class="hl-string">"#eee"</span>, borderRadius: <span class="hl-string">"10px"</span> }}&gt;
+      &lt;div style={{ 
+        width: `${porcentaje}%`, 
+        height: <span class="hl-string">"20px"</span>, 
+        backgroundColor: <span class="hl-string">"#4CAF50"</span>,
+        borderRadius: <span class="hl-string">"10px"</span>
+      }}&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+&lt;<span class="hl-function">BarraProgreso</span> porcentaje={<span class="hl-number">75</span>} /&gt; <span class="hl-comment">// Barra al 75%</span></code></pre>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Nivel 3: Props avanzadas -->
+    <section class="section">
+      <div class="card">
+        <h2><span class="step-counter">3</span>Nivel Avanzado: Props Opcionales y Condicionales</h2>
+
+        <details>
+          <summary class="summary-advanced">
+            <span class="icon">🖼️</span>Props opcionales (imagen opcional)
+          </summary>
+          <div class="details-content">
+            <h4>Componente que muestra imagen solo si existe</h4>
+            
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">TarjetaCompleta</span>({ titulo, descripcion, imagen, color }) {
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ 
+      backgroundColor: color || <span class="hl-string">"white"</span>, 
+      padding: <span class="hl-string">"1rem"</span>, 
+      borderRadius: <span class="hl-string">"8px"</span>,
+      textAlign: <span class="hl-string">"center"</span>
+    }}&gt;
+      {imagen && &lt;img src={imagen} alt={titulo} style={{ width: <span class="hl-string">"100px"</span>, height: <span class="hl-string">"100px"</span> }} /&gt;}
+      &lt;h3&gt;{titulo}&lt;/h3&gt;
+      &lt;p&gt;{descripcion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <h4>Usando el componente:</h4>
+            <pre><code class="language-jsx"><span class="hl-comment">// Tarjeta CON imagen</span>
+&lt;<span class="hl-function">TarjetaCompleta</span> 
+  titulo=<span class="hl-string">"React"</span>
+  descripcion=<span class="hl-string">"Librería de JavaScript"</span>
+  imagen=<span class="hl-string">"react-logo.png"</span>
+  color=<span class="hl-string">"#e1f5fe"</span>
+/&gt;
+
+<span class="hl-comment">// Tarjeta SIN imagen</span>
+&lt;<span class="hl-function">TarjetaCompleta</span> 
+  titulo=<span class="hl-string">"HTML"</span>
+  descripcion=<span class="hl-string">"Lenguaje de marcado"</span>
+  color=<span class="hl-string">"#fff3e0"</span>
+/&gt;</code></pre>
+
+            <div class="highlight-box">
+              <p><strong>🔍 Cómo funciona:</strong> <code>{imagen && &lt;img.../&gt;}</code> significa "si imagen existe, muestra la etiqueta img"</p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-advanced">
+            <span class="icon">🎨</span>Props para estilos dinámicos completos
+          </summary>
+          <div class="details-content">
+            <h4>Máximo control sobre la apariencia</h4>
+            
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">TarjetaPersonalizable</span>({ 
+  titulo, 
+  descripcion, 
+  colorFondo, 
+  colorTexto, 
+  tamaño,
+  sombra,
+  borde 
+}) {
+  <span class="hl-keyword">const</span> estilos = {
+    backgroundColor: colorFondo || <span class="hl-string">"white"</span>,
+    color: colorTexto || <span class="hl-string">"black"</span>,
+    padding: tamaño === <span class="hl-string">"grande"</span> ? <span class="hl-string">"2rem"</span> : <span class="hl-string">"1rem"</span>,
+    fontSize: tamaño === <span class="hl-string">"grande"</span> ? <span class="hl-string">"1.2rem"</span> : <span class="hl-string">"1rem"</span>,
+    boxShadow: sombra ? <span class="hl-string">"0 4px 8px rgba(0,0,0,0.1)"</span> : <span class="hl-string">"none"</span>,
+    border: borde || <span class="hl-string">"none"</span>,
+    borderRadius: <span class="hl-string">"8px"</span>,
+    margin: <span class="hl-string">"1rem"</span>
+  };
+
+  <span class="hl-keyword">return</span> (
+    &lt;div style={estilos}&gt;
+      &lt;h3&gt;{titulo}&lt;/h3&gt;
+      &lt;p&gt;{descripcion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <h4>Ejemplos de uso:</h4>
+            <pre><code class="language-jsx"><span class="hl-comment">// Tarjeta básica</span>
+&lt;<span class="hl-function">TarjetaPersonalizable</span> 
+  titulo=<span class="hl-string">"Básica"</span> 
+  descripcion=<span class="hl-string">"Tarjeta simple"</span> 
+/&gt;
+
+<span class="hl-comment">// Tarjeta con todo personalizado</span>
+&lt;<span class="hl-function">TarjetaPersonalizable</span> 
+  titulo=<span class="hl-string">"Premium"</span>
+  descripcion=<span class="hl-string">"Tarjeta con todos los extras"</span>
+  colorFondo=<span class="hl-string">"#f0f8ff"</span>
+  colorTexto=<span class="hl-string">"#1565c0"</span>
+  tamaño=<span class="hl-string">"grande"</span>
+  sombra={<span class="hl-keyword">true</span>}
+  borde=<span class="hl-string">"2px solid #2196f3"</span>
+/&gt;</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-advanced">
+            <span class="icon">🔄</span>Props como funciones (eventos)
+          </summary>
+          <div class="details-content">
+            <h4>Pasando funciones como props</h4>
+            
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">BotonInteligente</span>({ texto, alHacerClick, color }) {
+  <span class="hl-keyword">return</span> (
+    &lt;button 
+      onClick={alHacerClick}
+      style={{ 
+        backgroundColor: color || <span class="hl-string">"#4CAF50"</span>, 
+        color: <span class="hl-string">"white"</span>,
+        padding: <span class="hl-string">"0.5rem 1rem"</span>,
+        border: <span class="hl-string">"none"</span>,
+        borderRadius: <span class="hl-string">"4px"</span>,
+        cursor: <span class="hl-string">"pointer"</span>
+      }}
+    &gt;
+      {texto}
+    &lt;/button&gt;
+  );
+}
+
+<span class="hl-comment">// En el componente padre:</span>
+<span class="hl-keyword">function</span> <span class="hl-function">App</span>() {
+  <span class="hl-keyword">const</span> saludar = () =&gt; alert(<span class="hl-string">"¡Hola!"</span>);
+  <span class="hl-keyword">const</span> despedir = () =&gt; alert(<span class="hl-string">"¡Adiós!"</span>);
+
+  <span class="hl-keyword">return</span> (
+    &lt;div&gt;
+      &lt;<span class="hl-function">BotonInteligente</span> texto=<span class="hl-string">"Saludar"</span> alHacerClick={saludar} color=<span class="hl-string">"green"</span> /&gt;
+      &lt;<span class="hl-function">BotonInteligente</span> texto=<span class="hl-string">"Despedir"</span> alHacerClick={despedir} color=<span class="hl-string">"red"</span> /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Nivel 4: Props con Arrays y objetos -->
+    <section class="section">
+      <div class="card">
+        <h2><span class="step-counter">4</span>Nivel Experto: Props con Estructuras Complejas</h2>
+
+        <details>
+          <summary class="summary-code">
+            <span class="icon">📊</span>Props con Arrays (listas)
+          </summary>
+          <div class="details-content">
+            <h4>Pasando listas como props</h4>
+            
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">ListaCompras</span>({ elementos, titulo }) {
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ border: <span class="hl-string">"1px solid #ccc"</span>, padding: <span class="hl-string">"1rem"</span>, borderRadius: <span class="hl-string">"8px"</span> }}&gt;
+      &lt;h3&gt;{titulo}&lt;/h3&gt;
+      &lt;ul&gt;
+        {elementos.map((elemento, index) =&gt; (
+          &lt;li key={index}&gt;{elemento}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="hl-comment">// Usando el componente:</span>
+<span class="hl-keyword">const</span> compras = [<span class="hl-string">"Leche"</span>, <span class="hl-string">"Pan"</span>, <span class="hl-string">"Huevos"</span>, <span class="hl-string">"Frutas"</span>];
+
+&lt;<span class="hl-function">ListaCompras</span> 
+  titulo=<span class="hl-string">"Mi Lista de Compras"</span> 
+  elementos={compras} 
+/&gt;</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-code">
+            <span class="icon">🗂️</span>Props con objetos
+          </summary>
+          <div class="details-content">
+            <h4>Pasando objetos completos como props</h4>
+            
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">TarjetaUsuario</span>({ usuario }) {
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ 
+      border: <span class="hl-string">"1px solid #ddd"</span>, 
+      padding: <span class="hl-string">"1rem"</span>, 
+      borderRadius: <span class="hl-string">"8px"</span>,
+      textAlign: <span class="hl-string">"center"</span>
+    }}&gt;
+      &lt;img 
+        src={usuario.avatar} 
+        alt={usuario.nombre}
+        style={{ width: <span class="hl-string">"80px"</span>, height: <span class="hl-string">"80px"</span>, borderRadius: <span class="hl-string">"50%"</span> }}
+      /&gt;
+      &lt;h3&gt;{usuario.nombre}&lt;/h3&gt;
+      &lt;p&gt;{usuario.email}&lt;/p&gt;
+      &lt;p&gt;{usuario.edad} años&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="hl-comment">// Definiendo el objeto usuario:</span>
+<span class="hl-keyword">const</span> usuario = {
+  nombre: <span class="hl-string">"Ana García"</span>,
+  email: <span class="hl-string">"ana@email.com"</span>,
+  edad: <span class="hl-number">28</span>,
+  avatar: <span class="hl-string">"https://ejemplo.com/avatar.jpg"</span>
+};
+
+&lt;<span class="hl-function">TarjetaUsuario</span> usuario={usuario} /&gt;</code></pre>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-code">
+            <span class="icon">🔄</span>Combinando todo: Array de objetos
+          </summary>
+          <div class="details-content">
+            <h4>El caso más común en aplicaciones reales</h4>
+            
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">GaleriaProductos</span>({ productos }) {
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ display: <span class="hl-string">"grid"</span>, gridTemplateColumns: <span class="hl-string">"repeat(auto-fit, minmax(250px, 1fr))"</span>, gap: <span class="hl-string">"1rem"</span> }}&gt;
+      {productos.map(producto =&gt; (
+        &lt;div key={producto.id} style={{ 
+          border: <span class="hl-string">"1px solid #eee"</span>, 
+          padding: <span class="hl-string">"1rem"</span>, 
+          borderRadius: <span class="hl-string">"8px"</span>,
+          textAlign: <span class="hl-string">"center"</span>
+        }}&gt;
+          &lt;img src={producto.imagen} alt={producto.nombre} style={{ width: <span class="hl-string">"100%"</span>, height: <span class="hl-string">"150px"</span>, objectFit: <span class="hl-string">"cover"</span> }} /&gt;
+          &lt;h3&gt;{producto.nombre}&lt;/h3&gt;
+          &lt;p&gt;{producto.descripcion}&lt;/p&gt;
+          &lt;p style={{ fontSize: <span class="hl-string">"1.2rem"</span>, fontWeight: <span class="hl-string">"bold"</span>, color: <span class="hl-string">"green"</span> }}&gt;
+            ${producto.precio}
+          &lt;/p&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+<span class="hl-comment">// Array de productos:</span>
+<span class="hl-keyword">const</span> productos = [
+  {
+    id: <span class="hl-number">1</span>,
+    nombre: <span class="hl-string">"Laptop"</span>,
+    descripcion: <span class="hl-string">"Laptop para programar"</span>,
+    precio: <span class="hl-number">899</span>,
+    imagen: <span class="hl-string">"laptop.jpg"</span>
+  },
+  {
+    id: <span class="hl-number">2</span>,
+    nombre: <span class="hl-string">"Mouse"</span>,
+    descripcion: <span class="hl-string">"Mouse inalámbrico"</span>,
+    precio: <span class="hl-number">25</span>,
+    imagen: <span class="hl-string">"mouse.jpg"</span>
+  }
+];
+
+&lt;<span class="hl-function">GaleriaProductos</span> productos={productos} /&gt;</code></pre>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Práctica guiada -->
+    <section class="section">
+      <div class="card">
+        <h2><span class="step-counter">5</span>¡Práctica Guiada!</h2>
+
+        <details>
+          <summary class="summary-practice">
+            <span class="icon">💪</span>Ejercicio: Crea tu propio componente Carta
+          </summary>
+          <div class="details-content">
+            <h4>Objetivo: Crear un componente que muestre información de una persona</h4>
+            
+            <div class="highlight-box">
+              <h5>📋 Requisitos del componente:</h5>
+              <ul>
+                <li>✅ Debe recibir: nombre, apellido, edad, profesión, foto (opcional)</li>
+                <li>✅ Debe mostrar la foto solo si existe</li>
+                <li>✅ Debe tener un color de fondo personalizable</li>
+                <li>✅ Si la edad es mayor a 65, debe mostrar "Jubilado" en lugar de la profesión</li>
+              </ul>
+            </div>
+
+            <h5>🎯 Plantilla para empezar:</h5>
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Carta</span>({ 
+  nombre, 
+  apellido, 
+  edad, 
+  profesion, 
+  foto, 
+  colorFondo 
+}) {
+  <span class="hl-comment">// Tu código aquí...</span>
+  
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ backgroundColor: colorFondo || <span class="hl-string">"white"</span> }}&gt;
+      <span class="hl-comment">// Tu JSX aquí...</span>
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <h5>✨ Solución:</h5>
+            <details>
+              <summary>Ver solución (intenta primero)</summary>
+              <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Carta</span>({ nombre, apellido, edad, profesion, foto, colorFondo }) {
+  <span class="hl-keyword">const</span> mostrarProfesion = edad > <span class="hl-number">65</span> ? <span class="hl-string">"Jubilado"</span> : profesion;
+  
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ 
+      backgroundColor: colorFondo || <span class="hl-string">"#f5f5f5"</span>,
+      padding: <span class="hl-string">"1.5rem"</span>,
+      borderRadius: <span class="hl-string">"10px"</span>,
+      textAlign: <span class="hl-string">"center"</span>,
+      border: <span class="hl-string">"1px solid #ddd"</span>,
+      margin: <span class="hl-string">"1rem"</span>
+    }}&gt;
+      {foto && &lt;img src={foto} alt={nombre} style={{ 
+        width: <span class="hl-string">"100px"</span>, 
+        height: <span class="hl-string">"100px"</span>, 
+        borderRadius: <span class="hl-string">"50%"</span>,
+        marginBottom: <span class="hl-string">"1rem"</span>
+      }} /&gt;}
+      &lt;h2&gt;{nombre} {apellido}&lt;/h2&gt;
+      &lt;p&gt;{edad} años&lt;/p&gt;
+      &lt;p style={{ fontStyle: <span class="hl-string">"italic"</span> }}&gt;{mostrarProfesion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="hl-comment">// Ejemplo de uso:</span>
+&lt;<span class="hl-function">Carta</span> 
+  nombre=<span class="hl-string">"María"</span>
+  apellido=<span class="hl-string">"González"</span>
+  edad={<span class="hl-number">30</span>}
+  profesion=<span class="hl-string">"Desarrolladora"</span>
+  foto=<span class="hl-string">"maria.jpg"</span>
+  colorFondo=<span class="hl-string">"#e3f2fd"</span>
+/&gt;</code></pre>
+            </details>
+          </div>
+        </details>
+
+        <details>
+          <summary class="summary-practice">
+            <span class="icon">🎮</span>Desafío: Componente interactivo con props
+          </summary>
+          <div class="details-content">
+            <h4>Crea un componente Contador que:</h4>
+            <ul>
+              <li>Reciba un valor inicial como prop</li>
+              <li>Reciba un color para el botón como prop</li>
+              <li>Reciba una función que se ejecute al hacer click</li>
+            </ul>
+
+            <pre><code class="language-jsx"><span class="hl-keyword">function</span> <span class="hl-function">Contador</span>({ valorInicial, colorBoton, alCambiar }) {
+  <span class="hl-comment">// Pista: necesitarás useState para el estado interno</span>
+  <span class="hl-keyword">const</span> [count, setCount] = useState(valorInicial || <span class="hl-number">0</span>);
+  
+  <span class="hl-keyword">const</span> incrementar = () =&gt; {
+    <span class="hl-keyword">const</span> nuevoValor = count + <span class="hl-number">1</span>;
+    setCount(nuevoValor);
+    alCambiar && alCambiar(nuevoValor); <span class="hl-comment">// Llama a la función si existe</span>
+  };
+
+  <span class="hl-keyword">return</span> (
+    &lt;div style={{ textAlign: <span class="hl-string">"center"</span>, padding: <span class="hl-string">"1rem"</span> }}&gt;
+      &lt;h2&gt;Contador: {count}&lt;/h2&gt;
+      &lt;button 
+        onClick={incrementar}
+        style={{ 
+          backgroundColor: colorBoton || <span class="hl-string">"blue"</span>,
+          color: <span class="hl-string">"white"</span>,
+          padding: <span class="hl-string">"0.5rem 1rem"</span>,
+          border: <span class="hl-string">"none"</span>,
+          borderRadius: <span class="hl-string">"4px"</span>
+        }}
+      &gt;
+        Incrementar
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Resumen y conceptos clave -->
+    <section class="section">
+      <div class="card">
+        <h2><span class="icon">🎓</span>Resumen: Lo que has aprendido</h2>
+        
+        <div class="analogy">
+          <h3>🧠 Conceptos clave que dominas:</h3>
+          <ul>
+            <li><strong>Props básicas:</strong> Pasar texto, números y booleanos</li>
+            <li><strong>Props de estilo:</strong> Personalizar colores y apariencia</li>
+            <li><strong>Props opcionales:</strong> Usar renderizado condicional</li>
+            <li><strong>Props por defecto:</strong> Evitar errores con valores predeterminados</li>
+            <li><strong>Props complejas:</strong> Arrays, objetos y funciones</li>
+          </ul>
+        </div>
+
+        <div class="quote">
+          "Las props son el lenguaje que usan los componentes para comunicarse. Dominando las props, puedes crear componentes que se adapten a cualquier situación."
+        </div>
+
+        <h3>🚀 Próximos pasos:</h3>
+        <ul>
+          <li>Aprender <code>useState</code> para manejar estado interno</li>
+          <li>Explorar <code>useEffect</code> para efectos secundarios</li>
+          <li>Crear aplicaciones más complejas con múltiples componentes</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Navegación -->
+    <div class="nav-buttons">
+      <a href="componentes.html" class="nav-button">← Componentes Básicos</a>
+      <a href="estado-hooks.html" class="nav-button">Estado y Hooks →</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Props en React · Guía Didáctica Completa</p>
+      <p>Hecho con ❤️ para estudiantes que están empezando su viaje en React</p>
+    </div>
+  </footer>
+
+  <script>
+    // Script para la barra de progreso
+    let progress = 0;
+    const progressBar = document.getElementById('progressBar');
+    
+    // Simular progreso al hacer scroll
+    window.addEventListener('scroll', () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = window.scrollY;
+      const progressPercentage = (scrolled / documentHeight) * 100;
+      
+      progressBar.style.width = progressPercentage + '%';
+    });
+
+    // Agregar interactividad a los summaries
+    document.querySelectorAll('details').forEach(detail => {
+      detail.addEventListener('toggle', () => {
+        if (detail.open) {
+          detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

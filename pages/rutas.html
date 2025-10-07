@@ -1,0 +1,258 @@
+<!--
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Página Extra · Rutas con React Router</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>🧭 Extra · Rutas en React (React Router)</h1>
+      <p>Navegación entre páginas sin recargar</p>
+      
+      <!-- Menú de navegación -->
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">🏠 Inicio</a>
+        <a href="intro.html" class="nav-link">📦 Día 1</a>
+        <a href="componentes.html" class="nav-link">🧩 Día 2</a>
+        <a href="props.html" class="nav-link">🚀 Día 3</a>
+        <a href="estados.html" class="nav-link">⚡ Día 4</a>
+        <a href="proyecto.html" class="nav-link">🏁 Día 5</a>
+        <a href="#" class="nav-link extra active">🧭 Extra</a>
+      </nav>
+      
+      <!-- Migas de pan -->
+      <div class="breadcrumb">
+        <a href="../index.html">🏠 Inicio</a>
+        <span class="breadcrumb-separator">→</span>
+        <span class="breadcrumb-current">🧭 Extra: React Router</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Qué y por qué -->
+    <section>
+      <h2>1) ¿Qué es React Router y por qué usarlo?</h2>
+      <div class="card">
+        <p><strong>React Router</strong> nos permite crear “páginas” dentro de una app de React (Home, Sobre mí, Contacto…), navegando entre ellas sin recargar el navegador. Ideal para sitios con varias secciones.</p>
+      </div>
+    </section>
+
+    <!-- Instalación -->
+    <section>
+      <h2>2) Instalación</h2>
+      <div class="card">
+<pre><code class="language-bash">npm i react-router-dom
+</code></pre>
+        <p>Tras instalar, reinicia si fuera necesario <code>npm run dev</code>.</p>
+      </div>
+    </section>
+
+    <!-- Estructura simple -->
+    <section>
+      <h2>3) Estructura mínima de archivos</h2>
+      <div class="card">
+<pre><code class="language-text">src/
+├─ main.jsx
+├─ App.jsx
+├─ pages/
+│  ├─ Home.jsx
+│  ├─ Sobre.jsx
+│  └─ Contacto.jsx
+└─ components/
+   └─ Navbar.jsx
+</code></pre>
+      </div>
+    </section>
+
+    <!-- Navbar -->
+    <section>
+      <h2>4) Navbar con enlaces (Link/NavLink)</h2>
+      <div class="card">
+<pre><code class="language-jsx">// src/components/Navbar.jsx
+import { NavLink } from "react-router-dom";
+
+export default function Navbar(){
+  const active = ({ isActive }) => ({
+    textDecoration: isActive ? "underline" : "none",
+    fontWeight: isActive ? 700 : 600
+  });
+
+  return (
+    &lt;nav className="mt-4"&gt;
+      &lt;ul style={{ display:"flex", gap:"1rem", listStyle:"none", padding:0 }}&gt;
+        &lt;li&gt;&lt;NavLink style={active} to="/" end&gt;Inicio&lt;/NavLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;NavLink style={active} to="/sobre"&gt;Sobre mí&lt;/NavLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;NavLink style={active} to="/contacto"&gt;Contacto&lt;/NavLink&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  );
+}
+</code></pre>
+      </div>
+    </section>
+
+    <!-- Páginas -->
+    <section>
+      <h2>5) Páginas básicas</h2>
+      <div class="card">
+<pre><code class="language-jsx">// src/pages/Home.jsx
+export default function Home(){
+  return (
+    &lt;section className="card"&gt;
+      &lt;h2&gt;🏠 Inicio&lt;/h2&gt;
+      &lt;p className="mt-2"&gt;Bienvenida a mi mini-sitio con React Router.&lt;/p&gt;
+    &lt;/section&gt;
+  );
+}
+
+// src/pages/Sobre.jsx
+export default function Sobre(){
+  return (
+    &lt;section className="card"&gt;
+      &lt;h2&gt;👩‍💻 Sobre mí&lt;/h2&gt;
+      &lt;p className="mt-2"&gt;Soy Inma, me encanta enseñar React de forma sencilla.&lt;/p&gt;
+    &lt;/section&gt;
+  );
+}
+
+// src/pages/Contacto.jsx
+export default function Contacto(){
+  return (
+    &lt;section className="card"&gt;
+      &lt;h2&gt;✉️ Contacto&lt;/h2&gt;
+      &lt;p className="mt-2"&gt;Escríbeme a &lt;strong&gt;hola@inmacontreras.com&lt;/strong&gt;&lt;/p&gt;
+    &lt;/section&gt;
+  );
+}
+</code></pre>
+      </div>
+    </section>
+
+    <!-- App con rutas -->
+    <section>
+      <h2>6) Definir rutas</h2>
+      <div class="card">
+<pre><code class="language-jsx">// src/App.jsx
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Sobre from "./pages/Sobre";
+import Contacto from "./pages/Contacto";
+
+function NotFound(){
+  return &lt;p className="mt-2"&gt;404 · Página no encontrada&lt;/p&gt;;
+}
+
+export default function App(){
+  return (
+    &lt;&gt;
+      &lt;header className="react-header"&gt;
+        &lt;div className="react-container"&gt;
+          &lt;h1 className="react-title"&gt;Mi sitio con rutas&lt;/h1&gt;
+          &lt;p className="react-subtitle"&gt;React + React Router&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/header&gt;
+
+      &lt;main className="react-container"&gt;
+        &lt;Navbar /&gt;
+
+        &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+          &lt;Route path="/sobre" element={&lt;Sobre /&gt;} /&gt;
+          &lt;Route path="/contacto" element={&lt;Contacto /&gt;} /&gt;
+          &lt;Route path="*" element={&lt;NotFound /&gt;} /&gt;
+        &lt;/Routes&gt;
+      &lt;/main&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+      </div>
+    </section>
+
+    <!-- Activar el router -->
+    <section>
+      <h2>7) Activar el router en <code>main.jsx</code></h2>
+      <div class="card">
+<pre><code class="language-jsx">// src/main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import "./styles/react-theme.css"; // o tu css/style.css
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  &lt;React.StrictMode&gt;
+    &lt;BrowserRouter&gt;
+      &lt;App /&gt;
+    &lt;/BrowserRouter&gt;
+  &lt;/React.StrictMode&gt;
+);
+</code></pre>
+        <p class="mt-2">Listo: ya puedes navegar entre <code>/</code>, <code>/sobre</code> y <code>/contacto</code> sin recargar la página.</p>
+      </div>
+    </section>
+
+    <!-- Rutas anidadas (opcional) -->
+    <section>
+      <h2>8) Bonus (opcional): Rutas anidadas</h2>
+      <div class="card">
+<pre><code class="language-jsx">// src/pages/Blog.jsx
+import { Outlet, NavLink } from "react-router-dom";
+export default function Blog(){
+  return (
+    &lt;section className="card"&gt;
+      &lt;h2&gt;📝 Blog&lt;/h2&gt;
+      &lt;nav className="mt-2"&gt;
+        &lt;NavLink to="articulo-1"&gt;Artículo 1&lt;/NavLink&gt; ·{" "}
+        &lt;NavLink to="articulo-2"&gt;Artículo 2&lt;/NavLink&gt;
+      &lt;/nav&gt;
+      &lt;Outlet /&gt;
+    &lt;/section&gt;
+  );
+}
+
+// src/App.jsx (añade)
+// &lt;Route path="/blog" element={&lt;Blog /&gt;}&gt;
+//   &lt;Route path="articulo-1" element={&lt;p&gt;Contenido 1&lt;/p&gt;} /&gt;
+//   &lt;Route path="articulo-2" element={&lt;p&gt;Contenido 2&lt;/p&gt;} /&gt;
+// &lt;/Route&gt;
+</code></pre>
+        <p class="mt-2">Las anidadas sirven para secciones con subpáginas (catálogos, paneles, etc.).</p>
+      </div>
+    </section>
+
+    <!-- Publicación -->
+    <section>
+      <h2>9) Publicar con rutas</h2>
+      <div class="card">
+        <ul>
+          <li>En Vercel/Netlify, el comportamiento por defecto suele funcionar con <code>BrowserRouter</code> si hay “fallback” al <code>index.html</code> (en Netlify: regla de reescritura <code>/*  /index.html 200</code>).</li>
+          <li>Alternativa sencilla: usar <code>&lt;HashRouter&gt;</code> en vez de <code>BrowserRouter</code>; evita configurar rewrites pero las URLs incluyen <code>#</code>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Nav -->
+    <div class="mt-8">
+      <a href="index.html">⬅️ Portada</a> ·
+      <a href="dia1.html">Día 1</a> ·
+      <a href="dia2.html">Día 2</a> ·
+      <a href="dia3.html">Día 3</a> ·
+      <a href="dia4.html">Día 4</a> ·
+      <a href="dia5.html">Día 5</a> ·
+      <strong>Rutas</strong>
+    </div>
+  </main>
+
+  <footer>
+    <p>Curso Básico de React · Extra: Rutas</p>
+  </footer>
+</body>
+</html>
+-->
