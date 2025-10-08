@@ -70,7 +70,7 @@
       <p>Los atributos (<code>src</code>, <code>alt</code>, <code>width</code>) hacen que la misma etiqueta <code>img</code> pueda mostrar diferentes imágenes.</p>
       
       <h3>🎯 ¡Las Props son lo mismo pero para tus componentes!</h3>
-      <p>Las <strong>props</strong> son "atributos personalizados" que le pasas a un componente como parametros para que sea <strong>reutilizable</strong>.</p>
+      <p>Las <strong>props</strong> son "atributos personalizados" que le pasas a un componente como parametros para que sea <strong>reutilizable pero no siempre igual</strong>.</p>
       
       <h3>🛠️ Ejemplo práctico: Creemos un componente Tarjeta profesional</h3>
       <p>Vamos a crear una tarjeta moderna con CSS separado, imagen opcional y botón. Crea <strong>dos archivos</strong>:</p>
@@ -80,36 +80,46 @@
         <div class="details-content">
           <pre><code class="language-jsx">import './Tarjeta.css';
 
-function Tarjeta({ titulo, descripcion, imagen, textoBoton, color, colorFondo }) {
-  return (
-    &lt;div 
+    // Componente Tarjeta: recibe props para personalizar cada tarjeta
+    function Tarjeta({ titulo, descripcion, imagen, textoBoton, color, colorFondo }) {
+      return (
+        // Contenedor principal de la tarjeta
+        // borderLeftColor y backgroundColor se personalizan con props
+        &lt;div 
       className="tarjeta" 
       style={{ 
-        borderLeftColor: color,
-        backgroundColor: colorFondo || '#ffffff'
+        borderLeftColor: color,              // Color del borde izquierdo
+        backgroundColor: colorFondo || '#ffffff' // Fondo personalizado o blanco por defecto
       }}
-    &gt;
+        &gt;
+      {/* Renderiza la imagen solo si la prop 'imagen' existe */}
       {imagen && (
         &lt;div className="tarjeta-imagen"&gt;
-          &lt;img src={imagen} alt={titulo} /&gt;
+          &lt;img src={imagen} alt={titulo} /&gt; {/* alt mejora accesibilidad */}
         &lt;/div&gt;
       )}
       
+      {/* Contenido principal de la tarjeta */}
       &lt;div className="tarjeta-contenido"&gt;
-        &lt;h3 className="tarjeta-titulo"&gt;{titulo}&lt;/h3&gt;
-        &lt;p className="tarjeta-descripcion"&gt;{descripcion}&lt;/p&gt;
+        &lt;h3 className="tarjeta-titulo"&gt;{titulo}&lt;/h3&gt; {/* Título dinámico */}
+        &lt;p className="tarjeta-descripcion"&gt;{descripcion}&lt;/p&gt; {/* Descripción dinámica */}
         
+        {/* Renderiza el botón solo si la prop 'textoBoton' existe */}
         {textoBoton && (
-          &lt;button className="tarjeta-boton" style={{ backgroundColor: color }}&gt;
-            {textoBoton}
+          &lt;button 
+        className="tarjeta-boton" 
+        style={{ backgroundColor: color }} // Color del botón igual al borde
+          &gt;
+        {textoBoton} {/* Texto del botón personalizado */}
           &lt;/button&gt;
         )}
       &lt;/div&gt;
-    &lt;/div&gt;
-  );
-}
+        &lt;/div&gt;
+      );
+    }
 
-export default Tarjeta;</code></pre>
+    export default Tarjeta; // Exporta el componente para usarlo en otras partes
+    </code></pre>
         </div>
       </details>
 
@@ -256,12 +266,12 @@ export default Tarjeta;</code></pre>
       </details>
 
       <details>
-        <summary class="summary-section success">✨ Nuevas características del componente mejorado (Click para ver/ocultar)</summary>
+        <summary class="summary-section success">✨ Características del componente Tarjeta.jsx (Click para ver/ocultar)</summary>
         <div class="details-content">
-          <h4>🎯 ¿Qué mejoras tiene la nueva Tarjeta?</h4>
+          <h4>🎯 ¿Qué características tiene nuestro componente Tarjeta?</h4>
           
           <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-            <h5>🆕 Props nuevas disponibles:</h5>
+            <h5>🆕 Props  disponibles:</h5>
             <ul>
               <li><strong>imagen:</strong> URL de imagen (opcional) - si no se pasa, la tarjeta se reorganiza automáticamente</li>
               <li><strong>textoBoton:</strong> Texto del botón (opcional) - si no se pasa, no aparece botón</li>
@@ -282,7 +292,7 @@ export default Tarjeta;</code></pre>
             </ul>
           </div>
 
-          <h5>🎨 Diseño profesional con CSS moderno:</h5>
+          <h5>🎨 Diseño  con CSS moderno:</h5>
           <ul>
             <li><strong>Layout Flexbox:</strong> Imagen a la izquierda, contenido a la derecha</li>
             <li><strong>Sombras suaves:</strong> Efecto elevado con hover animado</li>
@@ -346,7 +356,7 @@ export default Tarjeta;</code></pre>
       </details>
 
       <details>
-        <summary class="summary-section summary-success">🔍 Explicación línea por línea del componente mejorado (Click para ver/ocultar)</summary>
+        <summary class="summary-section summary-success">🔍 Explicación línea por línea del componente Tarjeta.jsx (Click para ver/ocultar)</summary>
         <div class="details-content">
           <p><strong>� Línea 1: <code>import './Tarjeta.css';</code></strong></p>
           <ul>
@@ -402,95 +412,59 @@ export default Tarjeta;</code></pre>
         </div>
       </details>
 
-      <details>
-        <summary class="summary-section summary-orange">📱 Ejemplos del componente mejorado (Click para ver/ocultar)</summary>
+     <!-- <details>
+        <summary class="summary-section summary-orange">📱 Ejemplos del componente  (Click para ver/ocultar)</summary>
         <div class="details-content">
           <h4>🎯 Diferentes configuraciones de la Tarjeta</h4>
           
           <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-            <h5>🖼️ Ejemplo 1: Tarjeta completa (con imagen, botón y fondo personalizado)</h5>
-            <pre><code class="language-jsx">&lt;Tarjeta 
-  titulo="Aprende React"
-  descripcion="Curso completo de React desde cero hasta avanzado"
-  imagen="/images/react-logo.png"
-  textoBoton="Empezar curso"
-  color="#61dafb"
-  colorFondo="#f0f8ff"
-/&gt;</code></pre>
-            <p><strong>Resultado:</strong> Tarjeta con imagen, fondo azul claro, borde azul y botón azul.</p>
+        <h5>🖼️ Ejemplo 1: Tarjeta completa (con imagen, botón y fondo personalizado)</h5>
+        <pre><code class="language-jsx">&lt;Tarjeta 
+      titulo="IA revoluciona la medicina"
+      descripcion="Investigadores logran diagnosticar enfermedades raras usando inteligencia artificial."
+      imagen="/images/ia-medicina.jpg"
+      textoBoton="Leer noticia"
+      color="#61dafb"
+      colorFondo="#f0f8ff"
+    /&gt;</code></pre>
+        <p><strong>Resultado:</strong> Tarjeta con imagen, fondo azul claro, borde azul y botón azul.</p>
           </div>
 
           <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-            <h5>🎨 Ejemplo 2: Tarjeta con fondo colorido</h5>
-            <pre><code class="language-jsx">&lt;Tarjeta 
-  titulo="Tips de JavaScript"
-  descripcion="Consejos útiles para mejorar tu código JavaScript"
-  textoBoton="Leer más"
-  color="#f39c12"
-  colorFondo="#fef9e7"
-/&gt;</code></pre>
-            <p><strong>Resultado:</strong> Tarjeta compacta con fondo amarillo claro y elementos naranjas.</p>
+        <h5>🎨 Ejemplo 2: Tarjeta con fondo colorido</h5>
+        <pre><code class="language-jsx">&lt;Tarjeta 
+      titulo="Nuevo récord en baterías"
+      descripcion="Científicos desarrollan una batería que dura 10 años sin recargar."
+      textoBoton="Ver avance"
+      color="#f39c12"
+      colorFondo="#fef9e7"
+    /&gt;</code></pre>
+        <p><strong>Resultado:</strong> Tarjeta compacta con fondo amarillo claro y elementos naranjas.</p>
           </div>
 
           <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-            <h5>📸 Ejemplo 3: Fondo blanco (por defecto)</h5>
-            <pre><code class="language-jsx">&lt;Tarjeta 
-  titulo="Galería de proyectos"
-  descripcion="Explora los proyectos más creativos de nuestra comunidad"
-  imagen="/images/gallery.jpg"
-  color="#9c27b0"
-/&gt;</code></pre>
-            <p><strong>Resultado:</strong> Tarjeta con fondo blanco por defecto, borde morado.</p>
+        <h5>📸 Ejemplo 3: Fondo blanco (por defecto)</h5>
+        <pre><code class="language-jsx">&lt;Tarjeta 
+      titulo="Robots en la agricultura"
+      descripcion="Granjas inteligentes usan robots para cosechar y analizar cultivos."
+      imagen="/images/robot-agricultura.jpg"
+      color="#9c27b0"
+    /&gt;</code></pre>
+        <p><strong>Resultado:</strong> Tarjeta con fondo blanco por defecto, borde morado.</p>
           </div>
 
           <div style="background: #f3e5f5; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-            <h5>🌈 Ejemplo 4: Fondo degradado con CSS personalizado</h5>
-            <pre><code class="language-jsx">&lt;Tarjeta 
-  titulo="¿Sabías que...?"
-  descripcion="React fue creado por Facebook en 2013 y ahora es usado por millones"
-  color="#e91e63"
-  colorFondo="linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%)"
-/&gt;</code></pre>
-            <p><strong>Resultado:</strong> Tarjeta con degradado rosa suave como fondo.</p>
+        <h5>🌈 Ejemplo 4: Fondo degradado con CSS personalizado</h5>
+        <pre><code class="language-jsx">&lt;Tarjeta 
+      titulo="Curiosidad: Internet cuántico"
+      descripcion="Se realiza la primera transmisión segura usando tecnología cuántica."
+      color="#e91e63"
+      colorFondo="linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%)"
+    /&gt;</code></pre>
+        <p><strong>Resultado:</strong> Tarjeta con degradado rosa suave como fondo.</p>
           </div>
 
-          <h5>🏠 Layout horizontal en Home.jsx:</h5>
-          <pre><code class="language-jsx">import Tarjeta from './components/Tarjeta.jsx';
-
-function Home() {
-  return (
-    &lt;div&gt;
-      &lt;h1&gt;Mi página con tarjetas mejoradas&lt;/h1&gt;
-      
-      {/* IMPORTANTE: Usar contenedor para layout horizontal */}
-      &lt;div className="tarjetas-container"&gt;
-        &lt;Tarjeta 
-          titulo="React Masterclass"
-          descripcion="Domina React con proyectos reales y las mejores prácticas"
-          imagen="/images/react-course.jpg"
-          textoBoton="Inscribirse ahora"
-          color="#61dafb"
-          colorFondo="#f0f8ff"
-        /&gt;
         
-        &lt;Tarjeta 
-          titulo="Comunidad activa"
-          descripcion="Únete a más de 10,000 desarrolladores que aprenden juntos"
-          textoBoton="Unirse"
-          color="#4caf50"
-          colorFondo="#f1f8e9"
-        /&gt;
-        
-        &lt;Tarjeta 
-          titulo="Estadísticas 2024"
-          descripcion="React sigue siendo el framework más popular para desarrollo frontend"
-          color="#ff9800"
-          colorFondo="#fff3e0"
-        /&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
 
           <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
             <h5>💡 ¿Por qué estas mejoras son importantes?</h5>
@@ -515,7 +489,7 @@ function Home() {
             </ul>
           </div>
         </div>
-      </details>
+      </details>-->
 
         <details>
           <summary class="summary-section summary-warning">⚠️ ¿Las props son opcionales u obligatorias? (Click para entender)</summary>
@@ -610,7 +584,7 @@ function Home() {
             </table>
 
             <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #ff9800;">
-              <h5>🏫 Para el aula: ¿Cómo explicarlo a los estudiantes?</h5>
+              <h5>🏫 Resumen ¿Qué son los props?</h5>
               <p><strong>"Las props en React son como los ingredientes de una receta:</strong></p>
               <ul>
                 <li>Puedes cocinar sin algunos ingredientes, pero el plato no sabrá igual</li>
@@ -624,7 +598,7 @@ function Home() {
         <p><strong>Ahora úsalo en <code>Home.jsx</code>:</strong></p>
 
         <details>
-          <summary class="summary-section summary-primary">🏠 Código completo de Home.jsx con SEIS tarjetas diferentes (Click para ver/ocultar)</summary>
+          <summary class="summary-section summary-primary">🏠 Código completo de Home.jsx con noticias tecnológicas (Click para ver/ocultar)</summary>
           <div class="details-content">
             <pre><code class="language-jsx">import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -637,80 +611,81 @@ function Home() {
     &lt;div&gt;
       &lt;Header /&gt;
       &lt;main&gt;
-        &lt;h1&gt;🎯 Demo de Tarjetas con Todas las Props&lt;/h1&gt;
-        &lt;p&gt;Aquí tienes 6 tarjetas diferentes que muestran todas las combinaciones posibles:&lt;/p&gt;
+        &lt;h1&gt;🤖 Últimas Noticias Tecnológicas e IA&lt;/h1&gt;
+        &lt;p&gt;Mantente al día con las innovaciones más importantes del mundo tecnológico&lt;/p&gt;
         
-        {/* Primera fila - 3 tarjetas CON IMAGEN */}
+        {/* Primera fila - 3 noticias destacadas sobre IA */}
         &lt;div className="tarjetas-container"&gt;
           
-          {/* Tarjeta 1: COMPLETA - Con imagen, botón y fondo personalizado */}
+          {/* Tarjeta 1: GPT-5 y OpenAI */}
           &lt;Tarjeta 
-            titulo="React Masterclass"
-            descripcion="Curso completo de React desde cero hasta nivel avanzado con proyectos reales"
-            imagen="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=150&h=150&fit=crop"
-            textoBoton="Inscribirse ahora"
-            color="#61dafb"
-            colorFondo="#f0f8ff"
+            titulo="OpenAI anuncia GPT-5"
+            descripcion="La próxima generación de ChatGPT promete capacidades multimodales avanzadas y razonamiento mejorado para 2024"
+            imagen="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=150&h=150&fit=crop"
+            textoBoton="Leer más"
+            color="#00a67e"
+            colorFondo="#f0f9f7"
           /&gt;
           
-          {/* Tarjeta 2: CON IMAGEN - Sin botón, fondo degradado */}
+          {/* Tarjeta 2: Quantum Computing */}
           &lt;Tarjeta 
-            titulo="Diseño UI/UX"
-            descripcion="Principios fundamentales de diseño para crear interfaces atractivas y funcionales"
-            imagen="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=150&h=150&fit=crop"
-            color="#ff5722"
-            colorFondo="linear-gradient(135deg, #fff3e0 0%, #ffccbc 100%)"
+            titulo="Google alcanza supremacía cuántica"
+            descripcion="El chip Willow de Google resuelve problemas que tardarían 10 septillones de años a supercomputadoras tradicionales"
+            imagen="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=150&h=150&fit=crop"
+            color="#4285f4"
+            colorFondo="linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%)"
           /&gt;
           
-          {/* Tarjeta 3: CON IMAGEN Y BOTÓN - Fondo sólido */}
+          {/* Tarjeta 3: Tesla y robots humanoides */}
           &lt;Tarjeta 
-            titulo="JavaScript Avanzado"
-            descripcion="Domina conceptos avanzados: closures, promises, async/await y más"
-            imagen="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=150&h=150&fit=crop"
-            textoBoton="Empezar curso"
-            color="#f7df1e"
-            colorFondo="#fffbf0"
+            titulo="Tesla Optimus en producción"
+            descripcion="Los robots humanoides de Tesla comenzarán trabajos en fábricas a finales de 2024, revolucionando la automatización"
+            imagen="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=150&h=150&fit=crop"
+            textoBoton="Ver video"
+            color="#e31837"
+            colorFondo="#fff1f2"
           /&gt;
           
         &lt;/div&gt;
 
-        {/* Segunda fila - 3 tarjetas SIN IMAGEN */}
+        {/* Segunda fila - 3 noticias sobre desarrollos tech */}
         &lt;div className="tarjetas-container"&gt;
           
-          {/* Tarjeta 4: MINIMALISTA - Solo texto, fondo blanco por defecto */}
+          {/* Tarjeta 4: Apple Vision Pro */}
           &lt;Tarjeta 
-            titulo="¿Sabías que...?"
-            descripcion="React fue creado por Facebook en 2013 y ahora es usado por millones de desarrolladores en todo el mundo"
-            color="#e91e63"
+            titulo="🥽 Apple Vision Pro evoluciona"
+            descripcion="La segunda generación del headset de Apple reduce peso 40% y mejora la autonomía a 8 horas de uso continuo"
+            color="#007aff"
+            colorFondo="#f0f7ff"
           /&gt;
           
-          {/* Tarjeta 5: SOLO BOTÓN - Sin imagen, con fondo vibrante */}
+          {/* Tarjeta 5: GitHub Copilot X */}
           &lt;Tarjeta 
-            titulo="Comunidad Activa"
-            descripcion="Únete a más de 10,000 desarrolladores que aprenden y crecen juntos cada día"
-            textoBoton="Unirse gratis"
-            color="#4caf50"
-            colorFondo="#e8f5e8"
+            titulo="GitHub Copilot revoluciona el código"
+            descripcion="La nueva versión puede crear aplicaciones completas desde descripciones en lenguaje natural, aumentando productividad 300%"
+            textoBoton="Probar gratis"
+            color="#238636"
+            colorFondo="#f6ffed"
           /&gt;
           
-          {/* Tarjeta 6: CON BOTÓN Y FONDO - Estilo llamativo */}
+          {/* Tarjeta 6: Meta y el Metaverso */}
           &lt;Tarjeta 
-            titulo="Bootcamp Intensivo"
-            descripcion="Programa intensivo de 12 semanas para convertirte en desarrollador Full Stack"
-            textoBoton="Más info"
-            color="#9c27b0"
-            colorFondo="#f3e5f5"
+            titulo="Meta lanza Horizon Worlds 2.0"
+            descripcion="Gráficos fotorrealistas y avatares ultra-detallados marcan el futuro de la realidad virtual social"
+            textoBoton="Explorar"
+            color="#1877f2"
+            colorFondo="linear-gradient(135deg, #e7f3ff 0%, #bedcfa 100%)"
           /&gt;
           
         &lt;/div&gt;
 
         &lt;div className="explicacion"&gt;
-          &lt;h2&gt;🎯 ¿Qué acabas de ver?&lt;/h2&gt;
+          &lt;h2&gt;📈 Tendencias Tecnológicas 2024-2025&lt;/h2&gt;
           &lt;ul&gt;
-            &lt;li&gt;&lt;strong&gt;Fila 1 (CON IMÁGENES):&lt;/strong&gt; Tres tarjetas con fotos diferentes&lt;/li&gt;
-            &lt;li&gt;&lt;strong&gt;Fila 2 (SIN IMÁGENES):&lt;/strong&gt; Tres tarjetas enfocadas en contenido&lt;/li&gt;
-            &lt;li&gt;&lt;strong&gt;6 combinaciones diferentes&lt;/strong&gt; del mismo componente&lt;/li&gt;
-            &lt;li&gt;&lt;strong&gt;Layout horizontal&lt;/strong&gt; usando .tarjetas-container&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Inteligencia Artificial:&lt;/strong&gt; GPT-5, Claude 3, y modelos multimodales&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Computación Cuántica:&lt;/strong&gt; Chips más potentes y estables&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Realidad Virtual/AR:&lt;/strong&gt; Headsets más ligeros y accesibles&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Robótica:&lt;/strong&gt; Humanoides trabajando junto a humanos&lt;/li&gt;
           &lt;/ul&gt;
         &lt;/div&gt;
       &lt;/main&gt;
@@ -729,22 +704,7 @@ export default Home;</code></pre>
             
             <p>En <code>Home.jsx</code> estamos viendo algo increíble: <strong>el mismo componente Tarjeta usado 6 veces</strong>, pero cada una se ve completamente diferente. ¿Cómo es posible?</p>
 
-            <h5>🔥 1. Dos filas organizadas estratégicamente:</h5>
-            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-              <h6>🖼️ Primera fila - CON IMÁGENES:</h6>
-              <ul>
-                <li><strong>Tarjeta 1:</strong> Completa (imagen + botón + fondo azul)</li>
-                <li><strong>Tarjeta 2:</strong> Imagen + fondo degradado (sin botón)</li>
-                <li><strong>Tarjeta 3:</strong> Imagen + botón + fondo amarillo</li>
-              </ul>
-              
-              <h6>📝 Segunda fila - SIN IMÁGENES:</h6>
-              <ul>
-                <li><strong>Tarjeta 4:</strong> Minimalista (solo texto, fondo blanco)</li>
-                <li><strong>Tarjeta 5:</strong> Con botón + fondo verde</li>
-                <li><strong>Tarjeta 6:</strong> Con botón + fondo morado</li>
-              </ul>
-            </div>
+           
 
             <h5>🎨 2. Variedad de fondos y colores:</h5>
             <pre><code class="language-jsx">// Fondo personalizado sólido:
@@ -810,20 +770,20 @@ imagen="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=150&h=150
             <p>¿Quieres agregar más tarjetas? ¡Súper fácil!</p>
             <pre><code class="language-jsx">// Ejemplos adicionales con nuevas props:
 &lt;Tarjeta 
-  titulo="Python" 
-  descripcion="Lenguaje versátil para IA" 
-  imagen="python-logo.jpg"
-  textoBoton="Aprender"
+  titulo="Ruta de arte urbano" 
+  descripcion="Descubre los murales y grafitis más creativos en las calles de Sevilla" 
+  imagen="arte-urbano-sevilla.jpg"
+  textoBoton="Ver mapa"
   color="#3776ab" 
   colorFondo="#f0f8ff"
 /&gt;
 
 &lt;Tarjeta 
-  titulo="Datos curiosos" 
-  descripcion="El primer bug de programación fue literalmente un insecto" 
+  titulo="Leyendas de Triana" 
+  descripcion="Explora las historias y mitos más famosos del barrio de Triana" 
   color="#ff6b6b"
   colorFondo="linear-gradient(45deg, #ffebee, #ffcdd2)"
-/&gt;</code></pre>
+/&gt;
 
             <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
               <h5>🧩 Analogía perfecta: El molde de galletas</h5>
@@ -895,9 +855,12 @@ imagen="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=150&h=150
       </div>
     </section>
 
-    <!-- Nuevo: Tarjetas dinámicas con .map() 
+    <!--Nuevo: Tarjetas dinámicas con .map() -->
     <section>
       <h2>🔁 El Siguiente Nivel: Tarjetas Dinámicas con .map()</h2>
+    
+
+
       <div class="card">
         <p><strong>¡Hasta ahora has creado tarjetas una por una!</strong> Pero... ¿qué pasa si necesitas 50 tarjetas? ¿Las vas a escribir a mano? 😅</p>
         
@@ -915,8 +878,8 @@ imagen="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=150&h=150
         <pre><code class="language-javascript">// Array básico que ya conoces
 const frutas = ["🍎", "🍌", "🍓", "🥝"];
 
-// Recorrer con .map() (también lo conoces)
-frutas.map(fruta => console.log("Me gusta la", fruta));
+// Recorrer con .map() (método que transforma cada elemento del array no sólo lo muestra)
+frutas.map(fruta => console.log("Me gusta la ", fruta));
 
 // Resultado en consola:
 // Me gusta la 🍎
@@ -926,53 +889,654 @@ frutas.map(fruta => console.log("Me gusta la", fruta));
 
         <h3>💡 Concepto clave: ¡En React es exactamente igual!</h3>
         <p><strong>La diferencia:</strong> En lugar de <code>console.log()</code>, devolvemos componentes JSX</p>
+<details>
+  <summary class="summary-section summary-warning">El método map con arrays en React</summary>
+  <p>¿En que se parecen y se diferencian los maps de los arrays que conocemos?¿Funcionan igual?¿Es el mismo concepto?</p>
+      <p>¡Vamos a descubrirlo!</p>
 
-        <details>
-          <summary class="summary-section summary-success">🎯 Demo paso a paso: De array simple a tarjetas React (Click para ver)</summary>
-          <div class="details-content">
-            
-            <h4>📝 Paso 1: Empezamos con un array simple</h4>
-            <pre><code class="language-javascript">// Array de tecnologías (datos que ya tienes)
-const tecnologias = ["HTML", "CSS", "JavaScript", "React"];</code></pre>
+      <!-- Nueva explicación sobre arrays, forEach y map -->
+      <div class="card">
+        <h3>🧠 Conectando con lo que ya sabes: Arrays y forEach</h3>
+        <p><strong>Antes de React, ya sabías trabajar con arrays:</strong></p>
+        
+        <h4>📚 Repaso rápido de arrays básicos:</h4>
+        <pre><code class="language-javascript">// Array que ya conoces
+const colores = ["rojo", "azul", "verde", "amarillo"];
 
-            <h4>🔄 Paso 2: Recorremos con .map() básico</h4>
-            <pre><code class="language-javascript">// Esto ya lo sabes hacer:
-tecnologias.map(tech => console.log(tech));
+// forEach (que ya dominas) - Ejecuta algo con cada elemento
+colores.forEach(color => {
+  console.log("Me gusta el color", color);
+});
 
-// Resultado: HTML, CSS, JavaScript, React</code></pre>
+// Resultado en consola:
+// Me gusta el color rojo
+// Me gusta el color azul  
+// Me gusta el color verde
+// Me gusta el color amarillo</code></pre>
 
-            <h4>⚛️ Paso 3: ¡Lo mismo pero devolviendo JSX!</h4>
-            <pre><code class="language-jsx">// En React, en lugar de console.log, devolvemos JSX:
-{tecnologias.map(tech => (
-  &lt;div key={tech}&gt;{tech}&lt;/div&gt;
+        <h4>🔄 ¿Qué hace .map()? ¡Es similar pero diferente!</h4>
+        <pre><code class="language-javascript">// .map() - TRANSFORMA cada elemento y crea un nuevo array
+const coloresEnMayuscula = colores.map(color => {
+  return color.toUpperCase();
+});
+
+console.log(coloresEnMayuscula);
+// Resultado: ["ROJO", "AZUL", "VERDE", "AMARILLO"]</code></pre>
+
+        <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #4caf50;">
+          <h4>⚡ Diferencia clave entre forEach y map:</h4>
+          <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+            <thead>
+              <tr style="background: #f5f5f5;">
+                <th style="padding: 0.8rem; border: 1px solid #ddd; text-align: left;">Método</th>
+                <th style="padding: 0.8rem; border: 1px solid #ddd; text-align: left;">¿Qué hace?</th>
+                <th style="padding: 0.8rem; border: 1px solid #ddd; text-align: left;">¿Devuelve algo?</th>
+                <th style="padding: 0.8rem; border: 1px solid #ddd; text-align: left;">Uso típico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>forEach</strong></td>
+                <td style="padding: 0.8rem; border: 1px solid #ddd;">Ejecuta una función por cada elemento</td>
+                <td style="padding: 0.8rem; border: 1px solid #ddd;">❌ No (undefined)</td>
+                <td style="padding: 0.8rem; border: 1px solid #ddd;">Mostrar, imprimir, efectos secundarios</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>map</strong></td>
+                <td style="padding: 0.8rem; border: 1px solid #ddd;">Transforma cada elemento</td>
+                <td style="padding: 0.8rem; border: 1px solid #ddd;">✅ Sí (nuevo array)</td>
+                <td style="padding: 0.8rem; border: 1px solid #ddd;">Crear, transformar, generar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>🎯 ¿Por qué .map() es perfecto para React?</h4>
+        <p><strong>Porque React necesita que le "devuelvas" elementos JSX, no que imprimas en consola:</strong></p>
+
+        <div style="background: #fff3e0; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #ff9800;">
+          <h5>❌ forEach NO funciona en React:</h5>
+          <pre><code class="language-jsx">// ❌ ESTO NO FUNCIONA - forEach no devuelve nada
+{colores.forEach(color => (
+  &lt;div&gt;{color}&lt;/div&gt;  // React no recibe estos elementos
 ))}
 
-// Resultado: 4 divs automáticos con HTML, CSS, JavaScript, React</code></pre>
+// Resultado: No se muestra nada</code></pre>
 
-            <h4>🎴 Paso 4: Ahora con nuestro componente Tarjeta</h4>
-            <pre><code class="language-jsx">// Sustituimos el div por nuestro componente:
-{tecnologias.map(tech => (
-  &lt;Tarjeta 
-    key={tech}
-    titulo={tech} 
-    descripcion={`Aprende ${tech} desde cero`}
-    color="#61dafb"
-  /&gt;
-))}</code></pre>
+          <h5>✅ map SÍ funciona en React:</h5>
+          <pre><code class="language-jsx">// ✅ ESTO SÍ FUNCIONA - map devuelve un array de elementos JSX
+{colores.map(color => (
+  &lt;div key={color}&gt;{color}&lt;/div&gt;  // React recibe un array de elementos
+))}
 
-            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-              <h5>🧠 ¿Qué acabas de ver?</h5>
+// Resultado: 4 divs con los colores</code></pre>
+        </div>
+
+        <h4>🏭 Analogía perfecta: La fábrica de productos</h4>
+        <div style="background: #f0f8ff; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #2196f3;">
+          <p><strong>Imagina una fábrica:</strong></p>
+          <ul>
+            <li>🏭 <strong>forEach:</strong> "Inspecciona cada producto que pasa por la cinta" - Solo mira, no crea nada nuevo</li>
+            <li>🎯 <strong>map:</strong> "Por cada material que entra, produce un producto terminado" - Transforma y crea</li>
+            <li>⚛️ <strong>En React:</strong> Por cada dato del array, crea un componente visual</li>
+          </ul>
+        </div>
+
+        <h4>💡 Demostración práctica con nombres:</h4>
+        <pre><code class="language-javascript">// Datos simples
+const nombres = ["Ana", "Luis", "María", "Carlos"];
+
+// 1. forEach - Solo hacer algo (no crear)
+nombres.forEach(nombre => {
+  console.log(`Hola ${nombre}`);  // Solo imprime
+});
+
+// 2. map - Crear algo nuevo  
+const saludos = nombres.map(nombre => {
+  return `Hola ${nombre}`;  // Crea un nuevo array de saludos
+});
+
+console.log(saludos);
+// ["Hola Ana", "Hola Luis", "Hola María", "Hola Carlos"]
+
+// 3. En React - map crea componentes
+const componentesSaludo = nombres.map(nombre => (
+  &lt;div key={nombre}&gt;Hola {nombre}&lt;/div&gt;
+));</code></pre>
+
+        <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #2196f3;">
+          <h4>🎓 Para recordar :</h4>
+          <ul>
+            <li><strong>forEach:</strong> "Haz algo con cada elemento" (efecto secundario)</li>
+            <li><strong>map:</strong> "Convierte cada elemento en algo nuevo" (transformación)</li>
+            <li><strong>React necesita transformación:</strong> datos → componentes visuales</li>
+            <li><strong>Por eso usamos map:</strong> array de datos → array de componentes JSX</li>
+          </ul>
+        </div>
+      </div>
+      </details>
+      </summary>
+
+</details>
+        <details>
+          <summary class="summary-section summary-success">🎯 Proyecto práctico: Crear tarjetas dinámicas paso a paso (Click para ver)</summary>
+          <div class="details-content">
+            
+            <h4>🚀 ¿Qué vamos a construir?</h4>
+            <p><strong>Una página de Proyectos con 9 tarjetas generadas automáticamente</strong> usando el componente Tarjeta que ya tienes y el poder de <code>.map()</code></p>
+
+            <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #4caf50;">
+              <h5>🎯 Objetivo del ejercicio:</h5>
               <ul>
-                <li><strong>Mismo concepto:</strong> .map() funciona igual que siempre</li>
-                <li><strong>Nueva aplicación:</strong> En lugar de console.log, creamos componentes</li>
-                <li><strong>Resultado:</strong> 4 tarjetas automáticas, sin escribir código repetido</li>
-                <li><strong>Escalabilidad:</strong> Si añades "Vue" al array, automáticamente aparece una quinta tarjeta</li>
+                <li>✅ <strong>Reutilizar</strong> el componente Tarjeta existente</li>
+                <li>✅ <strong>Crear un array</strong> con 9 proyectos diferentes</li>
+                <li>✅ <strong>Usar .map()</strong> para generar las tarjetas automáticamente</li>
+                <li>✅ <strong>Crear la página Proyectos</strong> que falta en tu Header</li>
+                <li>✅ <strong>Layout horizontal</strong> con el CSS que ya tienes</li>
+              </ul>
+            </div>
+
+            <h4>📝 Paso 1: El concepto - De datos a componentes</h4>
+            <p><strong>El proceso mental:</strong></p>
+            <div style="background: #f0f8ff; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <p>
+                <strong>📊 Array de datos</strong> → 
+                <strong>🔄 .map()</strong> → 
+                <strong>🎴 Tarjetas automáticas</strong>
+              </p>
+            </div>
+
+            <pre><code class="language-javascript">// 1. Tenemos datos
+const proyectos = [
+  { titulo: "Proyecto 1", descripcion: "...", imagen: "...", color: "#e74c3c" },
+  { titulo: "Proyecto 2", descripcion: "...", imagen: "...", color: "#3498db" },
+  // ... 7 proyectos más
+];
+
+// 2. Los transformamos en componentes con .map()
+{proyectos.map(proyecto => (
+  &lt;Tarjeta 
+    key={proyecto.id}
+    titulo={proyecto.titulo}
+    descripcion={proyecto.descripcion}
+    // ... resto de props
+  /&gt;
+))}
+
+// 3. React genera 9 tarjetas automáticamente</code></pre>
+
+            <h4>📄 Paso 2: Crear una nueva página dentro de la carpeta pages Proyectos.jsx</h4>
+            <p><strong>Crea un nuevo archivo:</strong> <code>pages/Proyectos.jsx</code></p>
+            <p><strong>Pega este codigo tal cual hasta el export</strong></p>
+            <pre><code class="language-jsx">import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Tarjeta from "../components/Tarjeta";
+import "./Proyectos.css";
+
+function Proyectos() {
+  // 🧬 Array con 9 noticias fascinantes de ciencia y tecnología
+  const noticias = [
+    {
+      id: 1,
+      titulo: "🧬 CRISPR cura diabetes tipo 1",
+      descripcion: "Primera paciente curada completamente de diabetes mediante edición genética CRISPR-Cas9, revolucionando el tratamiento de enfermedades autoinmunes",
+      imagen: "/images/imagen2.png",
+      textoBoton: "Leer estudio",
+      color: "#27ae60",
+      colorFondo: "#e8f8f5"
+    },
+    {
+      id: 2,
+      titulo: "🚀 James Webb descubre galaxias imposibles",
+      descripcion: "El telescopio espacial detecta galaxias maduras que existían solo 400 millones de años después del Big Bang, desafiando las teorías actuales",
+      imagen: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=150&h=150&fit=crop",
+      textoBoton: "Ver imágenes",
+      color: "#8e44ad",
+      colorFondo: "#f4f0f7"
+    },
+    {
+      id: 3,
+      titulo: "🤖 IA detecta cáncer antes que médicos",
+      descripcion: "Sistema de IA de Google identifica cáncer de mama con 99.2% de precisión, superando a radiólogos expertos en diagnósticos tempranos",
+      imagen: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=150&h=150&fit=crop",
+      textoBoton: "Ver demo",
+      color: "#e74c3c",
+      colorFondo: "#fdf2f2"
+    },
+    {
+      id: 4,
+      titulo: "🧠 Neuralink restaura la vista",
+      descripcion: "Primer paciente ciego recupera visión parcial gracias a implante cerebral que conecta directamente con la corteza visual",
+      imagen: "https://images.unsplash.com/photo-1559757172-d87ebfb725df?w=150&h=150&fit=crop",
+      textoBoton: "Conocer más",
+      color: "#3498db",
+      colorFondo: "#ebf3fd"
+    },
+    {
+      id: 5,
+      titulo: "🌍 Fusión nuclear logra ganancia energética",
+      descripcion: "Laboratorio de Lawrence Livermore produce más energía de la que consume en reacción de fusión, marcando hito histórico para energía limpia",
+      imagen: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=150&h=150&fit=crop",
+      textoBoton: "Ver experimento",
+      color: "#f39c12",
+      colorFondo: "#fef9e7"
+    },
+    {
+      id: 6,
+      titulo: "📚 ChatGPT personalizado para cada estudiante",
+      descripcion: "IA educativa se adapta al ritmo y estilo de aprendizaje individual, mejorando comprensión en matemáticas y ciencias hasta 40%",
+      imagen: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=150&h=150&fit=crop",
+      textoBoton: "Probar gratis",
+      color: "#9b59b6",
+      colorFondo: "#f8f4fd"
+    },
+    {
+      id: 7,
+      titulo: "🪐 Agua líquida confirmada en Europa",
+      descripcion: "La luna de Júpiter tiene océanos subterráneos con más agua que todos los océanos terrestres, aumentando posibilidades de vida extraterrestre",
+      imagen: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=150&h=150&fit=crop",
+      textoBoton: "Explorar",
+      color: "#1abc9c",
+      colorFondo: "#e8fcf7"
+    },
+    {
+      id: 8,
+      titulo: "💊 Pastilla que revierte el envejecimiento",
+      descripcion: "Ensayos clínicos muestran que NAD+ sintético revierte marcadores de edad a nivel celular, extendiendo longevidad en ratones 30%",
+      imagen: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=150&h=150&fit=crop",
+      textoBoton: "Ver resultados",
+      color: "#e67e22",
+      colorFondo: "#fef4e6"
+    },
+    {
+      id: 9,
+      titulo: "⚡ Computadoras cuánticas descifran proteínas",
+      descripcion: "IBM y Google usan qubits para simular plegamiento de proteínas, acelerando desarrollo de medicamentos contra Alzheimer y Parkinson",
+      imagen: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=150&h=150&fit=crop",
+      textoBoton: "Descubrir",
+      color: "#34495e",
+      colorFondo: "#f8f9fa",
+      claseEspecial: "tarjeta-destacada"
+    }
+  ];
+
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      
+      &lt;main&gt;
+        &lt;div className="proyectos-hero"&gt;
+          &lt;h1&gt;🧬 Avances Científicos Revolucionarios&lt;/h1&gt;
+          &lt;p&gt;Descubre los 9 avances más impactantes en tecnología, medicina, astronomía e IA que están cambiando nuestro mundo&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div className="proyectos-container"&gt;
+          {/* 🔥 MAPEO DINÁMICO - 9 noticias científicas fascinantes */}
+          &lt;div className="tarjetas-container"&gt;
+            {noticias.map(noticia => (
+              &lt;div 
+                key={noticia.id}
+                className={`proyecto-item ${noticia.claseEspecial || ''}`}
+              &gt;
+                &lt;Tarjeta
+                  titulo={noticia.titulo}
+                  descripcion={noticia.descripcion}
+                  imagen={noticia.imagen}
+                  textoBoton={noticia.textoBoton}
+                  color={noticia.color}
+                  colorFondo={noticia.colorFondo}
+                /&gt;
+              &lt;/div&gt;
+            ))}
+          &lt;/div&gt;
+
+          &lt;div className="proyectos-stats"&gt;
+            &lt;h2&gt;📊 Impacto Científico Global&lt;/h2&gt;
+            &lt;div className="stats-grid"&gt;
+              &lt;div className="stat"&gt;
+                &lt;span className="numero"&gt;{noticias.length}&lt;/span&gt;
+                &lt;span className="texto"&gt;Avances revolucionarios&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div className="stat"&gt;
+                &lt;span className="numero"&gt;5&lt;/span&gt;
+                &lt;span className="texto"&gt;Áreas de investigación&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div className="stat"&gt;
+                &lt;span className="numero"&gt;∞&lt;/span&gt;
+                &lt;span className="texto"&gt;Posibilidades futuras&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+      
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Proyectos;</code></pre>
+
+<p><strong>Fin del archivo Proyecto.jsx</strong></p>
+
+
+            <h4>🎨 Paso 3: Estilos para la página (Proyectos.css)</h4>
+            <p><strong>Crea el archivo:</strong> <code>pages/Proyectos.css</code></p>
+            <pre><code class="language-css">/* Proyectos.css - Estilos específicos para la página de proyectos */
+
+.proyectos-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+  margin-bottom: 3rem;
+}
+
+.proyectos-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.proyectos-hero p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.proyectos-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Estadísticas del portfolio */
+.proyectos-stats {
+  margin-top: 4rem;
+  text-align: center;
+  background: white;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.proyectos-stats h2 {
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #f8f9fa;
+  transition: transform 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+}
+
+.numero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.texto {
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .proyectos-hero {
+    padding: 2rem 1rem;
+  }
+  
+  .proyectos-hero h1 {
+    font-size: 2.2rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}</code></pre>
+
+            <h4>�️ Paso 4: Configurar las rutas en App.jsx</h4>
+            <p><strong>Actualiza tu archivo App.jsx</strong> para incluir la nueva página de Proyectos:</p>
+            <pre><code class="language-jsx">import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Proyectos from "./pages/Proyectos";
+
+function App() {
+  return (
+    &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+      &lt;Route path="/proyectos" element={&lt;Proyectos /&gt;} /&gt;
+      &lt;Route path="/sobre-mi" element={&lt;div style={{paddingTop: '100px', padding: '100px 2rem'}}&gt;Página Sobre Mí (En construcción)&lt;/div&gt;} /&gt;
+    &lt;/Routes&gt;
+  );
+}
+
+export default App;</code></pre>
+
+            <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #2196f3;">
+              <h5>🧠 ¿De dónde sale la sintaxis <code>element={&lt;Proyectos /&gt;}</code>?</h5>
+              <p><strong>React Router</strong> usa una sintaxis específica para definir qué componente mostrar en cada ruta:</p>
+              
+              <ul>
+                <li><strong><code>path="/"</code></strong> → Define la URL de la ruta</li>
+                <li><strong><code>element={&lt;Componente /&gt;}</code></strong> → Define QUÉ componente React mostrar</li>
+              </ul>
+
+              <h6>📝 Ejemplos de sintaxis:</h6>
+              <pre><code class="language-jsx">// ✅ CORRECTO - Componente React
+&lt;Route path="/proyectos" element={&lt;Proyectos /&gt;} /&gt;
+
+// ✅ CORRECTO - JSX directo para páginas simples  
+&lt;Route path="/sobre-mi" element={&lt;div&gt;Página simple&lt;/div&gt;} /&gt;
+
+// ❌ INCORRECTO - Falta las llaves {}
+&lt;Route path="/proyectos" element=&lt;Proyectos /&gt; /&gt;
+
+// ❌ INCORRECTO - No es JSX
+&lt;Route path="/proyectos" element="Proyectos" /&gt;</code></pre>
+
+              <h6>🔍 ¿Por qué <code>element</code> y no <code>component</code>?</h6>
+              <p>React Router v6 cambió de <code>component</code> a <code>element</code> porque:</p>
+              <ul>
+                <li><strong>Más flexible:</strong> Puedes pasar props directamente</li>
+                <li><strong>Mejor rendimiento:</strong> No recrea el componente en cada render</li>
+                <li><strong>JSX nativo:</strong> Usas la sintaxis normal de React</li>
+              </ul>
+            </div>
+
+            <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #4caf50;">
+              <h4>🧠 ¿Qué acabamos de hacer?</h4>
+              
+              <h5>📊 Los números hablan:</h5>
+              <ul>
+                <li><strong>1 array</strong> con 9 objetos de avances científicos</li>
+                <li><strong>1 componente Tarjeta</strong> reutilizado</li>
+                <li><strong>1 línea .map()</strong> que genera todo</li>
+                <li><strong>9 tarjetas únicas</strong> renderizadas automáticamente</li>
+                <li><strong>0 código repetido</strong> - ¡Pura eficiencia!</li>
+              </ul>
+
+              <h5>🔄 El flujo completo:</h5>
+              <ol>
+                <li><strong>Array de datos:</strong> 9 objetos con información científica</li>
+                <li><strong>map() mágico:</strong> Recorre cada noticia del array</li>
+                <li><strong>Componente Tarjeta:</strong> Se reutiliza 9 veces con props diferentes</li>
+                <li><strong>key única:</strong> Cada tarjeta tiene su ID para que React las distingua</li>
+                <li><strong>Layout horizontal:</strong> CSS de .tarjetas-container organiza todo</li>
+                <li><strong>Resultado:</strong> Página profesional con 9 avances científicos únicos</li>
+              </ol>
+
+              <h5>⚡ Ventajas de este enfoque:</h5>
+              <ul>
+                <li><strong>Escalable:</strong> ¿Quieres 20 proyectos? Solo añade 11 objetos más al array</li>
+                <li><strong>Mantenible:</strong> Cambios en Tarjeta.jsx afectan a todas las tarjetas</li>
+                <li><strong>Limpio:</strong> Separación clara entre datos (array) y presentación (componente)</li>
+                <li><strong>Profesional:</strong> Exactamente como trabajan las apps reales</li>
+              </ul>
+            </div>
+
+            <div style="background: #fff3e0; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #ff9800;">
+              <h4>🎯 Conceptos clave nuevos:</h4>
+              <ul>
+                <li><strong>Reutilización de componentes:</strong> Un componente, múltiples usos</li>
+                <li><strong>Datos dinámicos:</strong> Array de objetos → Tarjetas visuales</li>
+                <li><strong>Props dinámicas:</strong> Cada objeto alimenta las props del componente</li>
+                <li><strong>Key única:</strong> React necesita identificar cada elemento de la lista</li>
+                <li><strong>Separación de responsabilidades:</strong> Datos, lógica y presentación separados</li>
               </ul>
             </div>
           </div>
         </details>
 
         <details>
+          <summary class="summary-section summary-success">🧬 Análisis del nuevo código científico: De datos a componentes visuales (Click para explicación)</summary>
+          <div class="details-content">
+            
+            <h4>🔬 Diseccionando el código de Proyectos.jsx línea por línea</h4>
+            <p>Vamos a analizar como <strong>buenos programadores</strong> cada parte del código que acabamos de crear para entender la magia detrás de las tarjetas dinámicas.</p>
+
+            <h5>📊 1. La estructura de datos (El cerebro del componente)</h5>
+            <pre><code class="language-jsx">const noticias = [
+  {
+    id: 1,
+    titulo: "🧬 CRISPR cura diabetes tipo 1",
+    descripcion: "Primera paciente curada completamente...",
+    imagen: "/images/imagen2.png",
+    textoBoton: "Leer estudio",
+    color: "#27ae60",
+    colorFondo: "#e8f8f5"
+  },
+  // ... 8 objetos más
+];</code></pre>
+
+            <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h6>🧠 ¿Por qué esta estructura es genial?</h6>
+              <ul>
+                <li><strong>Escalabilidad:</strong> ¿Quieres 50 noticias? Solo añade 41 objetos más</li>
+                <li><strong>Consistencia:</strong> Cada objeto tiene exactamente las mismas propiedades</li>
+                <li><strong>Separación:</strong> Los datos están separados de la presentación</li>
+                <li><strong>Mantenimiento:</strong> Cambiar una noticia = cambiar un objeto</li>
+              </ul>
+            </div>
+
+            <h5>🎨 2. El mapeo mágico (La transformación)</h5>
+            <pre><code class="language-jsx">{noticias.map(noticia => (
+  &lt;div 
+    key={noticia.id}
+    className={`proyecto-item ${noticia.claseEspecial || ''}`}
+  &gt;
+    &lt;Tarjeta
+      titulo={noticia.titulo}
+      descripcion={noticia.descripcion}
+      imagen={noticia.imagen}
+      textoBoton={noticia.textoBoton}
+      color={noticia.color}
+      colorFondo={noticia.colorFondo}
+    /&gt;
+  &lt;/div&gt;
+))}</code></pre>
+
+            <div style="background: #f3e5f5; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h6>🔄 El proceso paso a paso:</h6>
+              <ol>
+                <li><strong>noticias.map()</strong> → "Oye React, recorre mi array"</li>
+                <li><strong>noticia =></strong> → "Para cada objeto del array..."</li>
+                <li><strong>key={noticia.id}</strong> → "Dale una identidad única"</li>
+                <li><strong>&lt;Tarjeta props={...}/></strong> → "Crea un componente con estos datos"</li>
+                <li><strong>Resultado:</strong> 9 componentes Tarjeta únicos automáticamente</li>
+              </ol>
+            </div>
+
+            <h5>🎯 3. El componente wrapper inteligente</h5>
+            <pre><code class="language-jsx">&lt;div 
+  key={noticia.id}
+  className={`proyecto-item ${noticia.claseEspecial || ''}`}
+&gt;</code></pre>
+
+            <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h6>🤓 ¿Por qué envolvemos cada Tarjeta?</h6>
+              <ul>
+                <li><strong>key única:</strong> React necesita identificar cada elemento</li>
+                <li><strong>Clases CSS:</strong> Podemos aplicar estilos específicos</li>
+                <li><strong>Clases dinámicas:</strong> `${noticia.claseEspecial || ''}` añade clases opcionales</li>
+                <li><strong>Flexibilidad:</strong> Cada tarjeta puede tener comportamiento único</li>
+              </ul>
+            </div>
+
+            <h5>📈 4. Los datos dinámicos en acción</h5>
+            <pre><code class="language-jsx">&lt;span className="numero"&gt;{noticias.length}&lt;/span&gt;
+&lt;span className="texto"&gt;Avances revolucionarios&lt;/span&gt;</code></pre>
+
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+              <h6>💡 La inteligencia del código:</h6>
+              <ul>
+                <li><strong>{noticias.length}</strong> → Cuenta automáticamente los elementos</li>
+                <li><strong>Si añades noticias:</strong> El contador se actualiza solo</li>
+                <li><strong>Si quitas noticias:</strong> El contador se ajusta automáticamente</li>
+                <li><strong>Cero mantenimiento manual</strong> → JavaScript hace el trabajo</li>
+              </ul>
+            </div>
+
+            <h5>🌟 5. El patrón profesional completo</h5>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+              <h6 style="color: white; margin-top: 0;">🏆 Este código sigue las mejores prácticas de React:</h6>
+              <ul style="color: white;">
+                <li><strong>Single Responsibility:</strong> Cada componente tiene una función específica</li>
+                <li><strong>DRY (Don't Repeat Yourself):</strong> Un componente, múltiples usos</li>
+                <li><strong>Data-driven:</strong> Los datos controlan la UI, no al revés</li>
+                <li><strong>Declarativo:</strong> Describes QUÉ quieres, no CÓMO hacerlo</li>
+                <li><strong>Escalable:</strong> Fácil de mantener y expandir</li>
+              </ul>
+            </div>
+
+            <h5>🎓 Conceptos nuevos que hemos introducido</h5>
+            <div style="background: #ffeaa7; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #fdcb6e;">
+              <ul>
+                <li><strong>Inmutabilidad:</strong> El array original nunca cambia</li>
+                <li><strong>Functional Programming:</strong> .map() es programación funcional pura</li>
+                <li><strong>Virtual DOM:</strong> React optimiza los renders automáticamente</li>
+                <li><strong>Component Composition:</strong> Combinas componentes pequeños para crear interfaces complejas</li>
+                <li><strong>Props drilling:</strong> Los datos fluyen de padre a hijo de forma predecible</li>
+              </ul>
+            </div>
+
+            <div style="background: #00b894; color: white; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+              <h6 style="color: white; margin-top: 0;">🚀 ¡Felicidades! Acabas de crear código de nivel profesional</h6>
+              <p style="color: white; margin-bottom: 0;">Este patrón que acabas de implementar es exactamente el mismo que usan aplicaciones como Netflix (películas), Instagram (posts), Amazon (productos) y Twitter (tweets). ¡Ya piensas como un desarrollador React senior!</p>
+            </div>
+          </div>
+        </details>
+
+    <!--   <details>
           <summary class="summary-section summary-primary">🏪 Ejemplo real: Tienda de productos con .map() (Click para ver)</summary>
           <div class="details-content">
             
@@ -1210,7 +1774,7 @@ export default Tienda;</code></pre>
               </ul>
             </div>
           </div>
-        </details>
+        </details>-->
 
         <details>
           <summary class="summary-section summary-info">🧠 ¿Por qué necesitamos la prop `key`? (Click para entender)</summary>
@@ -1278,7 +1842,7 @@ export default Tienda;</code></pre>
               </ul>
             </div>
 
-            <h5>🎯 En nuestro ejemplo de tienda:</h5>
+         <!--   <h5>🎯 En nuestro ejemplo de tienda:</h5>
             <pre><code class="language-jsx">{productos.map(producto => (
   &lt;Tarjeta
     key={producto.id}  {/* 👈 Cada producto tiene un ID único (1, 2, 3, 4, 5, 6) */}
@@ -1369,10 +1933,10 @@ const productosCaros = productos.filter(p =>
               </ul>
             </div>
           </div>
-        </details>
+        </details>-->
 
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
-          <h3>🎓 Frase para recordar toda la vida:</h3>
+          <h3>🎓 Recuerda:</h3>
           <p style="font-size: 1.3rem; margin: 1rem 0; font-weight: 600;">
             "En React: datos en array + .map() + componente = UI automática"
           </p>
@@ -1381,12 +1945,740 @@ const productosCaros = productos.filter(p =>
           </p>
         </div>
       </div>
-    </section>-->
+    </section>
+
+        <!-- ============================================================ -->
+        <!-- 🎯 SECCIÓN WRAPPER: COMPONENTES INTELIGENTES -->
+        <!-- ============================================================ 
+        <details>
+          <summary class="summary-section summary-advanced">🎯 AVANZADO: Componentes Wrapper - El arte de envolver componentes (Click para dominar)</summary>
+          <div class="details-content">
+            
+            <h4>🧠 ¿Qué es exactamente un "componente wrapper"?</h4>
+            <p>Un concepto <strong>fundamental en React</strong> que todo desarrollador profesional debe dominar.</p>
+
+            <div style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+              <h5 style="color: white; margin-top: 0; text-align: center;">📚 Definición profesional</h5>
+              
+              <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; margin: 1rem 0; backdrop-filter: blur(10px);">
+                <p style="color: white; margin: 0; font-size: 1.1rem; line-height: 1.6; text-align: center;">
+                  Un <strong>wrapper</strong> (envoltorio) es un <strong>elemento HTML que "abraza" a otro componente</strong> para darle funcionalidades extra, estilos o propiedades que el componente original no tiene.
+                </p>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                
+                 Sin wrapper
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                  <h6 style="color: #fd79a8; margin-top: 0;">❌ Sin wrapper:</h6>
+                  <pre style="background: #2d3436; color: white; padding: 0.8rem; border-radius: 4px; font-size: 0.8rem; margin: 0.5rem 0;"><code>{noticias.map(noticia => (
+  &lt;Tarjeta
+    key={noticia.id}
+    titulo={noticia.titulo}
+    // ... más props
+  /&gt;
+))}</code></pre>
+                  <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+                    <strong>Problema:</strong> No podemos añadir clases CSS específicas ni estilos individuales a cada tarjeta
+                  </div>
+                </div>
+
+                 Con wrapper
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                  <h6 style="color: #55a3ff; margin-top: 0;">✅ Con wrapper:</h6>
+                  <pre style="background: #2d3436; color: white; padding: 0.8rem; border-radius: 4px; font-size: 0.8rem; margin: 0.5rem 0;"><code>{noticias.map(noticia => (
+  <span style="color: #74b9ff;">&lt;div 
+    key={noticia.id}
+    className="proyecto-item"
+  &gt;</span>
+    &lt;Tarjeta
+      titulo={noticia.titulo}
+      // ... más props
+    /&gt;
+  <span style="color: #74b9ff;">&lt;/div&gt;</span>
+))}</code></pre>
+                  <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+                    <strong>Solución:</strong> Cada tarjeta está envuelta y controlada individualmente
+                  </div>
+                </div>
+              </div>
+
+              <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                <h6 style="color: #ffeaa7; margin-top: 0;">🔍 Análisis línea por línea del wrapper:</h6>
+                <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace; line-height: 1.6;"><code><span style="color: #fd79a8;">&lt;div</span>                                          <span style="color: #74b9ff;">👈 Elemento wrapper (contenedor)</span>
+  <span style="color: #55a3ff;">key</span>={noticia.id}                            <span style="color: #74b9ff;">👈 Identidad única para React</span>
+  <span style="color: #55a3ff;">className</span>={`proyecto-item ${noticia.claseEspecial || ''}`}  <span style="color: #74b9ff;">👈 Clases CSS dinámicas</span>
+<span style="color: #fd79a8;">&gt;</span>
+  <span style="color: #a29bfe;">&lt;Tarjeta                                   👈 Componente hijo envuelto</span>
+    <span style="color: #55a3ff;">titulo</span>={noticia.titulo}
+    <span style="color: #55a3ff;">descripcion</span>={noticia.descripcion}
+    <span style="color: #a29bfe;">// ... resto de props</span>
+  <span style="color: #a29bfe;">/&gt;</span>
+<span style="color: #fd79a8;">&lt;/div&gt;</span>                                       <span style="color: #74b9ff;">👈 Cierre del wrapper</span></code></pre>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                  <strong style="color: #ffeaa7;">Key única</strong><br/>
+                  <span style="color: white; font-size: 0.9rem;">React identifica cada elemento</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
+                  <strong style="color: #55a3ff;">CSS dinámico</strong><br/>
+                  <span style="color: white; font-size: 0.9rem;">Estilos específicos por tarjeta</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔧</div>
+                  <strong style="color: #fd79a8;">Flexibilidad</strong><br/>
+                  <span style="color: white; font-size: 0.9rem;">Comportamiento individual</span>
+                </div>
+              </div>
+
+              <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                <h6 style="color: #55a3ff; margin-top: 0;">💡 Ejemplo práctico del poder del wrapper:</h6>
+                <p style="color: white; margin: 0.5rem 0;">Imagina que quieres que la tarjeta de CRISPR (la primera) tenga un borde dorado especial:</p>
+                <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 4px; font-size: 0.9rem; margin: 0.5rem 0;"><code><span style="color: #74b9ff;">// En tu array de datos:</span>
+{
+  id: 1,
+  titulo: "🧬 CRISPR cura diabetes tipo 1",
+  <span style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.4rem; border-radius: 3px;">claseEspecial: "tarjeta-destacada"</span>  <span style="color: #74b9ff;">👈 Propiedad extra</span>
+}
+
+<span style="color: #74b9ff;">// En tu CSS:</span>
+<span style="color: #55a3ff;">.tarjeta-destacada</span> {
+  <span style="color: #ffeaa7;">border</span>: <span style="color: #fd79a8;">3px solid gold</span>;
+  <span style="color: #ffeaa7;">box-shadow</span>: <span style="color: #fd79a8;">0 0 20px rgba(255,215,0,0.5)</span>;
+}</code></pre>
+                <p style="color: white; margin: 0.5rem 0;">
+                  <strong>🎉 Resultado:</strong> Solo la tarjeta de CRISPR tendrá el borde dorado, ¡sin tocar el componente Tarjeta original!
+                </p>
+              </div>
+            </div>
+
+             ============================================================ -->
+            <!-- 🚀 ACTIVIDAD PRÁCTICA: IMPLEMENTAR EL WRAPPER -->
+            <!-- ============================================================ 
+            <div style="background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+              <h5 style="color: white; margin-top: 0; text-align: center;">🚀 ACTIVIDAD PRÁCTICA: Implementa tu primer wrapper</h5>
+              <p style="color: white; text-align: center; font-size: 1.1rem; margin: 1rem 0;">
+                Vamos a hacer que <strong>3 tarjetas específicas</strong> tengan efectos visuales únicos usando el poder del wrapper
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem;">🧬</div>
+                  <strong>CRISPR</strong><br/>
+                  <span style="font-size: 0.9rem;">Borde dorado brillante</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem;">⚡</div>
+                  <strong>Computadoras cuánticas</strong><br/>
+                  <span style="font-size: 0.9rem;">Animación pulsante</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem;">🤖</div>
+                  <strong>IA detecta cáncer</strong><br/>
+                  <span style="font-size: 0.9rem;">Sombra roja intensa</span>
+                </div>
+              </div>
+            </div>
+
+            <h5>📝 Paso 1: Modificar el array de datos</h5>
+            <p><strong>Abre tu archivo Proyectos.jsx</strong> y busca el array <code>noticias</code>. Vamos a añadir la propiedad <code>claseEspecial</code> a 3 noticias específicas:</p>
+            
+            <div style="background: #2d3436; color: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; font-family: 'Courier New', monospace;">
+              <div style="color: #74b9ff; margin-bottom: 1rem;">// Busca estos objetos en tu array y añade la propiedad claseEspecial:</div>
+              <pre style="margin: 0; color: white; line-height: 1.6;"><code>{
+  id: 1,
+  titulo: "🧬 CRISPR cura diabetes tipo 1",
+  descripcion: "Primera paciente curada completamente...",
+  imagen: "/images/imagen2.png",
+  textoBoton: "Leer estudio",
+  color: "#27ae60",
+  colorFondo: "#e8f8f5"<span style="color: #fd79a8;">,
+  claseEspecial: "tarjeta-destacada"  // 👈 ¡AÑADE ESTA LÍNEA!</span>
+},
+{
+  id: 3,
+  titulo: "🤖 IA detecta cáncer antes que médicos",
+  descripcion: "Sistema de IA de Google identifica...",
+  imagen: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=150&h=150&fit=crop",
+  textoBoton: "Ver demo",
+  color: "#e74c3c",
+  colorFondo: "#fdf2f2"<span style="color: #fd79a8;">,
+  claseEspecial: "tarjeta-medica"  // 👈 ¡AÑADE ESTA LÍNEA!</span>
+},
+{
+  id: 9,
+  titulo: "⚡ Computadoras cuánticas descifran proteínas",
+  descripcion: "IBM y Google usan qubits para simular...",
+  imagen: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=150&h=150&fit=crop",
+  textoBoton: "Descubrir",
+  color: "#34495e",
+  colorFondo: "#f8f9fa"<span style="color: #fd79a8;">,
+  claseEspecial: "tarjeta-cuantica"  // 👈 ¡AÑADE ESTA LÍNEA!</span>
+}</code></pre>
+            </div>
+
+            <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #ff9800;">
+              <strong>⚠️ Importante:</strong> No olvides añadir la <strong>coma</strong> después de la última propiedad existente y antes de <code>claseEspecial</code>
+            </div>
+
+            <h5>🎨 Paso 2: Crear los estilos CSS</h5>
+            <p><strong>Abre tu archivo Proyectos.css</strong> y añade estos estilos al final del archivo:</p>
+            
+            <div style="background: #2d3436; color: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; font-family: 'Courier New', monospace;">
+              <div style="color: #74b9ff; margin-bottom: 1rem;">/* Estilos especiales para wrappers - Añadir al final de Proyectos.css */</div>
+              <pre style="margin: 0; color: white; line-height: 1.6;"><code><span style="color: #fd79a8;">/* 🧬 Tarjeta CRISPR - Borde dorado brillante */</span>
+<span style="color: #55a3ff;">.tarjeta-destacada</span> {
+  <span style="color: #ffeaa7;">border</span>: <span style="color: #a29bfe;">3px solid #ffd700</span>;
+  <span style="color: #ffeaa7;">box-shadow</span>: 
+    <span style="color: #a29bfe;">0 0 20px rgba(255, 215, 0, 0.4),
+    0 0 40px rgba(255, 215, 0, 0.2)</span>;
+  <span style="color: #ffeaa7;">transform</span>: <span style="color: #a29bfe;">scale(1.02)</span>;
+  <span style="color: #ffeaa7;">position</span>: <span style="color: #a29bfe;">relative</span>;
+  <span style="color: #ffeaa7;">z-index</span>: <span style="color: #a29bfe;">10</span>;
+}
+
+<span style="color: #fd79a8;">/* 🤖 Tarjeta IA Médica - Sombra roja intensa */</span>
+<span style="color: #55a3ff;">.tarjeta-medica</span> {
+  <span style="color: #ffeaa7;">border-left</span>: <span style="color: #a29bfe;">5px solid #e74c3c</span>;
+  <span style="color: #ffeaa7;">box-shadow</span>: 
+    <span style="color: #a29bfe;">-5px 0 15px rgba(231, 76, 60, 0.3),
+    0 5px 15px rgba(231, 76, 60, 0.2)</span>;
+  <span style="color: #ffeaa7;">background</span>: <span style="color: #a29bfe;">linear-gradient(135deg, #fdf2f2 0%, #fff5f5 100%)</span>;
+}
+
+<span style="color: #fd79a8;">/* ⚡ Tarjeta Cuántica - Animación pulsante */</span>
+<span style="color: #55a3ff;">.tarjeta-cuantica</span> {
+  <span style="color: #ffeaa7;">border</span>: <span style="color: #a29bfe;">2px solid #6c5ce7</span>;
+  <span style="color: #ffeaa7;">animation</span>: <span style="color: #a29bfe;">pulso-cuantico 2s infinite</span>;
+}
+
+<span style="color: #fd79a8;">/* Animación para tarjeta cuántica */</span>
+<span style="color: #55a3ff;">@keyframes pulso-cuantico</span> {
+  <span style="color: #a29bfe;">0%</span> {
+    <span style="color: #ffeaa7;">box-shadow</span>: <span style="color: #a29bfe;">0 0 10px rgba(108, 92, 231, 0.4)</span>;
+    <span style="color: #ffeaa7;">transform</span>: <span style="color: #a29bfe;">scale(1)</span>;
+  }
+  <span style="color: #a29bfe;">50%</span> {
+    <span style="color: #ffeaa7;">box-shadow</span>: <span style="color: #a29bfe;">0 0 25px rgba(108, 92, 231, 0.8)</span>;
+    <span style="color: #ffeaa7;">transform</span>: <span style="color: #a29bfe;">scale(1.03)</span>;
+  }
+  <span style="color: #a29bfe;">100%</span> {
+    <span style="color: #ffeaa7;">box-shadow</span>: <span style="color: #a29bfe;">0 0 10px rgba(108, 92, 231, 0.4)</span>;
+    <span style="color: #ffeaa7;">transform</span>: <span style="color: #a29bfe;">scale(1)</span>;
+  }
+}</code></pre>
+            </div>
+
+            <h5>🔧 Paso 3: Verificar que el wrapper está implementado</h5>
+            <p><strong>Comprueba que tu código JSX</strong> en Proyectos.jsx tenga el wrapper correctamente implementado:</p>
+            
+            <div style="background: #2d3436; color: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; font-family: 'Courier New', monospace;">
+              <div style="color: #74b9ff; margin-bottom: 1rem;">// Este código ya debería estar en tu Proyectos.jsx:</div>
+              <pre style="margin: 0; color: white; line-height: 1.6;"><code>&lt;div className="tarjetas-container"&gt;
+  {noticias.map(noticia => (
+    <span style="background: rgba(116, 185, 255, 0.3); padding: 0.2rem 0.4rem; border-radius: 3px;">&lt;div 
+      key={noticia.id}
+      className={`proyecto-item ${noticia.claseEspecial || ''}`}
+    &gt;</span>  <span style="color: #74b9ff;">👈 ¡Este es el wrapper mágico!</span>
+      &lt;Tarjeta
+        titulo={noticia.titulo}
+        descripcion={noticia.descripcion}
+        imagen={noticia.imagen}
+        textoBoton={noticia.textoBoton}
+        color={noticia.color}
+        colorFondo={noticia.colorFondo}
+      /&gt;
+    <span style="background: rgba(116, 185, 255, 0.3); padding: 0.2rem 0.4rem; border-radius: 3px;">&lt;/div&gt;</span>
+  ))}
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #27ae60;">
+              <h6 style="color: #27ae60; margin-top: 0;">✅ ¿Cómo funciona la magia?</h6>
+              <ol style="color: #2d3436; line-height: 1.8;">
+                <li><strong>Condición:</strong> <code>${noticia.claseEspecial || ''}</code> verifica si existe la propiedad</li>
+                <li><strong>Si existe:</strong> Añade la clase CSS específica (ej: "tarjeta-destacada")</li>
+                <li><strong>Si no existe:</strong> Añade una cadena vacía (no pasa nada)</li>
+                <li><strong>Resultado:</strong> Solo las tarjetas con <code>claseEspecial</code> tienen efectos visuales</li>
+              </ol>
+            </div>
+
+             ============================================================ -->
+            <!-- 🔍 EXPLICACIÓN DETALLADA: ¿QUE ES UNA CADENA VACÍA? 
+             ============================================================ 
+            <div style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+              <h6 style="color: white; margin-top: 0; text-align: center;">🔍 ¿Qué significa exactamente "cadena vacía"?</h6>
+              
+              <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                <h6 style="color: #ffeaa7; margin-top: 0;">📝 Definición técnica:</h6>
+                <p style="color: white; margin: 0.5rem 0; font-size: 1.1rem;">
+                  Una <strong>"cadena vacía"</strong> es literalmente <code>''</code> (dos comillas sin nada dentro). 
+                  Es como tener una caja completamente vacía, sin ningún contenido.
+                </p>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                
+                 Ejemplo visual - CON clase 
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                  <h6 style="color: #55a3ff; margin-top: 0;">✅ Noticia CON claseEspecial:</h6>
+                  <pre style="background: #2d3436; color: white; padding: 0.8rem; border-radius: 4px; font-size: 0.8rem;"><code>{
+  id: 1,
+  titulo: "🧬 CRISPR cura diabetes",
+  <span style="color: #fd79a8;">claseEspecial: "tarjeta-destacada"</span>
+}</code></pre>
+                  <div style="color: white; font-size: 0.9rem; margin-top: 0.5rem;">
+                    <strong>Resultado:</strong><br/>
+                    <code style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.4rem; border-radius: 3px;">className="proyecto-item tarjeta-destacada"</code>
+                  </div>
+                </div>
+
+                 Ejemplo visual - SIN clase 
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                  <h6 style="color: #fd79a8; margin-top: 0;">❌ Noticia SIN claseEspecial:</h6>
+                  <pre style="background: #2d3436; color: white; padding: 0.8rem; border-radius: 4px; font-size: 0.8rem;"><code>{
+  id: 2,
+  titulo: "🚀 Nave espacial de SpaceX",
+  <span style="color: #74b9ff;">// No tiene claseEspecial</span>
+}</code></pre>
+                  <div style="color: white; font-size: 0.9rem; margin-top: 0.5rem;">
+                    <strong>Resultado:</strong><br/>
+                    <code style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.4rem; border-radius: 3px;">className="proyecto-item "</code>
+                    <div style="font-size: 0.8rem; opacity: 0.8;">👆 Nota el espacio al final (cadena vacía)</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                <h6 style="color: #ffeaa7; margin-top: 0;">🧠 Paso a paso del operador || (OR lógico):</h6>
+                <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace; line-height: 1.6;"><code><span style="color: #74b9ff;">// El código: ${noticia.claseEspecial || ''}</span>
+
+<span style="color: #fd79a8;">// Caso 1: La noticia SÍ tiene claseEspecial</span>
+noticia.claseEspecial = <span style="color: #55a3ff;">"tarjeta-destacada"</span>
+<span style="color: #74b9ff;">Resultado:</span> <span style="color: #55a3ff;">"tarjeta-destacada"</span>  <span style="color: #ffeaa7;">// ✅ Usa el valor que existe</span>
+
+<span style="color: #fd79a8;">// Caso 2: La noticia NO tiene claseEspecial</span>
+noticia.claseEspecial = <span style="color: #e17055;">undefined</span>
+<span style="color: #74b9ff;">Resultado:</span> <span style="color: #55a3ff;">""</span>                     <span style="color: #ffeaa7;">// ✅ Usa la cadena vacía</span></code></pre>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                  <strong style="color: #ffeaa7;">Propósito</strong><br/>
+                  <span style="color: white; font-size: 0.9rem;">Evitar errores de JavaScript</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                  <strong style="color: #55a3ff;">Resultado</strong><br/>
+                  <span style="color: white; font-size: 0.9rem;">className siempre válido</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                  <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛡️</div>
+                  <strong style="color: #fd79a8;">Seguridad</strong><br/>
+                  <span style="color: white; font-size: 0.9rem;">Sin undefined en HTML</span>
+                </div>
+              </div>
+
+              <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                <h6 style="color: #55a3ff; margin-top: 0;">💡 ¿Qué pasaría SIN la cadena vacía?</h6>
+                <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 4px; font-size: 0.9rem; margin: 0.5rem 0;"><code><span style="color: #fd79a8;">// ❌ CÓDIGO PROBLEMÁTICO (sin cadena vacía):</span>
+className={`proyecto-item ${noticia.claseEspecial}`}
+
+<span style="color: #fd79a8;">// ❌ RESULTADO en HTML:</span>
+&lt;div className="proyecto-item undefined"&gt;  <span style="color: #e17055;">👈 ¡ERROR!</span>
+
+<span style="color: #74b9ff;">// ✅ CÓDIGO CORRECTO (con cadena vacía):</span>
+className={`proyecto-item ${noticia.claseEspecial || ''}`}
+
+<span style="color: #74b9ff;">// ✅ RESULTADO en HTML:</span>
+&lt;div className="proyecto-item "&gt;  <span style="color: #55a3ff;">👈 ¡Perfecto!</span></code></pre>
+                <p style="color: white; margin: 0.5rem 0;">
+                  <strong>🎯 Conclusión:</strong> La cadena vacía <code>''</code> es un <strong>salvavidas</strong> que previene que aparezca "undefined" en tu HTML.
+                </p>
+              </div>
+            </div>
+
+            <h5>🎉 Resultado esperado</h5>
+            <p><strong>Guarda todos los archivos</strong> y recarga tu página en el navegador. Deberías ver:</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+              <div style="background: linear-gradient(135deg, #ffd700, #ffed4a); color: #2d3436; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧬</div>
+                <strong>Tarjeta CRISPR</strong><br/>
+                <span style="font-size: 0.9rem;">Borde dorado brillante con sombra</span><br/>
+                <span style="font-size: 0.8rem; opacity: 0.8;">Ligeramente más grande</span>
+              </div>
+              <div style="background: linear-gradient(135deg, #e74c3c, #ff6b6b); color: white; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤖</div>
+                <strong>Tarjeta IA Médica</strong><br/>
+                <span style="font-size: 0.9rem;">Borde rojo lateral con sombra</span><br/>
+                <span style="font-size: 0.8rem; opacity: 0.8;">Fondo degradado sutil</span>
+              </div>
+              <div style="background: linear-gradient(135deg, #6c5ce7, #a29bfe); color: white; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                <strong>Tarjeta Cuántica</strong><br/>
+                <span style="font-size: 0.9rem;">Animación pulsante continua</span><br/>
+                <span style="font-size: 0.8rem; opacity: 0.8;">Efecto de respiración</span>
+              </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
+              <h6 style="color: white; margin-top: 0;">🎓 ¡Felicidades! Has dominado el wrapper</h6>
+              <p style="color: white; margin: 1rem 0; font-size: 1.1rem;">
+                Acabas de implementar un patrón profesional que se usa en aplicaciones reales como Netflix, YouTube y Amazon. 
+                <strong>¡Ya piensas como un desarrollador senior!</strong>
+              </p>
+              <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                <strong>📚 Concepto dominado:</strong> Separación de responsabilidades - El componente Tarjeta se mantiene puro mientras el wrapper maneja la personalización visual
+              </div>
+            </div>
+          </div>
+        </details>
+
+            <!-- ============================================================ -->
+            <!-- 🎁 SECCIÓN BONUS: GESTIÓN DE IMÁGENES EN REACT -->
+            <!-- ============================================================ -->
+            <details>
+              <summary class="summary-section summary-bonus">🎁 BONUS: ¿Por qué pusimos la imagen en public/images? Todas las opciones explicadas (Click para bonus)</summary>
+              <div class="details-content">
+                
+                <h4>🖼️ Análisis completo: Cómo manejar imágenes en React</h4>
+                <p>¿Te fijaste que en el código usamos <code>imagen: "/images/imagen2.png"</code>? Vamos a analizar <strong>todas las opciones</strong> que tienes para trabajar con imágenes en React.</p>
+
+                <div style="background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+                  <h5 style="color: white; margin-top: 0; text-align: center;">🎯 Código que estamos analizando:</h5>
+                  <pre style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; color: #ffeaa7; font-family: 'Courier New', monospace;"><code>{
+  id: 1,
+  titulo: "🧬 CRISPR cura diabetes tipo 1",
+  descripcion: "Primera paciente curada completamente...",
+  <span style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.4rem; border-radius: 4px;">imagen: "/images/imagen2.png", // 👈 ¡Esta línea!</span>
+  textoBoton: "Leer estudio",
+  color: "#27ae60",
+  colorFondo: "#e8f8f5"
+}</code></pre>
+                </div>
+
+                <h5>📂 Opción 1: Carpeta public/images/ (La que usamos)</h5>
+                <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; border-left: 4px solid #27ae60;">
+                  
+                  <h6 style="color: #27ae60; margin-top: 0;">🏗️ Estructura del proyecto:</h6>
+                  <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 0.9rem;">mi-proyecto/
+├── public/
+│   ├── <span style="color: #74b9ff;">images/</span>
+│   │   ├── imagen2.png      <span style="color: #55a3ff;">👈 Aquí está nuestra imagen</span>
+│   │   ├── logo.jpg
+│   │   └── banner.png
+│   └── index.html
+├── src/
+│   └── components/</pre>
+
+                  <h6 style="color: #27ae60;">✅ Ventajas:</h6>
+                  <ul>
+                    <li><strong>🚀 URL directa:</strong> <code>"/images/imagen2.png"</code> funciona inmediatamente</li>
+                    <li><strong>🌐 Acceso público:</strong> Cualquiera puede ver la imagen en el navegador</li>
+                    <li><strong>📁 Organización simple:</strong> Todas las imágenes en un lugar</li>
+                    <li><strong>🔗 SEO friendly:</strong> URLs limpias para buscadores</li>
+                    <li><strong>⚡ No se procesan:</strong> Se sirven tal como están</li>
+                  </ul>
+
+                  <h6 style="color: #e17055;">❌ Desventajas:</h6>
+                  <ul>
+                    <li><strong>📦 Tamaño del bundle:</strong> Se incluyen aunque no las uses</li>
+                    <li><strong>🔄 Sin optimización:</strong> No se comprimen automáticamente</li>
+                    <li><strong>🚫 Sin versionado:</strong> Problemas de caché si cambias la imagen</li>
+                    <li><strong>⚠️ Error silencioso:</strong> Si no existe, no da error en desarrollo</li>
+                  </ul>
+
+                  <div style="background: rgba(39, 174, 96, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <strong>🎯 Ideal para:</strong> Logos, favicons, imágenes que rara vez cambian, assets estáticos
+                  </div>
+                </div>
+
+                <h5>🗂️ Opción 2: Carpeta src/assets/ (Importación directa)</h5>
+                <div style="background: #f0f8ff; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; border-left: 4px solid #3498db;">
+                  
+                  <h6 style="color: #3498db; margin-top: 0;">🏗️ Estructura alternativa:</h6>
+                  <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 0.9rem;">mi-proyecto/
+├── src/
+│   ├── <span style="color: #fd79a8;">assets/</span>
+│   │   ├── <span style="color: #74b9ff;">images/</span>
+│   │   │   ├── crispr.jpg    <span style="color: #55a3ff;">👈 Imagen importada</span>
+│   │   │   └── telescope.jpg
+│   │   └── icons/
+│   └── components/</pre>
+
+                  <h6 style="color: #3498db;">📝 Código requerido:</h6>
+                  <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace;"><code><span style="color: #fd79a8;">import</span> crisprImage <span style="color: #fd79a8;">from</span> <span style="color: #55a3ff;">'../assets/images/crispr.jpg'</span>;
+
+<span style="color: #74b9ff;">const</span> noticias = [
+  {
+    id: 1,
+    titulo: "🧬 CRISPR cura diabetes tipo 1",
+    imagen: crisprImage, <span style="color: #55a3ff;">// 👈 Variable importada</span>
+    // ...
+  }
+];</code></pre>
+
+                  <h6 style="color: #3498db;">✅ Ventajas:</h6>
+                  <ul>
+                    <li><strong>📦 Optimización automática:</strong> Webpack comprime y optimiza</li>
+                    <li><strong>🔄 Versionado automático:</strong> Hash único para cada versión</li>
+                    <li><strong>⚠️ Errores en desarrollo:</strong> Te avisa si la imagen no existe</li>
+                    <li><strong>🌳 Tree shaking:</strong> Solo incluye imágenes que realmente usas</li>
+                    <li><strong>🗜️ Compresión inteligente:</strong> Convierte a WebP automáticamente</li>
+                  </ul>
+
+                  <h6 style="color: #e17055;">❌ Desventajas:</h6>
+                  <ul>
+                    <li><strong>📝 Más código:</strong> Requiere import para cada imagen</li>
+                    <li><strong>🔄 Rebuild:</strong> Cambiar imagen requiere recompilar</li>
+                    <li><strong>🧠 Complejidad:</strong> URLs generadas automáticamente (largas y raras)</li>
+                    <li><strong>📋 Más gestión:</strong> Arrays dinámicos son más complicados</li>
+                  </ul>
+
+                  <div style="background: rgba(52, 152, 219, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <strong>🎯 Ideal para:</strong> Imágenes críticas, apps con pocas imágenes, máximo rendimiento
+                  </div>
+                </div>
+
+                <h5>☁️ Opción 3: URLs externas (Unsplash, CDN)</h5>
+                <div style="background: #f8f5ff; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; border-left: 4px solid #9b59b6;">
+                  
+                  <h6 style="color: #9b59b6; margin-top: 0;">🌐 Ejemplo del código:</h6>
+                  <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace;"><code>{
+  id: 2,
+  titulo: "🚀 James Webb descubre galaxias imposibles",
+  <span style="background: rgba(155, 89, 182, 0.3); padding: 0.2rem 0.4rem; border-radius: 4px;">imagen: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=150&h=150&fit=crop",</span>
+  // ...
+}</code></pre>
+
+                  <h6 style="color: #9b59b6;">✅ Ventajas:</h6>
+                  <ul>
+                    <li><strong>🚀 Velocidad de desarrollo:</strong> No necesitas descargar/gestionar archivos</li>
+                    <li><strong>📦 Bundle ligero:</strong> Las imágenes no aumentan el tamaño de tu app</li>
+                    <li><strong>🔄 Actualizaciones dinámicas:</strong> Cambias URL y ya está</li>
+                    <li><strong>🌍 CDN global:</strong> Se sirven desde el servidor más cercano</li>
+                    <li><strong>🎨 Unsplash gratis:</strong> Millones de imágenes profesionales</li>
+                  </ul>
+
+                  <h6 style="color: #e17055;">❌ Desventajas:</h6>
+                  <ul>
+                    <li><strong>🌐 Dependencia externa:</strong> Si Unsplash cae, tus imágenes no cargan</li>
+                    <li><strong>⚡ Latencia:</strong> Conexión a servidor externo</li>
+                    <li><strong>💰 Límites:</strong> Algunos CDNs tienen restricciones de uso</li>
+                    <li><strong>🎨 Menos control:</strong> No puedes modificar las imágenes</li>
+                    <li><strong>📱 Offline:</strong> No funcionan sin internet</li>
+                  </ul>
+
+                  <div style="background: rgba(155, 89, 182, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <strong>🎯 Ideal para:</strong> Prototipado rápido, MVPs, demos, portfolios personales
+                  </div>
+                </div>
+
+                <h5>🎯 Recomendación del profesor</h5>
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+                  <h6 style="color: white; margin-top: 0; text-align: center;">📋 ¿Cuándo usar cada opción?</h6>
+                  
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                      <div style="font-size: 2rem; margin-bottom: 0.5rem;">👶</div>
+                      <strong style="color: #ffeaa7;">Principiante</strong><br/>
+                      <span style="color: white; font-size: 0.9rem;">public/images/ + URLs Unsplash</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                      <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧑‍💻</div>
+                      <strong style="color: #55a3ff;">Proyecto real</strong><br/>
+                      <span style="color: white; font-size: 0.9rem;">src/assets/ para críticas, public/ para estáticas</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                      <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+                      <strong style="color: #fd79a8;">Producción</strong><br/>
+                      <span style="color: white; font-size: 0.9rem;">CDN profesional + optimización avanzada</span>
+                    </div>
+                  </div>
+
+                  <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                    <strong style="color: #ffeaa7;">💡 Para este curso elegimos public/images/ porque:</strong>
+                    <ul style="color: white; margin: 0.5rem 0;">
+                      <li>✅ Es fácil de entender para principiantes</li>
+                      <li>✅ No complica el código con imports</li>
+                      <li>✅ Permite usar URLs tanto locales como externas</li>
+                      <li>✅ Es la opción más directa para aprender</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div style="background: #fff3e0; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #ff9800;">
+                  <h6 style="color: #f57c00; margin-top: 0;">🔥 Ejercicio para casa:</h6>
+                  <ol style="color: #5d4037; line-height: 1.8;">
+                    <li><strong>Desafío 1:</strong> Descarga una imagen de CRISPR y ponla en <code>public/images/</code></li>
+                    <li><strong>Desafío 2:</strong> Cambia la ruta en el código: <code>imagen: "/images/tu-imagen-crispr.jpg"</code></li>
+                    <li><strong>Desafío 3:</strong> Comprueba que funciona en el navegador</li>
+                    <li><strong>Bonus:</strong> Prueba a usar una imagen de Unsplash diferente para otra noticia</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+    <!-- ============================================================ -->
+    <!-- 🏁 SECCIÓN DE RESUMEN FINAL Y PRÓXIMOS PASOS -->
+    <!-- ============================================================ -->
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 3rem 2rem; margin: 3rem 0;">
+      <div style="max-width: 1000px; margin: 0 auto; color: white;">
+        <h2 style="color: white; text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">
+          🎯 ¡Resumen de tu progreso !
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+          
+          <!-- Columna 1: Lo que dominaste -->
+          <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <h3 style="color: #4ecdc4; margin-top: 0;">🎓 Conceptos que CONOCISTE hoy:</h3>
+            <ul style="color: white; line-height: 1.8;">
+              <li><strong>✅ Props avanzadas:</strong> 6 tipos diferentes (texto, imagen, color, función)</li>
+              <li><strong>✅ Componentes reutilizables:</strong> Un componente, infinitos usos</li>
+              <li><strong>✅ Arrays y .map():</strong> De datos estáticos a UI dinámica</li>
+              <li><strong>✅ Key única:</strong> Optimización profesional de React</li>
+              <li><strong>✅ React Router:</strong> Navegación entre páginas SPA</li>
+              <li><strong>✅ Separación de responsabilidades:</strong> Datos vs Presentación</li>
+            </ul>
+          </div>
+
+          <!-- Columna 2: Logros técnicos -->
+          <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <h3 style="color: #55a3ff; margin-top: 0;">🚀 Logros aprendidos:</h3>
+            <ul style="color: white; line-height: 1.8;">
+              <li><strong>🏗️ Arquitectura profesional:</strong> Estructura de carpetas escalable</li>
+              <li><strong>🔧 Componente Tarjeta:</strong> Con 6 props opcionales y flexibles</li>
+              <li><strong>📰 Página Home:</strong> 6 noticias tecnológicas dinámicas</li>
+              <li><strong>🧬 Página Proyectos:</strong> 9 avances científicos automáticos</li>
+              <li><strong>🛤️ Sistema de rutas:</strong> Configurado y funcionando</li>
+              <li><strong>💎 Código limpio:</strong> Siguiendo mejores prácticas de React</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Números impresionantes -->
+        <div style="background: rgba(255,255,255,0.15); padding: 2rem; border-radius: 12px; text-align: center; margin: 2rem 0;">
+          <h3 style="color: white; margin-top: 0;">📊 Los números de tu progreso:</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            <div>
+              <div style="font-size: 3rem; font-weight: bold; color: #4ecdc4;">15</div>
+              <div style="color: white;">Tarjetas creadas automáticamente</div>
+            </div>
+            <div>
+              <div style="font-size: 3rem; font-weight: bold; color: #55a3ff;">6</div>
+              <div style="color: white;">Props diferentes dominadas</div>
+            </div>
+            <div>
+              <div style="font-size: 3rem; font-weight: bold; color: #ffd93d;">2</div>
+              <div style="color: white;">Páginas dinámicas funcionando</div>
+            </div>
+            <div>
+              <div style="font-size: 3rem; font-weight: bold; color: #6c5ce7;">1</div>
+              <div style="color: white;">Patrón profesional dominado</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- De principiante a profesional -->
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+          <h3 style="color: #ffd93d; text-align: center; margin-top: 0;">🌟 Tu evolución como desarrollador React:</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="text-align: center; color: white;">
+              <div style="font-size: 2rem;">👶</div>
+              <div><strong>Antes:</strong></div>
+              <div style="opacity: 0.8;">Componentes estáticos</div>
+            </div>
+            <div style="color: #4ecdc4; font-size: 2rem;">→</div>
+            <div style="text-align: center; color: white;">
+              <div style="font-size: 2rem;">🧑‍💻</div>
+              <div><strong>Ahora:</strong></div>
+              <div style="opacity: 0.8;">Datos dinámicos + .map()</div>
+            </div>
+            <div style="color: #4ecdc4; font-size: 2rem;">→</div>
+            <div style="text-align: center; color: white;">
+              <div style="font-size: 2rem;">🚀</div>
+              <div><strong>Próximo:</strong></div>
+              <div style="opacity: 0.8;">Estados y efectos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 🎯 PRÓXIMOS PASOS Y ROADMAP -->
+    <!-- ============================================================ -->
+    <section style="background: #2d3436; color: white; padding: 3rem 2rem;">
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <h2 style="color: #74b9ff; text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">
+          🗺️ Tu roadmap de aprendizaje React
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+          
+          <!-- Lección actual -->
+          <div style="background: linear-gradient(135deg, #00b894, #00cec9); padding: 1.5rem; border-radius: 12px; position: relative;">
+            <div style="position: absolute; top: -10px; right: -10px; background: #ffd93d; color: #2d3436; padding: 0.5rem; border-radius: 50%; font-weight: bold;">✅</div>
+            <h3 style="color: white; margin-top: 0;">📚 Lección 3: Props y Datos Dinámicos</h3>
+            <ul style="color: white; line-height: 1.6;">
+              <li>✅ Props con 6 tipos diferentes</li>
+              <li>✅ Componente Tarjeta reutilizable</li>
+              <li>✅ Arrays y .map() para UI automática</li>
+              <li>✅ React Router para navegación</li>
+            </ul>
+            <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 8px; margin-top: 1rem; text-align: center;">
+              <strong>🎯 COMPLETADO - ¡Intenta pensar para que podemos usar los props!</strong>
+            </div>
+          </div>
+
+          <!-- Próxima lección -->
+          <div style="background: linear-gradient(135deg, #6c5ce7, #a29bfe); padding: 1.5rem; border-radius: 12px; position: relative;">
+            <div style="position: absolute; top: -10px; right: -10px; background: #fd79a8; color: white; padding: 0.5rem; border-radius: 50%; font-weight: bold;">⏳</div>
+            <h3 style="color: white; margin-top: 0;">🎮 Lección 4: Estado y Interactividad</h3>
+            <ul style="color: white; line-height: 1.6;">
+              <li>🎯 useState Hook para datos que cambian</li>
+              <li>🖱️ OnClick, onChange, onSubmit</li>
+              <li>📝 Formularios controlados e inputs</li>
+              <li>🔄 Actualizar la UI en tiempo real</li>
+            </ul>
+            <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 8px; margin-top: 1rem; text-align: center;">
+              <strong>🚀 PRÓXIMO - ¡Haremos apps interactivas!</strong>
+            </div>
+          </div>
+
+         
+
+        <!-- Call to action -->
+        <div style="background: linear-gradient(135deg, #00b894, #00cec9); padding: 2rem; border-radius: 12px; text-align: center; margin: 2rem 0;">
+          <h3 style="color: white; margin-top: 0; font-size: 1.5rem;">🎯 Tu misión para la próxima clase:</h3>
+          <div style="color: white; font-size: 1.1rem; line-height: 1.8;">
+            <p><strong>1. 🔬 Experimenta:</strong> Añade más noticias científicas al array de Proyectos.jsx</p>
+            <p><strong>2. 🎨 Personaliza:</strong> Cambia colores y textos para hacer las tarjetas únicas</p>
+            <p><strong>3. 🧠 Reflexiona:</strong> ¿Qué otros datos podrías mostrar con este patrón?</p>
+            <p><strong>4. 🚀 Prepárate:</strong> En la próxima clase haremos que las tarjetas respondan a clicks</p>
+          </div>
+        </div>
+
+        <!-- Motivación final -->
+        <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 12px;">
+          <h3 style="color: #74b9ff; margin-top: 0;">💪 Mensaje del profesor:</h3>
+          <p style="font-size: 1.3rem; color: white; line-height: 1.6; margin: 1rem 0;">
+            "¡Felicidades! Estás conociendo uno de los Framework más usados. Poco a poco irás avanzando. Este patrón que dominaste hoy es la base de TODAS las aplicaciones web modernas."
+          </p>
+          <p style="font-size: 1.1rem; color: white; opacity: 0.9;">
+            Sigue practicando y experimentando. ¡Nos vemos en la próxima clase para hacer tus apps interactivas! 🚀
+      </div>
+    </section>
 
   </main>
 
   <footer>
-    <p>💙 Día 3 completado: Props dominadas con 6 ejemplos diferentes | Layout horizontal perfecto | ¡Listo para el siguiente nivel!</p>
+    <p>💙 Día 3 completado: Props con 6 ejemplos diferentes | Tarjetas dinámicas | ¡Listo para el siguiente nivel!</p>
   </footer>
 </body>
 </html>
