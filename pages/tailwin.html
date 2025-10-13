@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS con React - Curso Completo</title>
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ========================================
+       HEADER PRINCIPAL
+       ======================================== -->
+  <header>
+    <div class="header-content">
+      <h1>🎨 Tailwind CSS con React</h1>
+      <p>Aprende a crear interfaces modernas y responsivas con la potencia de Tailwind CSS y React</p>
+      
+      <!-- Navegación principal -->
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">🏠 Inicio</a>
+        <a href="intro.html" class="nav-link">📚 Introducción</a>
+        <a href="componentes.html" class="nav-link">🧩 Componentes</a>
+        <a href="estados.html" class="nav-link">⚡ Estados</a>       
+        <a href="tailwin.html" class="nav-link">🎨 Tailwind</a>
+      </nav>
+      
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="../index.html">Curso React</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">Tailwind CSS</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       CONTENIDO PRINCIPAL
+       ======================================== -->
+  <div class="container">
+    
+    <!-- ================================================================ -->
+    <!-- SECCIÓN 1: ¿QUÉ ES TAILWIND CSS? -->
+    <!-- ================================================================ -->
+    <section class="card">
+      <h2>🌟 ¿Qué es Tailwind CSS?</h2>
+      
+      <p>
+        <strong>Tailwind CSS</strong> es un framework de CSS basado en clases utilitarias que te permite 
+        construir interfaces modernas directamente en tu HTML/JSX sin escribir CSS personalizado.
+      </p>
+
+      <details style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-info">🎯 Filosofía de Tailwind: "Utility-First"</summary>
+        <div class="details-content">
+          <p>
+            En lugar de escribir CSS personalizado, usas clases predefinidas que describen exactamente 
+            lo que quieres lograr:
+          </p>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+            <!-- CSS Tradicional -->
+            <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; border: 2px solid #ff9800;">
+              <h4 style="color: #f57c00; margin-top: 0;">❌ CSS Tradicional</h4>
+              <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;"><code>/* CSS */
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* HTML */
+&lt;button class="btn-primary"&gt;
+  Botón
+&lt;/button&gt;</code></pre>
+            </div>
+
+            <!-- Tailwind CSS -->
+            <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px; border: 2px solid #4caf50;">
+              <h4 style="color: #2e7d32; margin-top: 0;">✅ Con Tailwind</h4>
+              <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;"><code>/* Solo HTML/JSX */
+&lt;button className="bg-blue-500 text-white 
+                   px-4 py-2 rounded-lg 
+                   font-semibold shadow-md
+                   hover:bg-blue-600 
+                   transition-colors"&gt;
+  Botón
+&lt;/button&gt;</code></pre>
+            </div>
+          </div>
+
+          <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+            <h4 style="color: #7b1fa2; margin-top: 0;">🧠 Ventajas de este enfoque:</h4>
+            <ul style="margin: 0; color: #555;">
+              <li><strong>Desarrollo más rápido:</strong> No cambias entre HTML y CSS constantemente</li>
+              <li><strong>Mantenimiento fácil:</strong> Los estilos están donde los usas</li>
+              <li><strong>Bundle pequeño:</strong> Solo incluye las clases que realmente usas</li>
+              <li><strong>Consistencia:</strong> Design system integrado en las clases</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- Ventajas de Tailwind -->
+      <details style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-success">🚀 Ventajas de usar Tailwind CSS</summary>
+        <div class="details-content">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            
+            <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2196f3;">
+              <h4 style="color: #1976d2; margin-top: 0;">⚡ Desarrollo Ultrarrápido</h4>
+              <ul style="color: #555; margin: 0;">
+                <li>No necesitas pensar nombres de clases</li>
+                <li>No cambias entre archivos HTML y CSS</li>
+                <li>Prototipado instantáneo</li>
+                <li>Menos decisiones que tomar</li>
+              </ul>
+            </div>
+
+            <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ff9800;">
+              <h4 style="color: #f57c00; margin-top: 0;">🎯 Design System Incluido</h4>
+              <ul style="color: #555; margin: 0;">
+                <li>Paleta de colores predefinida</li>
+                <li>Espaciado consistente</li>
+                <li>Tipografía escalable</li>
+                <li>Breakpoints responsivos</li>
+              </ul>
+            </div>
+
+            <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #9c27b0;">
+              <h4 style="color: #7b1fa2; margin-top: 0;">📦 Bundle Optimizado</h4>
+              <ul style="color: #555; margin: 0;">
+                <li>Solo incluye CSS que usas (PurgeCSS)</li>
+                <li>Archivos finales muy pequeños</li>
+                <li>Performance mejorada</li>
+                <li>Carga más rápida</li>
+              </ul>
+            </div>
+
+            <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4caf50;">
+              <h4 style="color: #2e7d32; margin-top: 0;">🔧 Mantenimiento Fácil</h4>
+              <ul style="color: #555; margin: 0;">
+                <li>Estilos junto al componente</li>
+                <li>Cambios localizados</li>
+                <li>Refactoring seguro</li>
+                <li>No hay CSS huérfano</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Comparación con alternativas -->
+      <details style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-warning">🔍 Tailwind vs Otras Alternativas</summary>
+        <div class="details-content">
+          
+          <div style="margin: 2rem 0;">
+            <h4 style="color: #f57c00; margin-bottom: 1.5rem;">📊 Comparativa de Frameworks CSS</h4>
+            
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <thead>
+                  <tr style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white;">
+                    <th style="padding: 1rem; text-align: left; font-weight: 600;">Framework</th>
+                    <th style="padding: 1rem; text-align: left; font-weight: 600;">Enfoque</th>
+                    <th style="padding: 1rem; text-align: left; font-weight: 600;">Ventajas</th>
+                    <th style="padding: 1rem; text-align: left; font-weight: 600;">Desventajas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid #e0e0e0;">
+                    <td style="padding: 1rem; font-weight: 600; color: #0ea5e9;">🌊 Tailwind CSS</td>
+                    <td style="padding: 1rem; color: #555;">Utility-First</td>
+                    <td style="padding: 1rem; color: #2e7d32; font-size: 0.9rem;">
+                      • Bundle pequeño<br>
+                      • Desarrollo rápido<br>
+                      • Altamente customizable
+                    </td>
+                    <td style="padding: 1rem; color: #d32f2f; font-size: 0.9rem;">
+                      • Curva de aprendizaje<br>
+                      • HTML con muchas clases
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e0e0e0; background: #f8f9fa;">
+                    <td style="padding: 1rem; font-weight: 600; color: #6366f1;">🟣 Bootstrap</td>
+                    <td style="padding: 1rem; color: #555;">Componentes</td>
+                    <td style="padding: 1rem; color: #2e7d32; font-size: 0.9rem;">
+                      • Fácil de empezar<br>
+                      • Componentes listos<br>
+                      • Gran comunidad
+                    </td>
+                    <td style="padding: 1rem; color: #d32f2f; font-size: 0.9rem;">
+                      • Bundle grande<br>
+                      • Difícil customizar<br>
+                      • Sitios similares
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e0e0e0;">
+                    <td style="padding: 1rem; font-weight: 600; color: #3b82f6;">💙 Material-UI</td>
+                    <td style="padding: 1rem; color: #555;">Componentes React</td>
+                    <td style="padding: 1rem; color: #2e7d32; font-size: 0.9rem;">
+                      • Componentes React<br>
+                      • Material Design<br>
+                      • Muy completo
+                    </td>
+                    <td style="padding: 1rem; color: #d32f2f; font-size: 0.9rem;">
+                      • Bundle muy grande<br>
+                      • Estilo muy específico<br>
+                      • Menos flexibilidad
+                    </td>
+                  </tr>
+                  <tr style="background: #f8f9fa;">
+                    <td style="padding: 1rem; font-weight: 600; color: #ef4444;">🎨 CSS Puro</td>
+                    <td style="padding: 1rem; color: #555;">Personalizado</td>
+                    <td style="padding: 1rem; color: #2e7d32; font-size: 0.9rem;">
+                      • Control total<br>
+                      • Bundle mínimo<br>
+                      • Sin dependencias
+                    </td>
+                    <td style="padding: 1rem; color: #d32f2f; font-size: 0.9rem;">
+                      • Desarrollo lento<br>
+                      • Mantenimiento difícil<br>
+                      • Inconsistencias
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h4 style="color: #1976d2; margin-top: 0;">🎯 ¿Cuándo usar Tailwind?</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+              <div>
+                <h5 style="color: #2e7d32; margin-bottom: 1rem;">✅ Ideal para:</h5>
+                <ul style="color: #555; margin: 0;">
+                  <li>Proyectos desde cero</li>
+                  <li>Equipos que quieren consistencia</li>
+                  <li>Aplicaciones con design system</li>
+                  <li>Desarrollo rápido de prototipos</li>
+                  <li>Cuando el bundle size importa</li>
+                </ul>
+              </div>
+              <div>
+                <h5 style="color: #d32f2f; margin-bottom: 1rem;">❌ No tanto para:</h5>
+                <ul style="color: #555; margin: 0;">
+                  <li>Proyectos muy pequeños</li>
+                  <li>Equipos sin experiencia en CSS</li>
+                  <li>Cuando necesitas algo muy específico</li>
+                  <li>Migración de proyectos grandes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SECCIÓN 2: INSTALACIÓN DE TAILWIND EN REACT -->
+    <!-- ================================================================ -->
+    <section class="card">
+      <h2>🚀 Instalación de Tailwind en React</h2>
+
+      <p>
+        Vamos a aprender a instalar y configurar Tailwind CSS en un proyecto React paso a paso. 
+        Te muestro dos métodos: con Vite (recomendado) y con Create React App.
+      </p>
+
+      <!-- Método 1: Con Vite (Recomendado) -->
+      <details style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-success">✅ Método : Con Vite </summary>
+        <div class="details-content">
+          
+          <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+            <h4 style="color: #1976d2; margin-top: 0;">🎯 ¿Por qué Vite?</h4>
+            <p style="color: #555; margin: 0;">
+              Vite es más rápido, moderno y tiene mejor soporte para Tailwind. 
+              Es la opción recomendada para nuevos proyectos React.
+            </p>
+          </div>
+
+          <h4 style="color: #2e7d32;">Paso 1: Crear el proyecto React con Vite</h4>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code># Crear proyecto
+npm create vite@latest mi-proyecto-tailwind -- --template react
+
+# Entrar al directorio
+cd mi-proyecto-tailwind
+
+</code></pre>
+
+          <h4 style="color: #2e7d32;">Paso 2: Instalar Tailwind CSS</h4>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code># Instalar Tailwind y sus dependencias
+npm install tailwindcss @tailwindcss/vite
+
+</code></pre>
+
+          <h4 style="color: #2e7d32;">Paso 3: Configurar Tailwind</h4>
+          <p style="color: #555;">Edita el archivo <code>tailwind.config.js</code>:</p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>/** @type {import('tailwindcss').Config} */
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+</code></pre>
+
+          <h4 style="color: #2e7d32;">Paso 4: Agregar directivas de Tailwind</h4>
+          <p style="color: #555;">Reemplaza el contenido de <code>src/index.css</code>:</p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>@import "tailwindcss";
+
+</code></pre>
+
+          <h4 style="color: #2e7d32;">Paso 5: ¡Probar que funciona!</h4>
+          <p style="color: #555;">Edita <code>src/App.jsx</code> para probar Tailwind:</p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>function App() {
+  return (
+    &lt;div className="min-h-screen bg-gradient-to-br from-blue-400 to-purple-600 
+                    flex items-center justify-center"&gt;
+      &lt;div className="bg-white rounded-xl shadow-2xl p-8 text-center"&gt;
+        &lt;h1 className="text-4xl font-bold text-gray-800 mb-4"&gt;
+          🎉 ¡Tailwind funciona!
+        &lt;/h1&gt;
+        &lt;p className="text-gray-600 text-lg"&gt;
+          Tu proyecto está listo para crear interfaces increíbles
+        &lt;/p&gt;
+        &lt;button className="mt-6 bg-blue-500 hover:bg-blue-600 
+                           text-white font-semibold py-3 px-6 
+                           rounded-lg transition-colors duration-200
+                           transform hover:scale-105"&gt;
+          ¡Empezar a crear!
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+
+          <h4 style="color: #2e7d32;">Paso 6: Ejecutar el proyecto</h4>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>npm run dev</code></pre>
+
+          <div style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; text-align: center;">
+            <h4 style="margin-top: 0;">🎉 ¡Instalación completada!</h4>
+            <p style="margin: 0;">
+              Si ves una página con un gradiente azul-morado y una tarjeta blanca centrada, 
+              ¡Tailwind está funcionando perfectamente!
+            </p>
+          
+        
+      </details>
+
+    </section>
+
+      <!-- Método 2: Con Create React App 
+      <details style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-warning">⚠️ Método 2: Con Create React App (Método alternativo)</summary>
+        <div class="details-content">
+          
+          <div style="background: #ffebee; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+            <h4 style="color: #d32f2f; margin-top: 0;">📝 Nota importante</h4>
+            <p style="color: #555; margin: 0;">
+              Create React App está en mantenimiento. Se recomienda usar Vite para nuevos proyectos, 
+              pero si ya tienes un proyecto con CRA, aquí está el proceso.
+            </p>
+          </div>
+
+          <h4 style="color: #f57c00;">Paso 1: Crear proyecto con CRA</h4>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>npx create-react-app mi-proyecto-tailwind
+cd mi-proyecto-tailwind</code></pre>
+
+          <h4 style="color: #f57c00;">Paso 2: Instalar Tailwind</h4>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>npm install -D tailwindcss
+npx tailwindcss init</code></pre>
+
+          <h4 style="color: #f57c00;">Paso 3: Configurar tailwind.config.js</h4>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}</code></pre>
+
+          <h4 style="color: #f57c00;">Paso 4: Agregar Tailwind al CSS</h4>
+          <p style="color: #555;">En <code>src/index.css</code>:</p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>@tailwind base;
+@tailwind components;
+@tailwind utilities;</code></pre>
+        </div>
+      </details>-->
+
+      <!-- Verificación de la instalación 
+      <details style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-info">🔍 Verificar que todo funciona correctamente</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #1976d2; margin-top: 0;">✅ Checklist de verificación</h4>
+          
+                   
+           
+
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196f3;">
+              <h5 style="color: #1976d2; margin: 0 0 0.5rem 0;">2. Prueba rápida en el navegador</h5>
+              <p style="color: #555; margin: 0;">
+                Agrega esta clase a cualquier elemento: <code>className="text-red-500"</code>
+                Si el texto se ve rojo, ¡Tailwind funciona!
+              </p>
+            </div>
+
+                   </div>
+
+          <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h4 style="color: #2e7d32; margin-top: 0;">🛠️ Troubleshooting común</h4>
+            
+            <div style="margin: 1rem 0;">
+              <h5 style="color: #1976d2;">❌ Los estilos no se aplican</h5>
+              <ul style="color: #555; margin: 0;">
+                <li>Verifica que agregaste las directivas @tailwind en index.css</li>
+                <li>Asegúrate de que index.css está importado en main.jsx/index.js</li>
+                <li>Revisa que el content en tailwind.config.js incluye tus archivos</li>
+              </ul>
+            </div>
+
+            <div style="margin: 1rem 0;">
+              <h5 style="color: #1976d2;">❌ Error de compilación</h5>
+              <ul style="color: #555; margin: 0;">
+                <li>Reinstala node_modules: <code>rm -rf node_modules && npm install</code></li>
+                <li>Verifica la sintaxis en tailwind.config.js</li>
+                <li>Asegúrate de usar la versión correcta de Node.js (>=14)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+  --> 
+    <!-- SECCIÓN 3: CREANDO COMPONENTES CON TAILWIND -->
+    <!-- ================================================================ -->
+    <div class="container">
+    <section class="card">
+      <h2>🧩 Creando Componentes con Tailwind</h2>
+
+      <p>
+        Ahora que tienes Tailwind instalado, vamos a crear componentes profesionales paso a paso. 
+        Aprenderás las mejores prácticas y patrones de diseño con Tailwind CSS.
+      </p>
+
+      <!-- Conceptos básicos de clases -->
+      <details style="background: #f3e5f5; border: 2px solid #9c27b0; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-primary">📚 Conceptos básicos de clases Tailwind</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #7b1fa2; margin-top: 0;">🎨 ¿Qué son las clases de Tailwind?</h4>
+          <p style="color: #555;">
+        Tailwind CSS funciona usando <strong>clases utilitarias</strong>: cada clase aplica un estilo específico a tu elemento. 
+        No necesitas escribir CSS, solo agregas las clases en el atributo <code>className</code> (en React) o <code>class</code> (en HTML).
+          </p>
+          <p style="color: #555;">
+        Por ejemplo, si quieres que un texto sea rojo y grande, escribes: <code>className="text-red-500 text-xl"</code>.
+          </p>
+          <p style="color: #555;">
+        Aquí tienes los grupos de clases más usados y ejemplos sencillos:
+          </p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+        
+        <!-- Colores -->
+        <div style="background: #ffebee; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f44336;">
+          <h5 style="color: #d32f2f; margin-top: 0;">🎨 Colores</h5>
+          <p style="color: #555; margin-bottom: 0.5rem;">
+            Cambian el color de texto, fondo o bordes.
+          </p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;"><code>// Texto rojo
+    text-red-500
+
+    // Fondo azul
+    bg-blue-600
+
+    // Borde gris
+    border-gray-300</code></pre>
+        </div>
+
+        <!-- Espaciado -->
+        <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4caf50;">
+          <h5 style="color: #2e7d32; margin-top: 0;">📏 Espaciado</h5>
+          <p style="color: #555; margin-bottom: 0.5rem;">
+            Controlan el espacio interno (<strong>padding</strong>) y externo (<strong>margin</strong>).
+          </p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;"><code>// Padding de 1rem (16px)
+    p-4
+
+    // Margen horizontal de 1.5rem (24px)
+    mx-6
+
+    // Espacio entre elementos en un grid/flex
+    gap-4</code></pre>
+        </div>
+
+        <!-- Layout -->
+        <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2196f3;">
+          <h5 style="color: #1976d2; margin-top: 0;">📐 Layout</h5>
+          <p style="color: #555; margin-bottom: 0.5rem;">
+            Organizan la posición y el tamaño de los elementos.
+          </p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;"><code>// Flexbox horizontal
+    flex justify-center items-center
+
+    // Grid de 3 columnas
+    grid grid-cols-3 gap-4
+
+    // Ancho completo
+    w-full
+
+    // Alto de toda la pantalla
+    h-screen</code></pre>
+        </div>
+
+        <!-- Tipografía -->
+        <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ff9800;">
+          <h5 style="color: #f57c00; margin-top: 0;">✍️ Tipografía</h5>
+          <p style="color: #555; margin-bottom: 0.5rem;">
+            Modifican el tamaño, peso y alineación del texto.
+          </p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;"><code>// Texto pequeño
+    text-sm
+
+    // Texto grande
+    text-4xl
+
+    // Negrita
+    font-bold
+
+    // Centrado
+    text-center</code></pre>
+        </div>
+          </div>
+          <div style="background: #e8f5e9; color: #2e7d32; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+        <strong>¿Cómo se usan?</strong> Solo escribe las clases que necesitas en el atributo <code>className</code> (React) o <code>class</code> (HTML). Puedes combinar muchas clases en un solo elemento.
+        <br>
+        <code>&lt;button className="bg-blue-600 text-white px-4 py-2 rounded-lg"&gt;Botón&lt;/button&gt;</code>
+          </div>
+        </div>
+      </details>
+
+      <div style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+        <h4 style="margin-top: 0;">💡 Tip fácil: ¿Cómo funcionan los números en Tailwind?</h4>
+        <p style="margin: 0;">
+          En Tailwind, los números en las clases de espaciado (como <code>p-4</code>, <code>m-2</code>, <code>gap-6</code>) indican el tamaño en pasos de 4px.<br>
+          <strong>Ejemplo:</strong>
+          <ul style="margin: 1rem 0 0 0; padding-left: 1.2rem;">
+        <li><code>p-1</code> = <strong>4px</strong> de padding</li>
+        <li><code>p-2</code> = <strong>8px</strong> de padding</li>
+        <li><code>p-4</code> = <strong>16px</strong> de padding</li>
+        <li><code>p-8</code> = <strong>32px</strong> de padding</li>
+          </ul>
+          <br>
+          <span style="font-size: 0.95em;">Solo recuerda: <strong>cada número</strong> multiplica 4px (<code>número × 4px</code>). Así puedes calcular cualquier clase de espaciado fácilmente.</span>
+        </p>
+      </div>
+
+      <details style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-warning">📋 CHULETA VISUAL — Tailwind CSS para saberlo todo</summary>
+        <div class="details-content">
+          <table style="width:100%; border-collapse:collapse; background:white; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); font-size:0.98em;">
+            <thead>
+              <tr style="background:linear-gradient(90deg,#3b82f6 0%,#6366f1 100%); color:white;">
+                <th style="padding:0.7em; text-align:left; border-bottom:2px solid #e5e7eb;">🔹 Categoría</th>
+                <th style="padding:0.7em; text-align:left; border-bottom:2px solid #e5e7eb;">🧱 Clase Tailwind</th>
+                <th style="padding:0.7em; text-align:left; border-bottom:2px solid #e5e7eb;">🎯 Qué hace</th>
+                <th style="padding:0.7em; text-align:left; border-bottom:2px solid #e5e7eb;">💬 Equivalente CSS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Colores de texto</td><td style="border-right:1px solid #e5e7eb;">text-red-600</td><td style="border-right:1px solid #e5e7eb;">Texto rojo</td><td>color: #dc2626;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">text-gray-700</td><td style="border-right:1px solid #e5e7eb;">Texto gris oscuro</td><td>color: #374151;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">text-white</td><td style="border-right:1px solid #e5e7eb;">Texto blanco</td><td>color: #fff;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Colores de fondo</td><td style="border-right:1px solid #e5e7eb;">bg-blue-500</td><td style="border-right:1px solid #e5e7eb;">Fondo azul medio</td><td>background-color: #3b82f6;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">bg-green-100</td><td style="border-right:1px solid #e5e7eb;">Fondo verde claro</td><td>background-color: #d1fae5;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">bg-black</td><td style="border-right:1px solid #e5e7eb;">Fondo negro</td><td>background-color: black;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Tamaño de texto</td><td style="border-right:1px solid #e5e7eb;">text-sm</td><td style="border-right:1px solid #e5e7eb;">Texto pequeño</td><td>font-size: 0.875rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">text-lg</td><td style="border-right:1px solid #e5e7eb;">Texto grande</td><td>font-size: 1.125rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">text-2xl</td><td style="border-right:1px solid #e5e7eb;">Muy grande</td><td>font-size: 1.5rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Peso de fuente</td><td style="border-right:1px solid #e5e7eb;">font-light</td><td style="border-right:1px solid #e5e7eb;">Fuente fina</td><td>font-weight: 300;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">font-semibold</td><td style="border-right:1px solid #e5e7eb;">Seminegrita</td><td>font-weight: 600;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">font-bold</td><td style="border-right:1px solid #e5e7eb;">Negrita</td><td>font-weight: 700;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="2" style="border-right:1px solid #e5e7eb;">Alineación de texto</td><td style="border-right:1px solid #e5e7eb;">text-center</td><td style="border-right:1px solid #e5e7eb;">Centra el texto</td><td>text-align: center;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">text-right</td><td style="border-right:1px solid #e5e7eb;">Alinea a la derecha</td><td>text-align: right;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Espaciado interno (padding)</td><td style="border-right:1px solid #e5e7eb;">p-4</td><td style="border-right:1px solid #e5e7eb;">16 px en todos los lados</td><td>padding: 1rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">px-8</td><td style="border-right:1px solid #e5e7eb;">Horizontal 32 px</td><td>padding-left/right: 2rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">py-2</td><td style="border-right:1px solid #e5e7eb;">Vertical 8 px</td><td>padding-top/bottom: 0.5rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Espaciado externo (margin)</td><td style="border-right:1px solid #e5e7eb;">m-4</td><td style="border-right:1px solid #e5e7eb;">Margen 16 px</td><td>margin: 1rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">mx-auto</td><td style="border-right:1px solid #e5e7eb;">Centra horizontalmente</td><td>margin: 0 auto;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">mt-8</td><td style="border-right:1px solid #e5e7eb;">Margen superior 32 px</td><td>margin-top: 2rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Bordes y esquinas</td><td style="border-right:1px solid #e5e7eb;">border</td><td style="border-right:1px solid #e5e7eb;">Añade borde 1 px gris</td><td>border: 1px solid #e5e7eb;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">border-2 border-blue-500</td><td style="border-right:1px solid #e5e7eb;">Borde azul 2 px</td><td>border: 2px solid #3b82f6;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">rounded-lg</td><td style="border-right:1px solid #e5e7eb;">Bordes redondeados</td><td>border-radius: 0.5rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Sombras y efectos</td><td style="border-right:1px solid #e5e7eb;">shadow</td><td style="border-right:1px solid #e5e7eb;">Sombra leve</td><td>box-shadow: ...;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">shadow-lg</td><td style="border-right:1px solid #e5e7eb;">Sombra más grande</td><td>box-shadow: ...;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">hover:shadow-xl</td><td style="border-right:1px solid #e5e7eb;">Más sombra al pasar el ratón</td><td>:hover { box-shadow: ... }</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Flexbox (alineación)</td><td style="border-right:1px solid #e5e7eb;">flex</td><td style="border-right:1px solid #e5e7eb;">Activa flexbox</td><td>display: flex;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">items-center</td><td style="border-right:1px solid #e5e7eb;">Centra verticalmente</td><td>align-items: center;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">justify-between</td><td style="border-right:1px solid #e5e7eb;">Espacio entre elementos</td><td>justify-content: space-between;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="2" style="border-right:1px solid #e5e7eb;">Grid (rejilla)</td><td style="border-right:1px solid #e5e7eb;">grid grid-cols-3</td><td style="border-right:1px solid #e5e7eb;">3 columnas iguales</td><td>display: grid; grid-template-columns: repeat(3,1fr);</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">gap-4</td><td style="border-right:1px solid #e5e7eb;">Espacio entre celdas</td><td>gap: 1rem;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Transiciones y efectos</td><td style="border-right:1px solid #e5e7eb;">transition</td><td style="border-right:1px solid #e5e7eb;">Activa transiciones suaves</td><td>transition: all 0.2s;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">hover:scale-105</td><td style="border-right:1px solid #e5e7eb;">Aumenta tamaño al pasar</td><td>transform: scale(1.05);</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">duration-300</td><td style="border-right:1px solid #e5e7eb;">Duración 0.3 s</td><td>transition-duration: 300ms;</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="3" style="border-right:1px solid #e5e7eb;">Responsive (tamaños de pantalla)</td><td style="border-right:1px solid #e5e7eb;">sm:text-sm</td><td style="border-right:1px solid #e5e7eb;">En pantallas pequeñas → texto pequeño</td><td>@media (min-width:640px){…}</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">md:flex</td><td style="border-right:1px solid #e5e7eb;">En pantallas medianas → usa flex</td><td>@media (min-width:768px){display:flex;}</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td style="border-right:1px solid #e5e7eb;">lg:px-12</td><td style="border-right:1px solid #e5e7eb;">En pantallas grandes → más padding</td><td>@media (min-width:1024px){padding:3rem;}</td></tr>
+              <tr style="border-bottom:1px solid #e5e7eb;"><td rowspan="2" style="border-right:1px solid #e5e7eb;">Estados interactivos</td><td style="border-right:1px solid #e5e7eb;">hover:bg-blue-600</td><td style="border-right:1px solid #e5e7eb;">Cambia color al pasar ratón</td><td>:hover { background-color:#2563eb; }</td></tr>
+              <tr><td style="border-right:1px solid #e5e7eb;">focus:ring-2</td><td style="border-right:1px solid #e5e7eb;">Añade aro de enfoque</td><td>:focus { box-shadow:0 0 0 2px … }</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:2rem;">
+            <h4 style="color:#1976d2;">💡 Tips rápidos para recordar</h4>
+            <table style="width:100%; border-collapse:collapse; background:#f8f9fa; border-radius:8px; font-size:0.98em;">
+              <thead>
+                <tr style="background:#e3f2fd;">
+                  <th style="padding:0.6em; text-align:left;">Concepto</th>
+                  <th style="padding:0.6em; text-align:left;">Regla</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>p → padding, m → margin</td><td>px (horizontal), py (vertical)</td></tr>
+                <tr><td>Los números (1–96)</td><td>Escala (4 px × número)</td></tr>
+                <tr><td>Colores</td><td>Van del 50 (claro) al 900 (oscuro)</td></tr>
+                <tr><td>Combina clases</td><td>En un mismo className</td></tr>
+                <tr><td>hover:, focus:</td><td>Efectos interactivos</td></tr>
+                <tr><td>sm:, md:, lg:</td><td>Diseño responsive</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+        
+      </details>
+    
+
+       
+
+      <!-- Sección 2: Dónde encontrar componentes -->
+      <!-- Sección 2: Dónde encontrar componentes -->
+<details style="background:#e3f2fd; border:2px solid #2196f3; border-radius:12px; margin:2rem 0;">
+  <summary class="summary-info">🔍 Dónde conseguir componentes gratuitos para React + Tailwind</summary>
+  <div class="details-content">
+    <h2 style="color:#1976d2; margin-top:0;">2) Cómo encontrar componentes listos para usar</h2>
+
+    <p>
+      Tailwind CSS no trae componentes preconstruidos (como botones, navbars o cards).  
+      Pero existen muchas <strong>galerías gratuitas</strong> donde puedes copiar el código y usarlo directamente en tus proyectos.
+    </p>
+
+   
+    <ul style="margin:1.5rem 0 2rem 0; padding-left:1.2rem;">
+      <li>
+      <a href="https://daisyui.com/components/" target="_blank" rel="noopener">
+        <strong>DaisyUI</strong> — <span style="color:#2e7d32;">Componentes listos para Tailwind</span>
+      </a>
+      <br>
+      <span style="font-size:0.95em; color:#555;">
+        <strong>Nota:</strong> Para usar DaisyUI necesitas tener el archivo <code>tailwind.config.js</code> en la raíz de tu proyecto.<br>
+        Si usas Vite y no lo tienes, créalo con:<br>
+        <code>npx tailwindcss init</code><br>
+        Luego agrega <code>require('daisyui')</code> en <code>plugins</code>.<br>
+        <strong>Ejemplo:</strong>
+        <pre style="background:#f1f1f1; padding:0.5rem; border-radius:6px; font-size:0.9em; margin-top:0.3rem;">
+    // tailwind.config.js
+    module.exports = {
+      content: ["./index.html", "./src/**/*.{js,jsx}"],
+      theme: { extend: {} },
+      plugins: [require("daisyui")],
+    }
+        </pre>
+      </span>
+      <br>
+      <span style="font-size:0.95em; color:#555;">
+        Instala el plugin y copia/pega cualquier componente en tu proyecto React.  
+        <strong>Ideal para empezar rápido</strong> y personalizar fácilmente.
+      </span>
+      </li>
+      <li>
+      <a href="https://tailwindcomponents.com/" target="_blank" rel="noopener">
+        <strong>Tailwind Components</strong> — <span style="color:#1976d2;">Galería de componentes gratuitos</span>
+      </a>
+      <br>
+      <span style="font-size:0.95em; color:#555;">
+        Miles de ejemplos listos para copiar y pegar. Solo adapta <code>class</code> a <code>className</code> para React.
+      </span>
+      </li>
+     
+      <li>
+      <a href="https://hyperui.dev/" target="_blank" rel="noopener">
+        <strong>HyperUI</strong> — <span style="color:#f57c00;">Componentes minimalistas</span>
+      </a>
+      <br>
+      <span style="font-size:0.95em; color:#555;">
+        Componentes modernos y minimalistas, listos para copiar y pegar en tu proyecto.
+      </span>
+      <br>
+      <span style="font-size:0.95em; color:#1976d2;">
+        <strong>Recuerda:</strong> Para usar el código en React, pon el JSX dentro de una función.<br>
+        <strong>Estructura básica de un componente:</strong>
+        <pre style="background:#f1f1f1; padding:0.5rem; border-radius:6px; font-size:0.9em; margin-top:0.3rem;">
+    export default function MiComponente() {
+      return (
+        &lt;div&gt;
+      {/* Tu código JSX aquí */}
+        &lt;/div&gt;
+      );
+    }
+        </pre>
+        Cambia <code>class</code> por <code>className</code> y cierra las etiquetas como <code>&lt;img /&gt;</code>.
+      </span>
+      </li>
+      <li>
+      <strong>Buscar componentes en GitHub</strong> — <span style="color:#0ea5e9;">Repositorios open source</span>
+      <br>
+      <span style="font-size:0.95em; color:#555;">
+        Puedes encontrar cientos de componentes gratuitos buscando en <a href="https://github.com/search?q=tailwind+react+component" target="_blank" rel="noopener">GitHub</a>.  
+        <br>
+        <strong>¿Cómo buscar?</strong> Escribe palabras clave como <code>tailwind react component</code> en el buscador de GitHub.
+        <br>
+        <strong>¿Cómo implementar?</strong>
+        <ol style="margin:0.5em 0 0 1.2em;">
+        <li>Abre el repositorio y revisa la documentación o el README.</li>
+        <li>Copia el código del componente (generalmente archivos <code>.jsx</code>).</li>
+        <li>Pega el código en tu carpeta <code>src/components</code> y adapta <code>class</code> a <code>className</code> si es necesario.</li>
+        <li>Instala dependencias si el componente lo requiere (por ejemplo, ejecuta <code>npm install nombre-paquete</code>).</li>
+        <li>Importa el componente en tu proyecto y úsalo como cualquier otro componente React.</li>
+        </ol>
+        <span style="font-size:0.95em; color:#1976d2;">
+        Tip: Busca componentes populares y revisa los issues/pull requests para asegurarte de que están mantenidos.
+        </span>
+      </span>
+      </li>
+    </ul>
+
+    <div style="background:#e8f5e9; color:#2e7d32; padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
+      <h4 style="margin-top:0;">✅ Opción fácil: instalar <code>daisyui</code></h4>
+      <p>
+        DaisyUI es un <strong>plugin gratuito</strong> que añade decenas de componentes a Tailwind (botones, menús, cards, modales, carruseles, etc.).
+      </p>
+      <p><strong>Instalación:</strong></p>
+      <pre style="background:#2d3748; color:#e2e8f0; padding:0.8rem; border-radius:6px; font-size:0.9em;">
+npm i -D daisyui
+      </pre>
+      <p><strong>Activación en tu proyecto:</strong></p>
+      <pre style="background:#2d3748; color:#e2e8f0; padding:0.8rem; border-radius:6px; font-size:0.9em;">
+// tailwind.config.js
+export default {
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  theme: { extend: {} },
+  plugins: [require("daisyui")],
+}
+      </pre>
+      <p>
+        Una vez añadido, puedes copiar componentes desde  
+        <a href="https://daisyui.com/components/" target="_blank">https://daisyui.com/components/</a>  
+        y pegarlos directamente en tus archivos React (con pequeños ajustes JSX).
+      </p>
+    </div>
+
+    <div style="background:#e3f2fd; border-radius:8px; padding:1rem;">
+      <h4 style="color:#1976d2; margin-top:0;">💡 Cómo adaptar el HTML a JSX</h4>
+      <ul style="color:#333;">
+        <li>Reemplaza <code>class</code> por <code>className</code>.</li>
+        <li>Cierra todas las etiquetas: por ejemplo <code>&lt;img /&gt;</code>, <code>&lt;input /&gt;</code>.</li>
+        <li>Si hay atributos no válidos (como <code>for</code>), cámbialos: <code>htmlFor</code>, <code>tabindex</code> → <code>tabIndex</code>.</li>
+        <li>Guarda el bloque como componente:  
+          <pre style="background:#f1f1f1; padding:0.5rem; border-radius:6px; font-size:0.9em; margin-top:0.3rem;">
+export default function Navbar() {
+  return (
+    &lt;nav className="navbar bg-base-100"&gt;
+      &lt;a className="btn btn-ghost text-xl"&gt;Mi Web&lt;/a&gt;
+    &lt;/nav&gt;
+  )
+}
+          </pre>
+        </li>
+      </ul>
+    </div>
+
+    <div class="callout info" style="margin-top:1.5rem;">
+      <strong>Consejo:</strong> Empieza por componentes simples (navbars, cards, botones).  
+      Copia el HTML, conviértelo a JSX, y luego personaliza los colores o textos.  
+      ¡Así aprenderás Tailwind sin complicarte con librerías grandes!
+    </div>
+
+    <div class="callout success" style="margin-top:1rem;">
+      <strong>Tip avanzado:</strong> Cuando ya domines Tailwind, puedes usar librerías como  
+      <code>@headlessui/react</code> (para menús accesibles) o <code>Flowbite React</code>,  
+      pero al principio no son necesarias.
+    </div>
+  </div>
+</details>
+
+
+      <details style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-info">🔄 Convertir HTML a JSX (React)</summary>
+        <div class="details-content">
+
+            <!-- Sección 3: convertir HTML -> JSX (manual) -->
+            <section class="card">
+            <h2>3) Convertir el HTML a un componente React — <span class="tag">CAMINO MANUAL</span></h2>
+
+            <div class="split" style="display: flex; flex-direction: column; gap: 2rem;">
+              <div style="min-width: 300px;">
+              <h3>HTML copiado de la galería</h3>
+              <div class="before">
+          <pre><code>&lt;header class="bg-white border-b shadow-sm"&gt;
+          &lt;div class="mx-auto max-w-6xl flex justify-between items-center p-4"&gt;
+            &lt;h1 class="text-2xl font-bold text-blue-600"&gt;Mi Web&lt;/h1&gt;
+            &lt;nav class="space-x-4"&gt;
+            &lt;a href="#" class="text-gray-600 hover:text-blue-600"&gt;Inicio&lt;/a&gt;
+            &lt;a href="#" class="text-gray-600 hover:text-blue-600"&gt;Servicios&lt;/a&gt;
+            &lt;a href="#" class="text-gray-600 hover:text-blue-600"&gt;Contacto&lt;/a&gt;
+            &lt;/nav&gt;
+          &lt;/div&gt;
+          &lt;/header&gt;</code></pre>
+              </div>
+              </div>
+              <div style="min-width: 300px;">
+              <h3>El mismo código en JSX (React)</h3>
+              <div class="after">
+          <pre><code>export default function Header() {
+          return (
+            &lt;header className="bg-white border-b shadow-sm"&gt;
+            &lt;div className="mx-auto max-w-6xl flex justify-between items-center p-4"&gt;
+              &lt;h1 className="text-2xl font-bold text-blue-600"&gt;Mi Web&lt;/h1&gt;
+              &lt;nav className="space-x-4"&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600"&gt;Inicio&lt;/a&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600"&gt;Servicios&lt;/a&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600"&gt;Contacto&lt;/a&gt;
+              &lt;/nav&gt;
+            &lt;/div&gt;
+            &lt;/header&gt;
+          );
+          }</code></pre>
+              </div>
+              </div>
+            </div>
+
+            <h3>Reglas rápidas (memoriza estas 6)</h3>
+            <ol>
+              <li><code>class</code> → <code>className</code></li>
+              <li><code>for</code> (en <code>&lt;label&gt;</code>) → <code>htmlFor</code></li>
+              <li>Etiquetas sueltas se cierran: <code>&lt;img /&gt;</code>, <code>&lt;input /&gt;</code>, <code>&lt;br /&gt;</code></li>
+              <li>Enlaza imágenes/recursos válidos (o añade <code>alt</code> en <code>&lt;img /&gt;</code>)</li>
+              <li>Eventos se escriben en camelCase: <code>onClick</code>, <code>onChange</code>…</li>
+              <li>Si ves <code>class="..."</code> dentro de SVG, también cambia a <code>className</code></li>
+            </ol>
+
+            <div class="callout danger" style="background: #ffebee; color: #d32f2f; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+              Si pegas HTML con scripts inline (<code>onClick="..."</code>) o <code>&lt;script&gt;</code> embebidos, migra esa lógica a funciones de React (no pegues JS inline en JSX).
+            </div>
+            <h3>Ejemplo práctico: convertir un botón HTML a JSX</h3>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+              <div style="min-width: 300px;">
+                <h4>HTML original</h4>
+                <pre><code>&lt;button class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"&gt;
+              Comprar ahora
+            &lt;/button&gt;</code></pre>
+              </div>
+              <div style="min-width: 300px;">
+                <h4>JSX en React</h4>
+                <pre><code>export default function Boton() {
+              return (
+                &lt;button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"&gt;
+                  Comprar ahora
+                &lt;/button&gt;
+              );
+            }</code></pre>
+              </div>
+            </div>
+            <ul>
+              <li><strong>Paso 1:</strong> Cambia <code>class</code> por <code>className</code>.</li>
+              <li><strong>Paso 2:</strong> Coloca el HTML dentro de una función que retorna el JSX.</li>
+              <li><strong>Paso 3:</strong> Si el botón tiene eventos (<code>onclick</code>), usa <code>onClick</code> y pasa una función de JavaScript.</li>
+            </ul>
+            <div class="callout info" style="margin-top:1rem;">
+              <strong>Tip:</strong> Siempre revisa los atributos (<code>class</code>, <code>for</code>, etc.) y cierra las etiquetas como <code>&lt;img /&gt;</code> en JSX.
+            </div>
+            </section>
+
+          <!-- Sección 4: convertir HTML -> JSX (automático) -->
+          <section class="card">
+            <h2>4) Convertir el HTML a JSX — <span class="tag">CAMINO AUTOMÁTICO</span></h2>
+            <p>Pega el HTML en uno de estos conversores y copia el JSX resultante:</p>
+            <ul class="links">
+              <li><a href="https://transform.tools/html-to-jsx" target="_blank" rel="noopener">transform.tools — HTML → JSX</a></li>
+              <li><a href="https://magic.reactjs.net/htmltojsx.htm" target="_blank" rel="noopener">magic.reactjs.net — HTML to JSX</a></li>
+            </ul>
+
+            <div class="grid two" style="display: flex; gap: 1rem; margin-top:10px">
+              <div class="callout" style="background: #e8f5e9; color: #2e7d32; padding: 1rem; border-radius: 8px;">
+                <strong>Pro tip:</strong> Tras convertir, revisa rápido <code>className</code>, <code>htmlFor</code> y etiquetas autocerradas.
+              </div>
+              <div class="callout warn" style="background: #fff3e0; color: #f57c00; padding: 1rem; border-radius: 8px;">
+                Si el conversor falla con SVGs complejos, conviértelo por partes (container + iconos) o haz el ajuste manual.
+              </div>
+            </div>
+          </section>
+        </div>
+      </details>
+
+      <details style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-info">🟦 Componente uno: Header  sencillo</summary>
+        <div class="details-content">
+          <h4 style="color: #1976d2; margin-top: 0;">🔹 Header minimalista con Tailwind</h4>
+          <p style="color: #555;">
+            Si solo necesitas un header básico, este ejemplo es ideal para proyectos pequeños o landing pages.
+          </p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; font-size: 0.9rem;"><code>export default function Header() {
+        return (
+          &lt;header className="bg-white border-b shadow-sm"&gt;
+            &lt;div className="mx-auto max-w-6xl flex justify-between items-center p-4"&gt;
+              &lt;h1 className="text-2xl font-bold text-blue-600"&gt;Mi Web&lt;/h1&gt;
+              &lt;nav className="space-x-4"&gt;
+                &lt;a href="#" className="text-gray-600 hover:text-blue-600"&gt;Inicio&lt;/a&gt;
+                &lt;a href="#" className="text-gray-600 hover:text-blue-600"&gt;Servicios&lt;/a&gt;
+                &lt;a href="#" className="text-gray-600 hover:text-blue-600"&gt;Contacto&lt;/a&gt;
+              &lt;/nav&gt;
+            &lt;/div&gt;
+          &lt;/header&gt;
+        );
+      }</code></pre>
+          <div style="background: #e8f5e9; color: #2e7d32; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+            <strong>Tip:</strong> Puedes usar este header como punto de partida y añadir más elementos según lo necesites.
+          </div>
+        </div>
+      </details>
+
+      <!-- COMPONENTE 1: HEADER -->
+      <details style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-success">🎯 Componente 1: Header Profesional</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #2e7d32; margin-top: 0;">🏗️ Creando un Header moderno</h4>
+          
+          <p style="color: #555;">
+            Vamos a crear un header responsivo con logo, navegación y botón de acción. 
+            Aprenderás sobre flexbox, responsive design y hover effects.
+          </p>
+
+          <h5 style="color: #1976d2;">📂 Estructura del archivo</h5>
+          <p style="color: #555;">Crea el archivo <code>src/components/Header.jsx</code>:</p>
+
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; font-size: 0.8rem; line-height: 1.4;"><code>import React, { useState } from 'react';
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    &lt;header className="bg-white shadow-lg sticky top-0 z-50"&gt;
+      &lt;div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;
+        &lt;div className="flex justify-between items-center h-16"&gt;
+          
+          {/* Logo */}
+          &lt;div className="flex-shrink-0"&gt;
+            &lt;div className="flex items-center"&gt;
+              &lt;div className="h-8 w-8 bg-gradient-to-r from-blue-500 to-purple-600 
+                              rounded-lg flex items-center justify-center"&gt;
+                &lt;span className="text-white font-bold text-sm"&gt;MI&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span className="ml-2 text-xl font-bold text-gray-800"&gt;
+                MiEmpresa
+              &lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          {/* Navegación Desktop */}
+          &lt;nav className="hidden md:block"&gt;
+            &lt;div className="ml-10 flex items-baseline space-x-4"&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600 
+                                     px-3 py-2 rounded-md text-sm font-medium
+                                     transition-colors duration-200"&gt;
+                Inicio
+              &lt;/a&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600 
+                                     px-3 py-2 rounded-md text-sm font-medium
+                                     transition-colors duration-200"&gt;
+                Servicios
+              &lt;/a&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600 
+                                     px-3 py-2 rounded-md text-sm font-medium
+                                     transition-colors duration-200"&gt;
+                Sobre Nosotros
+              &lt;/a&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600 
+                                     px-3 py-2 rounded-md text-sm font-medium
+                                     transition-colors duration-200"&gt;
+                Contacto
+              &lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/nav&gt;
+
+          {/* Botón CTA Desktop */}
+          &lt;div className="hidden md:block"&gt;
+            &lt;button className="bg-blue-600 hover:bg-blue-700 text-white 
+                               px-4 py-2 rounded-lg text-sm font-medium
+                               transition-colors duration-200
+                               transform hover:scale-105"&gt;
+              Empezar Ahora
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          {/* Botón menú móvil */}
+          &lt;div className="md:hidden"&gt;
+            &lt;button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-600 hover:text-gray-800 focus:outline-none"
+            &gt;
+              &lt;svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;
+                {isMenuOpen ? (
+                  &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                        d="M6 18L18 6M6 6l12 12" /&gt;
+                ) : (
+                  &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                        d="M4 6h16M4 12h16M4 18h16" /&gt;
+                )}
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Menú móvil */}
+        {isMenuOpen && (
+          &lt;div className="md:hidden"&gt;
+            &lt;div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 rounded-lg mt-2"&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600 
+                                     block px-3 py-2 rounded-md text-base font-medium"&gt;
+                Inicio
+              &lt;/a&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600 
+                                     block px-3 py-2 rounded-md text-base font-medium"&gt;
+                Servicios
+              &lt;/a&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600 
+                                     block px-3 py-2 rounded-md text-base font-medium"&gt;
+                Sobre Nosotros
+              &lt;/a&gt;
+              &lt;a href="#" className="text-gray-600 hover:text-blue-600 
+                                     block px-3 py-2 rounded-md text-base font-medium"&gt;
+                Contacto
+              &lt;/a&gt;
+              &lt;button className="w-full text-left bg-blue-600 hover:bg-blue-700 
+                                 text-white px-3 py-2 rounded-md text-base font-medium
+                                 mt-2 transition-colors duration-200"&gt;
+                Empezar Ahora
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/header&gt;
+  );
+};
+
+export default Header;</code></pre>
+
+          <h5 style="color: #1976d2;">🎨 Análisis del código</h5>
+          
+          <div style="display: grid; gap: 1rem; margin: 2rem 0;">
+            
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196f3;">
+              <h6 style="color: #1976d2; margin: 0 0 0.5rem 0;">🔹 Layout y estructura</h6>
+              <ul style="color: #555; margin: 0; font-size: 0.9rem;">
+                <li><code>sticky top-0 z-50</code>: Header fijo al hacer scroll</li>
+                <li><code>max-w-7xl mx-auto</code>: Ancho máximo centrado</li>
+                <li><code>flex justify-between items-center</code>: Layout horizontal</li>
+                <li><code>h-16</code>: Altura consistente del header</li>
+              </ul>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #4caf50;">
+              <h6 style="color: #2e7d32; margin: 0 0 0.5rem 0;">📱 Responsive design</h6>
+              <ul style="color: #555; margin: 0; font-size: 0.9rem;">
+                <li><code>hidden md:block</code>: Ocultar en móvil, mostrar en desktop</li>
+                <li><code>md:hidden</code>: Mostrar solo en móvil</li>
+                <li><code>sm:px-6 lg:px-8</code>: Padding responsivo</li>
+              </ul>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff9800;">
+              <h6 style="color: #f57c00; margin: 0 0 0.5rem 0;">✨ Interactividad</h6>
+              <ul style="color: #555; margin: 0; font-size: 0.9rem;">
+                <li><code>hover:text-blue-600</code>: Color al pasar el mouse</li>
+                <li><code>transition-colors duration-200</code>: Transiciones suaves</li>
+                <li><code>transform hover:scale-105</code>: Efecto de escala</li>
+                <li>Estado <code>isMenuOpen</code> para el menú móvil</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h4 style="margin-top: 0;">🎯 Uso del componente</h4>
+            <p style="margin-bottom: 1rem;">Para usar este header en tu App.jsx:</p>
+            <pre style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 6px; margin: 0;"><code>import Header from './components/Header';
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      {/* Resto de tu aplicación */}
+    &lt;/div&gt;
+  );
+}</code></pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- COMPONENTE 2: CARRUSEL -->
+      <details style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-warning">🎠 Componente 2: Carrusel de Imágenes</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #f57c00; margin-top: 0;">🎡 Carrusel moderno con navegación</h4>
+          
+          <p style="color: #555;">
+            Vamos a crear un carrusel elegante con navegación automática, botones de control 
+            y indicadores. Aprenderás sobre animaciones CSS y gestión de estado.
+          </p>
+
+          <h5 style="color: #1976d2;">📂 Crear el archivo</h5>
+          <p style="color: #555;">Crea <code>src/components/Carousel.jsx</code>:</p>
+
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; font-size: 0.8rem; line-height: 1.4;"><code>import React, { useState, useEffect } from 'react';
+
+const Carousel = ({ images, autoPlay = true, interval = 5000 }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!autoPlay) return;
+
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [currentIndex, autoPlay, interval, images.length]);
+
+  const goToPrevious = () => {
+    setCurrentIndex(
+      currentIndex === 0 ? images.length - 1 : currentIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentIndex(
+      currentIndex === images.length - 1 ? 0 : currentIndex + 1
+    );
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  return (
+    &lt;div className="relative w-full max-w-4xl mx-auto bg-white rounded-xl 
+                    shadow-2xl overflow-hidden"&gt;
+      
+      {/* Contenedor de imágenes */}
+      &lt;div className="relative h-64 md:h-96 overflow-hidden"&gt;
+        {images.map((image, index) => (
+          &lt;div
+            key={index}
+            className={`absolute inset-0 transition-transform duration-500 ease-in-out
+                        ${index === currentIndex 
+                          ? 'translate-x-0' 
+                          : index < currentIndex 
+                            ? '-translate-x-full' 
+                            : 'translate-x-full'
+                        }`}
+          &gt;
+            &lt;img
+              src={image.src}
+              alt={image.alt}
+              className="w-full h-full object-cover"
+            /&gt;
+            
+            {/* Overlay con información */}
+            &lt;div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent
+                            flex items-end p-6"&gt;
+              &lt;div className="text-white"&gt;
+                &lt;h3 className="text-xl md:text-2xl font-bold mb-2"&gt;
+                  {image.title}
+                &lt;/h3&gt;
+                &lt;p className="text-sm md:text-base opacity-90"&gt;
+                  {image.description}
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+
+      {/* Botón anterior */}
+      &lt;button
+        onClick={goToPrevious}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2
+                   bg-white/20 hover:bg-white/30 backdrop-blur-sm
+                   text-white p-2 rounded-full
+                   transition-all duration-200 hover:scale-110
+                   focus:outline-none focus:ring-2 focus:ring-white/50"
+      &gt;
+        &lt;svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;
+          &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                d="M15 19l-7-7 7-7" /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+
+      {/* Botón siguiente */}
+      &lt;button
+        onClick={goToNext}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2
+                   bg-white/20 hover:bg-white/30 backdrop-blur-sm
+                   text-white p-2 rounded-full
+                   transition-all duration-200 hover:scale-110
+                   focus:outline-none focus:ring-2 focus:ring-white/50"
+      &gt;
+        &lt;svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;
+          &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                d="M9 5l7 7-7 7" /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+
+      {/* Indicadores */}
+      &lt;div className="absolute bottom-4 left-1/2 transform -translate-x-1/2
+                      flex space-x-2"&gt;
+        {images.map((_, index) => (
+          &lt;button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-200
+                        ${index === currentIndex
+                          ? 'bg-white scale-110'
+                          : 'bg-white/50 hover:bg-white/75'
+                        }`}
+          /&gt;
+        ))}
+      &lt;/div&gt;
+
+      {/* Contador */}
+      &lt;div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm
+                      text-white px-3 py-1 rounded-full text-sm"&gt;
+        {currentIndex + 1} / {images.length}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Carousel;</code></pre>
+
+          <h5 style="color: #1976d2;">🎯 Cómo usar el carrusel</h5>
+          <p style="color: #555;">Ejemplo de uso en tu componente:</p>
+          
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>import Carousel from './components/Carousel';
+
+const carouselImages = [
+  {
+    src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
+    alt: 'Naturaleza',
+    title: 'Conecta con la naturaleza',
+    description: 'Descubre paisajes increíbles y momentos únicos'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800',
+    alt: 'Aventura',
+    title: 'Vive la aventura',
+    description: 'Experiencias que transforman tu perspectiva'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+    alt: 'Tranquilidad',
+    title: 'Encuentra la paz',
+    description: 'Momentos de calma en un mundo acelerado'
+  }
+];
+
+function App() {
+  return (
+    &lt;div className="p-8"&gt;
+      &lt;Carousel 
+        images={carouselImages}
+        autoPlay={true}
+        interval={4000}
+      /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h5 style="color: #1976d2;">🔧 Características avanzadas</h5>
+          
+          <div style="display: grid; gap: 1rem; margin: 2rem 0;">
+            
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #4caf50;">
+              <h6 style="color: #2e7d32; margin: 0 0 0.5rem 0;">✨ Funcionalidades incluidas</h6>
+              <ul style="color: #555; margin: 0; font-size: 0.9rem;">
+                <li><strong>Auto-play:</strong> Cambio automático de imágenes</li>
+                <li><strong>Navegación:</strong> Botones anterior/siguiente</li>
+                <li><strong>Indicadores:</strong> Puntos para navegar directamente</li>
+                <li><strong>Contador:</strong> Posición actual / total</li>
+                <li><strong>Overlay:</strong> Información sobre cada imagen</li>
+                <li><strong>Responsive:</strong> Se adapta a diferentes pantallas</li>
+              </ul>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196f3;">
+              <h6 style="color: #1976d2; margin: 0 0 0.5rem 0;">🎨 Efectos visuales</h6>
+              <ul style="color: #555; margin: 0; font-size: 0.9rem;">
+                <li><code>transition-transform duration-500</code>: Transiciones suaves</li>
+                <li><code>backdrop-blur-sm</code>: Efecto de desenfoque</li>
+                <li><code>bg-gradient-to-t from-black/50</code>: Gradiente de overlay</li>
+                <li><code>hover:scale-110</code>: Escala al hover</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h4 style="margin-top: 0;">💡 Personalización avanzada</h4>
+            <p style="margin: 0;">
+              Puedes personalizar el intervalo de auto-play, desactivarlo completamente, 
+              cambiar los colores de los indicadores, y modificar las transiciones. 
+              ¡Todo está preparado para ser customizable!
+            </p>
+          </div>
+        </div>
+      </details>
+
+    
+
+      <!-- COMPONENTE 3: GALERÍA -->
+      <details style="background: #f3e5f5; border: 2px solid #9c27b0; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-primary">🖼️ Componente 3: Galería de Imágenes</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #7b1fa2; margin-top: 0;">📸 Galería responsiva con filtros</h4>
+          
+          <p style="color: #555;">
+            Crearemos una galería moderna con efectos hover, modal de zoom y sistema de filtros. 
+            Aprenderás sobre CSS Grid, estados complejos y portal modals.
+          </p>
+
+          <h5 style="color: #1976d2;">📂 Crear el archivo</h5>
+          <p style="color: #555;">Crea <code>src/components/Gallery.jsx</code>:</p>
+
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; font-size: 0.8rem; line-height: 1.4;"><code>import React, { useState } from 'react';
+
+const Gallery = ({ images }) => {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Obtener categorías únicas
+  const categories = ['all', ...new Set(images.map(img => img.category))];
+
+  // Filtrar imágenes por categoría
+  const filteredImages = selectedCategory === 'all' 
+    ? images 
+    : images.filter(img => img.category === selectedCategory);
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
+  return (
+    &lt;div className="w-full max-w-7xl mx-auto p-6"&gt;
+      
+      {/* Header de la galería */}
+      &lt;div className="text-center mb-8"&gt;
+        &lt;h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"&gt;
+          🎨 Nuestra Galería
+        &lt;/h2&gt;
+        &lt;p className="text-gray-600 text-lg max-w-2xl mx-auto"&gt;
+          Explora nuestra colección de imágenes organizadas por categorías. 
+          Haz clic en cualquier imagen para verla en detalle.
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      {/* Filtros */}
+      &lt;div className="flex flex-wrap justify-center gap-3 mb-8"&gt;
+        {categories.map((category) => (
+          &lt;button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            className={`px-6 py-2 rounded-full font-medium transition-all duration-300
+                        ${selectedCategory === category
+                          ? 'bg-blue-600 text-white shadow-lg transform scale-105'
+                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105'
+                        }`}
+          &gt;
+            {category === 'all' ? 'Todas' : category.charAt(0).toUpperCase() + category.slice(1)}
+          &lt;/button&gt;
+        ))}
+      &lt;/div&gt;
+
+      {/* Grid de imágenes */}
+      &lt;div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
+                      gap-4 md:gap-6"&gt;
+        {filteredImages.map((image, index) => (
+          &lt;div
+            key={index}
+            className="group relative overflow-hidden rounded-xl shadow-lg 
+                       cursor-pointer transform transition-all duration-300
+                       hover:scale-105 hover:shadow-2xl"
+            onClick={() => openModal(image)}
+          &gt;
+            &lt;div className="aspect-square overflow-hidden"&gt;
+              &lt;img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover transition-transform duration-300
+                           group-hover:scale-110"
+              /&gt;
+            &lt;/div&gt;
+            
+            {/* Overlay con información */}
+            &lt;div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                            flex items-end p-4"&gt;
+              &lt;div className="text-white"&gt;
+                &lt;h3 className="font-semibold text-lg mb-1"&gt;{image.title}&lt;/h3&gt;
+                &lt;p className="text-sm opacity-90"&gt;{image.description}&lt;/p&gt;
+                &lt;span className="inline-block bg-blue-500 text-xs px-2 py-1 
+                                 rounded-full mt-2"&gt;
+                  {image.category}
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            {/* Icono de zoom */}
+            &lt;div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm
+                            rounded-full p-2 opacity-0 group-hover:opacity-100
+                            transition-opacity duration-300"&gt;
+              &lt;svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;
+                &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+
+      {/* Contador de imágenes */}
+      &lt;div className="text-center mt-8"&gt;
+        &lt;p className="text-gray-600"&gt;
+          Mostrando &lt;span className="font-semibold text-blue-600"&gt;{filteredImages.length}&lt;/span&gt; 
+          {filteredImages.length === 1 ? ' imagen' : ' imágenes'}
+          {selectedCategory !== 'all' && (
+            &lt;&gt; en la categoría &lt;span className="font-semibold text-blue-600"&gt;{selectedCategory}&lt;/span&gt;&lt;/&gt;
+          )}
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      {/* Modal */}
+      {selectedImage && (
+        &lt;div className="fixed inset-0 bg-black/90 flex items-center justify-center 
+                        z-50 p-4 animate-fadeIn"
+             onClick={closeModal}&gt;
+          &lt;div className="relative max-w-4xl max-h-[90vh] bg-white rounded-xl 
+                          overflow-hidden shadow-2xl"
+               onClick={(e) => e.stopPropagation()}&gt;
+            
+            {/* Botón cerrar */}
+            &lt;button
+              onClick={closeModal}
+              className="absolute top-4 right-4 bg-black/50 hover:bg-black/70
+                         text-white rounded-full p-2 z-10
+                         transition-colors duration-200"
+            &gt;
+              &lt;svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;
+                &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                      d="M6 18L18 6M6 6l12 12" /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+
+            {/* Imagen grande */}
+            &lt;img
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              className="w-full h-auto max-h-[70vh] object-contain"
+            /&gt;
+
+            {/* Información */}
+            &lt;div className="p-6 bg-white"&gt;
+              &lt;h3 className="text-2xl font-bold text-gray-800 mb-2"&gt;
+                {selectedImage.title}
+              &lt;/h3&gt;
+              &lt;p className="text-gray-600 mb-4"&gt;
+                {selectedImage.description}
+              &lt;/p&gt;
+              &lt;div className="flex items-center gap-4"&gt;
+                &lt;span className="bg-blue-100 text-blue-800 px-3 py-1 
+                                 rounded-full text-sm font-medium"&gt;
+                  {selectedImage.category}
+                &lt;/span&gt;
+                &lt;span className="text-gray-500 text-sm"&gt;
+                  📅 {selectedImage.date || 'Fecha no disponible'}
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )}
+
+      &lt;style jsx&gt;{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+      `}&lt;/style&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Gallery;</code></pre>
+
+          <h5 style="color: #1976d2;">🎯 Datos de ejemplo para la galería</h5>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>const galleryImages = [
+  {
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400',
+    alt: 'Paisaje montañoso',
+    title: 'Montañas al Amanecer',
+    description: 'Vista espectacular de las montañas durante el amanecer',
+    category: 'naturaleza',
+    date: '2024-01-15'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400',
+    alt: 'Arquitectura moderna',
+    title: 'Edificio Corporativo',
+    description: 'Arquitectura moderna en el distrito financiero',
+    category: 'arquitectura',
+    date: '2024-02-20'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?w=400',
+    alt: 'Retrato profesional',
+    title: 'Ejecutiva Confiada',
+    description: 'Retrato profesional en ambiente corporativo',
+    category: 'retratos',
+    date: '2024-03-10'
+  },
+  // Agregar más imágenes...
+];
+
+// Uso en tu componente
+&lt;Gallery images={galleryImages} /&gt;</code></pre>
+
+          <div style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h4 style="margin-top: 0;">✨ Características de la galería</h4>
+            <ul style="margin: 0;">
+              <li><strong>Sistema de filtros:</strong> Por categorías dinámicas</li>
+              <li><strong>Grid responsivo:</strong> 1-4 columnas según pantalla</li>
+              <li><strong>Efectos hover:</strong> Zoom y overlay de información</li>
+              <li><strong>Modal de zoom:</strong> Vista detallada de cada imagen</li>
+              <li><strong>Contador dinámico:</strong> Muestra cantidad filtrada</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- COMPONENTE 4: TARJETAS -->
+      <details style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-info">🃏 Componente 4: Tarjetas (Cards)</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #1976d2; margin-top: 0;">💳 Tarjetas modernas para contenido</h4>
+          
+          <p style="color: #555;">
+            Las tarjetas son uno de los componentes más versátiles. Vamos a crear diferentes 
+            tipos: básicas, con imágenes, de producto y de testimonios.
+          </p>
+
+          <h5 style="color: #1976d2;">📂 Componente base de tarjeta</h5>
+          <p style="color: #555;">Crea <code>src/components/Card.jsx</code>:</p>
+
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; font-size: 0.8rem; line-height: 1.4;"><code>import React from 'react';
+
+// Componente base de tarjeta
+const Card = ({ children, className = '', hover = true, ...props }) => {
+  return (
+    &lt;div
+      className={`bg-white rounded-xl shadow-lg overflow-hidden
+                  ${hover ? 'transition-all duration-300 hover:shadow-2xl hover:-translate-y-2' : ''}
+                  ${className}`}
+      {...props}
+    &gt;
+      {children}
+    &lt;/div&gt;
+  );
+};
+
+// Tarjeta de producto
+const ProductCard = ({ product }) => {
+  return (
+    &lt;Card className="max-w-sm"&gt;
+      {/* Imagen del producto */}
+      &lt;div className="relative overflow-hidden"&gt;
+        &lt;img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 object-cover transition-transform duration-300 
+                     hover:scale-110"
+        /&gt;
+        
+        {/* Badge de descuento */}
+        {product.discount && (
+          &lt;div className="absolute top-4 left-4 bg-red-500 text-white 
+                          px-2 py-1 rounded-full text-sm font-bold"&gt;
+            -{product.discount}%
+          &lt;/div&gt;
+        )}
+
+        {/* Botón favorito */}
+        &lt;button className="absolute top-4 right-4 bg-white/80 hover:bg-white
+                           text-gray-600 hover:text-red-500 
+                           p-2 rounded-full transition-colors duration-200"&gt;
+          &lt;svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"&gt;
+            &lt;path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      {/* Contenido */}
+      &lt;div className="p-6"&gt;
+        {/* Categoría */}
+        &lt;span className="text-blue-600 text-sm font-medium uppercase tracking-wide"&gt;
+          {product.category}
+        &lt;/span&gt;
+        
+        {/* Nombre del producto */}
+        &lt;h3 className="text-xl font-bold text-gray-800 mt-2 mb-3"&gt;
+          {product.name}
+        &lt;/h3&gt;
+        
+        {/* Descripción */}
+        &lt;p className="text-gray-600 text-sm mb-4"&gt;
+          {product.description}
+        &lt;/p&gt;
+
+        {/* Rating */}
+        &lt;div className="flex items-center mb-4"&gt;
+          &lt;div className="flex text-yellow-400"&gt;
+            {[...Array(5)].map((_, i) => (
+              &lt;svg key={i} className={`w-4 h-4 ${i < product.rating ? 'fill-current' : 'text-gray-300'}`} viewBox="0 0 20 20"&gt;
+                &lt;path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /&gt;
+              &lt;/svg&gt;
+            ))}
+          &lt;/div&gt;
+          &lt;span className="text-gray-600 text-sm ml-2"&gt;
+            ({product.reviews} reseñas)
+          &lt;/span&gt;
+        &lt;/div&gt;
+
+        {/* Precio y botón */}
+        &lt;div className="flex items-center justify-between"&gt;
+          &lt;div className="flex items-center gap-2"&gt;
+            &lt;span className="text-2xl font-bold text-gray-800"&gt;
+              ${product.price}
+            &lt;/span&gt;
+            {product.originalPrice && (
+              &lt;span className="text-gray-500 line-through"&gt;
+                ${product.originalPrice}
+              &lt;/span&gt;
+            )}
+          &lt;/div&gt;
+          
+          &lt;button className="bg-blue-600 hover:bg-blue-700 text-white 
+                             px-4 py-2 rounded-lg font-medium
+                             transition-colors duration-200
+                             transform hover:scale-105"&gt;
+            Agregar
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/Card&gt;
+  );
+};
+
+// Tarjeta de testimonio
+const TestimonialCard = ({ testimonial }) => {
+  return (
+    &lt;Card className="max-w-md"&gt;
+      &lt;div className="p-6"&gt;
+        {/* Comillas */}
+        &lt;div className="text-blue-500 text-4xl font-bold mb-4"&gt;"&lt;/div&gt;
+        
+        {/* Testimonio */}
+        &lt;p className="text-gray-700 text-lg italic mb-6 leading-relaxed"&gt;
+          {testimonial.text}
+        &lt;/p&gt;
+
+        {/* Información del cliente */}
+        &lt;div className="flex items-center"&gt;
+          &lt;img
+            src={testimonial.avatar}
+            alt={testimonial.name}
+            className="w-12 h-12 rounded-full object-cover mr-4"
+          /&gt;
+          &lt;div&gt;
+            &lt;h4 className="font-semibold text-gray-800"&gt;
+              {testimonial.name}
+            &lt;/h4&gt;
+            &lt;p className="text-gray-600 text-sm"&gt;
+              {testimonial.role} en {testimonial.company}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Rating de estrellas */}
+        &lt;div className="flex justify-center mt-4 text-yellow-400"&gt;
+          {[...Array(testimonial.rating)].map((_, i) => (
+            &lt;svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"&gt;
+              &lt;path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /&gt;
+            &lt;/svg&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/Card&gt;
+  );
+};
+
+// Tarjeta de servicio
+const ServiceCard = ({ service }) => {
+  return (
+    &lt;Card className="text-center"&gt;
+      &lt;div className="p-8"&gt;
+        {/* Icono */}
+        &lt;div className="inline-flex items-center justify-center w-16 h-16 
+                        bg-gradient-to-r from-blue-500 to-purple-600 
+                        rounded-full mb-6"&gt;
+          &lt;span className="text-2xl"&gt;{service.icon}&lt;/span&gt;
+        &lt;/div&gt;
+
+        {/* Título */}
+        &lt;h3 className="text-xl font-bold text-gray-800 mb-4"&gt;
+          {service.title}
+        &lt;/h3&gt;
+
+        {/* Descripción */}
+        &lt;p className="text-gray-600 mb-6 leading-relaxed"&gt;
+          {service.description}
+        &lt;/p&gt;
+
+        {/* Lista de características */}
+        &lt;ul className="text-left mb-6 space-y-2"&gt;
+          {service.features.map((feature, index) => (
+            &lt;li key={index} className="flex items-center text-gray-700"&gt;
+              &lt;svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"&gt;
+                &lt;path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /&gt;
+              &lt;/svg&gt;
+              {feature}
+            &lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+
+        {/* Botón de acción */}
+        &lt;button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 
+                           hover:from-blue-600 hover:to-purple-700
+                           text-white font-semibold py-3 px-6 rounded-lg
+                           transition-all duration-200 transform hover:scale-105"&gt;
+          Saber más
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/Card&gt;
+  );
+};
+
+export { Card, ProductCard, TestimonialCard, ServiceCard };</code></pre>
+
+          <h5 style="color: #1976d2;">🎯 Datos de ejemplo para las tarjetas</h5>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>// Datos de ejemplo
+const products = [
+  {
+    id: 1,
+    name: 'Smartphone Pro Max',
+    description: 'El smartphone más avanzado con cámara profesional y batería de larga duración.',
+    price: 999,
+    originalPrice: 1199,
+    discount: 17,
+    category: 'Tecnología',
+    rating: 5,
+    reviews: 234,
+    image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400'
+  }
+];
+
+const testimonials = [
+  {
+    name: 'María González',
+    role: 'CEO',
+    company: 'TechStart',
+    text: 'Increíble servicio, superó todas mis expectativas. El equipo fue profesional y los resultados excepcionales.',
+    rating: 5,
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100'
+  }
+];
+
+const services = [
+  {
+    icon: '🚀',
+    title: 'Desarrollo Web',
+    description: 'Creamos sitios web modernos y aplicaciones web optimizadas para tu negocio.',
+    features: ['Responsive Design', 'SEO Optimizado', 'Alta Performance', 'Soporte 24/7']
+  }
+];
+
+// Uso de los componentes
+&lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"&gt;
+  {products.map(product => (
+    &lt;ProductCard key={product.id} product={product} /&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+
+          <div style="background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h4 style="margin-top: 0;">🎨 Variaciones de tarjetas creadas</h4>
+            <ul style="margin: 0;">
+              <li><strong>ProductCard:</strong> Para e-commerce con precio, rating y botones</li>
+              <li><strong>TestimonialCard:</strong> Para mostrar reseñas y testimonios</li>
+              <li><strong>ServiceCard:</strong> Para servicios con características y CTA</li>
+              <li><strong>Card base:</strong> Componente reutilizable para otros usos</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- COMPONENTE 5: FOOTER -->
+      <details style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-success">🦶 Componente 5: Footer Completo</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #2e7d32; margin-top: 0;">📄 Footer profesional con múltiples secciones</h4>
+          
+          <p style="color: #555;">
+            El footer es crucial para la navegación y credibilidad. Crearemos uno con enlaces, 
+            redes sociales, suscripción a newsletter y información de contacto.
+          </p>
+
+          <h5 style="color: #1976d2;">📂 Crear el archivo</h5>
+          <p style="color: #555;">Crea <code>src/components/Footer.jsx</code>:</p>
+
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; font-size: 0.8rem; line-height: 1.4;"><code>import React, { useState } from 'react';
+
+const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail('');
+      setTimeout(() => setSubscribed(false), 3000);
+    }
+  };
+
+  const currentYear = new Date().getFullYear();
+
+  return (
+    &lt;footer className="bg-gray-900 text-white"&gt;
+      {/* Sección principal del footer */}
+      &lt;div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"&gt;
+        &lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"&gt;
+          
+          {/* Información de la empresa */}
+          &lt;div className="lg:col-span-1"&gt;
+            &lt;div className="flex items-center mb-4"&gt;
+              &lt;div className="h-10 w-10 bg-gradient-to-r from-blue-500 to-purple-600 
+                              rounded-lg flex items-center justify-center mr-3"&gt;
+                &lt;span className="text-white font-bold"&gt;MI&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span className="text-2xl font-bold"&gt;MiEmpresa&lt;/span&gt;
+            &lt;/div&gt;
+            
+            &lt;p className="text-gray-300 mb-6 leading-relaxed"&gt;
+              Creamos soluciones digitales innovadoras que impulsan el crecimiento 
+              de tu negocio. Tecnología de vanguardia con un enfoque humano.
+            &lt;/p&gt;
+
+            {/* Redes sociales */}
+            &lt;div className="flex space-x-4"&gt;
+              {[
+                { name: 'Facebook', icon: '📘', href: '#' },
+                { name: 'Twitter', icon: '🐦', href: '#' },
+                { name: 'LinkedIn', icon: '💼', href: '#' },
+                { name: 'Instagram', icon: '📷', href: '#' }
+              ].map((social) => (
+                &lt;a
+                  key={social.name}
+                  href={social.href}
+                  className="bg-gray-800 hover:bg-gray-700 p-3 rounded-full
+                             transition-colors duration-200 transform hover:scale-110"
+                  aria-label={social.name}
+                &gt;
+                  &lt;span className="text-xl"&gt;{social.icon}&lt;/span&gt;
+                &lt;/a&gt;
+              ))}
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          {/* Enlaces rápidos */}
+          &lt;div&gt;
+            &lt;h3 className="text-lg font-semibold mb-6"&gt;Enlaces Rápidos&lt;/h3&gt;
+            &lt;ul className="space-y-3"&gt;
+              {[
+                'Inicio',
+                'Sobre Nosotros',
+                'Servicios',
+                'Portfolio',
+                'Blog',
+                'Contacto'
+              ].map((link) => (
+                &lt;li key={link}&gt;
+                  &lt;a
+                    href="#"
+                    className="text-gray-300 hover:text-white transition-colors duration-200
+                               hover:underline"
+                  &gt;
+                    {link}
+                  &lt;/a&gt;
+                &lt;/li&gt;
+              ))}
+            &lt;/ul&gt;
+          &lt;/div&gt;
+
+          {/* Servicios */}
+          &lt;div&gt;
+            &lt;h3 className="text-lg font-semibold mb-6"&gt;Servicios&lt;/h3&gt;
+            &lt;ul className="space-y-3"&gt;
+              {[
+                'Desarrollo Web',
+                'Aplicaciones Móviles',
+                'E-commerce',
+                'SEO y Marketing',
+                'Consultoría',
+                'Mantenimiento'
+              ].map((service) => (
+                &lt;li key={service}&gt;
+                  &lt;a
+                    href="#"
+                    className="text-gray-300 hover:text-white transition-colors duration-200
+                               hover:underline"
+                  &gt;
+                    {service}
+                  &lt;/a&gt;
+                &lt;/li&gt;
+              ))}
+            &lt;/ul&gt;
+          &lt;/div&gt;
+
+          {/* Newsletter */}
+          &lt;div&gt;
+            &lt;h3 className="text-lg font-semibold mb-6"&gt;Newsletter&lt;/h3&gt;
+            &lt;p className="text-gray-300 mb-4"&gt;
+              Suscríbete para recibir las últimas noticias y ofertas especiales.
+            &lt;/p&gt;
+
+            &lt;form onSubmit={handleSubscribe} className="mb-4"&gt;
+              &lt;div className="flex flex-col sm:flex-row gap-2"&gt;
+                &lt;input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="tu@email.com"
+                  className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 
+                             rounded-lg focus:outline-none focus:ring-2 
+                             focus:ring-blue-500 focus:border-transparent
+                             text-white placeholder-gray-400"
+                  required
+                /&gt;
+                &lt;button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 px-6 py-2 
+                             rounded-lg font-medium transition-colors duration-200
+                             transform hover:scale-105"
+                &gt;
+                  Suscribirse
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+
+            {/* Mensaje de éxito */}
+            {subscribed && (
+              &lt;div className="bg-green-600 text-white px-4 py-2 rounded-lg 
+                              text-sm animate-pulse"&gt;
+                ✅ ¡Suscripción exitosa!
+              &lt;/div&gt;
+            )}
+
+            {/* Información de contacto */}
+            &lt;div className="mt-6 space-y-2 text-gray-300"&gt;
+              &lt;div className="flex items-center"&gt;
+                &lt;span className="mr-2"&gt;📍&lt;/span&gt;
+                &lt;span&gt;123 Calle Principal, Ciudad&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div className="flex items-center"&gt;
+                &lt;span className="mr-2"&gt;📞&lt;/span&gt;
+                &lt;span&gt;+1 (555) 123-4567&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div className="flex items-center"&gt;
+                &lt;span className="mr-2"&gt;✉️&lt;/span&gt;
+                &lt;span&gt;info@miempresa.com&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* Línea divisoria */}
+      &lt;div className="border-t border-gray-800"&gt;&lt;/div&gt;
+
+      {/* Sección inferior */}
+      &lt;div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6"&gt;
+        &lt;div className="flex flex-col md:flex-row justify-between items-center"&gt;
+          
+          {/* Copyright */}
+          &lt;div className="text-gray-400 text-sm mb-4 md:mb-0"&gt;
+            © {currentYear} MiEmpresa. Todos los derechos reservados.
+          &lt;/div&gt;
+
+          {/* Enlaces legales */}
+          &lt;div className="flex space-x-6 text-sm"&gt;
+            {[
+              'Política de Privacidad',
+              'Términos de Servicio',
+              'Cookies'
+            ].map((link) => (
+              &lt;a
+                key={link}
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors duration-200"
+              &gt;
+                {link}
+              &lt;/a&gt;
+            ))}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* Scroll to top button */}
+      &lt;button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 
+                   text-white p-3 rounded-full shadow-lg
+                   transition-all duration-200 transform hover:scale-110
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        aria-label="Volver arriba"
+      &gt;
+        &lt;svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;
+          &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                d="M5 10l7-7m0 0l7 7m-7-7v18" /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/footer&gt;
+  );
+};
+
+export default Footer;</code></pre>
+
+          <div style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h4 style="margin-top: 0;">🌟 Características del Footer</h4>
+            <ul style="margin: 0;">
+              <li><strong>Responsive:</strong> Se adapta de columna única a 4 columnas</li>
+              <li><strong>Newsletter:</strong> Formulario funcional con validación</li>
+              <li><strong>Redes sociales:</strong> Enlaces con efectos hover</li>
+              <li><strong>Scroll to top:</strong> Botón flotante para volver arriba</li>
+              <li><strong>Información completa:</strong> Contacto, enlaces y legal</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+    <!-- ================================================================ -->
+    <!-- SECCIÓN 4: EXPORTAR Y ORGANIZAR COMPONENTES -->
+    <!-- ================================================================ -->
+
+    <section class="card">
+      <h2>🎨 Cómo definir estilos propios en Tailwind CSS</h2>
+      <p>
+        Cuando usas Tailwind CSS, la mayoría de los estilos se aplican mediante clases utilitarias directamente en los componentes. Sin embargo, puedes personalizar aún más tus componentes añadiendo estilos propios, ya sea de forma <strong>inline</strong> o en <strong>archivos CSS externos</strong>.
+      </p>
+
+      <details style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-info">🔍 ¿Cómo funcionan los estilos entre padres e hijos?</summary>
+        <div class="details-content">
+          <h4 style="color: #1976d2; margin-top: 0;">🧩 Principio de cascada y superposición</h4>
+          <p style="color: #555;">
+            En CSS (y Tailwind), los <strong>estilos de los hijos</strong> pueden <strong>superponerse</strong> o sobrescribir los estilos de los padres si usan propiedades similares. Por ejemplo, si el padre tiene <code>bg-blue-500</code> y el hijo <code>bg-red-500</code>, el hijo se verá rojo aunque el padre sea azul.
+          </p>
+          <div style="display: flex; gap: 2rem; margin-top: 1rem;">
+            <div style="flex:1;">
+              <h5 style="color: #2196f3;">Ejemplo visual</h5>
+              <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>&lt;div className="bg-blue-500 p-6"&gt;
+      &lt;div className="bg-red-500 p-4"&gt;
+        Soy el hijo (fondo rojo)
+      &lt;/div&gt;
+    &lt;/div&gt;</code></pre>
+            </div>
+            <div style="flex:1;">
+              <div style="background: #e8f5e9; color: #2e7d32; padding: 1rem; border-radius: 8px;">
+                <strong>Resultado:</strong> El padre tiene fondo azul, pero el hijo se verá con fondo rojo porque su estilo se superpone.
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-warning">✍️ Cambiar estilos usando <strong>inline style</strong></summary>
+        <div class="details-content">
+          <h4 style="color: #f57c00; margin-top: 0;">🔹 Estilos inline en React</h4>
+          <p style="color: #555;">
+            Puedes añadir estilos personalizados directamente en el componente usando el atributo <code>style</code> de React. Estos estilos tienen prioridad sobre las clases de Tailwind si afectan la misma propiedad.
+          </p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>&lt;button
+      className="bg-blue-500 text-white px-4 py-2 rounded"
+      style={{ backgroundColor: '#ff9800', color: '#222' }}
+    &gt;
+      Botón personalizado
+    &lt;/button&gt;</code></pre>
+          <div style="background: #e8f5e9; color: #2e7d32; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+            <strong>Tip:</strong> El <code>style</code> en React recibe un objeto JS. Aquí el fondo será naranja (<code>#ff9800</code>) y el texto oscuro, aunque la clase de Tailwind diga azul y blanco.
+          </div>
+        </div>
+      </details>
+
+      <details style="background: #f3e5f5; border: 2px solid #9c27b0; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-primary">🗂️ Cambiar estilos usando <strong>CSS externo</strong></summary>
+        <div class="details-content">
+          <h4 style="color: #7b1fa2; margin-top: 0;">🔹 Personalización con archivos CSS</h4>
+          <p style="color: #555;">
+            Puedes crear un archivo CSS propio y definir clases personalizadas. Luego, combínalas con las clases de Tailwind en tus componentes.
+          </p>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>/* styles/custom.css */
+    .mi-boton-personalizado {
+      background: linear-gradient(90deg, #ff9800 0%, #f57c00 100%);
+      color: #fff;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }</code></pre>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>// En tu componente React
+    import './styles/custom.css';
+
+    &lt;button className="mi-boton-personalizado px-6 py-3 font-bold hover:scale-105 transition"&gt;
+      Botón con estilo propio
+    &lt;/button&gt;</code></pre>
+          <div style="background: #e8f5e9; color: #2e7d32; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+            <strong>Tip:</strong> Si tu clase personalizada afecta la misma propiedad que Tailwind, el orden de las clases y la <code>especificidad</code> de CSS decidirán cuál se aplica. Las clases externas suelen tener prioridad si son más específicas.
+          </div>
+        </div>
+      </details>
+
+      <div style="background: linear-gradient(135deg, #2196f3 0%, #9c27b0 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+        <h4 style="margin-top: 0;">💡 Resumen didáctico</h4>
+        <ul style="margin: 0;">
+          <li>Las clases de los hijos sobrescriben los estilos de los padres si afectan la misma propiedad.</li>
+          <li>Puedes personalizar componentes con <strong>inline style</strong> (React) o <strong>CSS externo</strong>.</li>
+          <li>Combina clases de Tailwind y clases propias para máxima flexibilidad.</li>
+          <li>El orden y la especificidad de CSS determinan qué estilo se aplica si hay conflicto.</li>
+        </ul>
+        <p style="margin-top: 1rem;">
+          ¡Así puedes adaptar cualquier componente Tailwind a tu propio diseño y necesidades!
+        </p>
+      </div>
+    </section>
+    <section class="card">
+      <h2>📦 Exportar y Organizar Componentes</h2>
+
+      <p>
+        Ahora que tienes todos los componentes creados, vamos a organizarlos correctamente 
+        y crear un sistema de exports limpio para facilitar su uso en toda la aplicación.
+      </p>
+
+      <details style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-warning">📁 Estructura de carpetas recomendada</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #f57c00; margin-top: 0;">🗂️ Organización profesional de componentes</h4>
+          
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>src/
+├── components/
+│   ├── ui/                    // Componentes básicos reutilizables
+│   │   ├── Card.jsx
+│   │   ├── Button.jsx
+│   │   └── index.js          // Barrel exports
+│   ├── layout/               // Componentes de layout
+│   │   ├── Header.jsx
+│   │   ├── Footer.jsx
+│   │   └── index.js
+│   ├── features/             // Componentes específicos
+│   │   ├── Gallery.jsx
+│   │   ├── Carousel.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── TestimonialCard.jsx
+│   │   ├── ServiceCard.jsx
+│   │   └── index.js
+│   └── index.js              // Export principal
+├── pages/                    // Páginas completas
+├── hooks/                    // Custom hooks
+├── utils/                    // Utilidades
+└── styles/                   // CSS adicionales</code></pre>
+
+          <h5 style="color: #1976d2;">📄 Archivo src/components/ui/index.js</h5>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>// Barrel exports para componentes UI
+export { Card } from './Card';
+export { default as Button } from './Button';
+// Agregar más exports según necesites</code></pre>
+
+          <h5 style="color: #1976d2;">📄 Archivo src/components/layout/index.js</h5>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>// Exports de layout
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';</code></pre>
+
+          <h5 style="color: #1976d2;">📄 Archivo src/components/features/index.js</h5>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>// Exports de features
+export { default as Gallery } from './Gallery';
+export { default as Carousel } from './Carousel';
+export { ProductCard, TestimonialCard, ServiceCard } from './Card';</code></pre>
+
+          <h5 style="color: #1976d2;">📄 Archivo src/components/index.js (Principal)</h5>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>// Export principal de todos los componentes
+export * from './ui';
+export * from './layout';
+export * from './features';
+
+// Esto permite importar así:
+// import { Header, Footer, Gallery, Card } from './components';</code></pre>
+        </div>
+      </details>
+
+      <details style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-success">🎯 Ejemplo de aplicación completa</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #2e7d32; margin-top: 0;">🏗️ App.jsx usando todos los componentes</h4>
+          
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; font-size: 0.8rem; line-height: 1.4;"><code>import React from 'react';
+import { 
+  Header, 
+  Footer, 
+  Gallery, 
+  Carousel,
+  ProductCard,
+  TestimonialCard,
+  ServiceCard 
+} from './components';
+
+// Datos de ejemplo
+const carouselImages = [
+  {
+    src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
+    alt: 'Naturaleza',
+    title: 'Conecta con la naturaleza',
+    description: 'Descubre paisajes increíbles'
+  },
+  // Más imágenes...
+];
+
+const galleryImages = [
+  {
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400',
+    alt: 'Paisaje',
+    title: 'Montañas al Amanecer',
+    description: 'Vista espectacular de las montañas',
+    category: 'naturaleza',
+    date: '2024-01-15'
+  },
+  // Más imágenes...
+];
+
+const products = [
+  {
+    id: 1,
+    name: 'Smartphone Pro Max',
+    description: 'El smartphone más avanzado',
+    price: 999,
+    originalPrice: 1199,
+    discount: 17,
+    category: 'Tecnología',
+    rating: 5,
+    reviews: 234,
+    image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400'
+  },
+  // Más productos...
+];
+
+const testimonials = [
+  {
+    name: 'María González',
+    role: 'CEO',
+    company: 'TechStart',
+    text: 'Increíble servicio, superó todas mis expectativas.',
+    rating: 5,
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100'
+  },
+  // Más testimonios...
+];
+
+const services = [
+  {
+    icon: '🚀',
+    title: 'Desarrollo Web',
+    description: 'Sitios web modernos y optimizados',
+    features: ['Responsive Design', 'SEO Optimizado', 'Alta Performance']
+  },
+  // Más servicios...
+];
+
+function App() {
+  return (
+    &lt;div className="min-h-screen bg-gray-50"&gt;
+      {/* Header */}
+      &lt;Header /&gt;
+
+      {/* Hero Section con Carrusel */}
+      &lt;section className="py-16"&gt;
+        &lt;div className="max-w-7xl mx-auto px-4"&gt;
+          &lt;Carousel 
+            images={carouselImages}
+            autoPlay={true}
+            interval={5000}
+          /&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {/* Sección de Servicios */}
+      &lt;section className="py-16 bg-white"&gt;
+        &lt;div className="max-w-7xl mx-auto px-4"&gt;
+          &lt;h2 className="text-3xl font-bold text-center text-gray-800 mb-12"&gt;
+            Nuestros Servicios
+          &lt;/h2&gt;
+          &lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"&gt;
+            {services.map((service, index) => (
+              &lt;ServiceCard key={index} service={service} /&gt;
+            ))}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {/* Sección de Productos */}
+      &lt;section className="py-16 bg-gray-50"&gt;
+        &lt;div className="max-w-7xl mx-auto px-4"&gt;
+          &lt;h2 className="text-3xl font-bold text-center text-gray-800 mb-12"&gt;
+            Productos Destacados
+          &lt;/h2&gt;
+          &lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"&gt;
+            {products.map((product) => (
+              &lt;ProductCard key={product.id} product={product} /&gt;
+            ))}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {/* Galería */}
+      &lt;section className="py-16 bg-white"&gt;
+        &lt;Gallery images={galleryImages} /&gt;
+      &lt;/section&gt;
+
+      {/* Testimonios */}
+      &lt;section className="py-16 bg-gray-50"&gt;
+        &lt;div className="max-w-7xl mx-auto px-4"&gt;
+          &lt;h2 className="text-3xl font-bold text-center text-gray-800 mb-12"&gt;
+            Lo que dicen nuestros clientes
+          &lt;/h2&gt;
+          &lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"&gt;
+            {testimonials.map((testimonial, index) => (
+              &lt;TestimonialCard key={index} testimonial={testimonial} /&gt;
+            ))}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {/* Footer */}
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+
+          <div style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h4 style="margin-top: 0;">🎉 ¡Aplicación completa con Tailwind!</h4>
+            <p style="margin: 0;">
+              Con este código tienes una aplicación web completa que incluye todos los componentes 
+              que hemos creado: header responsivo, carrusel automático, galería con filtros, 
+              tarjetas de productos y servicios, testimonios y footer con newsletter.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; margin: 2rem 0;">
+        <summary class="summary-info">💡 Tips y mejores prácticas</summary>
+        <div class="details-content">
+          
+          <h4 style="color: #1976d2; margin-top: 0;">🚀 Consejos profesionales para Tailwind</h4>
+          
+          <div style="display: grid; gap: 1.5rem; margin: 2rem 0;">
+            
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4caf50;">
+              <h5 style="color: #2e7d32; margin-top: 0;">✅ Mejores prácticas</h5>
+              <ul style="color: #555; margin: 0;">
+                <li>Usa el sistema de design integrado (espaciado, colores)</li>
+                <li>Aprovecha las clases responsive (sm:, md:, lg:, xl:)</li>
+                <li>Combina hover: y focus: para mejor UX</li>
+                <li>Usa transition-* para animaciones suaves</li>
+                <li>Agrupa clases relacionadas para mejor legibilidad</li>
+              </ul>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ff9800;">
+              <h5 style="color: #f57c00; margin-top: 0;">⚠️ Errores comunes a evitar</h5>
+              <ul style="color: #555; margin: 0;">
+                <li>No uses !important en CSS personalizado</li>
+                <li>Evita valores arbitrarios cuando hay clases predefinidas</li>
+                <li>No duplicates estilos que Tailwind ya maneja</li>
+                <li>No olvides configurar el purge/content correctamente</li>
+              </ul>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2196f3;">
+              <h5 style="color: #1976d2; margin-top: 0;">🔧 Personalización avanzada</h5>
+              <ul style="color: #555; margin: 0;">
+                <li>Extiende el theme en tailwind.config.js para colores customizados</li>
+                <li>Crea componentes de clases con @apply para patrones repetidos</li>
+                <li>Usa plugins oficiales para funcionalidades extra</li>
+                <li>Configura variables CSS para valores dinámicos</li>
+              </ul>
+            </div>
+          </div>
+
+          <h5 style="color: #1976d2;">🎨 Ejemplo de personalización del theme</h5>
+          <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;"><code>// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#eff6ff',
+          500: '#3b82f6',
+          900: '#1e3a8a',
+        }
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+      }
+    },
+  },
+}</code></pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- CONCLUSIÓN -->
+    <!-- ================================================================ -->
+    <section class="card">
+      <h2>🎉 Conclusión</h2>
+
+      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem; border-radius: 16px; margin: 2rem 0; text-align: center;">
+        <h3 style="margin-top: 0; font-size: 2rem;">🏆 ¡Felicitaciones!</h3>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+          Has completado el curso completo de Tailwind CSS con React
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0;">
+          
+          <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🎨</div>
+            <h4 style="margin: 0 0 1rem 0;">Diseño Moderno</h4>
+            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">
+              Dominas las técnicas para crear interfaces atractivas y profesionales
+            </p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
+            <h4 style="margin: 0 0 1rem 0;">Desarrollo Rápido</h4>
+            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">
+              Puedes crear interfaces complejas en tiempo récord
+            </p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">📱</div>
+            <h4 style="margin: 0 0 1rem 0;">Responsive First</h4>
+            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">
+              Tus aplicaciones se adaptan perfectamente a cualquier dispositivo
+            </p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🔧</div>
+            <h4 style="margin: 0 0 1rem 0;">Componentes Pro</h4>
+            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">
+              Tienes una biblioteca de componentes reutilizables y escalables
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+        <h4 style="color: #1976d2; margin-top: 0; text-align: center;">📚 Lo que has aprendido</h4>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+          
+          <div>
+            <h5 style="color: #2e7d32; margin-bottom: 1rem;">🎯 Fundamentos</h5>
+            <ul style="color: #555; margin: 0; font-size: 0.9rem; line-height: 1.6;">
+              <li>Qué es Tailwind CSS y sus ventajas</li>
+              <li>Instalación y configuración</li>
+              <li>Sistema de clases utility-first</li>
+              <li>Responsive design con breakpoints</li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 style="color: #1976d2; margin-bottom: 1rem;">🧩 Componentes</h5>
+            <ul style="color: #555; margin: 0; font-size: 0.9rem; line-height: 1.6;">
+              <li>Header responsivo con navegación</li>
+              <li>Carrusel automático con controles</li>
+              <li>Galería con filtros y modal</li>
+              <li>Tarjetas para diferentes usos</li>
+              <li>Footer completo con newsletter</li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 style="color: #f57c00; margin-bottom: 1rem;">⚡ Técnicas Avanzadas</h5>
+            <ul style="color: #555; margin: 0; font-size: 0.9rem; line-height: 1.6;">
+              <li>Efectos hover y transiciones</li>
+              <li>Gradientes y backdrop filters</li>
+              <li>Animaciones CSS personalizadas</li>
+              <li>Organización de componentes</li>
+              <li>Mejores prácticas de desarrollo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin: 3rem 0;">
+        <h4 style="color: #1976d2; margin-bottom: 1rem;">🚀 ¡Sigue practicando!</h4>
+        <p style="color: #555; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+          Ahora tienes todas las herramientas para crear interfaces web modernas y profesionales. 
+          El siguiente paso es practicar con proyectos reales y explorar las funcionalidades avanzadas de Tailwind CSS.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer>
+    <p>© 2025 Curso de React con Tailwind CSS - Creando interfaces modernas paso a paso</p>
+  </footer>
+</body>
+</html>

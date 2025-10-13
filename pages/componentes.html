@@ -13,27 +13,27 @@
       <p>De HTML "normal" a JSX + piezas reutilizables</p>
       
       <!-- Menú de navegación -->
+      <!-- Menú de navegación -->
+       <!-- Navegación principal -->
       <nav class="main-nav">
         <a href="../index.html" class="nav-link">🏠 Inicio</a>
-        <a href="intro.html" class="nav-link">📦 Día 1</a>
-        <a href="#" class="nav-link active">🧩 Día 2</a>
-        <a href="props.html" class="nav-link">🚀 Día 3</a>
-       <!--- <a href="estados.html" class="nav-link">⚡ Día 4</a>
-        <a href="proyecto.html" class="nav-link">🏁 Día 5</a>
-        <a href="rutas.html" class="nav-link extra">🧭 Extra</a>-->
+        <a href="intro.html" class="nav-link">📚 Introducción</a>
+        <a href="componentes.html" class="nav-link active">🧩 Componentes</a>
+        <a href="estados.html" class="nav-link">⚡ Estados</a>       
+        <a href="tailwin.html" class="nav-link ">🎨 Tailwind</a>
       </nav>
       
-      <!-- Migas de pan -->
+      <!-- Breadcrumb -->
       <div class="breadcrumb">
-        <a href="../index.html">🏠 Inicio</a>
-        <span class="breadcrumb-separator">→</span>
-        <span class="breadcrumb-current">🧩 Día 2: JSX y Componentes</span>
+        <a href="../index.html">Curso React</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">Componentes</span>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <!-- Pregunta clave -->
+    <!-- Pregunta clave 
     <section>
       <h2>🤔 La Gran Pregunta: ¿Qué es JSX?</h2>
       <div class="card">
@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <!-- Comparación visual -->
+     Comparación visual 
     <section>
       <h2>👀 JSX vs HTML: ¿En qué se parecen y en qué se diferencian?</h2>
       <div class="card">
@@ -100,7 +100,7 @@
       </div>
     </section>
 
-    <!-- El superpoder de JSX -->
+     El superpoder de JSX 
     <section>
       <h2>🦸‍♀️ El Superpoder de JSX: Mezclar HTML con JavaScript</h2>
       <div class="card">
@@ -167,7 +167,7 @@
       </div>
     </section>
 
-    <!-- Componentes: el corazón de React -->
+     Componentes: el corazón de React -->
     <section>
       <h2>🧩 Componentes: Las Piezas de LEGO de tu Aplicación</h2>
       <div class="card">
@@ -403,9 +403,9 @@ export default Header;</code></pre>
         <p>¡Excelente! Ya tienes tu componente Header creado. Ahora viene la parte emocionante: <strong>¡usarlo en tu aplicación!</strong></p>
         
         <p>Como buen desarrollador React, vamos a crear una página <code>Home.jsx</code> que será nuestra página principal. Esta página importará y usará nuestro componente Header.</p>
+        <p>Crea una carpeta Pages y dentro colocaremos nuestras páginas. Recuerda que siempre trabajamos en src</p>
+        <h4>📁 Crea los archivos dentro de la carpeta Pages Home.jsx y Home.css</h4>
         
-        <h4>📁 Crea los archivos Home.jsx y Home.css</h4>
-        <p>En tu carpeta <code>src/</code>, crea <strong>dos archivos</strong> (al mismo nivel que App.jsx):</p>
         <ol>
           <li><code>Home.jsx</code> - El componente React</li>
           <li><code>Home.css</code> - Los estilos de la página home</li>
@@ -594,15 +594,11 @@ export default Home;</code></pre>
           </div>
         </details>
 
-        <h4>🔧 Paso final: Actualizar App.jsx</h4>
+        <h4>🔧 Penúltimo paso: Actualizar App.jsx</h4>
         <p>¡Perfecto! Ya tienes tu componente Home funcionando. Ahora necesitas actualizar <code>App.jsx</code> para que use React Router y permita la navegación entre páginas.</p>
+
         
-        <p><strong>📋 Requisitos previos:</strong></p>
-        <ol>
-          <li>Mueve tu archivo <code>Home.jsx</code> a una carpeta <code>src/pages/</code></li>
-          <li>Mueve tu archivo <code>Home.css</code> también a <code>src/pages/</code></li>
-          <li>Instala React Router: <code>npm install react-router-dom</code></li>
-        </ol>
+       
 
         <details>
           <summary class="summary-section summary-primary">🗺️ Código completo de App.jsx con rutas (Click para ver/ocultar)</summary>
@@ -681,11 +677,11 @@ export default App;</code></pre>
               <li><strong>Desarrollo progresivo:</strong> Páginas temporales mientras construyes</li>
             </ul>
 
-            <p><strong>🚀 Resultado:</strong> ¡Ahora tienes una aplicación React funcional con navegación real entre páginas!</p>
+            
           </div>
         </details>
 
-        <h4>📋 Paso crucial: Actualizar main.jsx</h4>
+        <h4>📋 Último paso: Actualizar main.jsx</h4>
         <p>Para que las rutas funcionen, también necesitas actualizar <code>main.jsx</code>. Este archivo es <strong>súper importante</strong> porque es el punto de entrada de toda tu aplicación React.</p>
 
         <details>
@@ -1011,10 +1007,167 @@ createRoot(document.getElementById('root')).render(
 
         <p style="text-align: center; font-size: 1.2rem; font-weight: bold; color: #28a745; margin-top: 2rem;">
           🎉 ¡Acabas de ver tu primera aplicacion en react! 🎉<br>
-          <em style="font-size: 1rem; color: #666;">Has creado tu primera aplicación con componentes, rutas y navegación profesional.</em>
+          <em style="font-size: 1rem; color: #666;">Has creado tu primera aplicación con tu primer componente reutilizable.</em>
         </p>
       </div>
     </section>
+
+    <!-- ============================================================ -->
+        <!-- 📚 CUADRO EXPLICATIVO: NOMENCLATURA EN REACT -->
+        <!-- ============================================================ -->
+        <div style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+          <h4 style="color: white; margin-top: 0; text-align: center;">📝 Nomenclatura en React: Las reglas de oro</h4>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+            
+            <!-- Componentes -->
+            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; backdrop-filter: blur(10px);">
+              <h5 style="color: #ffeaa7; margin-top: 0;">🧩 Componentes de React</h5>
+               <strong>Nota:</strong> El nombre del archivo debe coincidir con el nombre del Componente<br>
+              <ul style="color: white; line-height: 1.6; margin: 0;">
+                <li><strong>✅ Correcto:</strong> <code>Header.jsx</code></li>
+                <li><strong>✅ Correcto:</strong> <code>Tarjeta.jsx</code></li>
+                <li><strong>✅ Correcto:</strong> <code>Home.jsx</code></li>
+                <li><strong>❌ Incorrecto:</strong> <code>header.jsx</code></li>
+                <li><strong>❌ Incorrecto:</strong> <code>tarjeta.jsx</code></li>
+              </ul>
+              <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-size: 0.9rem;">
+                <strong>Regla:</strong> PascalCase (primera letra mayúscula)<br>
+               
+                <span>
+                  Ejemplo con dos palabras <code>NombreUsuario</code><br>
+                  Ejemplo con una palabra <code>Usuario</code>
+                  Ejemplo de tres palabras <code>TarjetaProductoDestacado</code>
+                </span>
+              </div>
+            </div>
+
+            <!-- Archivos CSS -->
+            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; backdrop-filter: blur(10px);">
+              <h5 style="color: #55a3ff; margin-top: 0;">🎨 Archivos CSS</h5>
+              <ul style="color: white; line-height: 1.6; margin: 0;">
+                <li><strong>✅ Correcto:</strong> <code>Header.css</code></li>
+                <li><strong>✅ Correcto:</strong> <code>Tarjeta.css</code></li>
+                <li><strong>✅ Correcto:</strong> <code>Home.css</code></li>
+                <li><strong>⚠️ También vale:</strong> <code>header.css</code></li>
+                <li><strong>⚠️ También vale:</strong> <code>tarjeta.css</code></li>
+              </ul>
+              <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-size: 0.9rem;">
+                <strong>Regla:</strong> Coincide con el nombre del componente
+              </div>
+            </div>
+
+            <!-- Variables y funciones -->
+            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; backdrop-filter: blur(10px);">
+              <h5 style="color: #fd79a8; margin-top: 0;">⚡ Variables y funciones</h5>
+              <ul style="color: white; line-height: 1.6; margin: 0;">
+                <li><strong>✅ Correcto:</strong> <code>const miVariable</code></li>
+                <li><strong>✅ Correcto:</strong> <code>const productos</code></li>
+                <li><strong>✅ Correcto:</strong> <code>function miFuncion()</code></li>
+                <li><strong>❌ Incorrecto:</strong> <code>const MiVariable</code></li>
+                <li><strong>❌ Incorrecto:</strong> <code>const mi_variable</code></li>
+              </ul>
+              <div style="background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-size: 0.9rem;">
+                <strong>Regla:</strong> camelCase (primera letra minúscula)
+              </div>
+            </div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center;">
+            <strong style="color: #ffeaa7;">💡 Tip del profesor:</strong> La consistencia en nomenclatura es clave para trabajar en equipo y mantener código limpio
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 🛠️ CUADRO EXPLICATIVO: COMANDOS Y ESTRUCTURA -->
+        <!-- ============================================================ -->
+        <div style="background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+          <h4 style="color: white; margin-top: 0; text-align: center;">🛠️ Comandos utilizados y estructura de proyecto</h4>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 1.5rem 0;">
+            
+            <!-- Comandos NPM -->
+            <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+              <h5 style="color: #ffeaa7; margin-top: 0;">⚡ Comandos ejecutados</h5>
+              
+              <div style="background: #2d3436; padding: 1rem; border-radius: 6px; margin: 1rem 0; font-family: 'Courier New', monospace;">
+                <div style="color: #74b9ff; margin-bottom: 0.5rem;"># 1. Crear proyecto React</div>
+                <div style="color: white;">npm create vite@latest mi-app -- --template react</div>
+              </div>
+              
+              <div style="background: #2d3436; padding: 1rem; border-radius: 6px; margin: 1rem 0; font-family: 'Courier New', monospace;">
+                <div style="color: #74b9ff; margin-bottom: 0.5rem;"># 2. Instalar React Router</div>
+                <div style="color: white;">npm install react-router-dom</div>
+              </div>
+              
+              <div style="background: #2d3436; padding: 1rem; border-radius: 6px; margin: 1rem 0; font-family: 'Courier New', monospace;">
+                <div style="color: #74b9ff; margin-bottom: 0.5rem;"># 3. Iniciar servidor desarrollo</div>
+                <div style="color: white;">npm run dev</div>
+              </div>
+
+              <div style="background: rgba(255,255,255,0.2); padding: 0.8rem; border-radius: 6px; margin-top: 1rem; font-size: 0.9rem;">
+                <strong>🎯 Resultado:</strong> Proyecto React + Navegación SPA
+              </div>
+            </div>
+
+            <!-- Estructura de carpetas -->
+            <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+              <h5 style="color: #55a3ff; margin-top: 0;">📁 Estructura creada en src/</h5>
+              
+              <div style="background: #2d3436; padding: 1rem; border-radius: 6px; margin: 1rem 0; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                <div style="color: #ffeaa7;">src/</div>
+                <div style="color: white; margin-left: 1rem;">├── <span style="color: #74b9ff;">components/</span></div>
+                <div style="color: white; margin-left: 2rem;">│   ├── Header.jsx</div>
+                <div style="color: white; margin-left: 2rem;">│   ├── Header.css</div>
+                <div style="color: white; margin-left: 2rem;">│   ├── Footer.jsx</div>
+                <div style="color: white; margin-left: 2rem;">│   ├── Footer.css</div>
+                <div style="color: white; margin-left: 2rem;">│   ├── Tarjeta.jsx</div>
+                <div style="color: white; margin-left: 2rem;">│   └── Tarjeta.css</div>
+                <div style="color: white; margin-left: 1rem;">├── <span style="color: #fd79a8;">pages/</span></div>
+                <div style="color: white; margin-left: 2rem;">│   ├── Home.jsx</div>
+                <div style="color: white; margin-left: 2rem;">│   ├── Home.css</div>
+                <div style="color: white; margin-left: 2rem;">│   ├── Proyectos.jsx</div>
+                <div style="color: white; margin-left: 2rem;">│   └── Proyectos.css</div>
+                <div style="color: white; margin-left: 1rem;">├── App.jsx</div>
+                <div style="color: white; margin-left: 1rem;">├── App.css</div>
+                <div style="color: white; margin-left: 1rem;">└── index.js</div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem; font-size: 0.85rem;">
+                <div style="background: rgba(116, 185, 255, 0.2); padding: 0.5rem; border-radius: 4px;">
+                  <strong style="color: #74b9ff;">components/</strong><br/>
+                  <span style="color: white;">Piezas reutilizables</span>
+                </div>
+                <div style="background: rgba(253, 121, 168, 0.2); padding: 0.5rem; border-radius: 4px;">
+                  <strong style="color: #fd79a8;">pages/</strong><br/>
+                  <span style="color: white;">Páginas completas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+            <h6 style="color: #ffeaa7; margin-top: 0; text-align: center;">🎯 Filosofía de organización</h6>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
+              <div>
+                <div style="font-size: 2rem;">🧩</div>
+                <strong style="color: white;">Componentes</strong><br/>
+                <span style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Se usan en múltiples páginas</span>
+              </div>
+              <div>
+                <div style="font-size: 2rem;">📄</div>
+                <strong style="color: white;">Páginas</strong><br/>
+                <span style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Rutas específicas de la app</span>
+              </div>
+              <div>
+                <div style="font-size: 2rem;">🎨</div>
+                <strong style="color: white;">CSS</strong><br/>
+                <span style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Cada componente su estilo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
 
     <!-- Ejercicio práctico -->
     <section>

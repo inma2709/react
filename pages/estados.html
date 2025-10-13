@@ -1,313 +1,251 @@
-<!--
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Día 4 · Estado (useState) y eventos</title>
-  <link rel="stylesheet" href="../style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>⚡ Estados y Eventos en React - Teoría y Ejercicios</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+            .comparison-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+     .before-after {
+      padding: 1.5rem;
+      border-radius: 12px;
+      position: relative;
+    }
+    
+    .before {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+      color: white;
+    }
+    
+    .after {
+      background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+      color: white;
+    }
+    
+    .badge-comparison {
+      position: absolute;
+      top: -10px;
+      left: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+    
+    .badge-html {
+      background: #ff4757;
+      color: white;
+    }
+    
+    .badge-react {
+      background: #2ed573;
+      color: white;
+    }
+    
+        /* Puedes copiar los estilos de tu archivo original */
+    </style>
 </head>
 <body>
-  <header>
-    <div class="header-content">
-      <h1>⚡ Día 4 · Estado y Eventos en React</h1>
-      <p>Interacciones básicas: contador, like, mostrar/ocultar e inputs controlados</p>
-      
-      Menú de navegación 
-      <nav class="main-nav">
+    <header>
+        <div class="header-content">
+            <h1>⚡ Estados y Eventos en React</h1>
+            <p>Teoría, comparación y ejercicios prácticos</p>
+             <!-- Menú de navegación -->
+     <nav class="main-nav">
         <a href="../index.html" class="nav-link">🏠 Inicio</a>
-        <a href="intro.html" class="nav-link">📦 Día 1</a>
-        <a href="componentes.html" class="nav-link">🧩 Día 2</a>
-        <a href="props.html" class="nav-link">🚀 Día 3</a>
-        <a href="#" class="nav-link active">⚡ Día 4</a>
-        <a href="proyecto.html" class="nav-link">🏁 Día 5</a>
-        <a href="rutas.html" class="nav-link extra">🧭 Extra</a>
+        <a href="intro.html" class="nav-link">📚 Introducción</a>
+        <a href="componentes.html" class="nav-link">🧩 Componentes</a>
+        <a href="estados.html" class="nav-link active">⚡ Estados</a>       
+        <a href="tailwin.html" class="nav-link ">🎨 Tailwind</a>
       </nav>
       
-       Migas de pan 
+      <!-- Breadcrumb -->
       <div class="breadcrumb">
-        <a href="../index.html">🏠 Inicio</a>
-        <span class="breadcrumb-separator">→</span>
-        <span class="breadcrumb-current">⚡ Día 4: Estado y Eventos</span>
+        <a href="../index.html">Curso React</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">Estados</span>
       </div>
     </div>
-  </header>
+        </div>
+    </header>
 
-  <main class="container">
-    <!-- Objetivos -->
-    <section>
-      <h2>1) Objetivos del día</h2>
-      <div class="card">
-        <ul>
-          <li>Entender qué es el <strong>estado</strong> y por qué React lo necesita.</li>
-          <li>Crear y actualizar estado con <code>useState</code>.</li>
-          <li>Manejar eventos como <code>onClick</code> y <code>onChange</code>.</li>
-          <li>Hacer renderizado condicional con estado.</li>
-        </ul>
-      </div>
-    </section>
+    <main class="container">
 
-    <!-- Qué es el estado -->
-    <section>
-      <h2>2) ¿Qué es el estado?</h2>
-      <div class="card">
-        <p>El <strong>estado</strong> es la “memoria” de un componente: datos que pueden cambiar con el tiempo y que, cuando cambian, hacen que la interfaz se vuelva a pintar.</p>
-<pre><code class="language-jsx">import { useState } from "react";
+        <!-- ==================== TEORÍA DE ESTADOS Y EVENTOS EN REACT ==================== -->
+        <section>
+            <h2>📚 Teoría: ¿Qué son los estados y eventos en React?</h2>
+            <div class="card">
+                <h3>🔍 Estados en React</h3>
+                <p>
+                    El <strong>estado</strong> en React es como la "memoria" de un componente. Permite guardar información que puede cambiar mientras el usuario interactúa con la aplicación, como el valor de un contador, el texto que escribe en un formulario, o si un menú está abierto o cerrado.<br><br>
+                    <strong>¿Por qué es importante?</strong> El estado no solo mejora el rendimiento y el SEO, sino que también facilita el desarrollo. Cuando el estado cambia, React actualiza automáticamente la interfaz, evitando que tú tengas que modificar el DOM manualmente. Esto hace que tu código sea más limpio, fácil de mantener y menos propenso a errores.<br><br>
+                    <strong>En HTML y JS tradicional</strong>, los datos se guardan en variables normales y tú tienes que actualizar la interfaz manualmente. En React, el estado está integrado y React se encarga de mostrar siempre la información actualizada.
+                </p>
+                <h3>🎮 Eventos en React</h3>
+                <p>
+                    Los <strong>eventos</strong> en React son acciones que realiza el usuario, como hacer clic en un botón, escribir en un campo o enviar un formulario. React utiliza un sistema de <strong>eventos sintéticos</strong> que funciona igual en todos los navegadores y se integra perfectamente con el estado.<br><br>
+                    <strong>¿Qué aportan frente a HTML y JS?</strong> En HTML y JS, los eventos pueden variar según el navegador y requieren más código para funcionar bien. En React, los eventos son más fáciles de usar y siempre funcionan igual. Además, puedes modificar el estado directamente desde los eventos, haciendo que la interfaz se actualice automáticamente.<br><br>
+                    <strong>Ejemplo didáctico:</strong> Si tienes un botón que suma 1 a un contador, el evento <code>onClick</code> modifica el estado, y React actualiza el número en pantalla sin que tú tengas que tocar el DOM.
+                </p>
+                <div class="concept-highlight">
+                    <strong>En resumen:</strong> El estado guarda los datos que cambian y los eventos permiten modificarlos. React se encarga de actualizar la pantalla automáticamente cuando el estado cambia. Esto te ayuda a crear aplicaciones interactivas de forma sencilla y profesional.
+                </div>
+                <div style="margin-top:1rem;">
+                    <strong>¿Cómo crear tus propios estados y eventos?</strong>
+                    <ul>
+                        <li>Usa <code>useState</code> para crear estados en tus componentes.</li>
+                        <li>Asocia eventos como <code>onClick</code>, <code>onChange</code> o <code>onSubmit</code> a elementos HTML.</li>
+                        <li>En la función del evento, modifica el estado usando su función correspondiente.</li>
+                        <li>React actualizará la interfaz automáticamente por ti.</li>
+                    </ul>
+                </div>
+            </div>
+        </section></div>
 
-export default function Contador(){
-  const [valor, setValor] = useState(0); // valor inicial: 0
+        <!-- ==================== COMPARATIVA REACT VS HTML+JS ==================== -->
+        <section>
+            <h2>⚡ Comparativa: React vs HTML + JavaScript tradicional</h2>
+            <div class="comparison-container" style="display: block;">
+            <div class="before-after before" style="margin-bottom: 2rem;">
+                <div class="badge-comparison badge-html">HTML + JS Tradicional</div>
+                <ul>
+                <li>Manipulación manual del DOM</li>
+                <li>Variables normales, no recuerdan entre renderizados</li>
+                <li>Eventos nativos, posibles incompatibilidades</li>
+                <li>Actualización manual de la interfaz</li>
+                </ul>
+                <pre style="background: #f8f9fa; color: #2d3436; padding: 1rem; border-radius: 8px;">
+    &lt;button id="btn"&gt;Click&lt;/button&gt;
+    &lt;script&gt;
+        document.getElementById("btn").onclick = function() {
+        alert("¡Has hecho clic!");
+        }
+    &lt;/script&gt;
+                </pre>
+            </div>
+            <div class="before-after after">
+                <div class="badge-comparison badge-react">React</div>
+                <ul>
+                <li>Estado interno, React recuerda los datos</li>
+                <li>Eventos sintéticos, consistentes en todos los navegadores</li>
+                <li>Actualización automática de la interfaz</li>
+                <li>Código más limpio y fácil de mantener</li>
+                </ul>
+                <pre style="background: #2d3436; color: white; padding: 1rem; border-radius: 8px;">
+    import { useState } from "react";
+    function Boton() {
+        return (
+        &lt;button onClick={() =&gt; alert("¡Has hecho clic!")}&gt;Click&lt;/button&gt;
+        );
+    }
+                </pre>
+            </div>
+            </div>
+            <div class="concept-highlight">
+            <strong>¿La diferencia?</strong> En HTML+JS tú controlas el DOM y los datos manualmente. En React, tú controlas los datos (estado) y React se encarga de actualizar la interfaz.
+            </div>
+        </section>
 
-  return (
-    &lt;div className="card"&gt;
-      &lt;p&gt;Has hecho clic: &lt;strong&gt;{valor}&lt;/strong&gt; veces&lt;/p&gt;
-      &lt;button className="btn mt-2" onClick={() =&gt; setValor(valor + 1)}&gt;+1&lt;/button&gt;
-    &lt;/div&gt;
-  );
-}
-</code></pre>
-        <ul class="mt-2">
-          <li><code>useState(0)</code> crea una pareja: <code>[valor, setValor]</code>.</li>
-          <li><code>setValor</code> actualiza el estado y React re-renderiza el componente.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Eventos -->
-    <section>
-      <h2>3) Eventos: <code>onClick</code>, <code>onChange</code></h2>
-      <div class="card">
-        <p>Los eventos en JSX van en <em>camelCase</em> y reciben funciones.</p>
-<pre><code class="language-jsx">export default function BotonLike(){
-  const [likes, setLikes] = useState(0);
-  function handleLike(){
-    setLikes(likes + 1);
-  }
-  return (
-    &lt;div className="card"&gt;
-      &lt;button className="btn" onClick={handleLike}&gt;👍 Me gusta&lt;/button&gt;
-      &lt;p className="mt-2"&gt;Likes: {likes}&lt;/p&gt;
-    &lt;/div&gt;
-  );
-}
-</code></pre>
-
-        <p class="mt-2"><strong>Input controlado</strong> (el valor del input vive en el estado):</p>
-<pre><code class="language-jsx">export default function NombreEnVivo(){
-  const [nombre, setNombre] = useState("");
-
-  return (
-    &lt;div className="card"&gt;
-      &lt;label htmlFor="nombre"&gt;Escribe tu nombre:&lt;/label&gt;
-      &lt;input
-        id="nombre"
-        className="mt-2"
-        value={nombre}
-        onChange={(e) =&gt; setNombre(e.target.value)}
-        placeholder="Tu nombre..."
-      /&gt;
-      &lt;p className="mt-2"&gt;Hola, &lt;strong&gt;{nombre || "anónimo"}&lt;/strong&gt; 👋&lt;/p&gt;
-    &lt;/div&gt;
-  );
-}
-</code></pre>
-      </div>
-    </section>
-
-    <!-- Renderizado condicional -->
-    <section>
-      <h2>4) Renderizado condicional</h2>
-      <div class="card">
-        <p>Muestra u oculta contenido según el estado.</p>
-<pre><code class="language-jsx">export default function ToggleDescripcion(){
-  const [visible, setVisible] = useState(false);
-
-  return (
-    &lt;div className="card"&gt;
-      &lt;button className="btn" onClick={() =&gt; setVisible(!visible)}&gt;
-        {visible ? "Ocultar" : "Mostrar"} descripción
-      &lt;/button&gt;
-
-      {visible &amp;&amp; (
-        &lt;p className="mt-2"&gt;Esta es una descripción que aparece y desaparece.&lt;/p&gt;
-      )}
-    &lt;/div&gt;
-  );
-}
-</code></pre>
-      </div>
-    </section>
-
-    <!-- Actualizaciones basadas en el valor previo -->
-    <section>
-      <h2>5) ¡Ojo! Actualizar en base al valor anterior</h2>
-      <div class="card">
-        <p>Cuando la actualización depende del valor previo, usa la función callback de <code>setState</code>:</p>
-<pre><code class="language-jsx">setValor(v =&gt; v + 1); // seguro cuando hay varias actualizaciones seguidas
-</code></pre>
-        <p>Ejemplo rápido:</p>
-<pre><code class="language-jsx">&lt;button onClick={() =&gt; {
-  setValor(v =&gt; v + 1);
-  setValor(v =&gt; v + 1); // suma 2 correctamente
-}}&gt;+2&lt;/button&gt;
-</code></pre>
-      </div>
-    </section>
-
-    <!-- Mini práctica guiada -->
-    <section>
-      <h2>6) Mini práctica (15–20 min): “Perfil interactivo”</h2>
-      <div class="card">
-        <p>Crea un pequeño perfil con tres interacciones:</p>
-        <ol>
-          <li><strong>Like</strong> al perfil (contador).</li>
-          <li><strong>Mostrar/ocultar</strong> biografía.</li>
-          <li><strong>Editar nombre</strong> con un input controlado.</li>
-        </ol>
-
-        <p class="mt-2"><strong>Estructura sugerida</strong></p>
-<pre><code class="language-jsx">// src/components/Perfil.jsx
-import { useState } from "react";
-
-export default function Perfil(){
-  const [nombre, setNombre] = useState("Inma");
-  const [likes, setLikes] = useState(0);
-  const [verBio, setVerBio] = useState(true);
-
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;Perfil de {nombre} &lt;span className="badge"&gt;React&lt;/span&gt;&lt;/h3&gt;
-
-      &lt;div className="mt-2"&gt;
-        &lt;label htmlFor="nombre"&gt;Nombre:&lt;/label&gt;
-        &lt;input
-          id="nombre"
-          className="mt-2"
-          value={nombre}
-          onChange={(e) =&gt; setNombre(e.target.value)}
-        /&gt;
-      &lt;/div&gt;
-
-      &lt;div className="mt-4"&gt;
-        &lt;button className="btn" onClick={() =&gt; setLikes(l =&gt; l + 1)}&gt;👍 Like&lt;/button&gt;
-        &lt;span className="mt-2"&gt; · Likes: {likes}&lt;/span&gt;
-      &lt;/div&gt;
-
-      &lt;div className="mt-4"&gt;
-        &lt;button className="btn" onClick={() =&gt; setVerBio(v =&gt; !v)}&gt;
-          {verBio ? "Ocultar" : "Mostrar"} bio
+        <!-- ==================== EJERCICIOS PRÁCTICOS ==================== -->
+        <section>
+            <h2>🧪 Ejercicios prácticos para que los implementes</h2>
+            <div class="card">
+                <h3>1️⃣ Botón que muestra una alerta</h3>
+                <p>Crea un componente con un botón que al hacer clic muestra una alerta.</p>
+                <pre style="background: #f8f9fa; color: #2d3436; padding: 1rem; border-radius: 8px;">
+<code>function BotonAlerta() {
+    return (
+        &lt;button onClick={() =&gt; alert("¡Hola! Has hecho clic.")}&gt;
+            Haz clic aquí
         &lt;/button&gt;
-      &lt;/div&gt;
-
-      {verBio &amp;&amp; (
-        &lt;p className="mt-2"&gt;
-          Soy formadora web y me encanta enseñar React con ejemplos sencillos.
-        &lt;/p&gt;
-      )}
-    &lt;/article&gt;
-  );
+    );
 }
-</code></pre>
+export default BotonAlerta;
+</code>
+                </pre>
 
-        <p class="mt-2"><strong>Usarlo en <code>App.jsx</code>:</strong></p>
-<pre><code class="language-jsx">// src/App.jsx
-import Perfil from "./components/Perfil";
+                <h3>2️⃣ Formulario con tres inputs y botón de enviar</h3>
+                <p>Crea un formulario con nombre, email y edad. Al enviar, muestra los datos en una alerta.</p>
+                <pre style="background: #f8f9fa; color: #2d3436; padding: 1rem; border-radius: 8px;">
+<code>import { useState } from "react";
+function FormularioSimple() {
+    const [nombre, setNombre] = useState("");
+    const [email, setEmail] = useState("");
+    const [edad, setEdad] = useState("");
 
-export default function App(){
-  return (
-    &lt;main className="container"&gt;
-      &lt;h2&gt;Interacciones básicas&lt;/h2&gt;
-      &lt;div className="mt-4"&gt;&lt;Perfil /&gt;&lt;/div&gt;
-    &lt;/main&gt;
-  );
+    function handleSubmit(e) {
+        e.preventDefault();
+        alert(
+            `Nombre: ${nombre}\nEmail: ${email}\nEdad: ${edad}`
+        );
+    }
+
+    return (
+        &lt;form onSubmit={handleSubmit}&gt;
+            &lt;input
+                type="text"
+                placeholder="Nombre"
+                value={nombre}
+                onChange={e =&gt; setNombre(e.target.value)}
+            /&gt;
+            &lt;input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={e =&gt; setEmail(e.target.value)}
+            /&gt;
+            &lt;input
+                type="number"
+                placeholder="Edad"
+                value={edad}
+                onChange={e =&gt; setEdad(e.target.value)}
+            /&gt;
+            &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+        &lt;/form&gt;
+    );
 }
-</code></pre>
+export default FormularioSimple;
+</code>
+                </pre>
 
-        <p class="mt-2"><strong>Reto extra (opcional):</strong> añade un botón “Reset” que ponga <code>likes</code> a 0 y <code>nombre</code> a “Inma”.</p>
-      </div>
-    </section>
-
-    <!-- Bonus: lista simple con añadir elementos -->
-    <section>
-      <h2>7) Bonus (opcional): lista con añadir elementos</h2>
-      <div class="card">
-        <p>Pequeña “lista de notas” para practicar estado con arrays.</p>
-<pre><code class="language-jsx">export default function Notas(){
-  const [texto, setTexto] = useState("");
-  const [notas, setNotas] = useState([]);
-
-  function addNota(){
-    if(!texto.trim()) return;
-    setNotas(prev =&gt; [...prev, { id: crypto.randomUUID(), texto }]);
-    setTexto("");
-  }
-
-  return (
-    &lt;div className="card"&gt;
-      &lt;h3&gt;Notas rápidas&lt;/h3&gt;
-      &lt;input value={texto} onChange={(e)=&gt;setTexto(e.target.value)} placeholder="Escribe una nota..." /&gt;
-      &lt;button className="btn mt-2" onClick={addNota}&gt;➕ Añadir&lt;/button&gt;
-
-      {notas.length === 0 ? (
-        &lt;p className="mt-2"&gt;No hay notas todavía.&lt;/p&gt;
-      ) : (
-        &lt;ul className="mt-2"&gt;
-          {notas.map(n =&gt; &lt;li key={n.id}&gt;{n.texto}&lt;/li&gt;)}
-        &lt;/ul&gt;
-      )}
-    &lt;/div&gt;
-  );
+                <h3>3️⃣ Botón que cambia de color al hacer clic</h3>
+                <p>Crea un botón que cambia de color cada vez que lo pulsas.</p>
+                <pre style="background: #f8f9fa; color: #2d3436; padding: 1rem; border-radius: 8px;">
+<code>import { useState } from "react";
+function BotonColor() {
+    const [color, setColor] = useState("blue");
+    function cambiarColor() {
+        setColor(color === "blue" ? "green" : "blue");
+    }
+    return (
+        &lt;button
+            onClick={cambiarColor}
+            style={{ background: color, color: "white", padding: "1rem" }}
+        &gt;
+            Cambiar color
+        &lt;/button&gt;
+    );
 }
-</code></pre>
-        <p class="mt-2">🧠 Conceptos: <code>useState</code> con arrays, <code>spread</code> para añadir, <code>key</code> en listas.</p>
-      </div>
-    </section>
+export default BotonColor;
+</code>
+                </pre>
+          
+        </section>
 
-    <!-- Errores comunes -->
-    <section>
-      <h2>8) Errores comunes hoy</h2>
-      <div class="card">
-        <ul>
-          <li>Modificar el estado directamente (usa siempre la función <code>set...</code>).</li>
-          <li>Olvidar que los inputs controlados deben leer su valor desde el estado.</li>
-          <li>Esperar que el estado cambie de forma “inmediata” en la misma línea (React puede agrupar actualizaciones).</li>
-        </ul>
-      </div>
-    </section>
+        <!-- ==================== NAVEGACIÓN Y FOOTER ==================== -->
+        <!-- ... (puedes mantener tu navegación y footer original) ... -->
 
-    <!-- Próximo día -->
-    <section>
-      <h2>9) ¿Qué haremos en el Día 5?</h2>
-      <div class="card">
-        <p>Montaremos la <strong>mini-página final</strong> combinando lo aprendido:</p>
-        <ul>
-          <li>Header + sección “Sobre mí”.</li>
-          <li>Listado de tarjetas (props + <code>map()</code>).</li>
-          <li>Interacciones básicas (like, toggle, input de contacto).</li>
-          <li>Revisión de estilos y <strong>publicación</strong> (Netlify/Vercel).</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Navegación -->
-    <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: rgba(97, 218, 251, 0.1); border-radius: 10px;">
-      <p style="margin-bottom: 1rem; font-size: 1.1rem; font-weight: bold;">🧭 Navegación del Curso</p>
-      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <a href="../index.html" style="text-decoration: none; background: #61dafb; color: white; padding: 8px 16px; border-radius: 20px;">🏠 Portada</a>
-        <a href="intro.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">📦 Día 1</a>
-        <a href="componentes.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🧩 Día 2</a>
-        <a href="props.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🚀 Día 3</a>
-        <strong style="background: #20232a; color: #61dafb; padding: 8px 16px; border-radius: 20px;">⚡ Día 4</strong>
-        <a href="proyecto.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🏁 Día 5</a>
-      </div>
-      <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
-        📍 <strong>Siguientes pasos:</strong> ¡Ya casi terminas! En el Día 5 juntaremos todo en un proyecto final completo.
-      </p>
-    </div>
-  </main>
-
-  <footer>
-    <p>Curso Básico de React · Día 4 · Inmacontreras © 2025</p>
-  </footer>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>⚡ Curso React desde Cero - Día 4: Estados y Eventos</p>
+        </div>
+    </footer>
 </body>
 </html>
--->

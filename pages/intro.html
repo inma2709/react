@@ -13,21 +13,20 @@
       <p>Creando nuestro primer proyecto con Vite</p>
       
       <!-- Menú de navegación -->
+       <!-- Navegación principal -->
       <nav class="main-nav">
         <a href="../index.html" class="nav-link">🏠 Inicio</a>
-        <a href="#" class="nav-link active">📦 Día 1</a>
-        <a href="componentes.html" class="nav-link">🧩 Día 2</a>
-        <a href="props.html" class="nav-link">🚀 Día 3</a>
-    <!--    <a href="estados.html" class="nav-link">⚡ Día 4</a>
-        <a href="proyecto.html" class="nav-link">🏁 Día 5</a>
-        <a href="rutas.html" class="nav-link extra">🧭 Extra</a>-->
+        <a href="intro.html" class="nav-link active">📚 Introducción</a>
+        <a href="componentes.html" class="nav-link">🧩 Componentes</a>
+        <a href="estados.html" class="nav-link">⚡ Estados</a>       
+        <a href="tailwin.html" class="nav-link ">🎨 Tailwind</a>
       </nav>
       
-      <!-- Migas de pan -->
+      <!-- Breadcrumb -->
       <div class="breadcrumb">
-        <a href="../index.html">🏠 Inicio</a>
-        <span class="breadcrumb-separator">→</span>
-        <span class="breadcrumb-current">📦 Día 1: Instalación de React</span>
+        <a href="../index.html">Curso React</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">Introduccion</span>
       </div>
     </div>
   </header>
@@ -408,6 +407,499 @@ export default App
           <li>🌐 <strong>El navegador recibe solo los cambios necesarios</strong> y los muestra al usuario.</li>
         </ul>
         <p><em>Por eso parece "mágico": el navegador cambia solo porque React y Vite trabajan juntos para actualizar solo lo necesario, de forma rápida y eficiente.</em></p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 🎯 SECCIÓN EXTENSA: JSX Y BUENAS PRÁCTICAS -->
+    <!-- ============================================================ -->
+    <section>
+      <h2>🎯 JSX: La sintaxis que mezcla HTML y JavaScript</h2>
+      <div class="card">
+        <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #2196f3; margin: 2rem 0;">
+          <h4 style="margin-top: 0; color: #1565c0;">🧠 ¿Qué es JSX y por qué es revolucionario?</h4>
+          <p style="color: #2d3436; margin: 0;">
+            <strong>JSX (JavaScript XML)</strong> es la sintaxis que permite escribir HTML dentro de JavaScript. 
+            Es como tener lo mejor de ambos mundos: la estructura de HTML y el poder de JavaScript juntos.
+          </p>
+        </div>
+
+        <h3>🔍 JSX vs HTML: Las diferencias que DEBES conocer</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+          <div style="background: #ffebee; border: 2px solid #e57373; border-radius: 12px; padding: 1.5rem;">
+            <h4 style="color: #d32f2f; margin-top: 0;">❌ HTML tradicional</h4>
+            <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>&lt;div class="mi-clase"&gt;
+  &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+  &lt;input type="text" id="nombre"&gt;
+  &lt;img src="foto.jpg" alt="Descripción"&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+          
+          <div style="background: #e8f5e9; border: 2px solid #81c784; border-radius: 12px; padding: 1.5rem;">
+            <h4 style="color: #388e3c; margin-top: 0;">✅ JSX (React)</h4>
+            <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>&lt;div className="mi-clase"&gt;
+  &lt;label htmlFor="nombre"&gt;Nombre:&lt;/label&gt;
+  &lt;input type="text" id="nombre" /&gt;
+  &lt;img src="foto.jpg" alt="Descripción" /&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <h3>⚡ Las 7 reglas de oro del JSX</h3>
+        
+        <div style="background: #fff3e0; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #ff9800; margin: 2rem 0;">
+          <h4 style="color: #f57c00; margin-top: 0;">1. 🏷️ className en lugar de class</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+            <div>
+              <p style="color: #d32f2f; font-weight: bold;">❌ Incorrecto:</p>
+              <pre style="background: #ffebee; padding: 0.8rem; border-radius: 6px;"><code>&lt;div class="mi-estilo"&gt;Texto&lt;/div&gt;</code></pre>
+            </div>
+            <div>
+              <p style="color: #388e3c; font-weight: bold;">✅ Correcto:</p>
+              <pre style="background: #e8f5e9; padding: 0.8rem; border-radius: 6px;"><code>&lt;div className="mi-estilo"&gt;Texto&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          <p style="color: #e65100; margin: 0;"><strong>¿Por qué?</strong> En JavaScript, <code>class</code> es una palabra reservada, así que JSX usa <code>className</code>.</p>
+        </div>
+
+        <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #9c27b0; margin: 2rem 0;">
+          <h4 style="color: #7b1fa2; margin-top: 0;">2. 🔗 htmlFor en lugar de for</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+            <div>
+              <p style="color: #d32f2f; font-weight: bold;">❌ Incorrecto:</p>
+              <pre style="background: #ffebee; padding: 0.8rem; border-radius: 6px;"><code>&lt;label for="email"&gt;Email:&lt;/label&gt;</code></pre>
+            </div>
+            <div>
+              <p style="color: #388e3c; font-weight: bold;">✅ Correcto:</p>
+              <pre style="background: #e8f5e9; padding: 0.8rem; border-radius: 6px;"><code>&lt;label htmlFor="email"&gt;Email:&lt;/label&gt;</code></pre>
+            </div>
+          </div>
+          <p style="color: #7b1fa2; margin: 0;"><strong>¿Por qué?</strong> Similar a <code>class</code>, <code>for</code> es una palabra reservada en JavaScript.</p>
+        </div>
+
+        <div style="background: #e0f2f1; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #4caf50; margin: 2rem 0;">
+          <h4 style="color: #388e3c; margin-top: 0;">3. 🔒 Todas las etiquetas deben cerrarse</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+            <div>
+              <p style="color: #d32f2f; font-weight: bold;">❌ Incorrecto:</p>
+              <pre style="background: #ffebee; padding: 0.8rem; border-radius: 6px;"><code>&lt;input type="text"&gt;
+&lt;img src="foto.jpg"&gt;
+&lt;br&gt;</code></pre>
+            </div>
+            <div>
+              <p style="color: #388e3c; font-weight: bold;">✅ Correcto:</p>
+              <pre style="background: #e8f5e9; padding: 0.8rem; border-radius: 6px;"><code>&lt;input type="text" /&gt;
+&lt;img src="foto.jpg" /&gt;
+&lt;br /&gt;</code></pre>
+            </div>
+          </div>
+          <p style="color: #388e3c; margin: 0;"><strong>¿Por qué?</strong> JSX es más estricto que HTML. Toda etiqueta debe tener cierre.</p>
+        </div>
+
+        <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #2196f3; margin: 2rem 0;">
+          <h4 style="color: #1565c0; margin-top: 0;">4. 📦 Solo un elemento padre por componente</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+            <div>
+              <p style="color: #d32f2f; font-weight: bold;">❌ Incorrecto:</p>
+              <pre style="background: #ffebee; padding: 0.8rem; border-radius: 6px;"><code>return (
+  &lt;h1&gt;Título&lt;/h1&gt;
+  &lt;p&gt;Párrafo&lt;/p&gt;
+);</code></pre>
+            </div>
+            <div>
+              <p style="color: #388e3c; font-weight: bold;">✅ Correcto:</p>
+              <pre style="background: #e8f5e9; padding: 0.8rem; border-radius: 6px;"><code>return (
+  &lt;div&gt;
+    &lt;h1&gt;Título&lt;/h1&gt;
+    &lt;p&gt;Párrafo&lt;/p&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+          </div>
+          <p style="color: #1565c0; margin: 0;"><strong>Alternativa:</strong> Usa <code>&lt;&gt;&lt;/&gt;</code> (Fragment) si no quieres un div extra.</p>
+        </div>
+
+        <div style="background: #fff8e1; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #ffc107; margin: 2rem 0;">
+          <h4 style="color: #f57c00; margin-top: 0;">5. 🧮 Expresiones JavaScript entre llaves { }</h4>
+          <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; margin: 1rem 0;"><code>const nombre = "Ana";
+const edad = 25;
+
+return (
+  &lt;div&gt;
+    &lt;h1&gt;Hola {nombre}&lt;/h1&gt;
+    &lt;p&gt;Tienes {edad} años&lt;/p&gt;
+    &lt;p&gt;El próximo año tendrás {edad + 1}&lt;/p&gt;
+  &lt;/div&gt;
+);</code></pre>
+          <p style="color: #f57c00; margin: 0;"><strong>💡 Clave:</strong> Todo lo que va entre { } se ejecuta como JavaScript.</p>
+        </div>
+
+        <div style="background: #fce4ec; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #e91e63; margin: 2rem 0;">
+          <h4 style="color: #c2185b; margin-top: 0;">6. 🎨 Estilos inline como objetos</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+            <div>
+              <p style="color: #d32f2f; font-weight: bold;">❌ HTML tradicional:</p>
+              <pre style="background: #ffebee; padding: 0.8rem; border-radius: 6px;"><code>&lt;div style="color: red; font-size: 16px;"&gt;</code></pre>
+            </div>
+            <div>
+              <p style="color: #388e3c; font-weight: bold;">✅ JSX:</p>
+              <pre style="background: #e8f5e9; padding: 0.8rem; border-radius: 6px;"><code>&lt;div style={{color: "red", fontSize: "16px"}}&gt;</code></pre>
+            </div>
+          </div>
+          <p style="color: #c2185b; margin: 0;"><strong>Nota:</strong> Propiedades CSS en camelCase (fontSize, backgroundColor, etc.)</p>
+        </div>
+
+        <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #4caf50; margin: 2rem 0;">
+          <h4 style="color: #388e3c; margin-top: 0;">7. 💬 Comentarios especiales</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+            <div>
+              <p style="color: #d32f2f; font-weight: bold;">❌ No funciona:</p>
+              <pre style="background: #ffebee; padding: 0.8rem; border-radius: 6px;"><code>&lt;div&gt;
+  &lt;!-- Comentario HTML --&gt;
+  &lt;p&gt;Texto&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div>
+              <p style="color: #388e3c; font-weight: bold;">✅ Correcto:</p>
+              <pre style="background: #e8f5e9; padding: 0.8rem; border-radius: 6px;"><code>&lt;div&gt;
+  {/* Comentario JSX */}
+  &lt;p&gt;Texto&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          <p style="color: #388e3c; margin: 0;"><strong>Formato:</strong> <code>{/* comentario */}</code> para comentar dentro del JSX.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 📝 SECCIÓN: NOMBRADO DE ARCHIVOS Y ORGANIZACIÓN -->
+    <!-- ============================================================ -->
+    <section>
+      <h2>📝 Convenciones de nombrado: La base del código profesional</h2>
+      <div class="card">
+        <div style="background: #e8f4fd; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #2196f3; margin: 2rem 0;">
+          <h4 style="margin-top: 0; color: #1565c0;">🎯 ¿Por qué importa tanto cómo nombres tus archivos?</h4>
+          <p style="color: #2d3436; margin: 0;">
+            Un buen nombrado no es vanidad: es <strong>comunicación</strong>. En 6 meses, cuando vuelvas a tu código, 
+            los nombres descriptivos serán la diferencia entre entender inmediatamente qué hace cada archivo o 
+            perder horas recordando tu propio trabajo.
+          </p>
+        </div>
+
+        <h3>🏷️ Reglas de oro para componentes React</h3>
+        
+        <div style="display: grid; gap: 1.5rem; margin: 2rem 0;">
+          <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem;">
+            <h4 style="color: #2e7d32; margin-top: 0;">✅ 1. PascalCase para componentes</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+              <div>
+                <p style="color: #d32f2f; font-weight: bold;">❌ Mal nombrado:</p>
+                <ul style="background: #ffebee; padding: 1rem; border-radius: 6px; margin: 0;">
+                  <li><code>header.jsx</code></li>
+                  <li><code>button_component.jsx</code></li>
+                  <li><code>my-card.jsx</code></li>
+                  <li><code>UserProfile-component.jsx</code></li>
+                </ul>
+              </div>
+              <div>
+                <p style="color: #388e3c; font-weight: bold;">✅ Bien nombrado:</p>
+                <ul style="background: #e8f5e9; padding: 1rem; border-radius: 6px; margin: 0;">
+                  <li><code>Header.jsx</code></li>
+                  <li><code>Button.jsx</code></li>
+                  <li><code>Card.jsx</code></li>
+                  <li><code>UserProfile.jsx</code></li>
+                </ul>
+              </div>
+            </div>
+            <p style="color: #2e7d32; margin: 0;"><strong>Regla:</strong> Primera letra mayúscula, cada palabra nueva con mayúscula, sin espacios ni guiones.</p>
+          </div>
+
+          <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem;">
+            <h4 style="color: #1565c0; margin-top: 0;">📂 2. Organización por carpetas lógicas</h4>
+            <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>src/
+├── 📁 components/           ← Componentes reutilizables
+│   ├── 📄 Header.jsx       ← Cabecera del sitio
+│   ├── 📄 Footer.jsx       ← Pie de página
+│   ├── 📄 Button.jsx       ← Botón reutilizable
+│   └── 📄 Card.jsx         ← Tarjeta de contenido
+├── 📁 pages/               ← Páginas principales
+│   ├── 📄 Home.jsx         ← Página de inicio
+│   ├── 📄 About.jsx        ← Página "Acerca de"
+│   └── 📄 Contact.jsx      ← Página de contacto
+├── 📁 hooks/               ← Hooks personalizados (avanzado)
+│   └── 📄 useLocalStorage.js
+├── 📁 utils/               ← Funciones auxiliares
+│   └── 📄 formatDate.js
+└── 📁 assets/              ← Imágenes, iconos, etc.
+    ├── 📁 images/
+    └── 📁 icons/</code></pre>
+            <p style="color: #1565c0; margin: 0;"><strong>Beneficio:</strong> Cualquier desarrollador encuentra lo que busca en segundos.</p>
+          </div>
+
+          <div style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 12px; padding: 1.5rem;">
+            <h4 style="color: #f57c00; margin-top: 0;">📝 3. Nombres descriptivos, no genéricos</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+              <div>
+                <p style="color: #d32f2f; font-weight: bold;">❌ Nombres vagos:</p>
+                <ul style="background: #ffebee; padding: 1rem; border-radius: 6px; margin: 0;">
+                  <li><code>Component.jsx</code> → ¿Qué hace?</li>
+                  <li><code>Item.jsx</code> → ¿Qué tipo de item?</li>
+                  <li><code>Thing.jsx</code> → Muy genérico</li>
+                  <li><code>Container.jsx</code> → ¿Contiene qué?</li>
+                </ul>
+              </div>
+              <div>
+                <p style="color: #388e3c; font-weight: bold;">✅ Nombres claros:</p>
+                <ul style="background: #e8f5e9; padding: 1rem; border-radius: 6px; margin: 0;">
+                  <li><code>ProductCard.jsx</code> → Tarjeta de producto</li>
+                  <li><code>BlogPost.jsx</code> → Artículo del blog</li>
+                  <li><code>LoginForm.jsx</code> → Formulario de login</li>
+                  <li><code>ShoppingCart.jsx</code> → Carrito de compras</li>
+                </ul>
+              </div>
+            </div>
+            <p style="color: #f57c00; margin: 0;"><strong>Pregúntate:</strong> "Si alguien ve este nombre, ¿entiende inmediatamente qué hace?"</p>
+          </div>
+        </div>
+
+        <h3>🔤 Convenciones adicionales importantes</h3>
+        
+        <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #9c27b0; margin: 2rem 0;">
+          <h4 style="color: #7b1fa2; margin-top: 0;">Variables y funciones: camelCase</h4>
+          <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; margin: 1rem 0;"><code>// ✅ Correcto
+const userName = "Ana";
+const userAge = 25;
+const handleButtonClick = () => { /* ... */ };
+const fetchUserData = async () => { /* ... */ };
+
+// ❌ Incorrecto
+const user_name = "Ana";           // snake_case (para Python/PHP)
+const UserAge = 25;               // PascalCase (solo para componentes)
+const HandleButtonClick = () => { /* ... */ }; // PascalCase innecesario</code></pre>
+        </div>
+
+        <div style="background: #e0f2f1; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #4caf50; margin: 2rem 0;">
+          <h4 style="color: #388e3c; margin-top: 0;">Constantes: UPPER_SNAKE_CASE</h4>
+          <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; margin: 1rem 0;"><code>// ✅ Para valores que nunca cambian
+const API_BASE_URL = "https://api.miapp.com";
+const MAX_USERS_PER_PAGE = 20;
+const THEME_COLORS = {
+  primary: "#2196f3",
+  secondary: "#ff9800"
+};</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 🏗️ SECCIÓN: BUENAS PRÁCTICAS Y CONSEJOS PRÁCTICOS -->
+    <!-- ============================================================ -->
+    <section>
+      <h2>🏗️ Consejos de desarrollo: Evita el "código espagueti"</h2>
+      <div class="card">
+        <div style="background: #ffebee; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #f44336; margin: 2rem 0;">
+          <h4 style="margin-top: 0; color: #d32f2f;">⚠️ El mayor enemigo del principiante: El anidamiento excesivo</h4>
+          <p style="color: #2d3436; margin: 0;">
+            <strong>"Código espagueti"</strong> es cuando tienes tantos niveles de anidamiento que pierdes el hilo. 
+            Como cajas dentro de cajas dentro de cajas... ¡hasta que no sabes dónde estás!
+          </p>
+        </div>
+
+        <h3>🚫 Ejemplo de lo que NO debes hacer</h3>
+        
+        <div style="background: #ffebee; border: 2px solid #f44336; border-radius: 12px; padding: 1.5rem; margin: 2rem 0;">
+          <h4 style="color: #d32f2f; margin-top: 0;">❌ Componente "monstruo" (no hagas esto)</h4>
+          <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; font-size: 0.85rem; line-height: 1.4;"><code>function App() {
+  return (
+    &lt;div&gt;
+      &lt;header&gt;
+        &lt;nav&gt;
+          &lt;ul&gt;
+            &lt;li&gt;
+              &lt;a href="#"&gt;
+                &lt;div&gt;
+                  &lt;span&gt;
+                    &lt;button&gt;
+                      &lt;div&gt;
+                        &lt;span&gt;Inicio&lt;/span&gt;
+                      &lt;/div&gt;
+                    &lt;/button&gt;
+                  &lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/a&gt;
+            &lt;/li&gt;
+            {/* 50 líneas más de anidamiento... */}
+          &lt;/ul&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main&gt;
+        &lt;section&gt;
+          &lt;div&gt;
+            &lt;div&gt;
+              &lt;div&gt;
+                {/* Y aquí pierdes la cuenta... */}
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p style="color: #d32f2f; margin: 1rem 0;"><strong>Problemas:</strong></p>
+          <ul style="color: #d32f2f;">
+            <li>🤯 <strong>Difícil de leer:</strong> No sabes dónde empieza o termina cada sección</li>
+            <li>🐛 <strong>Difícil de debuggear:</strong> Los errores son complicados de encontrar</li>
+            <li>♻️ <strong>No reutilizable:</strong> Todo está mezclado en un solo bloque</li>
+            <li>👥 <strong>Trabajo en equipo imposible:</strong> Otros desarrolladores se perderán</li>
+          </ul>
+        </div>
+
+        <h3>✅ La solución: Divide y vencerás</h3>
+        
+        <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin: 2rem 0;">
+          <h4 style="color: #2e7d32; margin-top: 0;">✅ Componentes separados y limpios</h4>
+          
+          <p style="color: #2e7d32; margin: 1rem 0;"><strong>1. Componente principal simple:</strong></p>
+          <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>// App.jsx - Solo estructura principal
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;MainContent /&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <p style="color: #2e7d32; margin: 1rem 0;"><strong>2. Header separado:</strong></p>
+          <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>// Header.jsx - Solo responsable de la cabecera
+function Header() {
+  return (
+    &lt;header&gt;
+      &lt;Logo /&gt;
+      &lt;Navigation /&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+
+          <p style="color: #2e7d32; margin: 1rem 0;"><strong>3. Navegación separada:</strong></p>
+          <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; font-size: 0.9rem;"><code>// Navigation.jsx - Solo se encarga del menú
+function Navigation() {
+  return (
+    &lt;nav&gt;
+      &lt;NavLink to="/"&gt;Inicio&lt;/NavLink&gt;
+      &lt;NavLink to="/about"&gt;Acerca de&lt;/NavLink&gt;
+      &lt;NavLink to="/contact"&gt;Contacto&lt;/NavLink&gt;
+    &lt;/nav&gt;
+  );
+}</code></pre>
+
+          <p style="color: #2e7d32; margin: 1rem 0;"><strong>Beneficios inmediatos:</strong></p>
+          <ul style="color: #2e7d32;">
+            <li>👀 <strong>Fácil de leer:</strong> Cada archivo tiene una responsabilidad clara</li>
+            <li>🔧 <strong>Fácil de mantener:</strong> Cambias solo lo que necesitas</li>
+            <li>♻️ <strong>Reutilizable:</strong> Puedes usar Header en otras páginas</li>
+            <li>🤝 <strong>Trabajo en equipo:</strong> Cada persona puede trabajar en un componente</li>
+          </ul>
+        </div>
+
+        <h3>📏 Regla del "5-7-3": Límites saludables</h3>
+        
+        <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #2196f3; margin: 2rem 0;">
+          <h4 style="color: #1565c0; margin-top: 0;">🎯 Límites recomendados para principiantes</h4>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+            <div style="background: rgba(33, 150, 243, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <div style="font-size: 2rem; color: #1565c0;">5</div>
+              <strong style="color: #1565c0;">Niveles máximo</strong><br>
+              <span style="font-size: 0.9rem; color: #555;">de anidamiento en JSX</span>
+            </div>
+            <div style="background: rgba(33, 150, 243, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <div style="font-size: 2rem; color: #1565c0;">7</div>
+              <strong style="color: #1565c0;">Elementos máximo</strong><br>
+              <span style="font-size: 0.9rem; color: #555;">por componente</span>
+            </div>
+            <div style="background: rgba(33, 150, 243, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <div style="font-size: 2rem; color: #1565c0;">3</div>
+              <strong style="color: #1565c0;">Responsabilidades máximo</strong><br>
+              <span style="font-size: 0.9rem; color: #555;">por componente</span>
+            </div>
+          </div>
+
+          <p style="color: #1565c0; margin: 1rem 0;"><strong>¿Cuándo dividir un componente?</strong></p>
+          <ul style="color: #2d3436;">
+            <li>🔢 <strong>Más de 50 líneas:</strong> Probablemente hace demasiadas cosas</li>
+            <li>📜 <strong>Necesitas hacer scroll:</strong> Para ver todo el componente</li>
+            <li>🤯 <strong>Te pierdes:</strong> No recuerdas qué hace cada parte</li>
+            <li>♻️ <strong>Repites código:</strong> La misma estructura en varios lugares</li>
+          </ul>
+        </div>
+
+        <h3>🛠️ Herramientas que te ayudan a escribir mejor código</h3>
+        
+        <div style="background: #fff8e1; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #ffc107; margin: 2rem 0;">
+          <h4 style="color: #f57c00; margin-top: 0;">🔧 Extensiones esenciales para VS Code</h4>
+          
+          <div style="display: grid; gap: 1rem; margin: 1.5rem 0;">
+            <div style="background: rgba(255, 193, 7, 0.1); padding: 1rem; border-radius: 8px;">
+              <strong style="color: #f57c00;">ES7+ React/Redux/React-Native snippets</strong><br>
+              <span style="color: #666;">Atajos para crear componentes rápidamente (escribe "rafce" + Tab)</span>
+            </div>
+            <div style="background: rgba(255, 193, 7, 0.1); padding: 1rem; border-radius: 8px;">
+              <strong style="color: #f57c00;">Prettier - Code formatter</strong><br>
+              <span style="color: #666;">Formatea tu código automáticamente al guardar</span>
+            </div>
+            <div style="background: rgba(255, 193, 7, 0.1); padding: 1rem; border-radius: 8px;">
+              <strong style="color: #f57c00;">Auto Rename Tag</strong><br>
+              <span style="color: #666;">Cambia automáticamente la etiqueta de cierre cuando cambias la de apertura</span>
+            </div>
+            <div style="background: rgba(255, 193, 7, 0.1); padding: 1rem; border-radius: 8px;">
+              <strong style="color: #f57c00;">Bracket Pair Colorizer</strong><br>
+              <span style="color: #666;">Colorea las llaves, paréntesis y corchetes para ver mejor el anidamiento</span>
+            </div>
+          </div>
+        </div>
+
+        <h3>💡 Consejos prácticos para el día a día</h3>
+        
+        <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #4caf50; margin: 2rem 0;">
+          <h4 style="color: #2e7d32; margin-top: 0;">🎯 Tu checklist antes de escribir código</h4>
+          <ol style="color: #2d3436;">
+            <li><strong>🤔 Pregúntate:</strong> "¿Qué responsabilidad única tendrá este componente?"</li>
+            <li><strong>📝 Nómbralo descriptivamente:</strong> El nombre debe explicar qué hace</li>
+            <li><strong>🏗️ Planifica la estructura:</strong> ¿Qué elementos necesitas? ¿En qué orden?</li>
+            <li><strong>🔍 Revisa el anidamiento:</strong> ¿Hay más de 5 niveles? Considera dividir</li>
+            <li><strong>♻️ Piensa en reutilización:</strong> ¿Podrías usar este componente en otro lugar?</li>
+          </ol>
+        </div>
+
+        <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #9c27b0; margin: 2rem 0;">
+          <h4 style="color: #7b1fa2; margin-top: 0;">🚀 Atajos que te harán más eficiente</h4>
+          <ul style="color: #2d3436;">
+            <li><strong>rafce</strong> + Tab → Crea un componente funcional completo</li>
+            <li><strong>imr</strong> + Tab → <code>import React from 'react'</code></li>
+            <li><strong>useState</strong> + Tab → <code>const [state, setState] = useState()</code></li>
+            <li><strong>Ctrl + D</strong> → Selecciona la siguiente ocurrencia de la palabra</li>
+            <li><strong>Alt + Shift + ↓</strong> → Duplica la línea actual</li>
+            <li><strong>Ctrl + /</strong> → Comenta/descomenta líneas</li>
+          </ul>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
+          <h4 style="margin-top: 0;">🏆 El secreto del código profesional</h4>
+          <p style="margin: 1rem 0; font-size: 1.1rem;">
+            <strong>No es escribir código perfecto desde el principio.</strong><br>
+            Es escribir código <em>legible</em>, <em>organizado</em> y <em>fácil de cambiar</em>.
+          </p>
+          <p style="margin: 0; font-style: italic;">
+            "El código se lee 10 veces más de lo que se escribe. Escribe para tu yo del futuro." 💭
+          </p>
+        </div>
+      </div>
+    </section>
 
     <section>
       <h2>🔄 Conectando con lo que ya sabes</h2>
@@ -547,17 +1039,7 @@ export default App
             </div>
           </section>
 
-    <!-- Navegación -->
-    <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: rgba(97, 218, 251, 0.1); border-radius: 10px;">
-      <p style="margin-bottom: 1rem; font-size: 1.1rem; font-weight: bold;">🧭 Navegación del Curso</p>
-      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <a href="../index.html" style="text-decoration: none; background: #61dafb; color: white; padding: 8px 16px; border-radius: 20px;">🏠 Portada</a>
-        <strong style="background: #20232a; color: #61dafb; padding: 8px 16px; border-radius: 20px;">📦 Día 1</strong>
-        <a href="componentes.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🧩 Día 2</a>
-        <a href="props.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🚀 Día 3</a>
-    <!--    <a href="estados.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">⚡ Día 4</a>
-        <a href="proyecto.html" style="text-decoration: none; background: #f8f9fa; color: #333; padding: 8px 16px; border-radius: 20px;">🏁 Día 5</a>-->
-      </div>
+    
       <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
         📍 <strong>Siguientes pasos:</strong> Una vez que tengas tu proyecto corriendo, continúa con el Día 2 para aprender JSX y componentes.
       </p>
