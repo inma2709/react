@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lección: Layout en React</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+    <header class="header bg-primary text-white py-4">
+        <div class="header-content container">
+            <h1 class="mb-1">📐 Lección: Creación de un Layout en React</h1>
+            <p class="lead">Organiza tu aplicación con un diseño común y profesional.</p>
+        </div>
+         <!-- Menú de navegación -->
+       <!-- Navegación principal -->
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">🏠 Inicio</a>
+        <a href="intro.html" class="nav-link ">📚 Introducción</a>
+        <a href="componentes.html" class="nav-link">🧩 Componentes</a>
+        <a href="estados.html" class="nav-link">⚡ Estados</a>       
+        <a href="tailwin.html" class="nav-link ">🎨 Tailwind</a>
+        <a href="layout.html" class="nav-link active">📐 Layout</a>
+      </nav>
+      
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="../index.html">Curso React</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">Layout</span>
+      </div>
+    </header>
+
+   
+
+   
+          
+
+        <main class="container flex-1 px-6 py-4">
+            <section id="que-es-layout">
+                <h2>¿Qué es un Layout?</h2>
+                <p>
+                    Un <strong>Layout</strong> es la estructura base que se repite en todas las páginas
+                    de una aplicación web. En React, se utiliza para envolver el contenido que cambia 
+                    (las rutas o páginas) con elementos que permanecen fijos, como el 
+                    <strong>header</strong>, la <strong>barra lateral</strong> o el <strong>footer</strong>.
+                </p>
+                <p>
+                    De este modo, todas las páginas heredan automáticamente la misma disposición, 
+                    lo que hace el desarrollo más rápido, ordenado y accesible.
+                </p>
+                <div class="alert bg-info text-dark p-2 mt-2">
+                    <strong>Ventaja:</strong> El layout permite mantener la coherencia visual y funcional en toda la app.
+                </div>
+            </section>
+
+            <section id="estructura-basica" class="mt-6">
+                <h2>📐 Estructura básica de un Layout</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Header:</strong> Cabecera con el título o logotipo del sitio.</li>
+                    <li><strong>Nav:</strong> Menú de navegación principal.</li>
+                    <li><strong>Sidebar:</strong> Barra lateral opcional (filtros, enlaces extra, etc.).</li>
+                    <li><strong>Footer:</strong> Pie de página con créditos o enlaces.</li>
+                    <li><strong>Outlet:</strong> Espacio dinámico donde se “montan” las páginas.</li>
+                </ul>
+                
+            </section>
+
+            <section id="configuracion" class="mt-6">
+                <h2>⚙️ Cómo se configura</h2>
+                <p>Para usar un layout en React con rutas:</p>
+                <ol class="list-decimal pl-6">
+                    <li>Importa <code>Outlet</code> desde <code>react-router-dom</code>.</li>
+                    <li>Crea un componente <code>Layout.jsx</code> que incluya tus zonas fijas.</li>
+                    <li>En <code>App.jsx</code>, declara un <code>&lt;Route element=&lt;Layout /&gt;&gt;</code> que envuelva las páginas hijas.</li>
+                </ol>
+                <pre style="background: #f8f9fa; color: #2d3436; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.95em; overflow-x: auto; max-width: 600px;">
+            <code>
+            import { Outlet } from "react-router-dom";
+            export default function Layout() {
+              return (
+                <>
+                  &lt;Header /&gt;
+                  &lt;Nav /&gt;
+                  &lt;Sidebar /&gt;
+                  &lt;main&gt;
+                    &lt;Outlet /&gt;
+                  &lt;/main&gt;
+                  &lt;Footer /&gt;
+                </>
+              );
+            }
+            </code>
+                </pre>
+                <p>De esta manera, todas las rutas que dependan de ese Layout compartirán su diseño general.</p>
+            </section>
+
+            <section id="ejemplo-practico" class="mt-6">
+                <h2>🌲 Ejemplo práctico: Escapadas de senderismo</h2>
+                <p>
+                    He creado un ejemplo completo donde se usa un layout con 
+                    <strong>Header</strong>, <strong>Nav</strong>, <strong>Sidebar</strong> y <strong>Footer</strong> 
+                    aplicando <strong>Tailwind CSS</strong> para el diseño.
+                </p>
+                <p>
+                    En este ejemplo, las páginas de <em>Inicio</em> y <em>Rutas</em> comparten el mismo marco visual.
+                </p>
+                <div class="card text-center mt-2 bg-success text-white p-3 rounded">
+                    <p>➡️ Abre el ejemplo en el siguiente enlace:</p>
+                    <a href="https://senderossevilla.netlify.app/" target="_blank" class="btn btn-light mt-2">
+                        Ver ejemplo: “Escapadas de Senderismo – Sevilla”
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <strong>¿Quieres practicar?</strong> Intenta replicarlo.
+                </div>
+            </section>
+
+            <section id="reflexion" class="mt-6">
+                <h2>💡 Para reflexionar</h2>
+                <p>
+                    Gracias a los layouts, evitamos repetir código, logramos coherencia visual 
+                    y mejoramos la accesibilidad y la mantenibilidad del proyecto.
+                </p>
+                <ul class="list-disc pl-6">
+                    <li>¿Qué elementos fijos incluirías en el layout de tu próxima app?</li>
+                    <li>¿Cómo puedes personalizar el layout para distintos tipos de usuarios?</li>
+                </ul>
+                <div class="alert bg-warning text-dark p-2 mt-2">
+                    <strong>Recuerda:</strong> Un buen layout facilita la navegación y la experiencia de usuario.
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer bg-dark text-white text-center py-3 mt-6">
+        <p>© Curso React - UF1841 | Ejemplo educativo preparado por Inma Contreras</p>
+    </footer>
+</body>
+</html></ul></section>
