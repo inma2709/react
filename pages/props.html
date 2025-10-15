@@ -2674,6 +2674,69 @@ className={`proyecto-item ${noticia.claseEspecial || ''}`}
             Sigue practicando y experimentando. ¡Nos vemos en la próxima clase para hacer tus apps interactivas! 🚀
       </div>
     </section>
+    
+    <section>
+      <h2>🛠️ Ejercicio: Botones Personalizados con Props</h2>
+      <div class="card">
+        <p>
+          <strong>Objetivo:</strong> Crea un componente <code>Boton</code> que reciba <code>texto</code>, <code>color</code> y <code>onClick</code> como props para mostrar botones personalizados.
+        </p>
+        <h3>Pasos:</h3>
+        <ol>
+          <li>
+            <strong>1.</strong> Crea <code>Boton.jsx</code> en tu carpeta <code>components</code>:
+            <pre><code class="language-jsx">function Boton({ texto, color = "#3498db", onClick }) {
+      return (
+        &lt;button
+          style={{
+            backgroundColor: color,
+            color: "white",
+            border: "none",
+            padding: "0.75rem 1.5rem",
+            borderRadius: "25px",
+            fontWeight: "600",
+            cursor: "pointer",
+            fontSize: "1rem",
+            margin: "0.5rem"
+          }}
+          onClick={onClick}
+        &gt;
+          {texto}
+        &lt;/button&gt;
+      );
+    }
+    export default Boton;</code></pre>
+          </li>
+          <li>
+            <strong>2.</strong> Úsalo en tu página:
+            <pre><code class="language-jsx">import Boton from "../components/Boton";
+
+    function DemoBotones() {
+      function alertaReact() {
+        alert("¡React es genial!");
+      }
+      function alertaJS() {
+        alert("¡JavaScript al poder!");
+      }
+      return (
+        &lt;div&gt;
+          &lt;h3&gt;Botones personalizados:&lt;/h3&gt;
+          &lt;Boton texto="React" color="#61dafb" onClick={alertaReact} /&gt;
+          &lt;Boton texto="JavaScript" color="#f7df1e" onClick={alertaJS} /&gt;
+          &lt;Boton texto="CSS" color="#2965f1" onClick={() =&gt; alert("¡Estilos al máximo!")} /&gt;
+        &lt;/div&gt;
+      );
+    }</code></pre>
+          </li>
+          <li>
+            <strong>3.</strong> Prueba cambiando el <code>texto</code> y <code>color</code> de cada botón. ¡Cada uno se verá y funcionará diferente!
+          </li>
+        </ol>
+        <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+          <strong>Tip:</strong> Puedes usar cualquier función en <code>onClick</code> para mostrar alertas, cambiar estados, etc.
+        </div>
+      </div>
+    </section>
 
   </main>
 
