@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Progresivos de React</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>⚛️ Ruta de Aprendizaje de React Progresiva</h1>
+            <p>Una colección de ejercicios estructurados para dominar React desde los fundamentos hasta conceptos avanzados. Aprende paso a paso con ejercicios prácticos y progresivos.</p>
+            
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="#nivel-1" class="nav-link">📝 Nivel 1: JSX</a>
+                <a href="#nivel-2" class="nav-link">🔧 Nivel 2: Props</a>
+                <a href="#nivel-3" class="nav-link">⚡ Nivel 3: Estado</a>
+                <a href="#nivel-4" class="nav-link">📋 Nivel 4: Listas</a>
+                <a href="#nivel-5" class="nav-link">🚀 Nivel 5: Avanzado</a>
+            </nav>
+            
+            <div class="breadcrumb">
+                <a href="../index.html">Curso React</a>
+                <span class="breadcrumb-separator">→</span>
+                <span class="breadcrumb-current">Ejercicios Progresivos</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- ========================================
+             NIVEL 1: FUNDAMENTOS Y COMPONENTES BÁSICOS
+             ======================================== -->
+        <section id="nivel-1" class="nivel">
+            <h2>📝 Nivel 1: Fundamentos y Componentes Básicos (JSX)</h2>
+            <p><strong>Objetivo del nivel:</strong> Dominar la sintaxis JSX, crear componentes básicos y entender la estructura de un proyecto React.</p>
+            
+            <div class="card-grid">
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>1. Primer Contacto y Hola Mundo</h3>
+                        <p><strong>Enunciado:</strong> Crea un nuevo proyecto React y modifica el componente principal para que muestre un encabezado con el texto "Hola Mundo React".</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-info">
+                            🚀 Instrucciones de Configuración Inicial
+                        </summary>
+                        <div class="details-content">
+                            <h4>Pasos para crear tu primer proyecto React:</h4>
+                            <ol>
+                                <li>
+                                    <strong>Crea el proyecto:</strong><br>
+                                    <code>npm create vite@latest mi-react-app -- --template react</code>
+                                </li>
+                                <li>
+                                    <strong>Navega al directorio:</strong><br>
+                                    <code>cd mi-react-app</code>
+                                </li>
+                                <li>
+                                    <strong>Instala las dependencias:</strong><br>
+                                    <code>npm install</code>
+                                </li>
+                                <li>
+                                    <strong>Instala React Router:</strong><br>
+                                    <code>npm install react-router-dom</code>
+                                </li>
+                                <li>
+                                    <strong>Modifica <code>main.jsx</code>:</strong>
+                                    <pre>import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;React.StrictMode&gt;
+    &lt;BrowserRouter&gt;
+      &lt;App /&gt;
+    &lt;/BrowserRouter&gt;
+  &lt;/React.StrictMode&gt;
+);</pre>
+                                </li>
+                                <li>
+                                    <strong>Crea el componente Home y modifica <code>App.jsx</code>:</strong>
+                                    <pre>import { Routes, Route } from 'react-router-dom';
+
+function Home() {
+  return &lt;h1&gt;Hola Mundo React&lt;/h1&gt;;
+}
+
+function App() {
+  return (
+    &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+    &lt;/Routes&gt;
+  );
+}
+
+export default App;</pre>
+                                </li>
+                                <li>
+                                    <strong>¡Ejecuta tu proyecto!</strong><br>
+                                    <code>npm run dev</code> y abre <code>http://localhost:5173</code>
+                                </li>
+                            </ol>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Entender la estructura de un proyecto React y familiarizarte con la configuración inicial usando Vite.</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>JSX:</strong> Sintaxis que combina JavaScript y HTML</li>
+                            <li><strong>Componentes:</strong> Funciones que retornan JSX</li>
+                            <li><strong>React Router:</strong> Navegación entre páginas</li>
+                            <li><strong>Vite:</strong> Herramienta de desarrollo rápida</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>2. Cabecera con Título y Logo</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Cabecera.jsx</code> que muestre un logo (imagen) y un título centrados horizontalmente.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-primary">
+                            💡 Ejemplo de Implementación
+                        </summary>
+                        <div class="details-content">
+                            <h4>Crear el archivo <code>src/components/Cabecera.jsx</code>:</h4>
+                            <pre>function Cabecera() {
+  return (
+    &lt;header style={{ textAlign: 'center', padding: '2rem' }}&gt;
+      &lt;img 
+        src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+        alt="Logo de React"
+        width={80}
+        height={80}
+        style={{ marginBottom: '1rem' }}
+      /&gt;
+      &lt;h1&gt;Mi Aplicación React&lt;/h1&gt;
+    &lt;/header&gt;
+  );
+}
+
+export default Cabecera;</pre>
+                            <h4>Usar en <code>App.jsx</code>:</h4>
+                            <pre>import Cabecera from './components/Cabecera';
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Cabecera /&gt;
+      {/* Resto de tu aplicación */}
+    &lt;/div&gt;
+  );
+}</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Aprender a crear componentes reutilizables y manejar elementos HTML como imágenes en JSX.</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>Componentes:</strong> Funciones que retornan JSX</li>
+                            <li><strong>Props de elementos:</strong> src, alt, width, height</li>
+                            <li><strong>Estilos inline:</strong> Objetos de estilo en JSX</li>
+                            <li><strong>Importación/Exportación:</strong> ES6 modules</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>3. Barra de Navegación</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>NavBar</code> que muestre una barra de navegación con enlaces a "Inicio", "Ejercicios" y "Contacto".</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Crear componentes de navegación y entender la estructura semántica HTML en React.</p>
+                        <h4>💡 Pistas:</h4>
+                        <ul>
+                            <li>Usa el elemento <code>&lt;nav&gt;</code> para semántica</li>
+                            <li>Estructura: <code>&lt;nav&gt;&lt;ul&gt;&lt;li&gt;&lt;a&gt;</code></li>
+                            <li>Con React Router usa <code>&lt;Link to="/ruta"&gt;</code></li>
+                            <li>Aplica estilos CSS para horizontal</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>4. Componente Avatar Simple</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Avatar</code> que muestre una imagen circular. Usa CSS para hacer la imagen redonda.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-success">
+                            🎨 Trucos de CSS para Avatars
+                        </summary>
+                        <div class="details-content">
+                            <h4>Estilo para avatar circular:</h4>
+                            <pre>const avatarStyle = {
+  width: '100px',
+  height: '100px',
+  borderRadius: '50%',
+  border: '3px solid #61dafb',
+  objectFit: 'cover'
+};</pre>
+                            <p><strong>Tips:</strong> <code>object-fit: cover</code> evita que la imagen se deforme al ajustarse al círculo.</p>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Manejar estilos CSS en componentes React y crear elementos visuales atractivos.</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>border-radius:</strong> Para formas circulares</li>
+                            <li><strong>object-fit:</strong> Control de escalado de imágenes</li>
+                            <li><strong>Estilos CSS:</strong> Variables de estilo en JSX</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>5. Lista de Elementos Estática</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>ListaTareas</code> que muestre una lista fija de 3 tareas usando elementos <code>&lt;li&gt;</code>.</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Practicar el renderizado de listas básicas en JSX antes de aprender sobre datos dinámicos.</p>
+                        <h4>💡 Estructura esperada:</h4>
+                        <ul>
+                            <li>Usar <code>&lt;ul&gt;</code> o <code>&lt;ol&gt;</code></li>
+                            <li>3-5 elementos <code>&lt;li&gt;</code> con tareas</li>
+                            <li>Aplicar estilos básicos</li>
+                            <li>Uso de elementos semánticos</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================
+             NIVEL 2: PROPS Y REUTILIZACIÓN
+             ======================================== -->
+        <section id="nivel-2" class="nivel">
+            <h2>🔧 Nivel 2: Props y Reutilización</h2>
+            <p><strong>Objetivo del nivel:</strong> Dominar el sistema de props para crear componentes reutilizables y flexibles.</p>
+            
+            <div class="card-grid">
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>6. Tarjeta con Props Básicos</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Tarjeta</code> que acepte <code>titulo</code>, <code>descripcion</code> e <code>imagen</code> como props. Renderiza 3 tarjetas diferentes.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-primary">
+                            📝 Plantilla de Componente
+                        </summary>
+                        <div class="details-content">
+                            <h4>Estructura del componente:</h4>
+                            <pre>function Tarjeta({ titulo, descripcion, imagen }) {
+  return (
+    &lt;div className="tarjeta"&gt;
+      &lt;img src={imagen} alt={titulo} /&gt;
+      &lt;h3&gt;{titulo}&lt;/h3&gt;
+      &lt;p&gt;{descripcion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Uso:
+&lt;Tarjeta 
+  titulo="React Básico"
+  descripcion="Aprende los fundamentos"
+  imagen="url-de-imagen"
+/&gt;</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Entender cómo los props hacen los componentes reutilizables y personalizables.</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>Destructuring:</strong> { titulo, descripcion }</li>
+                            <li><strong>Props:</strong> Datos que se pasan a componentes</li>
+                            <li><strong>Reutilización:</strong> Un componente, múltiples usos</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>7. Botón Personalizable</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Boton</code> que acepte <code>texto</code>, <code>color</code> y <code>tamaño</code> como props.</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Aprender a pasar estilos dinámicos mediante props.</p>
+                        <h4>💡 Variaciones a crear:</h4>
+                        <ul>
+                            <li>Botón grande azul: "Enviar"</li>
+                            <li>Botón pequeño rojo: "Cancelar"</li>
+                            <li>Botón mediano verde: "Guardar"</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>8. Props Opcionales con Renderizado Condicional</h3>
+                        <p><strong>Enunciado:</strong> Mejora la <code>Tarjeta</code> anterior para que el botón sea opcional. Si recibe la prop <code>enlace</code>, muestra un botón "Ver más".</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-warning">
+                            ⚠️ Renderizado Condicional
+                        </summary>
+                        <div class="details-content">
+                            <h4>Técnicas de renderizado condicional:</h4>
+                            <pre>// Operador AND (&&)
+{enlace && &lt;button&gt;Ver más&lt;/button&gt;}
+
+// Operador ternario
+{enlace ? &lt;button&gt;Ver más&lt;/button&gt; : null}
+
+// If tradicional
+if (enlace) {
+  return &lt;button&gt;Ver más&lt;/button&gt;;
+}</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Dominar el renderizado condicional para crear componentes flexibles.</p>
+                        <h4>💡 Prueba con:</h4>
+                        <ul>
+                            <li>Tarjetas con enlace (muestran botón)</li>
+                            <li>Tarjetas sin enlace (no muestran botón)</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>9. Componente con Children</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Panel</code> que use la prop especial <code>children</code> para envolver contenido.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-info">
+                            🧩 La Prop Children
+                        </summary>
+                        <div class="details-content">
+                            <h4>Ejemplo de uso de children:</h4>
+                            <pre>function Panel({ titulo, children }) {
+  return (
+    &lt;div className="panel"&gt;
+      &lt;h2&gt;{titulo}&lt;/h2&gt;
+      &lt;div className="panel-content"&gt;
+        {children}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Uso:
+&lt;Panel titulo="Mi Panel"&gt;
+  &lt;p&gt;Cualquier contenido aquí&lt;/p&gt;
+  &lt;button&gt;Un botón&lt;/button&gt;
+&lt;/Panel&gt;</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Entender cómo <code>children</code> permite crear componentes contenedores flexibles.</p>
+                        <h4>💡 Úsalo para:</h4>
+                        <ul>
+                            <li>Paneles de contenido</li>
+                            <li>Modales</li>
+                            <li>Tarjetas wrapper</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>10. Grid de Tarjetas con Array y Map</h3>
+                        <p><strong>Enunciado:</strong> Define un array de 6 objetos con datos de productos. Usa <code>.map()</code> para renderizar una tarjeta por cada producto.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-success">
+                            🗂️ Ejemplo de Datos
+                        </summary>
+                        <div class="details-content">
+                            <h4>Array de productos ejemplo:</h4>
+                            <pre>const productos = [
+  {
+    id: 1,
+    nombre: "Laptop Gaming",
+    precio: 999,
+    imagen: "url-imagen",
+    categoria: "Tecnología"
+  },
+  {
+    id: 2,
+    nombre: "Smartphone",
+    precio: 599,
+    imagen: "url-imagen",
+    categoria: "Tecnología"
+  },
+  // ... más productos
+];
+
+// Renderizado:
+{productos.map(producto => (
+  &lt;TarjetaProducto 
+    key={producto.id}
+    nombre={producto.nombre}
+    precio={producto.precio}
+    imagen={producto.imagen}
+  /&gt;
+))}</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Practicar el renderizado dinámico de listas usando <code>.map()</code> y entender la importancia de la prop <code>key</code>.</p>
+                        <h4>💡 Conceptos importantes:</h4>
+                        <ul>
+                            <li><strong>Array.map():</strong> Transforma arrays en JSX</li>
+                            <li><strong>Key prop:</strong> Ayuda a React a identificar elementos</li>
+                            <li><strong>Datos estructurados:</strong> Arrays de objetos</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================
+             NIVEL 3: ESTADO Y EVENTOS
+             ======================================== -->
+        <section id="nivel-3" class="nivel">
+            <h2>⚡ Nivel 3: Estado y Eventos</h2>
+            <p><strong>Objetivo del nivel:</strong> Aprender a manejar el estado interno de componentes y responder a eventos del usuario.</p>
+            
+            <div class="card-grid">
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>11. Contador Simple</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Contador</code> que use <code>useState</code> para mostrar un número y botones para incrementar/decrementar.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-primary">
+                            🎯 Tu Primer Hook: useState
+                        </summary>
+                        <div class="details-content">
+                            <h4>Estructura básica con useState:</h4>
+                            <pre>import { useState } from 'react';
+
+function Contador() {
+  const [cuenta, setCuenta] = useState(0);
+
+  const incrementar = () => {
+    setCuenta(cuenta + 1);
+  };
+
+  const decrementar = () => {
+    setCuenta(cuenta - 1);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Cuenta: {cuenta}&lt;/h2&gt;
+      &lt;button onClick={incrementar}&gt;+&lt;/button&gt;
+      &lt;button onClick={decrementar}&gt;-&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Introducir el concepto de estado en React y cómo los componentes pueden "recordar" información.</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>useState:</strong> Hook para manejar estado</li>
+                            <li><strong>Destructuring:</strong> [valor, setter]</li>
+                            <li><strong>Eventos:</strong> onClick para manejar clics</li>
+                            <li><strong>Funciones:</strong> Handlers de eventos</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>12. Toggle de Visibilidad</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente que tenga un botón "Mostrar/Ocultar" que alterne la visibilidad de un párrafo de texto.</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Practicar el estado booleano y el renderizado condicional dinámico.</p>
+                        <h4>💡 Técnicas a usar:</h4>
+                        <ul>
+                            <li>Estado booleano: <code>useState(false)</code></li>
+                            <li>Toggle: <code>setVisible(!visible)</code></li>
+                            <li>Renderizado condicional con estado</li>
+                            <li>Texto dinámico en botones</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>13. Input Controlado</h3>
+                        <p><strong>Enunciado:</strong> Crea un formulario con un input que muestre en tiempo real lo que el usuario escribe. Usa <code>useState</code> para el valor del input.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-warning">
+                            📝 Inputs Controlados vs No Controlados
+                        </summary>
+                        <div class="details-content">
+                            <h4>Input controlado (recomendado):</h4>
+                            <pre>const [nombre, setNombre] = useState('');
+
+&lt;input 
+  type="text"
+  value={nombre}
+  onChange={(e) => setNombre(e.target.value)}
+  placeholder="Escribe tu nombre"
+/&gt;
+
+&lt;p&gt;Hola, {nombre}!&lt;/p&gt;</pre>
+                            <p><strong>Ventajas:</strong> React controla el valor, fácil validación, estado sincronizado.</p>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Entender cómo sincronizar el estado de React con elementos de formulario.</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>Controlled components:</strong> React maneja el valor</li>
+                            <li><strong>onChange:</strong> Detecta cambios en inputs</li>
+                            <li><strong>event.target.value:</strong> Obtiene el valor actual</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>14. Cambio de Color de Fondo</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente con botones de colores. Al hacer clic en cada botón, cambia el color de fondo de un div.</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Practicar el manejo de estado para cambios visuales y estilos dinámicos.</p>
+                        <h4>💡 Ideas para implementar:</h4>
+                        <ul>
+                            <li>Array de colores predefinidos</li>
+                            <li>Botones generados con <code>.map()</code></li>
+                            <li>Estado para color actual</li>
+                            <li>Estilos inline dinámicos</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>15. Formulario de Registro</h3>
+                        <p><strong>Enunciado:</strong> Crea un formulario con campos para nombre, email y edad. Muestra un resumen de los datos ingresados en tiempo real.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-info">
+                            📋 Formulario Completo
+                        </summary>
+                        <div class="details-content">
+                            <h4>Manejo de múltiples inputs:</h4>
+                            <pre>const [formData, setFormData] = useState({
+  nombre: '',
+  email: '',
+  edad: ''
+});
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
+};
+
+&lt;input 
+  name="nombre"
+  value={formData.nombre}
+  onChange={handleChange}
+/&gt;</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Manejar formularios complejos con múltiples campos y estado de objeto.</p>
+                        <h4>💡 Conceptos avanzados:</h4>
+                        <ul>
+                            <li><strong>Estado de objeto:</strong> Múltiples propiedades</li>
+                            <li><strong>Spread operator:</strong> {...formData}</li>
+                            <li><strong>Computed property names:</strong> [name]: value</li>
+                            <li><strong>Handler genérico:</strong> Un onChange para todos</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================
+             NIVEL 4: LISTAS DINÁMICAS Y CRUD
+             ======================================== -->
+        <section id="nivel-4" class="nivel">
+            <h2>📋 Nivel 4: Listas Dinámicas y CRUD</h2>
+            <p><strong>Objetivo del nivel:</strong> Manejar listas dinámicas, agregar, editar y eliminar elementos (operaciones CRUD básicas).</p>
+            
+            <div class="card-grid">
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>16. Lista de Tareas (Todo List)</h3>
+                        <p><strong>Enunciado:</strong> Crea una aplicación de tareas que permita agregar nuevas tareas a una lista y marcarlas como completadas.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-success">
+                            ✅ Todo List Completo
+                        </summary>
+                        <div class="details-content">
+                            <h4>Estructura de datos y funciones:</h4>
+                            <pre>const [tareas, setTareas] = useState([]);
+const [nuevaTarea, setNuevaTarea] = useState('');
+
+const agregarTarea = () => {
+  if (nuevaTarea.trim()) {
+    setTareas([...tareas, {
+      id: Date.now(),
+      texto: nuevaTarea,
+      completada: false
+    }]);
+    setNuevaTarea('');
+  }
+};
+
+const toggleTarea = (id) => {
+  setTareas(tareas.map(tarea => 
+    tarea.id === id 
+      ? { ...tarea, completada: !tarea.completada }
+      : tarea
+  ));
+};</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Implementar una aplicación funcional que demuestre el manejo de arrays en el estado.</p>
+                        <h4>💡 Funcionalidades a incluir:</h4>
+                        <ul>
+                            <li>Agregar nuevas tareas</li>
+                            <li>Marcar tareas como completadas</li>
+                            <li>Mostrar contador de tareas pendientes</li>
+                            <li>Estilos diferenciados para completadas</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>17. Eliminar Elementos de Lista</h3>
+                        <p><strong>Enunciado:</strong> Extiende la lista de tareas anterior agregando un botón "Eliminar" para cada tarea.</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Aprender a eliminar elementos específicos de arrays usando <code>filter()</code>.</p>
+                        <h4>💡 Técnica de eliminación:</h4>
+                        <ul>
+                            <li>Usar <code>array.filter()</code></li>
+                            <li>Filtrar por ID diferente al eliminado</li>
+                            <li>Confirmación antes de eliminar</li>
+                            <li>Feedback visual al eliminar</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>18. Filtrar Lista de Productos</h3>
+                        <p><strong>Enunciado:</strong> Crea una lista de productos con un input de búsqueda que filtre los productos por nombre en tiempo real.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-primary">
+                            🔍 Sistema de Filtrado
+                        </summary>
+                        <div class="details-content">
+                            <h4>Lógica de filtrado:</h4>
+                            <pre>const [productos, setProductos] = useState([...]);
+const [filtro, setFiltro] = useState('');
+
+const productosFiltrados = productos.filter(producto =>
+  producto.nombre.toLowerCase().includes(filtro.toLowerCase())
+);
+
+// En el render:
+{productosFiltrados.map(producto => (
+  &lt;TarjetaProducto key={producto.id} {...producto} /&gt;
+))}</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Implementar filtrado en tiempo real usando <code>array.filter()</code> y <code>includes()</code>.</p>
+                        <h4>💡 Mejoras adicionales:</h4>
+                        <ul>
+                            <li>Filtrado insensible a mayúsculas</li>
+                            <li>Filtro por múltiples campos</li>
+                            <li>Mostrar "Sin resultados" cuando aplique</li>
+                            <li>Limpiar filtro con botón</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>19. Editar Elementos In-line</h3>
+                        <p><strong>Enunciado:</strong> Permite editar el texto de las tareas haciendo doble clic. El texto se convierte en un input editable.</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Implementar edición in-line cambiando entre modo vista y edición.</p>
+                        <h4>💡 Estados necesarios:</h4>
+                        <ul>
+                            <li>Estado para ID de tarea en edición</li>
+                            <li>Estado para texto temporal</li>
+                            <li>Eventos: onDoubleClick, onBlur, onKeyPress</li>
+                            <li>Guardar con Enter, cancelar con Escape</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>20. Reordenar Lista con Botones</h3>
+                        <p><strong>Enunciado:</strong> Agrega botones "Subir" y "Bajar" a cada elemento de la lista para reordenar las tareas.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-warning">
+                            ↕️ Lógica de Reordenamiento
+                        </summary>
+                        <div class="details-content">
+                            <h4>Funciones para mover elementos:</h4>
+                            <pre>const moverArriba = (index) => {
+  if (index > 0) {
+    const nuevasTareas = [...tareas];
+    [nuevasTareas[index], nuevasTareas[index - 1]] = 
+    [nuevasTareas[index - 1], nuevasTareas[index]];
+    setTareas(nuevasTareas);
+  }
+};
+
+const moverAbajo = (index) => {
+  if (index < tareas.length - 1) {
+    const nuevasTareas = [...tareas];
+    [nuevasTareas[index], nuevasTareas[index + 1]] = 
+    [nuevasTareas[index + 1], nuevasTareas[index]];
+    setTareas(nuevasTareas);
+  }
+};</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Aprender a manipular el orden de elementos en arrays usando intercambio de posiciones.</p>
+                        <h4>💡 Consideraciones:</h4>
+                        <ul>
+                            <li>Deshabilitar botones en extremos</li>
+                            <li>Usar destructuring para intercambio</li>
+                            <li>Mantener referencias de estado correctas</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================
+             NIVEL 5: CONCEPTOS AVANZADOS
+             ======================================== -->
+        <section id="nivel-5" class="nivel">
+            <h2>🚀 Nivel 5: Conceptos Avanzados</h2>
+            <p><strong>Objetivo del nivel:</strong> Explorar conceptos más avanzados como useEffect, comunicación entre componentes y patrones avanzados.</p>
+            
+            <div class="card-grid">
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>21. Reloj Digital con useEffect</h3>
+                        <p><strong>Enunciado:</strong> Crea un reloj digital que se actualice cada segundo usando <code>useEffect</code> y <code>setInterval</code>.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-info">
+                            ⏰ Tu Primer useEffect
+                        </summary>
+                        <div class="details-content">
+                            <h4>Reloj con useEffect:</h4>
+                            <pre>import { useState, useEffect } from 'react';
+
+function RelojDigital() {
+  const [hora, setHora] = useState(new Date());
+
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setHora(new Date());
+    }, 1000);
+
+    // Cleanup function
+    return () => clearInterval(intervalo);
+  }, []); // Array vacío = ejecuta solo al montar
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;{hora.toLocaleTimeString()}&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+}</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Introducir <code>useEffect</code> para efectos secundarios y la importancia del cleanup.</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>useEffect:</strong> Para efectos secundarios</li>
+                            <li><strong>setInterval:</strong> Ejecutar código repetidamente</li>
+                            <li><strong>Cleanup:</strong> Limpiar intervalos al desmontar</li>
+                            <li><strong>Dependency array:</strong> Controlar cuándo ejecutar</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>22. Contador de Clics con Persistencia</h3>
+                        <p><strong>Enunciado:</strong> Crea un contador que guarde su valor en localStorage y lo recupere al recargar la página.</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Combinar <code>useEffect</code> con localStorage para persistencia de datos.</p>
+                        <h4>💡 Funcionalidades:</h4>
+                        <ul>
+                            <li>Cargar valor inicial desde localStorage</li>
+                            <li>Guardar cambios automáticamente</li>
+                            <li>Manejar casos donde no hay datos guardados</li>
+                            <li>Botón para resetear contador</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>23. Comunicación Padre-Hijo</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente padre con una lista de tareas y un componente hijo que permita agregar nuevas tareas. La comunicación debe ser bidireccional.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-primary">
+                            👥 Lifting State Up
+                        </summary>
+                        <div class="details-content">
+                            <h4>Patrón de comunicación:</h4>
+                            <pre>// Componente Padre
+function GestorTareas() {
+  const [tareas, setTareas] = useState([]);
+
+  const agregarTarea = (nuevaTarea) => {
+    setTareas([...tareas, nuevaTarea]);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;FormularioTarea onAgregar={agregarTarea} /&gt;
+      &lt;ListaTareas tareas={tareas} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Componente Hijo
+function FormularioTarea({ onAgregar }) {
+  // Lógica del formulario
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAgregar(nuevaTarea); // Comunica al padre
+  };
+}</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Entender el patrón "lifting state up" para compartir estado entre componentes.</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>Callback props:</strong> Funciones pasadas como props</li>
+                            <li><strong>Lifting state up:</strong> Mover estado al padre común</li>
+                            <li><strong>Unidirectional data flow:</strong> Flujo de datos en una dirección</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>24. Hook Personalizado</h3>
+                        <p><strong>Enunciado:</strong> Crea un hook personalizado <code>useLocalStorage</code> que maneje automáticamente el guardado y carga de datos en localStorage.</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-success">
+                            🎣 Custom Hook
+                        </summary>
+                        <div class="details-content">
+                            <h4>Hook personalizado useLocalStorage:</h4>
+                            <pre>import { useState, useEffect } from 'react';
+
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      return initialValue;
+    }
+  });
+
+  const setStoredValue = (value) => {
+    try {
+      setValue(value);
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+    }
+  };
+
+  return [value, setStoredValue];
+}
+
+// Uso:
+function MiComponente() {
+  const [nombre, setNombre] = useLocalStorage('nombre', '');
+  // Se guarda automáticamente en localStorage
+}</pre>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Crear lógica reutilizable mediante hooks personalizados.</p>
+                        <h4>💡 Ventajas de custom hooks:</h4>
+                        <ul>
+                            <li>Reutilización de lógica</li>
+                            <li>Separación de responsabilidades</li>
+                            <li>Código más limpio y testeable</li>
+                            <li>Abstracción de complejidad</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>25. Aplicación Completa: Dashboard Personal</h3>
+                        <p><strong>Proyecto Final:</strong> Crea un dashboard personal que integre: reloj, lista de tareas, contador de productividad, notas rápidas y configuración de tema (claro/oscuro).</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Integrar todos los conceptos aprendidos en una aplicación completa y funcional.</p>
+                        <h4>💡 Características a incluir:</h4>
+                        <ul>
+                            <li><strong>Múltiples componentes:</strong> Cada widget en su componente</li>
+                            <li><strong>Estado global:</strong> Configuraciones compartidas</li>
+                            <li><strong>Persistencia:</strong> Guardar datos en localStorage</li>
+                            <li><strong>Temas:</strong> Cambio dinámico de estilos</li>
+                            <li><strong>Responsive:</strong> Adaptable a móviles</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================
+             SECCIÓN DE RECURSOS Y NEXT STEPS
+             ======================================== -->
+        <section class="nivel">
+            <h2>🎓 ¡Felicitaciones! Has completado la ruta de React</h2>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>🚀 Próximos Pasos</h3>
+                    <ul>
+                        <li>Explora React Router para SPAs</li>
+                        <li>Aprende sobre Context API</li>
+                        <li>Investiga librerías como Redux o Zustand</li>
+                        <li>Practica con APIs reales (fetch, axios)</li>
+                        <li>Estudia Testing con Jest y React Testing Library</li>
+                    </ul>
+                </article>
+                
+                <article class="card">
+                    <h3>📚 Recursos Adicionales</h3>
+                    <ul>
+                        <li><a href="https://react.dev" target="_blank">Documentación Oficial de React</a></li>
+                        <li><a href="https://github.com/facebook/react" target="_blank">React en GitHub</a></li>
+                        <li><a href="https://reactrouter.com" target="_blank">React Router</a></li>
+                        <li><a href="https://testing-library.com/react" target="_blank">React Testing Library</a></li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Curso de React - Ruta de Aprendizaje Progresiva</p>
+    </footer>
+
+</body>
+</html>
+        <section id="nivel-1" class="nivel">
+            <h2>📝 Nivel 1: Fundamentos y Componentes Básicos (JSX)</h2>
+            <p><strong>Objetivo del nivel:</strong> Dominar la sintaxis JSX, crear componentes básicos y entender la estructura de un proyecto React.</p>
+            
+            <div class="card-grid">
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>1. Primer Contacto y Hola Mundo</h3>
+                        <p><strong>Enunciado:</strong> Crea un nuevo proyecto React y modifica el componente principal para que muestre un encabezado con el texto "Hola Mundo React".</p>
+                    </div>
+                    <div class="recuadro-instrucciones" style="border:2px solid #61dafb; border-radius:8px; padding:1em; background:#f7fbff; margin-bottom:1em;">
+                        <h4>🚀 ¿Cómo iniciar tu proyecto React?</h4>
+                        <ol>
+                            <li>
+                                <strong>Crea el proyecto:</strong><br>
+                                <code>npm create vite@latest mi-react-app -- --template react</code>
+                            </li>
+                            
+                            <li>
+                                <strong>Instala React Router ya dentro de tu proyecto</strong><br>
+                                <code>npm install react-router-dom</code>
+                            </li>
+                            <li>
+                                <strong>Modifica <code>main.jsx</code> para usar React Router:</strong>
+                                <pre style="background:#eef; padding:0.5em; border-radius:4px;">
+                    import React from 'react';
+                    import ReactDOM from 'react-dom/client';
+                    import { BrowserRouter } from 'react-router-dom';
+                    import App from './App.jsx';
+
+                    ReactDOM.createRoot(document.getElementById('root')).render(
+                        <React.StrictMode>
+                            <BrowserRouter>
+                                <App />
+                            </BrowserRouter>
+                        </React.StrictMode>
+                    );
+                                </pre>
+                            </li>
+                            <li>
+                                <strong>Modifica <code>App.jsx</code> para mostrar la página de inicio. Crea una pagina de incio que será Home.</strong>
+                                <pre style="background:#eef; padding:0.5em; border-radius:4px;">
+                    import { Routes, Route } from 'react-router-dom';
+                    import Home from './Home.jsx';
+
+                    function Home() {
+                        return &lt;h1&gt;Hola Mundo React&lt;/h1&gt;;
+                    }
+
+                    function App() {
+                        return (
+                            &lt;Routes&gt;
+                                &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                                  
+                            &lt;/Routes&gt;
+                        );
+                    }
+
+                    export default App;
+                                </pre>
+                            </li>
+                            <li>
+                                <strong>¡Listo!</strong> Ejecuta <code>npm run dev</code> y abre <code>http://localhost:5173</code> para ver tu página de inicio.
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Entender la estructura de un proyecto React y dónde escribir el JSX inicial.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>Usa Vite (`npm create vite@latest`) </li>
+                            <li>Busca el archivo `App.jsx` o `App.js`.</li>
+                            <li>Actualiza las rutas para que cargue la pagina de inicio</h1>`.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>2. Cabecera con Título y Logo</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente `Cabecera.jsx` que muestre un logo (imagen) y un título (`<h1>`) centrados horizontalmente. Usa el logo de React como imagen.</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Crear una cabecera visualmente atractiva con elementos alineados y aprender a centrar contenido usando CSS.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>El logo puede ser: <code>https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg</code></li>
+                            <li>Usa un <code>div</code> como contenedor y aplica <code>style={{ textAlign: 'center' }}</code> o una clase CSS para centrar.</li>
+                            <li>Importa y usa el componente en <code>App.js</code> como <code>&lt;Cabecera /&gt;</code>.</li>
+                            <li>Recuerda el atributo <code>alt</code> en la imagen por accesibilidad.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>💡 ¿Cómo insertar imágenes en React?</h3>
+                        <p><strong>Explicación:</strong> Para mostrar imágenes en React, puedes usar el elemento HTML <code>&lt;img /&gt;</code> dentro de tu JSX. Debes proporcionar el atributo <code>src</code> con la URL de la imagen, y el atributo <code>alt</code> para accesibilidad.</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Ejemplo básico:</h4>
+                        <pre style="background:#eef; padding:0.5em; border-radius:4px;">
+                                {`function MiImagen() {
+                                         return (
+                                            <img
+                                            src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+                                            alt="Logo de React"
+                                            width={100}
+                                            height={100}
+                                            />
+                                        );
+                                        }`}
+                                                                </pre>
+                        <ul>
+                            <li><strong>src:</strong> Puede ser una URL externa o una ruta local dentro de tu proyecto (<code>src="./logo.png"</code>).</li>
+                            <li><strong>alt:</strong> Es importante para describir la imagen si no se carga o para lectores de pantalla.</li>
+                            <li>Puedes ajustar el tamaño usando los atributos <code>width</code> y <code>height</code>, o con CSS.</li>
+                        </ul>
+                        <h4>¿Dónde colocar la imagen?</h4>
+                        <ul>
+                            <li>En componentes, simplemente pon el <code>&lt;img /&gt;</code> donde quieras mostrar la imagen.</li>
+                            <li>Si usas imágenes locales, colócalas en la carpeta <code>src/assets</code> y usa <code>import logo from './assets/logo.png'</code> para importar y usar en <code>src={logo}</code>.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>3. Creación de una Barra de Navegación (NavBar)</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>NavBar</code> que muestre una barra de navegación con enlaces a "Inicio", "Ejercicios" y "Contacto". Decide si la barra va dentro del <code>&lt;header&gt;</code> o fuera, y explica tu elección.</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Aprender a crear componentes reutilizables para la navegación y entender la estructura de la interfaz.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>Usa el elemento <code>&lt;nav&gt;</code> y dentro una lista <code>&lt;ul&gt;</code> con <code>&lt;li&gt;</code> y <code>&lt;a&gt;</code> para los enlaces.</li>
+                            <li>Convierte la barra en un componente: <code>function NavBar() { ... }</code>.</li>
+                            <li>Importa y usa <code>&lt;NavBar /&gt;</code> en <code>App.js</code>.</li>
+                            <li>Puedes colocar <code>&lt;NavBar /&gt;</code> dentro del <code>&lt;header&gt;</code> si quieres que sea parte de la cabecera, o fuera si prefieres que esté separada. Ambas opciones son válidas según el diseño que busques.</li>
+                            <li>Si usas React Router, los enlaces pueden ser <code>&lt;Link to="/"&gt;</code> en vez de <code>&lt;a href="/"&gt;</code>.</li>
+                        </ul>
+                        <h4>¿Dónde colocar la barra? Intentalo de las dos formas</h4>
+                        <ul>
+                            <li><strong>Dentro de <code>&lt;header&gt;</code>:</strong> Si quieres que la navegación sea parte visual de la cabecera principal.</li>
+                            <li><strong>Fuera de <code>&lt;header&gt;</code>:</strong> Si prefieres separar la navegación del título y descripción.</li>
+                        </ul>
+                    </div>
+                </article>
+
+
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>4. Grid de Tarjetas con Props Fijos</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Tarjeta</code> que muestre un <strong>título</strong> (<code>&lt;h1&gt;</code>), un <strong>subtítulo</strong> (<code>&lt;h2&gt;</code>) y una <strong>foto</strong> (<code>&lt;img&gt;</code>). Renderiza <strong>tres tarjetas</strong> en un <code>grid</code> en <code>App.js</code>, pasando los props fijos para cada una (título, subtítulo y foto).</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Crear un componente reutilizable con varios props y mostrar varias instancias en una cuadrícula.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>El componente <code>Tarjeta</code> debe aceptar los props: <code>titulo</code>, <code>subtitulo</code> y <code>foto</code>.</li>
+                            <li>Usa una estructura de grid con CSS (por ejemplo, <code>display: grid</code> o una clase <code>card-grid</code>).</li>
+                            <li>Renderiza en <code>Home.js</code> tres veces el componente, pasando diferentes valores fijos para cada prop.</li>
+                            <li>Puedes usar la imagen de React: <code>https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg</code> o cualquier otra imagen por ejemplo de placeholder o picsum.</li>
+                            <li>Ejemplo de uso: <code>&lt;Tarjeta titulo="..." subtitulo="..." foto="..." /&gt;</code></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>5. Componente con Imagen (Avatar)</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente `Avatar` que muestre una imagen. Busca una URL de una imagen simple (p. ej., el logo de React) y úsala como `src` en el elemento `<img>`.</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Manejar elementos HTML estándar (como `<img>`) y sus atributos en JSX.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>El elemento `<img>` es autocerrado en JSX: `<img />`.</li>
+                            <li>Recuerda incluir el atributo `alt` por accesibilidad.</li>
+                            <li>Busca una URL de imagen, por ejemplo: `https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg`.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <hr>
+
+        <section class="nivel">
+            <h2>Nivel 2: Props  (Reutilización)</h2>
+            <div class="card-grid">
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>6. Tarjeta con Prop Opcional (Botón)</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Tarjeta</code> que muestre un título y un texto. Agrega una prop opcional <code>mostrarBoton</code>. Si <code>mostrarBoton</code> es <code>true</code>, muestra un botón con el texto "Acción". Si no, la tarjeta no muestra el botón. Renderiza el componente con y sin el botón.</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Aprender a usar props opcionales y el renderizado condicional en componentes React.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>La prop <code>mostrarBoton</code> puede tener valor <code>true</code> o <code>false</code> (o no estar presente).</li>
+                            <li>Usa el operador lógico <code>&&</code> para mostrar el botón solo si <code>mostrarBoton</code> es <code>true</code>: <code>{mostrarBoton && &lt;button&gt;Acción&lt;/button&gt;}</code>.</li>
+                            <li>Renderiza la tarjeta dos veces: una con <code>mostrarBoton={true}</code> y otra sin la prop.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>6b. Renderizar Múltiples Tarjetas con `.map()` y Props Variados</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Tarjeta</code> que acepte varios props, por ejemplo: <code>titulo</code>, <code>descripcion</code>, <code>imagen</code> y <code>enlace</code> (opcional). Luego, define un array de al menos <strong>seis objetos</strong> con diferentes combinaciones de estos props. Usa el método <code>.map()</code> para renderizar una <strong>tarjeta por cada objeto</strong> del array. Algunas tarjetas deben tener todos los props, otras solo algunos (por ejemplo, sin <code>enlace</code> o sin <code>imagen</code>).</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Practicar la creación de componentes flexibles y el renderizado dinámico de listas con props opcionales.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>Define el array de datos en tu componente principal (por ejemplo, <code>const tarjetas = [ ... ]</code>).</li>
+                            <li>En el componente <code>Tarjeta</code>, usa renderizado condicional para mostrar <code>imagen</code> y <code>enlace</code> solo si existen.</li>
+                            <li>Ejemplo de uso en el <code>.map()</code>:
+                                <pre style="background:#eef; padding:0.5em; border-radius:4px;">
+                {`tarjetas.map((item, idx) => (
+                  <Tarjeta
+                    key={idx}
+                    titulo={item.titulo}
+                    descripcion={item.descripcion}
+                    imagen={item.imagen}
+                    enlace={item.enlace}
+                  />
+                ))`}
+                                </pre>
+                            </li>
+                            <li>Recuerda que los props pueden ser opcionales: en el componente <code>Tarjeta</code> puedes usar <code>{imagen && &lt;img src={imagen} alt="" /&gt;}</code> y <code>{enlace && &lt;a href={enlace}&gt;Ver más&lt;/a&gt;}</code>.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>7b. Componente Botón con Props Personalizados</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Boton</code> que acepte los props <code>texto</code> y <code>color</code>. Renderiza dos botones con diferentes textos y colores usando este componente.</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Comprender cómo los props permiten personalizar componentes reutilizables y cómo pasar estilos dinámicamente.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>La firma del componente debe ser: <code>function Boton({ texto, color })</code>.</li>
+                            <li>Usa el prop <code>color</code> para el estilo inline: <code>style={{ backgroundColor: color }}</code>.</li>
+                            <li>Ejemplo de uso: <code>&lt;Boton texto="Aceptar" color="green" /&gt;</code> y <code>&lt;Boton texto="Cancelar" color="red" /&gt;</code>.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>8.1. Botón con Evento de Click (Alerta)</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>BotonAlerta</code> que muestre un botón. Al hacer clic, debe mostrar una alerta con el mensaje "¡Has hecho clic!".</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Aprender a manejar el evento <code>onClick</code> en React y disparar acciones (como <code>alert()</code>).</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>Define la función <code>mostrarAlerta</code> dentro del componente.</li>
+                            <li>Asocia la función al evento <code>onClick</code> del botón: <code>&lt;button onClick={mostrarAlerta}&gt;Haz clic&lt;/button&gt;</code>.</li>
+                            <li>La función debe llamar a <code>alert("¡Has hecho clic!")</code>.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>8.2. Botón con Evento de Hover (Cambio de Color)</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>BotonHover</code> que muestre un botón. Al pasar el ratón por encima, el botón debe cambiar de color (por ejemplo, de azul a naranja).</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Aprender a manejar los eventos <code>onMouseEnter</code> y <code>onMouseLeave</code> para cambiar estilos dinámicamente.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>Usa <code>useState</code> para guardar el color actual del botón.</li>
+                            <li>En <code>onMouseEnter</code>, cambia el color a naranja (<code>#ff9800</code>).</li>
+                            <li>En <code>onMouseLeave</code>, vuelve al color original (por ejemplo, azul <code>#2196f3</code>).</li>
+                            <li>Aplica el color con <code>style={{ backgroundColor: color }}</code> en el botón.</li>
+                        </ul>
+                    </div>
+                </article>
+
+
+                <article class="ejercicio-card">
+                    <div class="enunciado">
+                        <h3>13. Manejo de Formularios (Input Controlado)</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente `FormularioSaludo`. Usa `useState` para un estado `nombre`. Agrega un input de texto que actualice el estado `nombre` con cada pulsación de tecla. Muestra: "**Escribiendo: \[nombre]**".</p>
+                    </div>
+                    <div class="explicacion">
+                        <h4>Objetivo:</h4>
+                        <p>Crear un **input controlado**, donde el valor del input está siempre sincronizado con el estado de React.</p>
+                        <h4>Pistas 💡:</h4>
+                        <ul>
+                            <li>El input debe tener dos atributos clave: `value={nombre}` y `onChange={manejarCambio}`.</li>
+                            <li>La función `manejarCambio` recibe el objeto de evento (`e`). El nuevo valor se obtiene con `e.target.value`.</li>
+                            <li>Usa `setNombre(e.target.value)` para actualizar el estado.</li>
+                        </ul>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
