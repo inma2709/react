@@ -36,7 +36,7 @@
              NIVEL 1: FUNDAMENTOS Y COMPONENTES BÁSICOS
              ======================================== -->
         <section id="nivel-1" class="nivel">
-            <h2>📝 Nivel 1: Fundamentos y Componentes Básicos (JSX)</h2>
+            <h2>📝 Nivel 1: Fundamentos y Componentes  (JSX)</h2>
             <p><strong>Objetivo del nivel:</strong> Dominar la sintaxis JSX, crear componentes básicos y entender la estructura de un proyecto React.</p>
             
             <div class="card-grid">
@@ -197,65 +197,10 @@ function App() {
                     </div>
                 </article>
 
+              
                 <article class="card ejercicio-card">
                     <div class="enunciado">
-                        <h3>4. Componente Imagen</h3>
-                        <p><strong>Enunciado:</strong> Crea un componente <code>Imagen</code> que muestre una imagen circular. Usa CSS para hacer la imagen redonda.</p>
-                    </div>
-                    
-                    <details class="instrucciones-expandibles">
-                        <summary class="summary-section summary-success">
-                            🎨 Trucos de CSS para Avatars
-                        </summary>
-                        <div class="details-content">
-                            <h4>Estilo para avatar circular:</h4>
-                            <pre>const avatarStyle = {
-  width: '100px',
-  height: '100px',
-  borderRadius: '50%',
-  border: '3px solid #61dafb',
-  objectFit: 'cover'
-};</pre>
-                            <p><strong>Tips:</strong> <code>object-fit: cover</code> evita que la imagen se deforme al ajustarse al círculo.</p>
-                        </div>
-                    </details>
-                    
-                    <div class="explicacion">
-                        <h4>🎯 Objetivo:</h4>
-                        <p>Manejar estilos CSS en componentes React y crear elementos visuales atractivos.</p>
-                        <p>Integra la imagen en la página Home</p>
-                        <h4>💡 Conceptos clave:</h4>
-                        <ul>
-                            <li><strong>border-radius:</strong> Para formas circulares</li>
-                            <li><strong>object-fit:</strong> Control de escalado de imágenes</li>
-                            <li><strong>Estilos CSS:</strong> Variables de estilo en JSX</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card ejercicio-card">
-                    <div class="enunciado">
-                        <h3>5. Lista de Elementos Estática</h3>
-                        <p><strong>Enunciado:</strong> Crea un componente <code>ListaTareas</code> que muestre una lista fija de 3 tareas usando elementos <code>&lt;li&gt;</code>.</p>
-                    </div>
-                    
-                    <div class="explicacion">
-                        <h4>🎯 Objetivo:</h4>
-                        <p>Practicar el renderizado de listas básicas en JSX antes de aprender sobre datos dinámicos.</p>
-                        <h4>💡 Estructura esperada:</h4>
-                        <ul>
-                            <li>Usar <code>&lt;ul&gt;</code> o <code>&lt;ol&gt;</code></li>
-                            <li>3-5 elementos <code>&lt;li&gt;</code> con tareas</li>
-                            <li>Aplicar estilos básicos</li>
-                            <li>Uso de elementos semánticos</li>
-                        </ul>
-                        <p>Pon la lista en la página Home de forma que quede al lado de la imagen</p>
-                    </div>
-                </article>
-
-                <article class="card ejercicio-card">
-                    <div class="enunciado">
-                        <h3>6. Creación de un Footer Simple</h3>
+                        <h3>4. Creación de un Footer Simple</h3>
                         <p><strong>Enunciado:</strong> Crea un componente <code>Footer</code> que muestre un pie de página con un texto centrado, por ejemplo: "© 2025 Mi Aplicación React".</p>
                     </div>
                     <div class="explicacion">
@@ -273,7 +218,7 @@ function App() {
 
                 <article class="card ejercicio-card">
                     <div class="enunciado">
-                        <h3>7. Componente Aside (Barra Lateral)</h3>
+                        <h3>5. Componente Aside (Barra Lateral)</h3>
                         <p><strong>Enunciado:</strong> Crea un componente <code>Aside</code> que muestre una barra lateral con una lista de enlaces o secciones. El aside debe estar visualmente separado del contenido principal y puede incluir un título y varios elementos (por ejemplo, "Recursos", "Notas", "Ayuda").</p>
                     </div>
                     <div class="explicacion">
@@ -291,7 +236,7 @@ function App() {
 
                 <article class="card ejercicio-card">
                     <div class="enunciado">
-                        <h3>8. Layout General con Integración de Componentes</h3>
+                        <h3>6. Layout General con Integración de Componentes</h3>
                         <p><strong>Enunciado:</strong> Crea un componente <code>Layout</code> que integre todos los componentes principales: <code>Cabecera</code>, <code>NavBar</code>, <code>Aside</code> (uno a la izquierda y otro a la derecha), el contenido de la página y <code>Footer</code>. Usa React Router para renderizar la página correspondiente dentro del layout.</p>
                     </div>
                     
@@ -390,10 +335,70 @@ function App() {
                             <li><strong>Composición:</strong> Combinar múltiples componentes</li>
                         </ul>
                         <h4>✅ Resultado esperado:</h4>
-                        <p>Una aplicación con estructura completa: cabecera en la parte superior, navegación, contenido principal en el centro flanqueado por dos barras laterales, y pie de página en la parte inferior.</p>
+                        <p>Tu página Home debe tener estructura completa: cabecera en la parte superior, navegación, contenido principal en el centro flanqueado por dos barras laterales, y pie de página en la parte inferior.</p>
+                        
+                    </div>
+                </article>
+
+                  <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3>7.Componente Imagen</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>Imagen</code> que muestre una imagen circular. Usa CSS para hacer la imagen redonda.</p>
+                        <p>Usa una imagen de tu carpeta </p>
+                        <p>De momento no la metas en ninguna página</p>
+                    </div>
+                    
+                    <details class="instrucciones-expandibles">
+                        <summary class="summary-section summary-success">
+                            🎨 Trucos de CSS para Avatars
+                        </summary>
+                        <div class="details-content">
+                            <h4>Estilo para avatar circular:</h4>
+                            <pre>const avatarStyle = {
+  width: '100px',
+  height: '100px',
+  borderRadius: '50%',
+  border: '3px solid #61dafb',
+  objectFit: 'cover'
+};</pre>
+                            <p><strong>Tips:</strong> <code>object-fit: cover</code> evita que la imagen se deforme al ajustarse al círculo.</p>
+                        </div>
+                    </details>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Manejar estilos CSS en componentes React y crear elementos visuales atractivos.</p>
+                        <p>Integra la imagen en la página Home</p>
+                        <h4>💡 Conceptos clave:</h4>
+                        <ul>
+                            <li><strong>border-radius:</strong> Para formas circulares</li>
+                            <li><strong>object-fit:</strong> Control de escalado de imágenes</li>
+                            <li><strong>Estilos CSS:</strong> Variables de estilo en JSX</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card ejercicio-card">
+                    <div class="enunciado">
+                        <h3> 8.Lista de Elementos Estática</h3>
+                        <p><strong>Enunciado:</strong> Crea un componente <code>ListaTareas</code> que muestre una lista fija de 3 tareas usando elementos <code>&lt;li&gt;</code>.</p>
+                    </div>
+                    
+                    <div class="explicacion">
+                        <h4>🎯 Objetivo:</h4>
+                        <p>Practicar el renderizado de listas básicas en JSX antes de aprender sobre datos dinámicos.</p>
+                        <h4>💡 Estructura esperada:</h4>
+                        <ul>
+                            <li>Usar <code>&lt;ul&gt;</code> o <code>&lt;ol&gt;</code></li>
+                            <li>3-5 elementos <code>&lt;li&gt;</code> con tareas</li>
+                            <li>Aplicar estilos básicos</li>
+                            <li>Uso de elementos semánticos</li>
+                        </ul>
+                        <p>Pon la lista en la página Home de forma que quede al lado de la imagen</p>
                         <p>La imagen debe estar alineada a la izquierda y la lista de productos a la derecha.Ese será nuestro contenido principal</p>
                     </div>
                 </article>
+
             </div>
         </section>
 
@@ -445,7 +450,7 @@ function App() {
                             <li><strong>Props:</strong> Datos que se pasan a componentes</li>
                             <li><strong>Reutilización:</strong> Un componente, múltiples usos</li>
                         </ul>
-                        <p> Mete tres tarjetas en la página de Home</p>
+                        <p>Mete tres tarjetas en la página Home debajo de la imagen y de la lista</p>
                     </div>
                 </article>
 
@@ -471,7 +476,7 @@ function App() {
                 <article class="card ejercicio-card">
                     <div class="enunciado">
                         <h3>11. Props Opcionales con Renderizado Condicional</h3>
-                        <p>Abre una nueva página. En ella vamos a hacer seis tarjetas. Usa map.</p>
+                       
                         <p><strong>Enunciado:</strong> Mejora la <code>Tarjeta</code> anterior para que el botón sea opcional. Si recibe la prop <code>enlace</code>, muestra un botón "Ver más".</p>
                     </div>
                     
@@ -503,8 +508,9 @@ if (enlace) {
                             <li>Tarjetas sin enlace (no muestran botón)</li>
                             <li>Tarjetas con imagen y titulo</li>
                             <li>Tarjetas con borde si no se define ninguno el borde será azul por defecto</li>
-                            <li>Tarjeta sin imagen y sin título</li>
+                            <li>Tarjeta sin imagen.</li>
                             <li>Tarjeta con imagen y descripción</li>
+                            <li>Tarjeta con props obligatorios: precio y titulo. La imagen y el botón son optativos. El borde si no se define otro vendrá definido por defecto.</li>
 
                         </ul>
                     </div>
@@ -515,8 +521,11 @@ if (enlace) {
                 <article class="card ejercicio-card">
                     <div class="enunciado">
                         <h3>12. Grid de Tarjetas con Array y Map</h3>
-                        <p><strong>Enunciado:</strong> Define un array de 6 objetos con datos de productos. Usa <code>.map()</code> para renderizar una tarjeta por cada producto.</p>
-                    </div>
+                         <p>Abre una nueva página. En ella vamos a hacer seis tarjetas. </p>
+                        <p>Usa las tarjetas que has creado antes y en una página nueva crea un array con seis productos</p>                       </p>
+                        <p>Usa <code>.map()</code> para renderizar una tarjeta por cada producto.</p>
+                        
+                                             </div>
                     
                     <details class="instrucciones-expandibles">
                         <summary class="summary-section summary-success">
@@ -565,9 +574,246 @@ if (enlace) {
                         </ul>
                     </div>
                 </article>
+            <article class="card ejercicio-card full width-card" style="grid-column: 1 / -1;">
+                <div class="enunciado">
+                    <h3>¿Qué es la prop <code>children</code> en React y qué aporta frente a otras props?</h3>
+
+                    <p>
+                        <strong>Idea clave:</strong><br>
+                        <code>children</code> es una prop “convencional” que React rellena automáticamente con
+                        <em>todo lo que escribes entre la etiqueta de apertura y de cierre</em> de un componente.
+                        Es decir, es una prop como cualquier otra, pero está pensada para <strong>composición</strong>:
+                        crear componentes contenedores que muestran contenido flexible sin conocerlo de antemano.
+                    </p>
+
+                    <hr>
+
+                    <h4>1) El problema que resuelve</h4>
+                    <p>
+                        Sin <code>children</code>, cuando quieres que un componente muestre contenido dinámico, tienes que
+                        pasar ese contenido por props <em>nombradas</em> (por ejemplo: <code>title</code>, <code>content</code>, <code>footer</code>…).
+                        Esto funciona, pero te obliga a <strong>anticipar</strong> qué zonas habrá y qué nombres tendrán.
+                        Con <code>children</code>, el componente puede <em>envolver</em> cualquier JSX que le pongas dentro, sin
+                        exigir una estructura cerrada.
+                    </p>
+
+                    <details>
+                        <summary><strong>Sin <code>children</code> (solo props)</strong></summary>
+                        <pre><code>// Card con props nombradas
+            function Card({ title, content }) {
+                return (
+                    &lt;article className="card"&gt;
+                        &lt;h3&gt;{title}&lt;/h3&gt;
+                        &lt;div&gt;{content}&lt;/div&gt;
+                    &lt;/article&gt;
+                );
+            }
+
+            // Uso:
+            &lt;Card
+                title="Título fijo"
+                content={&lt;p&gt;Este bloque es el contenido&lt;/p&gt;}
+            /&gt;
+            </code></pre>
+                        <p>
+                            ❌ Limitación: si mañana quieres insertar también una imagen, un botón, o varias secciones, tendrás
+                            que crear más props (por ejemplo <code>image</code>, <code>actions</code>…) y cambiar el componente.
+                        </p>
+                    </details>
+
+                    <details open>
+                        <summary><strong>Con <code>children</code> (composición flexible)</strong></summary>
+                        <pre><code>// Card basada en composición
+            function Card({ children }) {
+                return &lt;article className="card"&gt;{children}&lt;/article&gt;;
+            }
+
+            // Uso:
+            &lt;Card&gt;
+                &lt;h3&gt;Título personalizado&lt;/h3&gt;
+                &lt;p&gt;Descripción variable&lt;/p&gt;
+                &lt;button&gt;Acción&lt;/button&gt;
+            &lt;/Card&gt;
+            </code></pre>
+                        <p>
+                            ✅ Ventaja: el consumidor de <code>Card</code> decide libremente la estructura interna.
+                            <code>Card</code> no necesita nuevas props para cada variación de contenido.
+                        </p>
+                    </details>
+
+                    <hr>
+
+                    <h4>2) ¿Qué es exactamente <code>children</code>?</h4>
+                    <ul>
+                        <li>Es una <strong>prop normal</strong> llamada <code>children</code> que React pasa automáticamente.</li>
+                        <li>Puede contener <em>cualquier cosa renderizable</em>: texto, elementos JSX, arrays, incluso funciones (patrón render-prop).</li>
+                        <li>La usas así dentro del componente: <code>function Panel({ children }) { return &lt;div&gt;{children}&lt;/div&gt;; }</code></li>
+                        <li>Funciona en <strong>componentes de React</strong> que tú creas (no es algo que “actives” en etiquetas HTML nativas).</li>
+                    </ul>
+
+                    <hr>
+
+                    <h4>3) ¿En qué se diferencia de “pasar todo por props”?</h4>
+                    <p>
+                        Pasar contenido como prop (p. ej. <code>content</code>) te obliga a nombrar y orquestar <em>slots</em> desde
+                        el componente padre, acoplando estructura y API. Con <code>children</code>:
+                    </p>
+                    <ul>
+                        <li><strong>Composición libre:</strong> el componente padre escribe el JSX dentro y controla la jerarquía natural.</li>
+                        <li><strong>Menos API que mantener:</strong> no creas una prop nueva por cada zona de contenido.</li>
+                        <li><strong>Legibilidad de JSX:</strong> lo que ves entre &lt;Card&gt;…&lt;/Card&gt; es lo que se renderiza dentro.</li>
+                    </ul>
+
+                    <details>
+                        <summary><strong>Comparativa rápida</strong></summary>
+                        <pre><code>// Props nombradas (slots rígidos)
+            &lt;Modal
+                header={&lt;Header /&gt;}
+                body={&lt;Contenido /&gt;}
+                footer={&lt;Botones /&gt;}
+            /&gt;
+
+            // Children (slot principal libre)
+            &lt;Modal&gt;
+                &lt;Header /&gt;
+                &lt;Contenido /&gt;
+                &lt;Botones /&gt;
+            &lt;/Modal&gt;
+            </code></pre>
+                        <p>
+                            💡 Regla práctica: usa <code>children</code> para el <em>slot principal</em>. Si tu componente tiene varios
+                            slots bien definidos (header, footer…), puedes combinarlos con props nombradas
+                            <em>además</em> de <code>children</code>.
+                        </p>
+                    </details>
+
+                    <hr>
+
+                    <h4>4) Uso paso a paso</h4>
+                    <ol>
+                        <li><strong>Crea</strong> un componente contenedor:
+                            <pre><code>function Panel({ children }) {
+                return &lt;section className="panel"&gt;{children}&lt;/section&gt;;
+            }</code></pre>
+                        </li>
+                        <li><strong>Rellénalo</strong> con JSX entre sus etiquetas:
+                            <pre><code>&lt;Panel&gt;
+                &lt;h4&gt;Título&lt;/h4&gt;
+                &lt;p&gt;Cuerpo del panel&lt;/p&gt;
+                &lt;button&gt;Acción&lt;/button&gt;
+            &lt;/Panel&gt;</code></pre>
+                        </li>
+                        <li><strong>Opcional</strong>: combina <code>children</code> con otras props para parametrizar el “marco”:
+                            <pre><code>function Card({ variant = "elevated", children }) {
+                return &lt;article className={`card card--${variant}`}&gt;{children}&lt;/article&gt;;
+            }
+
+            // Uso:
+            &lt;Card variant="outline"&gt;...contenido...&lt;/Card&gt;</code></pre>
+                        </li>
+                    </ol>
+
+                    <hr>
+
+                    <h4>5) ¿Cuándo conviene usar <code>children</code> en lugar de props normales?</h4>
+                    <ul>
+                        <li>Cuando tu componente es un <strong>contenedor</strong> (layout, tarjeta, panel, modal) y el
+                                <em>contenido exacto</em> lo decidirá el consumidor.</li>
+                        <li>Cuando necesitas <strong>flexibilidad máxima</strong> (puede contener texto, listas, imágenes, otros componentes).</li>
+                        <li>Cuando quieres <strong>componer interfaces</strong> por anidación natural de JSX (legibilidad/ergonomía).</li>
+                        <li>Cuando no tiene sentido limitar el contenido a una sola prop (p. ej. <code>content</code>).</li>
+                    </ul>
+
+                    <h4>6) ¿Cuándo es mejor usar props normales (nombradas)?</h4>
+                    <ul>
+                        
+                        <li>Cuando el componente <strong>controla la estructura</strong> por accesibilidad o diseño, y solo deja huecos concretos.</li>
+                       <li>Cuando el contenido es <strong>predecible y limitado</strong>, y no necesitas la flexibilidad de <code>children</code>.
+                        
+                    </ul>
+
+                    <hr>
+
+                    <h4>7) Ejemplo práctico: Tarjeta reutilizable con <code>children</code></h4>
+                    <pre><code>function Tarjeta({ children }) {
+                return (
+                    &lt;article className="tarjeta"&gt;
+                        {children}
+                    &lt;/article&gt;
+                );
+            }
+
+            // Uso variado:
+            &lt;Tarjeta&gt;
+                &lt;h3&gt;Título personalizado&lt;/h3&gt;
+                &lt;p&gt;Descripción variable&lt;/p&gt;
+                &lt;button&gt;Acción&lt;/button&gt;
+            &lt;/Tarjeta&gt;
+
+            &lt;Tarjeta&gt;
+                &lt;img src="/img/foto.jpg" alt="Ejemplo" /&gt;
+                &lt;div&gt;Otro contenido distinto&lt;/div&gt;
+            &lt;/Tarjeta&gt;
+            </code></pre>
+
+                    <p>
+                        Así, la misma <code>Tarjeta</code> muestra lo que le pases como <code>children</code>, sin cambiar su implementación.
+                    </p>
+
+                    <hr>
+
+                    <h4>8) Trucos y consideraciones</h4>
+                    <ul>
+                        <li><strong>Un solo hijo o varios:</strong> <code>children</code> puede ser un único elemento, texto, o un array de elementos.</li>
+                        <li><strong>Fragmentos:</strong> Si pasas varios elementos sin contenedor, React los agrupa en un <code>&lt;React.Fragment&gt;</code>.</li>
+                        <li><strong>Estilos y clases:</strong> Aplica estilos al contenedor que usa <code>children</code>, no al contenido interno.</li>
+                        <li><strong>Validación:</strong> Puedes usar PropTypes o TypeScript para validar que <code>children</code> es del tipo esperado (p. ej. nodo, función).</li>
+                        <li><strong>No abuses:</strong> Aunque es flexible, no conviertas todos tus componentes en “contenedores genéricos”. Usa props normales cuando tenga sentido.</li>
+                    </ul>
+
+                    <hr>
+
+                    <h4>9) Resumen corto</h4>
+                    <p>
+                        <code>children</code> es una prop especial <em>por convención</em> que habilita composición y contenido flexible.
+                        Úsala cuando tu componente sea un contenedor y no quieras encorsetarlo con mil props;
+                        utiliza props normales para parámetros y para slots fijos (header/footer/icon/…).
+                        Puedes combinarlas sin problema.
+                    </p>
+                </div>
+            </article>
+
+           <article class="card ejercicio-card full width-card" style="grid-column: 1 / -1;">
+                <div class="enunciado">
+                    <h3>Ejercicio de uso de <code>children</code></h3>
+                    <p>
+                        <p>Implementa un componente <code>Panel</code> que use <code>children</code> para mostrar contenido dinámico.</p>
+                        <strong>Ejemplo:</strong> Crea un componente <code>Panel</code> que envuelva cualquier contenido que le pases entre sus etiquetas.
+                    </p>
+                    <p>Crea una tercera página y en ella crea tres paneles dinámicos con contenido diferente.</p>
+                    <pre>
+            function Panel({ children }) {
+              return (
+                &lt;div className="panel"&gt;
+                  {children}
+                &lt;/div&gt;
+              );
+            }
+
+            // Uso:
+            &lt;Panel&gt;
+              &lt;h3&gt;Bienvenido&lt;/h3&gt;
+              &lt;p&gt;Este contenido es flexible y puede ser cualquier JSX.&lt;/p&gt;
+            &lt;/Panel&gt;
+                    </pre>
+                </div>
+              
+            </article>
+
             </div>
         </section>
-
+              <section id="nivel-2" class="nivel">
+            <h2>🔧 Nivel 3: Estados y eventos</h2>
              <article class="card ejercicio-card">
                     <div class="enunciado">
 
