@@ -70,7 +70,7 @@
                                     <code>npm install react-router-dom</code>
                                 </li>
                                 <li>
-                                    <strong>Modifica <code>main.jsx</code>:</strong>
+                                    <strong>Modifica <code>main.jsx para añadir las rutas</code>:</strong>
                                     <pre>import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -85,12 +85,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 );</pre>
                                 </li>
                                 <li>
-                                    <strong>Crea el componente Home y modifica <code>App.jsx</code>:</strong>
-                                    <pre>import { Routes, Route } from 'react-router-dom';
+            <strong>Crea la página  Home y en ella llama a Cabecera. Acuerdate de importarla</strong>
+            <p>Ahora modifica App.jsx para que Home sea tu página principal. A partr de ahora App solo la usaremos para las rutas</p>
+                                    
 
-function Home() {
-  return &lt;h1&gt;Hola Mundo React&lt;/h1&gt;;
-}
+
 
 function App() {
   return (
