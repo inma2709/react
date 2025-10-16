@@ -84,22 +84,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   &lt;/React.StrictMode&gt;
 );</pre>
                                 </li>
-                                <li>
-            <strong>Crea la página  Home y en ella llama a Cabecera. Acuerdate de importarla</strong>
-            <p>Ahora modifica App.jsx para que Home sea tu página principal. A partr de ahora App solo la usaremos para las rutas</p>
-                                    
-
-
-
-function App() {
-  return (
-    &lt;Routes&gt;
-      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
-    &lt;/Routes&gt;
-  );
-}
-
-export default App;</pre>
+                            
                                 </li>
                                 <li>
                                     <strong>¡Ejecuta tu proyecto!</strong><br>
@@ -150,17 +135,22 @@ export default App;</pre>
 }
 
 export default Cabecera;</pre>
-                            <h4>Usar en <code>App.jsx</code>:</h4>
-                            <pre>import Cabecera from './components/Cabecera';
+                             <li>
+            <strong>Crea la página  Home y en ella llama a Cabecera. Acuerdate de importarla</strong>
+            <p>Ahora modifica App.jsx para que Home sea tu página principal. A partr de ahora App solo la usaremos para las rutas</p>
+                                    
+
+
 
 function App() {
   return (
-    &lt;div&gt;
-      &lt;Cabecera /&gt;
-      {/* Resto de tu aplicación */}
-    &lt;/div&gt;
+    &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+    &lt;/Routes&gt;
   );
-}</pre>
+}
+
+export default App;</pre>
                         </div>
                     </details>
                     
